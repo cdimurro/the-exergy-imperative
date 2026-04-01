@@ -24,8 +24,8 @@ Every year, humanity produces roughly 600 EJ of primary energy. We track it meti
 ```
 The quality of energy — its exergy-to-energy ratio — ranges from 0 to 1. 
 
-- Electricity has an exergy-to-energy ratio of nearly 1, which means that it can be used to do almost anything.
-- Low temperature heat on the other hand, say 50°C, has an exergy-to-energy ratio of around 0.07.
+• Electricity has an exergy-to-energy ratio of nearly 1, which means that it can be used to do almost anything.
+• Low temperature heat on the other hand, say 50°C, has an exergy-to-energy ratio of around 0.07.
 ```
 What this means in practice is that it doesn't matter how much low temperature heat you have, you'll never be able to melt steel with it because that requires temperatures around 1500 °C. The quantity of how much low temperature heat you have is completely irrelevant if your goal is to melt steel. This is why Electricity has a higher 'quality' thermodynamically than low temperature heat. When you have 1 unit of electricity, 1 unit can be converted into work. When you have 1 unit of low temperature heat, only 0.07 units can be converted into work. This is why measuring Exergy is fundamental if we want to make our energy systems more efficient.
 
