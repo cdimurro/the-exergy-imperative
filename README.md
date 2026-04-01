@@ -1,4 +1,4 @@
-> **Published by [Exergy Lab](https://exergylab.io)** — a platform for discovering and validating energy innovations, purpose-built for the energy and deep-tech industries. Free for anyone working to advance clean energy.
+> **Published by [Exergy Lab](https://exergy-lab.com)** — a platform for discovering and validating energy innovations, purpose-built for the energy and deep-tech industries. Free for anyone to use to advance clean energy solution.
 >
 > This document is our first open-source contribution to the energy community. Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to share and adapt with attribution.
 
@@ -8,33 +8,30 @@
 
 ## A Complete Guide to the Most Underused Concept in Energy
 
-**Why the world treats all joules as equal — and why that blindness is slowing the energy transition.**
+**We act as if all joules are equal — when in fact they are not. This makes the energy system less efficient and is slowing down the energy transition.**
 
 ---
 
-> *"Energy is conserved. Exergy is not. That single asymmetry explains more about why energy systems waste so much than any other principle in thermodynamics."*
+> *"Energy is conserved. Exergy is not. This single thermodynamic principle holds the key to making the global energy system much more efficient."*
 
 ---
 
 # Preface: The Blind Spot
 
-The global energy system runs on a lie of omission.
+The global energy system is operating blind.
 
-Every year, humanity produces roughly 600 EJ of primary energy. We track it meticulously — barrels of oil, cubic meters of gas, megawatt-hours of electricity, tonnes of coal. We measure efficiency. We optimize. We build dashboards and write reports.
+Every year, humanity produces roughly 600 EJ of primary energy. We track it meticulously — barrels of oil, cubic meters of gas, megawatt-hours of electricity, tonnes of coal. We write reports and analyze charts, but nearly all of it treats joules as if they are interchangeable when they are not. Solving this fundamental blind spot within our energy systems would make the energy system more efficient, accelerate the energy transition, and save consumers money by allowing them to do more work with less energy. To understand exactly why here is a simple example: 
+```
+The quality of energy — its exergy-to-energy ratio — ranges from 0 to 1. 
 
-And nearly all of it treats every joule as interchangeable.
+- Electricity has an exergy-to-energy ratio of nearly 1, which means that it can be used to do almost anything.
+- Low temperature heat on the other hand, say 50°C, has an exergy-to-energy ratio of around 0.07.
+```
+What this means in practice is that it doesn't matter how much low temperature heat you have, you'll never be able to melt steel with it because that requires temperatures around 1500 °C. The quantity of how much low temperature heat you have is completely irrelevant if your goal is to melt steel. This is why Electricity has a higher 'quality' thermodynamically than low temperature heat. When you have 1 unit of electricity, 1 unit can be converted into work. When you have 1 unit of low temperature heat, only 0.07 units can be converted into work. This is why measuring Exergy is fundamental if we want to make our energy systems more efficient.
 
-A joule of electricity. A joule of 1,500 °C steel-mill heat. A joule of lukewarm bathwater at 35 °C. In the standard energy accounting used by governments, utilities, manufacturers, and investors, these are the same thing. One joule. One unit. Fully fungible.
+Today Exergy is almost completely absent from energy policy, investment analysis, technology evaluation, and the systems planning that will determine how efficient our energy system is over the next several decades, and also how fast the energy transition proceeds. 
 
-They are not.
-
-Electricity can do almost anything — drive a motor, run a computation, split water into hydrogen, or heat a building. The 1,500 °C heat can melt steel, drive a turbine, or generate electricity. The lukewarm bathwater can do almost nothing useful at all. Its energy is real, but its capacity to drive change is nearly zero.
-
-The quantity that captures this difference — the capacity of energy to perform useful work given its surroundings — is called **exergy**. It has been rigorously defined since the mid-20th century, refined across thousands of peer-reviewed papers, and applied in detailed studies of power plants, chemical processes, and industrial systems. It is taught in advanced thermodynamics courses at every major engineering university in the world.
-
-And it is almost completely absent from the energy policy, investment analysis, technology evaluation, and systems planning that will determine whether the energy transition succeeds or fails.
-
-This guide exists to change that. Not by advocating for exergy as a silver bullet — it is not one — but by explaining precisely what it reveals, where it is powerful, where it is weak, and how it can be practically applied to make better decisions about which energy technologies to build, fund, and deploy.
+This guide exists to change that. Not by advocating for exergy as a silver bullet, because it is not one — but by explaining precisely what it reveals, where it is powerful, where it is weak, and how it can be applied practically to make better decisions about which energy solutions to build, fund, and deploy.
 
 ---
 
@@ -274,15 +271,15 @@ Understanding exergy requires understanding what alternative metrics do and do n
 
 ### LCOE / LCOS / TCO
 
-**What they measure:** Levelized economic cost of energy, storage, or ownership.
+**What they measure:** Levelized cost of energy, storage, or ownership, over the lifetime of an asset.
 **What they miss:** Energy quality. A dollar per MWh of electricity is not equivalent to a dollar per MWh of 80 °C heat, but LCOE/LCOS do not distinguish between them.
 **What exergy adds:** Exergy-weighted cost metrics (e.g., $/MWh_ex) would correctly value energy services by quality, but these are not yet standard practice.
 **What exergy cannot do:** Replace economic analysis. A thermodynamically elegant system that costs too much will not be built.
 
 ### GHG / LCA Metrics
 
-**What they measure:** Greenhouse gas emissions and environmental impacts across a lifecycle.
-**What they miss:** Resource quality consumption. Two processes with identical GHG profiles may consume very different amounts of thermodynamic quality (exergy) from nature.
+**What they measure:** Greenhouse gas emissions and environmental impacts over a certain life cycle.
+**What they miss:** Resource quality consumption. Two processes with identical GHG profiles may consume very different amounts of raw materials and thermodynamic exergy from nature.
 **What exergy adds:** Cumulative Exergy Demand (CExD) provides a quality-weighted measure of total natural resource consumption, complementing GHG and other impact categories.
 **What exergy cannot do:** Replace emissions accounting. Exergy is not an environmental impact metric — it is a resource consumption metric.
 
@@ -370,7 +367,7 @@ Exergy analysis does not merely rank these options differently from first-law an
 
 CHP (cogeneration) systems produce both electricity and useful heat from a single fuel input. They are widely promoted as "high-efficiency" because their combined first-law efficiency (total energy output / fuel energy input) can reach 80–90%.
 
-But this metric adds electricity and heat as if they were interchangeable. They are not. A kilowatt-hour of electricity has 20–50 times the exergy of a kilowatt-hour of 60 °C heating water.
+But this metric adds electricity and heat as if they were interchangeable. They are not. A kilowatt-hour of electricity has roughly 10–20 times the exergy of a kilowatt-hour of hot water at 60–90 °C.
 
 When CHP is evaluated on an exergy basis, the picture changes dramatically:
 - Electrical output: high exergy
@@ -647,7 +644,7 @@ The energy transition is not merely a shift from fossil fuels to renewables. It 
 | Energy form | Exergy-to-energy ratio | Role in transition |
 |-------------|----------------------|-------------------|
 | Electricity (renewable or nuclear) | ~1.00 | Universal high-quality carrier — backbone of electrification |
-| Hydrogen (green) | ~0.83 (vs LHV) | High-quality chemical carrier for hard-to-electrify sectors |
+| Hydrogen (green) | ~0.98 (vs LHV) | High-quality chemical carrier for hard-to-electrify sectors |
 | High-T industrial heat (>500 °C) | 0.50–0.80 | Required for steel, cement, glass — difficult to decarbonize |
 | Medium-T process heat (100–500 °C) | 0.15–0.50 | Heat pumps and solar thermal can serve; efficiency depends on quality matching |
 | Low-T heat (<100 °C) | 0.02–0.15 | Must not be produced from high-quality sources; heat pumps and waste heat are the correct supply |
@@ -825,9 +822,9 @@ Most process simulation tools (Aspen Plus/HYSYS, gPROMS, EES, Thermoflex) can co
 
 ---
 
-## 14. Conclusion: Doing More with Less
+## 14. Conclusion: Seeing the Quality in Every Joule
 
-The title of this guide promises an explanation of how to "do less with more" — or rather, how to do *more with less* by respecting the quality of energy, not just its quantity.
+This guide set out to explain the most underused concept in energy — and to show precisely where it changes understanding and where it does not.
 
 The energy transition will require humanity to:
 - Generate 3–5× more electricity than today
