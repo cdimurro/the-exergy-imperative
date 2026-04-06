@@ -1,4 +1,4 @@
-> **Published by [Exergy Lab](https://exergy-lab.com)** — a platform for discovering and validating energy innovations, purpose-built for the energy and deep-tech industries. Free for anyone to use to advance clean energy solution.
+> **Published by [Exergy Lab](https://exergy-lab.com)** — a platform for discovering and validating energy innovations, purpose-built for energy and deep-tech industries. Free for anyone to use to advance clean energy solutions.
 >
 > This document is our first open-source contribution to the energy community. Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to share and adapt with attribution.
 
@@ -8,7 +8,7 @@
 
 ## A Complete Guide to the Most Underused Concept in Energy
 
-**We act as if all joules are equal — when in fact they are not. This makes the energy system less efficient and is slowing down the energy transition.**
+**We act as if all joules are equal — when in fact they are not. This makes our energy system less efficient and is slowing down the energy transition.**
 
 ---
 
@@ -16,18 +16,19 @@
 
 ---
 
-# Preface: The Blind Spot
-
-The global energy system is operating blind.
+# Preface: The global energy system is operating with a blind spot.
 
 Every year, humanity produces roughly 600 EJ of primary energy. We track it meticulously — barrels of oil, cubic meters of gas, megawatt-hours of electricity, tonnes of coal. We write reports and analyze charts, but nearly all of it treats joules as if they are interchangeable when they are not. Solving this fundamental blind spot within our energy systems would make the energy system more efficient, accelerate the energy transition, and save consumers money by allowing them to do more work with less energy. To understand exactly why here is a simple example: 
 ```
-The quality of energy — its exergy-to-energy ratio — ranges from 0 to 1. 
+Exergy measures the useful work potential of an energy source.
+The quality of different energy sources can be measured using the exergy-to-energy ratio, which ranges from 0 to 1.
 
-• Electricity has an exergy-to-energy ratio of nearly 1, which means that it can be used to do almost anything.
-• Low temperature heat on the other hand, say 50°C, has an exergy-to-energy ratio of around 0.07.
+• Electricity has an exergy-to-energy ratio of nearly 1, meaning that almost all of its energy can be converted into useful work.
+• Low-temperature heat, for example at 50°C, has an exergy-to-energy ratio of around 0.07.
 ```
-What this means in practice is that it doesn't matter how much low temperature heat you have, you'll never be able to melt steel with it because that requires temperatures around 1500 °C. The quantity of how much low temperature heat you have is completely irrelevant if your goal is to melt steel. This is why Electricity has a higher 'quality' thermodynamically than low temperature heat. When you have 1 unit of electricity, 1 unit can be converted into work. When you have 1 unit of low temperature heat, only 0.07 units can be converted into work. This is why measuring Exergy is fundamental if we want to make our energy systems more efficient.
+What this means in practice is that it doesn't matter how much low temperature heat you have, you'll never be able to melt steel with it because that requires temperatures around 1500 °C. The 'quantity' of how much low temperature heat you have is completely irrelevant if your goal is to melt steel. 
+
+This is why Electricity has a higher 'quality' thermodynamically than low temperature heat. When you have 1 unit of electricity, 1 unit can be converted into work. When you have 1 unit of low temperature heat, only 0.07 units can be converted into work. This is why measuring Exergy is fundamental if we want to make our energy systems more efficient.
 
 Today Exergy is almost completely absent from energy policy, investment analysis, technology evaluation, and the systems planning that will determine how efficient our energy system is over the next several decades, and also how fast the energy transition proceeds. 
 
