@@ -1,9 +1,3 @@
-> **Published by [Exergy Lab](https://exergy-lab.com)** — a platform for discovering and validating energy innovations, purpose-built for energy and deep-tech industries. Free for anyone to use to advance clean energy solutions.
->
-> This document is our first open-source contribution to the energy community. Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to share and adapt with attribution.
-
----
-
 # The Exergy Imperative
 
 ## A Complete Guide to the Most Underused Concept in Energy
@@ -958,3 +952,9 @@ Values from Szargut (2005), reference environment T₀ = 298.15 K, P₀ = 101.32
 *This document is released as an open resource for engineers, researchers, investors, policymakers, educators, and anyone working to accelerate the energy transition through better thermodynamic decision-making.*
 
 *If all joules are not equal — and they are not — then we owe it to ourselves and to the planet to stop accounting as if they are.*
+
+> **Published by [Exergy Lab](https://exergy-lab.com)** — a platform for discovering and validating energy innovations, purpose-built for energy and deep-tech industries. Free for anyone to use to advance clean energy solutions.
+>
+> This document is our first open-source contribution to the energy community. Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to share and adapt with attribution.
+
+---
