@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "id": "heat-factor-40c-20c",
+      "title": "Heat-quality factor at 40 C relative to 20 C",
+      "method": "thermal_exergy_factor_c",
+      "inputs": {"source_c": 40.0, "reference_c": 20.0},
+      "expected": 0.064,
+      "absolute_tolerance": 0.001,
+      "citation": {
+        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
+        "locator": "illustrative temperature example"
+      }
+    },
+    {
+      "id": "heat-factor-80c-20c",
+      "title": "Heat-quality factor at 80 C relative to 20 C",
+      "method": "thermal_exergy_factor_c",
+      "inputs": {"source_c": 80.0, "reference_c": 20.0},
+      "expected": 0.170,
+      "absolute_tolerance": 0.001,
+      "citation": {
+        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
+        "locator": "illustrative temperature example"
+      }
+    },
+    {
+      "id": "heat-factor-150c-20c",
+      "title": "Heat-quality factor at 150 C relative to 20 C",
+      "method": "thermal_exergy_factor_c",
+      "inputs": {"source_c": 150.0, "reference_c": 20.0},
+      "expected": 0.307,
+      "absolute_tolerance": 0.001,
+      "citation": {
+        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
+        "locator": "illustrative temperature example"
+      }
+    },
+    {
+      "id": "heat-pump-cop3-40c-20c",
+      "title": "Heat-pump exergetic efficiency at COP 3",
+      "method": "analyze_heat_pump",
+      "inputs": {
+        "delivered_heat_mwh": 1.0,
+        "source_temperature_c": 20.0,
+        "sink_temperature_c": 40.0,
+        "cop": 3.0
+      },
+      "output_path": "exergy.efficiency",
+      "expected": 0.192,
+      "absolute_tolerance": 0.001,
+      "citation": {
+        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
+        "locator": "heat-pump illustrative example"
+      }
+    },
+    {
+      "id": "petela-solar-radiation",
+      "title": "Petela exergy factor for undiluted solar radiation",
+      "method": "petela_exergy_factor",
+      "inputs": {"reference_k": 298.15, "radiation_temperature_k": 5778.0},
+      "expected": 0.931201163286267,
+      "absolute_tolerance": 1e-12,
+      "citation": {
+        "title": "Exergy of undiluted thermal radiation",
+        "doi": "10.1016/S0038-092X(03)00226-3"
+      }
+    }
+  ]
+}

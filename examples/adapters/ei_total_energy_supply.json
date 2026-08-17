@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "id": "energy-institute-total-energy-supply-long-v1",
+  "source_name": "Energy Institute Statistical Review - Total Energy Supply",
+  "source_url": "https://www.energyinst.org/statistical-review",
+  "license_notice": "Use only with a workbook you obtained lawfully. Review and comply with the Energy Institute terms that apply to your download; this adapter contains no publisher data.",
+  "sheet_name": "Total Energy Supply (TES) -EJ",
+  "header_row": 3,
+  "layout": "wide-years",
+  "id_columns": ["Exajoules"],
+  "year_field": "year",
+  "value_field": "value",
+  "fields": [
+    {"source": "Exajoules", "target": "location", "data_type": "string"},
+    {"source": "year", "target": "year", "data_type": "integer"},
+    {"source": "value", "target": "energy_supply_ej", "data_type": "number"}
+  ],
+  "defaults": {"unit": "EJ"},
+  "required": ["location", "year", "energy_supply_ej"],
+  "preserve_unmapped": false,
+  "notes": "Converts the selected wide year columns to one location-year record per row. Use missing_policy='drop' to omit blank and nonnumeric publisher cells."
+}

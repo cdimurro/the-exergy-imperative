@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/economic-result-v1.json",
+  "title": "Exergy Imperative project-economic result",
+  "type": "object",
+  "required": ["schema_version", "currency", "project_life_years", "discount_rate", "cash_flows", "npv", "annual_benefits", "assumptions", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "currency": {"type": "string", "minLength": 1},
+    "project_life_years": {"type": "integer", "minimum": 1},
+    "discount_rate": {"type": "number", "exclusiveMinimum": -1},
+    "cash_flows": {"type": "array", "minItems": 2, "items": {"type": "number"}},
+    "npv": {"type": "number"},
+    "irr": {"type": ["number", "null"]},
+    "simple_payback_years": {"type": ["number", "null"], "minimum": 0},
+    "discounted_payback_years": {"type": ["number", "null"], "minimum": 0},
+    "benefit_cost_ratio": {"type": ["number", "null"]},
+    "annualized_capital_cost": {"type": "number"},
+    "annual_benefits": {"type": "object", "additionalProperties": {"type": "number"}},
+    "assumptions": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,17 @@
+{
+  "name": "user-supplied industrial heat case",
+  "capital_cost": 1200000,
+  "annual_output_mwh": 9000,
+  "output_name": "useful heat",
+  "currency": "USD",
+  "price_year": 2026,
+  "project_life_years": 5,
+  "discount_rate": 0.07,
+  "annual_fixed_opex": 30000,
+  "variable_opex_per_mwh": 2.5,
+  "annual_fuel_use_mwh": 3000,
+  "annual_fuel_prices_per_mwh": [70, 72, 74, 76, 78],
+  "annual_emissions_kg_co2e": 250000,
+  "annual_carbon_prices_per_tonne": [50, 55, 60, 65, 70],
+  "source": "Values copied by the user from a source they are entitled to use"
+}

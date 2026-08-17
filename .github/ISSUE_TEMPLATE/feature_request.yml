@@ -1,0 +1,24 @@
+name: Feature request
+description: Propose a workflow, model, adapter, or documented validation case.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Who needs this and what decision will it support?
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Available inputs and desired outputs
+      description: State units, geography, industry, and likely missing data.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Methods, evidence, and licensing
+      description: Link primary methods or redistributable data sources if known.

@@ -1,0 +1,7729 @@
+{
+  "schema_version": "1.0",
+  "data_version": "owid-ember-2026-08-15",
+  "generated_on": "2026-08-15",
+  "license": "CC-BY-4.0; retain attribution to Ember and OWID",
+  "indicator": "carbon_intensity_elec",
+  "unit": "kg CO2e/MWh",
+  "scope": "lifecycle electricity-generation intensity",
+  "sources": {
+    "ember-yearly-electricity": {
+      "title": "Ember Yearly Electricity Data",
+      "url": "https://ember-energy.org/data/yearly-electricity-data/",
+      "methodology": "https://files.ember-energy.org/public-downloads/ember_electricity_data_methodology.pdf",
+      "license": "CC-BY-4.0"
+    },
+    "owid-energy": {
+      "title": "Our World in Data complete Energy dataset",
+      "url": "https://owid-public.owid.io/data/energy/owid-energy-data.csv",
+      "repository": "https://github.com/owid/energy-data",
+      "note": "OWID standardizes location names and republishes the Ember indicator."
+    }
+  },
+  "records": [
+    {
+      "iso3": "ABW",
+      "country": "Aruba",
+      "year": 2019,
+      "kg_co2e_per_mwh": 545.46
+    },
+    {
+      "iso3": "ABW",
+      "country": "Aruba",
+      "year": 2020,
+      "kg_co2e_per_mwh": 545.46
+    },
+    {
+      "iso3": "ABW",
+      "country": "Aruba",
+      "year": 2021,
+      "kg_co2e_per_mwh": 550.0
+    },
+    {
+      "iso3": "ABW",
+      "country": "Aruba",
+      "year": 2022,
+      "kg_co2e_per_mwh": 550.0
+    },
+    {
+      "iso3": "ABW",
+      "country": "Aruba",
+      "year": 2023,
+      "kg_co2e_per_mwh": 550.0
+    },
+    {
+      "iso3": "ABW",
+      "country": "Aruba",
+      "year": 2024,
+      "kg_co2e_per_mwh": 550.0
+    },
+    {
+      "iso3": "AFG",
+      "country": "Afghanistan",
+      "year": 2019,
+      "kg_co2e_per_mwh": 116.44
+    },
+    {
+      "iso3": "AFG",
+      "country": "Afghanistan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 93.22
+    },
+    {
+      "iso3": "AFG",
+      "country": "Afghanistan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 113.21
+    },
+    {
+      "iso3": "AFG",
+      "country": "Afghanistan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 125.0
+    },
+    {
+      "iso3": "AFG",
+      "country": "Afghanistan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 123.71
+    },
+    {
+      "iso3": "AFG",
+      "country": "Afghanistan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 131.31
+    },
+    {
+      "iso3": "AGO",
+      "country": "Angola",
+      "year": 2019,
+      "kg_co2e_per_mwh": 186.47
+    },
+    {
+      "iso3": "AGO",
+      "country": "Angola",
+      "year": 2020,
+      "kg_co2e_per_mwh": 171.33
+    },
+    {
+      "iso3": "AGO",
+      "country": "Angola",
+      "year": 2021,
+      "kg_co2e_per_mwh": 172.7
+    },
+    {
+      "iso3": "AGO",
+      "country": "Angola",
+      "year": 2022,
+      "kg_co2e_per_mwh": 172.16
+    },
+    {
+      "iso3": "AGO",
+      "country": "Angola",
+      "year": 2023,
+      "kg_co2e_per_mwh": 183.49
+    },
+    {
+      "iso3": "AGO",
+      "country": "Angola",
+      "year": 2024,
+      "kg_co2e_per_mwh": 185.38
+    },
+    {
+      "iso3": "ALB",
+      "country": "Albania",
+      "year": 2019,
+      "kg_co2e_per_mwh": 23.08
+    },
+    {
+      "iso3": "ALB",
+      "country": "Albania",
+      "year": 2020,
+      "kg_co2e_per_mwh": 24.48
+    },
+    {
+      "iso3": "ALB",
+      "country": "Albania",
+      "year": 2021,
+      "kg_co2e_per_mwh": 23.49
+    },
+    {
+      "iso3": "ALB",
+      "country": "Albania",
+      "year": 2022,
+      "kg_co2e_per_mwh": 24.39
+    },
+    {
+      "iso3": "ALB",
+      "country": "Albania",
+      "year": 2023,
+      "kg_co2e_per_mwh": 24.42
+    },
+    {
+      "iso3": "ALB",
+      "country": "Albania",
+      "year": 2024,
+      "kg_co2e_per_mwh": 25.18
+    },
+    {
+      "iso3": "ARE",
+      "country": "United Arab Emirates",
+      "year": 2019,
+      "kg_co2e_per_mwh": 660.09
+    },
+    {
+      "iso3": "ARE",
+      "country": "United Arab Emirates",
+      "year": 2020,
+      "kg_co2e_per_mwh": 645.69
+    },
+    {
+      "iso3": "ARE",
+      "country": "United Arab Emirates",
+      "year": 2021,
+      "kg_co2e_per_mwh": 605.3
+    },
+    {
+      "iso3": "ARE",
+      "country": "United Arab Emirates",
+      "year": 2022,
+      "kg_co2e_per_mwh": 558.49
+    },
+    {
+      "iso3": "ARE",
+      "country": "United Arab Emirates",
+      "year": 2023,
+      "kg_co2e_per_mwh": 483.79
+    },
+    {
+      "iso3": "ARE",
+      "country": "United Arab Emirates",
+      "year": 2024,
+      "kg_co2e_per_mwh": 467.51
+    },
+    {
+      "iso3": "ARG",
+      "country": "Argentina",
+      "year": 2020,
+      "kg_co2e_per_mwh": 394.7
+    },
+    {
+      "iso3": "ARG",
+      "country": "Argentina",
+      "year": 2021,
+      "kg_co2e_per_mwh": 406.99
+    },
+    {
+      "iso3": "ARG",
+      "country": "Argentina",
+      "year": 2022,
+      "kg_co2e_per_mwh": 392.69
+    },
+    {
+      "iso3": "ARG",
+      "country": "Argentina",
+      "year": 2023,
+      "kg_co2e_per_mwh": 350.9
+    },
+    {
+      "iso3": "ARG",
+      "country": "Argentina",
+      "year": 2024,
+      "kg_co2e_per_mwh": 344.83
+    },
+    {
+      "iso3": "ARG",
+      "country": "Argentina",
+      "year": 2025,
+      "kg_co2e_per_mwh": 346.0
+    },
+    {
+      "iso3": "ARM",
+      "country": "Armenia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 251.31
+    },
+    {
+      "iso3": "ARM",
+      "country": "Armenia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 265.54
+    },
+    {
+      "iso3": "ARM",
+      "country": "Armenia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 240.89
+    },
+    {
+      "iso3": "ARM",
+      "country": "Armenia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 262.43
+    },
+    {
+      "iso3": "ARM",
+      "country": "Armenia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 240.31
+    },
+    {
+      "iso3": "ARM",
+      "country": "Armenia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 211.93
+    },
+    {
+      "iso3": "ASM",
+      "country": "American Samoa",
+      "year": 2019,
+      "kg_co2e_per_mwh": 687.5
+    },
+    {
+      "iso3": "ASM",
+      "country": "American Samoa",
+      "year": 2020,
+      "kg_co2e_per_mwh": 647.06
+    },
+    {
+      "iso3": "ASM",
+      "country": "American Samoa",
+      "year": 2021,
+      "kg_co2e_per_mwh": 647.06
+    },
+    {
+      "iso3": "ASM",
+      "country": "American Samoa",
+      "year": 2022,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "ASM",
+      "country": "American Samoa",
+      "year": 2023,
+      "kg_co2e_per_mwh": 647.06
+    },
+    {
+      "iso3": "ASM",
+      "country": "American Samoa",
+      "year": 2024,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "ATG",
+      "country": "Antigua and Barbuda",
+      "year": 2019,
+      "kg_co2e_per_mwh": 638.89
+    },
+    {
+      "iso3": "ATG",
+      "country": "Antigua and Barbuda",
+      "year": 2020,
+      "kg_co2e_per_mwh": 628.57
+    },
+    {
+      "iso3": "ATG",
+      "country": "Antigua and Barbuda",
+      "year": 2021,
+      "kg_co2e_per_mwh": 628.57
+    },
+    {
+      "iso3": "ATG",
+      "country": "Antigua and Barbuda",
+      "year": 2022,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "ATG",
+      "country": "Antigua and Barbuda",
+      "year": 2023,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "ATG",
+      "country": "Antigua and Barbuda",
+      "year": 2024,
+      "kg_co2e_per_mwh": 594.6
+    },
+    {
+      "iso3": "AUS",
+      "country": "Australia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 642.32
+    },
+    {
+      "iso3": "AUS",
+      "country": "Australia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 605.91
+    },
+    {
+      "iso3": "AUS",
+      "country": "Australia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 577.86
+    },
+    {
+      "iso3": "AUS",
+      "country": "Australia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 556.7
+    },
+    {
+      "iso3": "AUS",
+      "country": "Australia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 553.83
+    },
+    {
+      "iso3": "AUS",
+      "country": "Australia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 525.18
+    },
+    {
+      "iso3": "AUT",
+      "country": "Austria",
+      "year": 2020,
+      "kg_co2e_per_mwh": 133.28
+    },
+    {
+      "iso3": "AUT",
+      "country": "Austria",
+      "year": 2021,
+      "kg_co2e_per_mwh": 135.29
+    },
+    {
+      "iso3": "AUT",
+      "country": "Austria",
+      "year": 2022,
+      "kg_co2e_per_mwh": 140.84
+    },
+    {
+      "iso3": "AUT",
+      "country": "Austria",
+      "year": 2023,
+      "kg_co2e_per_mwh": 111.72
+    },
+    {
+      "iso3": "AUT",
+      "country": "Austria",
+      "year": 2024,
+      "kg_co2e_per_mwh": 103.48
+    },
+    {
+      "iso3": "AUT",
+      "country": "Austria",
+      "year": 2025,
+      "kg_co2e_per_mwh": 116.91
+    },
+    {
+      "iso3": "AZE",
+      "country": "Azerbaijan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 680.0
+    },
+    {
+      "iso3": "AZE",
+      "country": "Azerbaijan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 676.14
+    },
+    {
+      "iso3": "AZE",
+      "country": "Azerbaijan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 671.39
+    },
+    {
+      "iso3": "AZE",
+      "country": "Azerbaijan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 669.99
+    },
+    {
+      "iso3": "AZE",
+      "country": "Azerbaijan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 634.34
+    },
+    {
+      "iso3": "AZE",
+      "country": "Azerbaijan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 631.9
+    },
+    {
+      "iso3": "BDI",
+      "country": "Burundi",
+      "year": 2019,
+      "kg_co2e_per_mwh": 230.77
+    },
+    {
+      "iso3": "BDI",
+      "country": "Burundi",
+      "year": 2020,
+      "kg_co2e_per_mwh": 189.19
+    },
+    {
+      "iso3": "BDI",
+      "country": "Burundi",
+      "year": 2021,
+      "kg_co2e_per_mwh": 230.77
+    },
+    {
+      "iso3": "BDI",
+      "country": "Burundi",
+      "year": 2022,
+      "kg_co2e_per_mwh": 230.77
+    },
+    {
+      "iso3": "BDI",
+      "country": "Burundi",
+      "year": 2023,
+      "kg_co2e_per_mwh": 180.0
+    },
+    {
+      "iso3": "BDI",
+      "country": "Burundi",
+      "year": 2024,
+      "kg_co2e_per_mwh": 183.67
+    },
+    {
+      "iso3": "BEL",
+      "country": "Belgium",
+      "year": 2020,
+      "kg_co2e_per_mwh": 166.61
+    },
+    {
+      "iso3": "BEL",
+      "country": "Belgium",
+      "year": 2021,
+      "kg_co2e_per_mwh": 131.79
+    },
+    {
+      "iso3": "BEL",
+      "country": "Belgium",
+      "year": 2022,
+      "kg_co2e_per_mwh": 139.4
+    },
+    {
+      "iso3": "BEL",
+      "country": "Belgium",
+      "year": 2023,
+      "kg_co2e_per_mwh": 134.67
+    },
+    {
+      "iso3": "BEL",
+      "country": "Belgium",
+      "year": 2024,
+      "kg_co2e_per_mwh": 126.96
+    },
+    {
+      "iso3": "BEL",
+      "country": "Belgium",
+      "year": 2025,
+      "kg_co2e_per_mwh": 149.82
+    },
+    {
+      "iso3": "BEN",
+      "country": "Benin",
+      "year": 2019,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "BEN",
+      "country": "Benin",
+      "year": 2020,
+      "kg_co2e_per_mwh": 595.96
+    },
+    {
+      "iso3": "BEN",
+      "country": "Benin",
+      "year": 2021,
+      "kg_co2e_per_mwh": 584.07
+    },
+    {
+      "iso3": "BEN",
+      "country": "Benin",
+      "year": 2022,
+      "kg_co2e_per_mwh": 595.96
+    },
+    {
+      "iso3": "BEN",
+      "country": "Benin",
+      "year": 2023,
+      "kg_co2e_per_mwh": 590.0
+    },
+    {
+      "iso3": "BEN",
+      "country": "Benin",
+      "year": 2024,
+      "kg_co2e_per_mwh": 584.16
+    },
+    {
+      "iso3": "BFA",
+      "country": "Burkina Faso",
+      "year": 2019,
+      "kg_co2e_per_mwh": 556.25
+    },
+    {
+      "iso3": "BFA",
+      "country": "Burkina Faso",
+      "year": 2020,
+      "kg_co2e_per_mwh": 547.17
+    },
+    {
+      "iso3": "BFA",
+      "country": "Burkina Faso",
+      "year": 2021,
+      "kg_co2e_per_mwh": 549.71
+    },
+    {
+      "iso3": "BFA",
+      "country": "Burkina Faso",
+      "year": 2022,
+      "kg_co2e_per_mwh": 568.05
+    },
+    {
+      "iso3": "BFA",
+      "country": "Burkina Faso",
+      "year": 2023,
+      "kg_co2e_per_mwh": 562.13
+    },
+    {
+      "iso3": "BFA",
+      "country": "Burkina Faso",
+      "year": 2024,
+      "kg_co2e_per_mwh": 562.13
+    },
+    {
+      "iso3": "BGD",
+      "country": "Bangladesh",
+      "year": 2020,
+      "kg_co2e_per_mwh": 678.91
+    },
+    {
+      "iso3": "BGD",
+      "country": "Bangladesh",
+      "year": 2021,
+      "kg_co2e_per_mwh": 679.04
+    },
+    {
+      "iso3": "BGD",
+      "country": "Bangladesh",
+      "year": 2022,
+      "kg_co2e_per_mwh": 676.48
+    },
+    {
+      "iso3": "BGD",
+      "country": "Bangladesh",
+      "year": 2023,
+      "kg_co2e_per_mwh": 682.72
+    },
+    {
+      "iso3": "BGD",
+      "country": "Bangladesh",
+      "year": 2024,
+      "kg_co2e_per_mwh": 695.7
+    },
+    {
+      "iso3": "BGD",
+      "country": "Bangladesh",
+      "year": 2025,
+      "kg_co2e_per_mwh": 696.13
+    },
+    {
+      "iso3": "BGR",
+      "country": "Bulgaria",
+      "year": 2020,
+      "kg_co2e_per_mwh": 383.91
+    },
+    {
+      "iso3": "BGR",
+      "country": "Bulgaria",
+      "year": 2021,
+      "kg_co2e_per_mwh": 415.29
+    },
+    {
+      "iso3": "BGR",
+      "country": "Bulgaria",
+      "year": 2022,
+      "kg_co2e_per_mwh": 476.33
+    },
+    {
+      "iso3": "BGR",
+      "country": "Bulgaria",
+      "year": 2023,
+      "kg_co2e_per_mwh": 338.32
+    },
+    {
+      "iso3": "BGR",
+      "country": "Bulgaria",
+      "year": 2024,
+      "kg_co2e_per_mwh": 278.85
+    },
+    {
+      "iso3": "BGR",
+      "country": "Bulgaria",
+      "year": 2025,
+      "kg_co2e_per_mwh": 275.55
+    },
+    {
+      "iso3": "BHR",
+      "country": "Bahrain",
+      "year": 2019,
+      "kg_co2e_per_mwh": 904.26
+    },
+    {
+      "iso3": "BHR",
+      "country": "Bahrain",
+      "year": 2020,
+      "kg_co2e_per_mwh": 904.13
+    },
+    {
+      "iso3": "BHR",
+      "country": "Bahrain",
+      "year": 2021,
+      "kg_co2e_per_mwh": 903.57
+    },
+    {
+      "iso3": "BHR",
+      "country": "Bahrain",
+      "year": 2022,
+      "kg_co2e_per_mwh": 902.75
+    },
+    {
+      "iso3": "BHR",
+      "country": "Bahrain",
+      "year": 2023,
+      "kg_co2e_per_mwh": 902.59
+    },
+    {
+      "iso3": "BHR",
+      "country": "Bahrain",
+      "year": 2024,
+      "kg_co2e_per_mwh": 902.24
+    },
+    {
+      "iso3": "BHS",
+      "country": "Bahamas",
+      "year": 2019,
+      "kg_co2e_per_mwh": 656.72
+    },
+    {
+      "iso3": "BHS",
+      "country": "Bahamas",
+      "year": 2020,
+      "kg_co2e_per_mwh": 655.17
+    },
+    {
+      "iso3": "BHS",
+      "country": "Bahamas",
+      "year": 2021,
+      "kg_co2e_per_mwh": 656.86
+    },
+    {
+      "iso3": "BHS",
+      "country": "Bahamas",
+      "year": 2022,
+      "kg_co2e_per_mwh": 653.66
+    },
+    {
+      "iso3": "BHS",
+      "country": "Bahamas",
+      "year": 2023,
+      "kg_co2e_per_mwh": 651.58
+    },
+    {
+      "iso3": "BHS",
+      "country": "Bahamas",
+      "year": 2024,
+      "kg_co2e_per_mwh": 653.33
+    },
+    {
+      "iso3": "BIH",
+      "country": "Bosnia and Herzegovina",
+      "year": 2020,
+      "kg_co2e_per_mwh": 711.14
+    },
+    {
+      "iso3": "BIH",
+      "country": "Bosnia and Herzegovina",
+      "year": 2021,
+      "kg_co2e_per_mwh": 615.97
+    },
+    {
+      "iso3": "BIH",
+      "country": "Bosnia and Herzegovina",
+      "year": 2022,
+      "kg_co2e_per_mwh": 683.18
+    },
+    {
+      "iso3": "BIH",
+      "country": "Bosnia and Herzegovina",
+      "year": 2023,
+      "kg_co2e_per_mwh": 576.25
+    },
+    {
+      "iso3": "BIH",
+      "country": "Bosnia and Herzegovina",
+      "year": 2024,
+      "kg_co2e_per_mwh": 601.03
+    },
+    {
+      "iso3": "BIH",
+      "country": "Bosnia and Herzegovina",
+      "year": 2025,
+      "kg_co2e_per_mwh": 570.64
+    },
+    {
+      "iso3": "BLR",
+      "country": "Belarus",
+      "year": 2020,
+      "kg_co2e_per_mwh": 498.7
+    },
+    {
+      "iso3": "BLR",
+      "country": "Belarus",
+      "year": 2021,
+      "kg_co2e_per_mwh": 433.21
+    },
+    {
+      "iso3": "BLR",
+      "country": "Belarus",
+      "year": 2022,
+      "kg_co2e_per_mwh": 439.22
+    },
+    {
+      "iso3": "BLR",
+      "country": "Belarus",
+      "year": 2023,
+      "kg_co2e_per_mwh": 359.85
+    },
+    {
+      "iso3": "BLR",
+      "country": "Belarus",
+      "year": 2024,
+      "kg_co2e_per_mwh": 329.55
+    },
+    {
+      "iso3": "BLR",
+      "country": "Belarus",
+      "year": 2025,
+      "kg_co2e_per_mwh": 309.25
+    },
+    {
+      "iso3": "BLZ",
+      "country": "Belize",
+      "year": 2019,
+      "kg_co2e_per_mwh": 173.08
+    },
+    {
+      "iso3": "BLZ",
+      "country": "Belize",
+      "year": 2020,
+      "kg_co2e_per_mwh": 159.09
+    },
+    {
+      "iso3": "BLZ",
+      "country": "Belize",
+      "year": 2021,
+      "kg_co2e_per_mwh": 166.67
+    },
+    {
+      "iso3": "BLZ",
+      "country": "Belize",
+      "year": 2022,
+      "kg_co2e_per_mwh": 170.21
+    },
+    {
+      "iso3": "BLZ",
+      "country": "Belize",
+      "year": 2023,
+      "kg_co2e_per_mwh": 155.56
+    },
+    {
+      "iso3": "BLZ",
+      "country": "Belize",
+      "year": 2024,
+      "kg_co2e_per_mwh": 170.21
+    },
+    {
+      "iso3": "BMU",
+      "country": "Bermuda",
+      "year": 2019,
+      "kg_co2e_per_mwh": 639.34
+    },
+    {
+      "iso3": "BMU",
+      "country": "Bermuda",
+      "year": 2020,
+      "kg_co2e_per_mwh": 644.07
+    },
+    {
+      "iso3": "BMU",
+      "country": "Bermuda",
+      "year": 2021,
+      "kg_co2e_per_mwh": 644.07
+    },
+    {
+      "iso3": "BMU",
+      "country": "Bermuda",
+      "year": 2022,
+      "kg_co2e_per_mwh": 650.79
+    },
+    {
+      "iso3": "BMU",
+      "country": "Bermuda",
+      "year": 2023,
+      "kg_co2e_per_mwh": 640.63
+    },
+    {
+      "iso3": "BMU",
+      "country": "Bermuda",
+      "year": 2024,
+      "kg_co2e_per_mwh": 639.34
+    },
+    {
+      "iso3": "BOL",
+      "country": "Bolivia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 483.93
+    },
+    {
+      "iso3": "BOL",
+      "country": "Bolivia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 467.34
+    },
+    {
+      "iso3": "BOL",
+      "country": "Bolivia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 485.86
+    },
+    {
+      "iso3": "BOL",
+      "country": "Bolivia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 501.2
+    },
+    {
+      "iso3": "BOL",
+      "country": "Bolivia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 495.2
+    },
+    {
+      "iso3": "BOL",
+      "country": "Bolivia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 481.29
+    },
+    {
+      "iso3": "BRA",
+      "country": "Brazil",
+      "year": 2020,
+      "kg_co2e_per_mwh": 133.36
+    },
+    {
+      "iso3": "BRA",
+      "country": "Brazil",
+      "year": 2021,
+      "kg_co2e_per_mwh": 168.07
+    },
+    {
+      "iso3": "BRA",
+      "country": "Brazil",
+      "year": 2022,
+      "kg_co2e_per_mwh": 103.39
+    },
+    {
+      "iso3": "BRA",
+      "country": "Brazil",
+      "year": 2023,
+      "kg_co2e_per_mwh": 96.26
+    },
+    {
+      "iso3": "BRA",
+      "country": "Brazil",
+      "year": 2024,
+      "kg_co2e_per_mwh": 106.06
+    },
+    {
+      "iso3": "BRA",
+      "country": "Brazil",
+      "year": 2025,
+      "kg_co2e_per_mwh": 109.95
+    },
+    {
+      "iso3": "BRB",
+      "country": "Barbados",
+      "year": 2019,
+      "kg_co2e_per_mwh": 632.08
+    },
+    {
+      "iso3": "BRB",
+      "country": "Barbados",
+      "year": 2020,
+      "kg_co2e_per_mwh": 613.21
+    },
+    {
+      "iso3": "BRB",
+      "country": "Barbados",
+      "year": 2021,
+      "kg_co2e_per_mwh": 603.77
+    },
+    {
+      "iso3": "BRB",
+      "country": "Barbados",
+      "year": 2022,
+      "kg_co2e_per_mwh": 605.51
+    },
+    {
+      "iso3": "BRB",
+      "country": "Barbados",
+      "year": 2023,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "BRB",
+      "country": "Barbados",
+      "year": 2024,
+      "kg_co2e_per_mwh": 594.6
+    },
+    {
+      "iso3": "BRN",
+      "country": "Brunei",
+      "year": 2019,
+      "kg_co2e_per_mwh": 896.55
+    },
+    {
+      "iso3": "BRN",
+      "country": "Brunei",
+      "year": 2020,
+      "kg_co2e_per_mwh": 895.47
+    },
+    {
+      "iso3": "BRN",
+      "country": "Brunei",
+      "year": 2021,
+      "kg_co2e_per_mwh": 894.74
+    },
+    {
+      "iso3": "BRN",
+      "country": "Brunei",
+      "year": 2022,
+      "kg_co2e_per_mwh": 892.86
+    },
+    {
+      "iso3": "BRN",
+      "country": "Brunei",
+      "year": 2023,
+      "kg_co2e_per_mwh": 894.64
+    },
+    {
+      "iso3": "BRN",
+      "country": "Brunei",
+      "year": 2024,
+      "kg_co2e_per_mwh": 892.09
+    },
+    {
+      "iso3": "BTN",
+      "country": "Bhutan",
+      "year": 2019,
+      "kg_co2e_per_mwh": 24.28
+    },
+    {
+      "iso3": "BTN",
+      "country": "Bhutan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 23.75
+    },
+    {
+      "iso3": "BTN",
+      "country": "Bhutan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 24.03
+    },
+    {
+      "iso3": "BTN",
+      "country": "Bhutan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 24.14
+    },
+    {
+      "iso3": "BTN",
+      "country": "Bhutan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 24.19
+    },
+    {
+      "iso3": "BTN",
+      "country": "Bhutan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 23.64
+    },
+    {
+      "iso3": "BWA",
+      "country": "Botswana",
+      "year": 2019,
+      "kg_co2e_per_mwh": 852.59
+    },
+    {
+      "iso3": "BWA",
+      "country": "Botswana",
+      "year": 2020,
+      "kg_co2e_per_mwh": 848.62
+    },
+    {
+      "iso3": "BWA",
+      "country": "Botswana",
+      "year": 2021,
+      "kg_co2e_per_mwh": 847.39
+    },
+    {
+      "iso3": "BWA",
+      "country": "Botswana",
+      "year": 2022,
+      "kg_co2e_per_mwh": 847.66
+    },
+    {
+      "iso3": "BWA",
+      "country": "Botswana",
+      "year": 2023,
+      "kg_co2e_per_mwh": 854.49
+    },
+    {
+      "iso3": "BWA",
+      "country": "Botswana",
+      "year": 2024,
+      "kg_co2e_per_mwh": 851.31
+    },
+    {
+      "iso3": "CAF",
+      "country": "Central African Republic",
+      "year": 2018,
+      "kg_co2e_per_mwh": 0.0
+    },
+    {
+      "iso3": "CAF",
+      "country": "Central African Republic",
+      "year": 2019,
+      "kg_co2e_per_mwh": 0.0
+    },
+    {
+      "iso3": "CAF",
+      "country": "Central African Republic",
+      "year": 2020,
+      "kg_co2e_per_mwh": 0.0
+    },
+    {
+      "iso3": "CAF",
+      "country": "Central African Republic",
+      "year": 2021,
+      "kg_co2e_per_mwh": 0.0
+    },
+    {
+      "iso3": "CAF",
+      "country": "Central African Republic",
+      "year": 2022,
+      "kg_co2e_per_mwh": 0.0
+    },
+    {
+      "iso3": "CAF",
+      "country": "Central African Republic",
+      "year": 2023,
+      "kg_co2e_per_mwh": 0.0
+    },
+    {
+      "iso3": "CAN",
+      "country": "Canada",
+      "year": 2020,
+      "kg_co2e_per_mwh": 161.69
+    },
+    {
+      "iso3": "CAN",
+      "country": "Canada",
+      "year": 2021,
+      "kg_co2e_per_mwh": 165.37
+    },
+    {
+      "iso3": "CAN",
+      "country": "Canada",
+      "year": 2022,
+      "kg_co2e_per_mwh": 160.6
+    },
+    {
+      "iso3": "CAN",
+      "country": "Canada",
+      "year": 2023,
+      "kg_co2e_per_mwh": 174.37
+    },
+    {
+      "iso3": "CAN",
+      "country": "Canada",
+      "year": 2024,
+      "kg_co2e_per_mwh": 185.35
+    },
+    {
+      "iso3": "CAN",
+      "country": "Canada",
+      "year": 2025,
+      "kg_co2e_per_mwh": 190.72
+    },
+    {
+      "iso3": "CHE",
+      "country": "Switzerland",
+      "year": 2020,
+      "kg_co2e_per_mwh": 36.64
+    },
+    {
+      "iso3": "CHE",
+      "country": "Switzerland",
+      "year": 2021,
+      "kg_co2e_per_mwh": 38.52
+    },
+    {
+      "iso3": "CHE",
+      "country": "Switzerland",
+      "year": 2022,
+      "kg_co2e_per_mwh": 37.27
+    },
+    {
+      "iso3": "CHE",
+      "country": "Switzerland",
+      "year": 2023,
+      "kg_co2e_per_mwh": 34.82
+    },
+    {
+      "iso3": "CHE",
+      "country": "Switzerland",
+      "year": 2024,
+      "kg_co2e_per_mwh": 34.58
+    },
+    {
+      "iso3": "CHE",
+      "country": "Switzerland",
+      "year": 2025,
+      "kg_co2e_per_mwh": 39.22
+    },
+    {
+      "iso3": "CHL",
+      "country": "Chile",
+      "year": 2020,
+      "kg_co2e_per_mwh": 436.83
+    },
+    {
+      "iso3": "CHL",
+      "country": "Chile",
+      "year": 2021,
+      "kg_co2e_per_mwh": 430.99
+    },
+    {
+      "iso3": "CHL",
+      "country": "Chile",
+      "year": 2022,
+      "kg_co2e_per_mwh": 372.8
+    },
+    {
+      "iso3": "CHL",
+      "country": "Chile",
+      "year": 2023,
+      "kg_co2e_per_mwh": 303.82
+    },
+    {
+      "iso3": "CHL",
+      "country": "Chile",
+      "year": 2024,
+      "kg_co2e_per_mwh": 259.87
+    },
+    {
+      "iso3": "CHL",
+      "country": "Chile",
+      "year": 2025,
+      "kg_co2e_per_mwh": 289.49
+    },
+    {
+      "iso3": "CHN",
+      "country": "China",
+      "year": 2020,
+      "kg_co2e_per_mwh": 606.29
+    },
+    {
+      "iso3": "CHN",
+      "country": "China",
+      "year": 2021,
+      "kg_co2e_per_mwh": 599.05
+    },
+    {
+      "iso3": "CHN",
+      "country": "China",
+      "year": 2022,
+      "kg_co2e_per_mwh": 586.75
+    },
+    {
+      "iso3": "CHN",
+      "country": "China",
+      "year": 2023,
+      "kg_co2e_per_mwh": 583.04
+    },
+    {
+      "iso3": "CHN",
+      "country": "China",
+      "year": 2024,
+      "kg_co2e_per_mwh": 555.4
+    },
+    {
+      "iso3": "CHN",
+      "country": "China",
+      "year": 2025,
+      "kg_co2e_per_mwh": 525.34
+    },
+    {
+      "iso3": "CIV",
+      "country": "Cote d'Ivoire",
+      "year": 2019,
+      "kg_co2e_per_mwh": 382.74
+    },
+    {
+      "iso3": "CIV",
+      "country": "Cote d'Ivoire",
+      "year": 2020,
+      "kg_co2e_per_mwh": 396.09
+    },
+    {
+      "iso3": "CIV",
+      "country": "Cote d'Ivoire",
+      "year": 2021,
+      "kg_co2e_per_mwh": 431.72
+    },
+    {
+      "iso3": "CIV",
+      "country": "Cote d'Ivoire",
+      "year": 2022,
+      "kg_co2e_per_mwh": 413.16
+    },
+    {
+      "iso3": "CIV",
+      "country": "Cote d'Ivoire",
+      "year": 2023,
+      "kg_co2e_per_mwh": 398.91
+    },
+    {
+      "iso3": "CIV",
+      "country": "Cote d'Ivoire",
+      "year": 2024,
+      "kg_co2e_per_mwh": 405.01
+    },
+    {
+      "iso3": "CMR",
+      "country": "Cameroon",
+      "year": 2019,
+      "kg_co2e_per_mwh": 305.56
+    },
+    {
+      "iso3": "CMR",
+      "country": "Cameroon",
+      "year": 2020,
+      "kg_co2e_per_mwh": 320.46
+    },
+    {
+      "iso3": "CMR",
+      "country": "Cameroon",
+      "year": 2021,
+      "kg_co2e_per_mwh": 298.45
+    },
+    {
+      "iso3": "CMR",
+      "country": "Cameroon",
+      "year": 2022,
+      "kg_co2e_per_mwh": 280.98
+    },
+    {
+      "iso3": "CMR",
+      "country": "Cameroon",
+      "year": 2023,
+      "kg_co2e_per_mwh": 224.38
+    },
+    {
+      "iso3": "CMR",
+      "country": "Cameroon",
+      "year": 2024,
+      "kg_co2e_per_mwh": 225.9
+    },
+    {
+      "iso3": "COD",
+      "country": "Democratic Republic of Congo",
+      "year": 2019,
+      "kg_co2e_per_mwh": 24.6
+    },
+    {
+      "iso3": "COD",
+      "country": "Democratic Republic of Congo",
+      "year": 2020,
+      "kg_co2e_per_mwh": 24.82
+    },
+    {
+      "iso3": "COD",
+      "country": "Democratic Republic of Congo",
+      "year": 2021,
+      "kg_co2e_per_mwh": 25.37
+    },
+    {
+      "iso3": "COD",
+      "country": "Democratic Republic of Congo",
+      "year": 2022,
+      "kg_co2e_per_mwh": 26.78
+    },
+    {
+      "iso3": "COD",
+      "country": "Democratic Republic of Congo",
+      "year": 2023,
+      "kg_co2e_per_mwh": 26.87
+    },
+    {
+      "iso3": "COD",
+      "country": "Democratic Republic of Congo",
+      "year": 2024,
+      "kg_co2e_per_mwh": 27.64
+    },
+    {
+      "iso3": "COG",
+      "country": "Congo",
+      "year": 2019,
+      "kg_co2e_per_mwh": 655.53
+    },
+    {
+      "iso3": "COG",
+      "country": "Congo",
+      "year": 2020,
+      "kg_co2e_per_mwh": 663.34
+    },
+    {
+      "iso3": "COG",
+      "country": "Congo",
+      "year": 2021,
+      "kg_co2e_per_mwh": 669.1
+    },
+    {
+      "iso3": "COG",
+      "country": "Congo",
+      "year": 2022,
+      "kg_co2e_per_mwh": 707.07
+    },
+    {
+      "iso3": "COG",
+      "country": "Congo",
+      "year": 2023,
+      "kg_co2e_per_mwh": 692.16
+    },
+    {
+      "iso3": "COG",
+      "country": "Congo",
+      "year": 2024,
+      "kg_co2e_per_mwh": 716.12
+    },
+    {
+      "iso3": "COK",
+      "country": "Cook Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "COK",
+      "country": "Cook Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "COK",
+      "country": "Cook Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 250.0
+    },
+    {
+      "iso3": "COK",
+      "country": "Cook Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 250.0
+    },
+    {
+      "iso3": "COK",
+      "country": "Cook Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 250.0
+    },
+    {
+      "iso3": "COK",
+      "country": "Cook Islands",
+      "year": 2024,
+      "kg_co2e_per_mwh": 250.0
+    },
+    {
+      "iso3": "COL",
+      "country": "Colombia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 271.25
+    },
+    {
+      "iso3": "COL",
+      "country": "Colombia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 195.83
+    },
+    {
+      "iso3": "COL",
+      "country": "Colombia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 202.15
+    },
+    {
+      "iso3": "COL",
+      "country": "Colombia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 258.37
+    },
+    {
+      "iso3": "COL",
+      "country": "Colombia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 298.3
+    },
+    {
+      "iso3": "COL",
+      "country": "Colombia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 186.81
+    },
+    {
+      "iso3": "COM",
+      "country": "Comoros",
+      "year": 2018,
+      "kg_co2e_per_mwh": 700.0
+    },
+    {
+      "iso3": "COM",
+      "country": "Comoros",
+      "year": 2019,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "COM",
+      "country": "Comoros",
+      "year": 2020,
+      "kg_co2e_per_mwh": 692.31
+    },
+    {
+      "iso3": "COM",
+      "country": "Comoros",
+      "year": 2021,
+      "kg_co2e_per_mwh": 692.31
+    },
+    {
+      "iso3": "COM",
+      "country": "Comoros",
+      "year": 2022,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "COM",
+      "country": "Comoros",
+      "year": 2023,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "CPV",
+      "country": "Cape Verde",
+      "year": 2019,
+      "kg_co2e_per_mwh": 545.46
+    },
+    {
+      "iso3": "CPV",
+      "country": "Cape Verde",
+      "year": 2020,
+      "kg_co2e_per_mwh": 547.62
+    },
+    {
+      "iso3": "CPV",
+      "country": "Cape Verde",
+      "year": 2021,
+      "kg_co2e_per_mwh": 534.88
+    },
+    {
+      "iso3": "CPV",
+      "country": "Cape Verde",
+      "year": 2022,
+      "kg_co2e_per_mwh": 480.0
+    },
+    {
+      "iso3": "CPV",
+      "country": "Cape Verde",
+      "year": 2023,
+      "kg_co2e_per_mwh": 480.0
+    },
+    {
+      "iso3": "CPV",
+      "country": "Cape Verde",
+      "year": 2024,
+      "kg_co2e_per_mwh": 461.54
+    },
+    {
+      "iso3": "CRI",
+      "country": "Costa Rica",
+      "year": 2020,
+      "kg_co2e_per_mwh": 27.3
+    },
+    {
+      "iso3": "CRI",
+      "country": "Costa Rica",
+      "year": 2021,
+      "kg_co2e_per_mwh": 25.92
+    },
+    {
+      "iso3": "CRI",
+      "country": "Costa Rica",
+      "year": 2022,
+      "kg_co2e_per_mwh": 24.12
+    },
+    {
+      "iso3": "CRI",
+      "country": "Costa Rica",
+      "year": 2023,
+      "kg_co2e_per_mwh": 24.74
+    },
+    {
+      "iso3": "CRI",
+      "country": "Costa Rica",
+      "year": 2024,
+      "kg_co2e_per_mwh": 25.46
+    },
+    {
+      "iso3": "CRI",
+      "country": "Costa Rica",
+      "year": 2025,
+      "kg_co2e_per_mwh": 24.2
+    },
+    {
+      "iso3": "CUB",
+      "country": "Cuba",
+      "year": 2019,
+      "kg_co2e_per_mwh": 641.06
+    },
+    {
+      "iso3": "CUB",
+      "country": "Cuba",
+      "year": 2020,
+      "kg_co2e_per_mwh": 638.99
+    },
+    {
+      "iso3": "CUB",
+      "country": "Cuba",
+      "year": 2021,
+      "kg_co2e_per_mwh": 638.81
+    },
+    {
+      "iso3": "CUB",
+      "country": "Cuba",
+      "year": 2022,
+      "kg_co2e_per_mwh": 640.26
+    },
+    {
+      "iso3": "CUB",
+      "country": "Cuba",
+      "year": 2023,
+      "kg_co2e_per_mwh": 644.38
+    },
+    {
+      "iso3": "CUB",
+      "country": "Cuba",
+      "year": 2024,
+      "kg_co2e_per_mwh": 642.82
+    },
+    {
+      "iso3": "CYM",
+      "country": "Cayman Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 638.89
+    },
+    {
+      "iso3": "CYM",
+      "country": "Cayman Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 637.68
+    },
+    {
+      "iso3": "CYM",
+      "country": "Cayman Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "CYM",
+      "country": "Cayman Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "CYM",
+      "country": "Cayman Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "CYM",
+      "country": "Cayman Islands",
+      "year": 2024,
+      "kg_co2e_per_mwh": 633.8
+    },
+    {
+      "iso3": "CYP",
+      "country": "Cyprus",
+      "year": 2020,
+      "kg_co2e_per_mwh": 581.44
+    },
+    {
+      "iso3": "CYP",
+      "country": "Cyprus",
+      "year": 2021,
+      "kg_co2e_per_mwh": 564.45
+    },
+    {
+      "iso3": "CYP",
+      "country": "Cyprus",
+      "year": 2022,
+      "kg_co2e_per_mwh": 555.13
+    },
+    {
+      "iso3": "CYP",
+      "country": "Cyprus",
+      "year": 2023,
+      "kg_co2e_per_mwh": 532.83
+    },
+    {
+      "iso3": "CYP",
+      "country": "Cyprus",
+      "year": 2024,
+      "kg_co2e_per_mwh": 511.23
+    },
+    {
+      "iso3": "CYP",
+      "country": "Cyprus",
+      "year": 2025,
+      "kg_co2e_per_mwh": 489.0
+    },
+    {
+      "iso3": "CZE",
+      "country": "Czechia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 460.18
+    },
+    {
+      "iso3": "CZE",
+      "country": "Czechia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 471.79
+    },
+    {
+      "iso3": "CZE",
+      "country": "Czechia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 488.36
+    },
+    {
+      "iso3": "CZE",
+      "country": "Czechia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 442.61
+    },
+    {
+      "iso3": "CZE",
+      "country": "Czechia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 414.23
+    },
+    {
+      "iso3": "CZE",
+      "country": "Czechia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 401.46
+    },
+    {
+      "iso3": "DEU",
+      "country": "Germany",
+      "year": 2020,
+      "kg_co2e_per_mwh": 355.61
+    },
+    {
+      "iso3": "DEU",
+      "country": "Germany",
+      "year": 2021,
+      "kg_co2e_per_mwh": 394.64
+    },
+    {
+      "iso3": "DEU",
+      "country": "Germany",
+      "year": 2022,
+      "kg_co2e_per_mwh": 419.74
+    },
+    {
+      "iso3": "DEU",
+      "country": "Germany",
+      "year": 2023,
+      "kg_co2e_per_mwh": 362.92
+    },
+    {
+      "iso3": "DEU",
+      "country": "Germany",
+      "year": 2024,
+      "kg_co2e_per_mwh": 336.38
+    },
+    {
+      "iso3": "DEU",
+      "country": "Germany",
+      "year": 2025,
+      "kg_co2e_per_mwh": 329.65
+    },
+    {
+      "iso3": "DJI",
+      "country": "Djibouti",
+      "year": 2019,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "DJI",
+      "country": "Djibouti",
+      "year": 2020,
+      "kg_co2e_per_mwh": 692.31
+    },
+    {
+      "iso3": "DJI",
+      "country": "Djibouti",
+      "year": 2021,
+      "kg_co2e_per_mwh": 450.0
+    },
+    {
+      "iso3": "DJI",
+      "country": "Djibouti",
+      "year": 2022,
+      "kg_co2e_per_mwh": 450.0
+    },
+    {
+      "iso3": "DJI",
+      "country": "Djibouti",
+      "year": 2023,
+      "kg_co2e_per_mwh": 450.0
+    },
+    {
+      "iso3": "DJI",
+      "country": "Djibouti",
+      "year": 2024,
+      "kg_co2e_per_mwh": 450.0
+    },
+    {
+      "iso3": "DMA",
+      "country": "Dominica",
+      "year": 2018,
+      "kg_co2e_per_mwh": 545.46
+    },
+    {
+      "iso3": "DMA",
+      "country": "Dominica",
+      "year": 2019,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "DMA",
+      "country": "Dominica",
+      "year": 2020,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "DMA",
+      "country": "Dominica",
+      "year": 2021,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "DMA",
+      "country": "Dominica",
+      "year": 2022,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "DMA",
+      "country": "Dominica",
+      "year": 2023,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "DNK",
+      "country": "Denmark",
+      "year": 2020,
+      "kg_co2e_per_mwh": 188.94
+    },
+    {
+      "iso3": "DNK",
+      "country": "Denmark",
+      "year": 2021,
+      "kg_co2e_per_mwh": 222.97
+    },
+    {
+      "iso3": "DNK",
+      "country": "Denmark",
+      "year": 2022,
+      "kg_co2e_per_mwh": 203.64
+    },
+    {
+      "iso3": "DNK",
+      "country": "Denmark",
+      "year": 2023,
+      "kg_co2e_per_mwh": 151.96
+    },
+    {
+      "iso3": "DNK",
+      "country": "Denmark",
+      "year": 2024,
+      "kg_co2e_per_mwh": 131.77
+    },
+    {
+      "iso3": "DNK",
+      "country": "Denmark",
+      "year": 2025,
+      "kg_co2e_per_mwh": 114.41
+    },
+    {
+      "iso3": "DOM",
+      "country": "Dominican Republic",
+      "year": 2020,
+      "kg_co2e_per_mwh": 581.32
+    },
+    {
+      "iso3": "DOM",
+      "country": "Dominican Republic",
+      "year": 2021,
+      "kg_co2e_per_mwh": 558.56
+    },
+    {
+      "iso3": "DOM",
+      "country": "Dominican Republic",
+      "year": 2022,
+      "kg_co2e_per_mwh": 580.06
+    },
+    {
+      "iso3": "DOM",
+      "country": "Dominican Republic",
+      "year": 2023,
+      "kg_co2e_per_mwh": 579.4
+    },
+    {
+      "iso3": "DOM",
+      "country": "Dominican Republic",
+      "year": 2024,
+      "kg_co2e_per_mwh": 567.62
+    },
+    {
+      "iso3": "DOM",
+      "country": "Dominican Republic",
+      "year": 2025,
+      "kg_co2e_per_mwh": 537.48
+    },
+    {
+      "iso3": "DZA",
+      "country": "Algeria",
+      "year": 2019,
+      "kg_co2e_per_mwh": 632.77
+    },
+    {
+      "iso3": "DZA",
+      "country": "Algeria",
+      "year": 2020,
+      "kg_co2e_per_mwh": 632.61
+    },
+    {
+      "iso3": "DZA",
+      "country": "Algeria",
+      "year": 2021,
+      "kg_co2e_per_mwh": 633.53
+    },
+    {
+      "iso3": "DZA",
+      "country": "Algeria",
+      "year": 2022,
+      "kg_co2e_per_mwh": 633.65
+    },
+    {
+      "iso3": "DZA",
+      "country": "Algeria",
+      "year": 2023,
+      "kg_co2e_per_mwh": 633.61
+    },
+    {
+      "iso3": "DZA",
+      "country": "Algeria",
+      "year": 2024,
+      "kg_co2e_per_mwh": 632.94
+    },
+    {
+      "iso3": "ECU",
+      "country": "Ecuador",
+      "year": 2020,
+      "kg_co2e_per_mwh": 159.48
+    },
+    {
+      "iso3": "ECU",
+      "country": "Ecuador",
+      "year": 2021,
+      "kg_co2e_per_mwh": 149.13
+    },
+    {
+      "iso3": "ECU",
+      "country": "Ecuador",
+      "year": 2022,
+      "kg_co2e_per_mwh": 181.19
+    },
+    {
+      "iso3": "ECU",
+      "country": "Ecuador",
+      "year": 2023,
+      "kg_co2e_per_mwh": 195.42
+    },
+    {
+      "iso3": "ECU",
+      "country": "Ecuador",
+      "year": 2024,
+      "kg_co2e_per_mwh": 203.61
+    },
+    {
+      "iso3": "ECU",
+      "country": "Ecuador",
+      "year": 2025,
+      "kg_co2e_per_mwh": 159.02
+    },
+    {
+      "iso3": "EGY",
+      "country": "Egypt",
+      "year": 2020,
+      "kg_co2e_per_mwh": 569.08
+    },
+    {
+      "iso3": "EGY",
+      "country": "Egypt",
+      "year": 2021,
+      "kg_co2e_per_mwh": 568.06
+    },
+    {
+      "iso3": "EGY",
+      "country": "Egypt",
+      "year": 2022,
+      "kg_co2e_per_mwh": 570.04
+    },
+    {
+      "iso3": "EGY",
+      "country": "Egypt",
+      "year": 2023,
+      "kg_co2e_per_mwh": 571.29
+    },
+    {
+      "iso3": "EGY",
+      "country": "Egypt",
+      "year": 2024,
+      "kg_co2e_per_mwh": 574.5
+    },
+    {
+      "iso3": "EGY",
+      "country": "Egypt",
+      "year": 2025,
+      "kg_co2e_per_mwh": 563.23
+    },
+    {
+      "iso3": "ERI",
+      "country": "Eritrea",
+      "year": 2019,
+      "kg_co2e_per_mwh": 575.0
+    },
+    {
+      "iso3": "ERI",
+      "country": "Eritrea",
+      "year": 2020,
+      "kg_co2e_per_mwh": 585.37
+    },
+    {
+      "iso3": "ERI",
+      "country": "Eritrea",
+      "year": 2021,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "ERI",
+      "country": "Eritrea",
+      "year": 2022,
+      "kg_co2e_per_mwh": 590.91
+    },
+    {
+      "iso3": "ERI",
+      "country": "Eritrea",
+      "year": 2023,
+      "kg_co2e_per_mwh": 591.84
+    },
+    {
+      "iso3": "ERI",
+      "country": "Eritrea",
+      "year": 2024,
+      "kg_co2e_per_mwh": 577.78
+    },
+    {
+      "iso3": "ESH",
+      "country": "Western Sahara",
+      "year": 2004,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "ESH",
+      "country": "Western Sahara",
+      "year": 2005,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "ESH",
+      "country": "Western Sahara",
+      "year": 2006,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "ESH",
+      "country": "Western Sahara",
+      "year": 2007,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "ESH",
+      "country": "Western Sahara",
+      "year": 2008,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "ESH",
+      "country": "Western Sahara",
+      "year": 2009,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "ESP",
+      "country": "Spain",
+      "year": 2020,
+      "kg_co2e_per_mwh": 199.1
+    },
+    {
+      "iso3": "ESP",
+      "country": "Spain",
+      "year": 2021,
+      "kg_co2e_per_mwh": 193.54
+    },
+    {
+      "iso3": "ESP",
+      "country": "Spain",
+      "year": 2022,
+      "kg_co2e_per_mwh": 217.13
+    },
+    {
+      "iso3": "ESP",
+      "country": "Spain",
+      "year": 2023,
+      "kg_co2e_per_mwh": 169.68
+    },
+    {
+      "iso3": "ESP",
+      "country": "Spain",
+      "year": 2024,
+      "kg_co2e_per_mwh": 146.22
+    },
+    {
+      "iso3": "ESP",
+      "country": "Spain",
+      "year": 2025,
+      "kg_co2e_per_mwh": 153.6
+    },
+    {
+      "iso3": "EST",
+      "country": "Estonia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 404.61
+    },
+    {
+      "iso3": "EST",
+      "country": "Estonia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 450.63
+    },
+    {
+      "iso3": "EST",
+      "country": "Estonia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 487.7
+    },
+    {
+      "iso3": "EST",
+      "country": "Estonia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 395.47
+    },
+    {
+      "iso3": "EST",
+      "country": "Estonia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 343.45
+    },
+    {
+      "iso3": "EST",
+      "country": "Estonia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 319.15
+    },
+    {
+      "iso3": "ETH",
+      "country": "Ethiopia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 24.33
+    },
+    {
+      "iso3": "ETH",
+      "country": "Ethiopia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 22.81
+    },
+    {
+      "iso3": "ETH",
+      "country": "Ethiopia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 23.55
+    },
+    {
+      "iso3": "ETH",
+      "country": "Ethiopia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 23.64
+    },
+    {
+      "iso3": "ETH",
+      "country": "Ethiopia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 23.41
+    },
+    {
+      "iso3": "ETH",
+      "country": "Ethiopia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 23.08
+    },
+    {
+      "iso3": "FIN",
+      "country": "Finland",
+      "year": 2020,
+      "kg_co2e_per_mwh": 130.27
+    },
+    {
+      "iso3": "FIN",
+      "country": "Finland",
+      "year": 2021,
+      "kg_co2e_per_mwh": 135.63
+    },
+    {
+      "iso3": "FIN",
+      "country": "Finland",
+      "year": 2022,
+      "kg_co2e_per_mwh": 129.97
+    },
+    {
+      "iso3": "FIN",
+      "country": "Finland",
+      "year": 2023,
+      "kg_co2e_per_mwh": 81.21
+    },
+    {
+      "iso3": "FIN",
+      "country": "Finland",
+      "year": 2024,
+      "kg_co2e_per_mwh": 66.63
+    },
+    {
+      "iso3": "FIN",
+      "country": "Finland",
+      "year": 2025,
+      "kg_co2e_per_mwh": 57.47
+    },
+    {
+      "iso3": "FJI",
+      "country": "Fiji",
+      "year": 2019,
+      "kg_co2e_per_mwh": 307.02
+    },
+    {
+      "iso3": "FJI",
+      "country": "Fiji",
+      "year": 2020,
+      "kg_co2e_per_mwh": 268.52
+    },
+    {
+      "iso3": "FJI",
+      "country": "Fiji",
+      "year": 2021,
+      "kg_co2e_per_mwh": 273.59
+    },
+    {
+      "iso3": "FJI",
+      "country": "Fiji",
+      "year": 2022,
+      "kg_co2e_per_mwh": 280.37
+    },
+    {
+      "iso3": "FJI",
+      "country": "Fiji",
+      "year": 2023,
+      "kg_co2e_per_mwh": 278.26
+    },
+    {
+      "iso3": "FJI",
+      "country": "Fiji",
+      "year": 2024,
+      "kg_co2e_per_mwh": 278.26
+    },
+    {
+      "iso3": "FLK",
+      "country": "Falkland Islands",
+      "year": 2018,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "FLK",
+      "country": "Falkland Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "FLK",
+      "country": "Falkland Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "FLK",
+      "country": "Falkland Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "FLK",
+      "country": "Falkland Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "FLK",
+      "country": "Falkland Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "FRA",
+      "country": "France",
+      "year": 2020,
+      "kg_co2e_per_mwh": 59.08
+    },
+    {
+      "iso3": "FRA",
+      "country": "France",
+      "year": 2021,
+      "kg_co2e_per_mwh": 59.8
+    },
+    {
+      "iso3": "FRA",
+      "country": "France",
+      "year": 2022,
+      "kg_co2e_per_mwh": 78.54
+    },
+    {
+      "iso3": "FRA",
+      "country": "France",
+      "year": 2023,
+      "kg_co2e_per_mwh": 53.26
+    },
+    {
+      "iso3": "FRA",
+      "country": "France",
+      "year": 2024,
+      "kg_co2e_per_mwh": 40.48
+    },
+    {
+      "iso3": "FRA",
+      "country": "France",
+      "year": 2025,
+      "kg_co2e_per_mwh": 41.44
+    },
+    {
+      "iso3": "FRO",
+      "country": "Faroe Islands",
+      "year": 2018,
+      "kg_co2e_per_mwh": 342.86
+    },
+    {
+      "iso3": "FRO",
+      "country": "Faroe Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 394.74
+    },
+    {
+      "iso3": "FRO",
+      "country": "Faroe Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 390.24
+    },
+    {
+      "iso3": "FRO",
+      "country": "Faroe Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 395.35
+    },
+    {
+      "iso3": "FRO",
+      "country": "Faroe Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 354.17
+    },
+    {
+      "iso3": "FRO",
+      "country": "Faroe Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 346.94
+    },
+    {
+      "iso3": "GAB",
+      "country": "Gabon",
+      "year": 2019,
+      "kg_co2e_per_mwh": 443.66
+    },
+    {
+      "iso3": "GAB",
+      "country": "Gabon",
+      "year": 2020,
+      "kg_co2e_per_mwh": 423.21
+    },
+    {
+      "iso3": "GAB",
+      "country": "Gabon",
+      "year": 2021,
+      "kg_co2e_per_mwh": 439.19
+    },
+    {
+      "iso3": "GAB",
+      "country": "Gabon",
+      "year": 2022,
+      "kg_co2e_per_mwh": 429.47
+    },
+    {
+      "iso3": "GAB",
+      "country": "Gabon",
+      "year": 2023,
+      "kg_co2e_per_mwh": 525.1
+    },
+    {
+      "iso3": "GAB",
+      "country": "Gabon",
+      "year": 2024,
+      "kg_co2e_per_mwh": 523.08
+    },
+    {
+      "iso3": "GBR",
+      "country": "United Kingdom",
+      "year": 2020,
+      "kg_co2e_per_mwh": 242.54
+    },
+    {
+      "iso3": "GBR",
+      "country": "United Kingdom",
+      "year": 2021,
+      "kg_co2e_per_mwh": 267.1
+    },
+    {
+      "iso3": "GBR",
+      "country": "United Kingdom",
+      "year": 2022,
+      "kg_co2e_per_mwh": 254.98
+    },
+    {
+      "iso3": "GBR",
+      "country": "United Kingdom",
+      "year": 2023,
+      "kg_co2e_per_mwh": 235.63
+    },
+    {
+      "iso3": "GBR",
+      "country": "United Kingdom",
+      "year": 2024,
+      "kg_co2e_per_mwh": 216.5
+    },
+    {
+      "iso3": "GBR",
+      "country": "United Kingdom",
+      "year": 2025,
+      "kg_co2e_per_mwh": 217.41
+    },
+    {
+      "iso3": "GEO",
+      "country": "Georgia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 175.63
+    },
+    {
+      "iso3": "GEO",
+      "country": "Georgia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 136.87
+    },
+    {
+      "iso3": "GEO",
+      "country": "Georgia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 167.02
+    },
+    {
+      "iso3": "GEO",
+      "country": "Georgia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 167.71
+    },
+    {
+      "iso3": "GEO",
+      "country": "Georgia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 145.01
+    },
+    {
+      "iso3": "GEO",
+      "country": "Georgia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 145.93
+    },
+    {
+      "iso3": "GHA",
+      "country": "Ghana",
+      "year": 2019,
+      "kg_co2e_per_mwh": 416.76
+    },
+    {
+      "iso3": "GHA",
+      "country": "Ghana",
+      "year": 2020,
+      "kg_co2e_per_mwh": 459.2
+    },
+    {
+      "iso3": "GHA",
+      "country": "Ghana",
+      "year": 2021,
+      "kg_co2e_per_mwh": 478.26
+    },
+    {
+      "iso3": "GHA",
+      "country": "Ghana",
+      "year": 2022,
+      "kg_co2e_per_mwh": 469.42
+    },
+    {
+      "iso3": "GHA",
+      "country": "Ghana",
+      "year": 2023,
+      "kg_co2e_per_mwh": 452.68
+    },
+    {
+      "iso3": "GHA",
+      "country": "Ghana",
+      "year": 2024,
+      "kg_co2e_per_mwh": 468.89
+    },
+    {
+      "iso3": "GIB",
+      "country": "Gibraltar",
+      "year": 2019,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "GIB",
+      "country": "Gibraltar",
+      "year": 2020,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "GIB",
+      "country": "Gibraltar",
+      "year": 2021,
+      "kg_co2e_per_mwh": 565.22
+    },
+    {
+      "iso3": "GIB",
+      "country": "Gibraltar",
+      "year": 2022,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "GIB",
+      "country": "Gibraltar",
+      "year": 2023,
+      "kg_co2e_per_mwh": 608.7
+    },
+    {
+      "iso3": "GIB",
+      "country": "Gibraltar",
+      "year": 2024,
+      "kg_co2e_per_mwh": 590.91
+    },
+    {
+      "iso3": "GIN",
+      "country": "Guinea",
+      "year": 2019,
+      "kg_co2e_per_mwh": 253.66
+    },
+    {
+      "iso3": "GIN",
+      "country": "Guinea",
+      "year": 2020,
+      "kg_co2e_per_mwh": 274.19
+    },
+    {
+      "iso3": "GIN",
+      "country": "Guinea",
+      "year": 2021,
+      "kg_co2e_per_mwh": 192.31
+    },
+    {
+      "iso3": "GIN",
+      "country": "Guinea",
+      "year": 2022,
+      "kg_co2e_per_mwh": 185.0
+    },
+    {
+      "iso3": "GIN",
+      "country": "Guinea",
+      "year": 2023,
+      "kg_co2e_per_mwh": 185.0
+    },
+    {
+      "iso3": "GIN",
+      "country": "Guinea",
+      "year": 2024,
+      "kg_co2e_per_mwh": 181.14
+    },
+    {
+      "iso3": "GLP",
+      "country": "Guadeloupe",
+      "year": 2018,
+      "kg_co2e_per_mwh": 584.8
+    },
+    {
+      "iso3": "GLP",
+      "country": "Guadeloupe",
+      "year": 2019,
+      "kg_co2e_per_mwh": 569.77
+    },
+    {
+      "iso3": "GLP",
+      "country": "Guadeloupe",
+      "year": 2020,
+      "kg_co2e_per_mwh": 547.06
+    },
+    {
+      "iso3": "GLP",
+      "country": "Guadeloupe",
+      "year": 2021,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "GLP",
+      "country": "Guadeloupe",
+      "year": 2022,
+      "kg_co2e_per_mwh": 493.9
+    },
+    {
+      "iso3": "GLP",
+      "country": "Guadeloupe",
+      "year": 2023,
+      "kg_co2e_per_mwh": 497.01
+    },
+    {
+      "iso3": "GMB",
+      "country": "Gambia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 652.17
+    },
+    {
+      "iso3": "GMB",
+      "country": "Gambia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GMB",
+      "country": "Gambia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 660.0
+    },
+    {
+      "iso3": "GMB",
+      "country": "Gambia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GMB",
+      "country": "Gambia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GMB",
+      "country": "Gambia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GNB",
+      "country": "Guinea-Bissau",
+      "year": 2019,
+      "kg_co2e_per_mwh": 625.0
+    },
+    {
+      "iso3": "GNB",
+      "country": "Guinea-Bissau",
+      "year": 2020,
+      "kg_co2e_per_mwh": 625.0
+    },
+    {
+      "iso3": "GNB",
+      "country": "Guinea-Bissau",
+      "year": 2021,
+      "kg_co2e_per_mwh": 625.0
+    },
+    {
+      "iso3": "GNB",
+      "country": "Guinea-Bissau",
+      "year": 2022,
+      "kg_co2e_per_mwh": 625.0
+    },
+    {
+      "iso3": "GNB",
+      "country": "Guinea-Bissau",
+      "year": 2023,
+      "kg_co2e_per_mwh": 625.0
+    },
+    {
+      "iso3": "GNB",
+      "country": "Guinea-Bissau",
+      "year": 2024,
+      "kg_co2e_per_mwh": 625.0
+    },
+    {
+      "iso3": "GNQ",
+      "country": "Equatorial Guinea",
+      "year": 2019,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "GNQ",
+      "country": "Equatorial Guinea",
+      "year": 2020,
+      "kg_co2e_per_mwh": 574.47
+    },
+    {
+      "iso3": "GNQ",
+      "country": "Equatorial Guinea",
+      "year": 2021,
+      "kg_co2e_per_mwh": 594.41
+    },
+    {
+      "iso3": "GNQ",
+      "country": "Equatorial Guinea",
+      "year": 2022,
+      "kg_co2e_per_mwh": 602.65
+    },
+    {
+      "iso3": "GNQ",
+      "country": "Equatorial Guinea",
+      "year": 2023,
+      "kg_co2e_per_mwh": 664.34
+    },
+    {
+      "iso3": "GNQ",
+      "country": "Equatorial Guinea",
+      "year": 2024,
+      "kg_co2e_per_mwh": 644.3
+    },
+    {
+      "iso3": "GRC",
+      "country": "Greece",
+      "year": 2020,
+      "kg_co2e_per_mwh": 423.07
+    },
+    {
+      "iso3": "GRC",
+      "country": "Greece",
+      "year": 2021,
+      "kg_co2e_per_mwh": 383.11
+    },
+    {
+      "iso3": "GRC",
+      "country": "Greece",
+      "year": 2022,
+      "kg_co2e_per_mwh": 376.81
+    },
+    {
+      "iso3": "GRC",
+      "country": "Greece",
+      "year": 2023,
+      "kg_co2e_per_mwh": 336.4
+    },
+    {
+      "iso3": "GRC",
+      "country": "Greece",
+      "year": 2024,
+      "kg_co2e_per_mwh": 321.65
+    },
+    {
+      "iso3": "GRC",
+      "country": "Greece",
+      "year": 2025,
+      "kg_co2e_per_mwh": 315.09
+    },
+    {
+      "iso3": "GRD",
+      "country": "Grenada",
+      "year": 2019,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GRD",
+      "country": "Grenada",
+      "year": 2020,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "GRD",
+      "country": "Grenada",
+      "year": 2021,
+      "kg_co2e_per_mwh": 652.17
+    },
+    {
+      "iso3": "GRD",
+      "country": "Grenada",
+      "year": 2022,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GRD",
+      "country": "Grenada",
+      "year": 2023,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GRD",
+      "country": "Grenada",
+      "year": 2024,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "GRL",
+      "country": "Greenland",
+      "year": 2019,
+      "kg_co2e_per_mwh": 122.45
+    },
+    {
+      "iso3": "GRL",
+      "country": "Greenland",
+      "year": 2020,
+      "kg_co2e_per_mwh": 134.62
+    },
+    {
+      "iso3": "GRL",
+      "country": "Greenland",
+      "year": 2021,
+      "kg_co2e_per_mwh": 117.65
+    },
+    {
+      "iso3": "GRL",
+      "country": "Greenland",
+      "year": 2022,
+      "kg_co2e_per_mwh": 111.11
+    },
+    {
+      "iso3": "GRL",
+      "country": "Greenland",
+      "year": 2023,
+      "kg_co2e_per_mwh": 131.15
+    },
+    {
+      "iso3": "GRL",
+      "country": "Greenland",
+      "year": 2024,
+      "kg_co2e_per_mwh": 150.0
+    },
+    {
+      "iso3": "GTM",
+      "country": "Guatemala",
+      "year": 2019,
+      "kg_co2e_per_mwh": 363.78
+    },
+    {
+      "iso3": "GTM",
+      "country": "Guatemala",
+      "year": 2020,
+      "kg_co2e_per_mwh": 265.7
+    },
+    {
+      "iso3": "GTM",
+      "country": "Guatemala",
+      "year": 2021,
+      "kg_co2e_per_mwh": 285.71
+    },
+    {
+      "iso3": "GTM",
+      "country": "Guatemala",
+      "year": 2022,
+      "kg_co2e_per_mwh": 191.4
+    },
+    {
+      "iso3": "GTM",
+      "country": "Guatemala",
+      "year": 2023,
+      "kg_co2e_per_mwh": 309.86
+    },
+    {
+      "iso3": "GTM",
+      "country": "Guatemala",
+      "year": 2024,
+      "kg_co2e_per_mwh": 301.46
+    },
+    {
+      "iso3": "GUF",
+      "country": "French Guiana",
+      "year": 2018,
+      "kg_co2e_per_mwh": 247.31
+    },
+    {
+      "iso3": "GUF",
+      "country": "French Guiana",
+      "year": 2019,
+      "kg_co2e_per_mwh": 347.37
+    },
+    {
+      "iso3": "GUF",
+      "country": "French Guiana",
+      "year": 2020,
+      "kg_co2e_per_mwh": 326.32
+    },
+    {
+      "iso3": "GUF",
+      "country": "French Guiana",
+      "year": 2021,
+      "kg_co2e_per_mwh": 216.5
+    },
+    {
+      "iso3": "GUF",
+      "country": "French Guiana",
+      "year": 2022,
+      "kg_co2e_per_mwh": 210.53
+    },
+    {
+      "iso3": "GUF",
+      "country": "French Guiana",
+      "year": 2023,
+      "kg_co2e_per_mwh": 244.9
+    },
+    {
+      "iso3": "GUM",
+      "country": "Guam",
+      "year": 2019,
+      "kg_co2e_per_mwh": 628.57
+    },
+    {
+      "iso3": "GUM",
+      "country": "Guam",
+      "year": 2020,
+      "kg_co2e_per_mwh": 625.73
+    },
+    {
+      "iso3": "GUM",
+      "country": "Guam",
+      "year": 2021,
+      "kg_co2e_per_mwh": 626.44
+    },
+    {
+      "iso3": "GUM",
+      "country": "Guam",
+      "year": 2022,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "GUM",
+      "country": "Guam",
+      "year": 2023,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "GUM",
+      "country": "Guam",
+      "year": 2024,
+      "kg_co2e_per_mwh": 607.53
+    },
+    {
+      "iso3": "GUY",
+      "country": "Guyana",
+      "year": 2019,
+      "kg_co2e_per_mwh": 634.78
+    },
+    {
+      "iso3": "GUY",
+      "country": "Guyana",
+      "year": 2020,
+      "kg_co2e_per_mwh": 640.35
+    },
+    {
+      "iso3": "GUY",
+      "country": "Guyana",
+      "year": 2021,
+      "kg_co2e_per_mwh": 640.35
+    },
+    {
+      "iso3": "GUY",
+      "country": "Guyana",
+      "year": 2022,
+      "kg_co2e_per_mwh": 648.44
+    },
+    {
+      "iso3": "GUY",
+      "country": "Guyana",
+      "year": 2023,
+      "kg_co2e_per_mwh": 644.93
+    },
+    {
+      "iso3": "GUY",
+      "country": "Guyana",
+      "year": 2024,
+      "kg_co2e_per_mwh": 644.93
+    },
+    {
+      "iso3": "HKG",
+      "country": "Hong Kong",
+      "year": 2019,
+      "kg_co2e_per_mwh": 776.67
+    },
+    {
+      "iso3": "HKG",
+      "country": "Hong Kong",
+      "year": 2020,
+      "kg_co2e_per_mwh": 684.13
+    },
+    {
+      "iso3": "HKG",
+      "country": "Hong Kong",
+      "year": 2021,
+      "kg_co2e_per_mwh": 691.61
+    },
+    {
+      "iso3": "HKG",
+      "country": "Hong Kong",
+      "year": 2022,
+      "kg_co2e_per_mwh": 682.27
+    },
+    {
+      "iso3": "HKG",
+      "country": "Hong Kong",
+      "year": 2023,
+      "kg_co2e_per_mwh": 674.44
+    },
+    {
+      "iso3": "HKG",
+      "country": "Hong Kong",
+      "year": 2024,
+      "kg_co2e_per_mwh": 675.48
+    },
+    {
+      "iso3": "HND",
+      "country": "Honduras",
+      "year": 2019,
+      "kg_co2e_per_mwh": 342.4
+    },
+    {
+      "iso3": "HND",
+      "country": "Honduras",
+      "year": 2020,
+      "kg_co2e_per_mwh": 326.43
+    },
+    {
+      "iso3": "HND",
+      "country": "Honduras",
+      "year": 2021,
+      "kg_co2e_per_mwh": 284.17
+    },
+    {
+      "iso3": "HND",
+      "country": "Honduras",
+      "year": 2022,
+      "kg_co2e_per_mwh": 296.56
+    },
+    {
+      "iso3": "HND",
+      "country": "Honduras",
+      "year": 2023,
+      "kg_co2e_per_mwh": 328.26
+    },
+    {
+      "iso3": "HND",
+      "country": "Honduras",
+      "year": 2024,
+      "kg_co2e_per_mwh": 322.12
+    },
+    {
+      "iso3": "HRV",
+      "country": "Croatia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 226.76
+    },
+    {
+      "iso3": "HRV",
+      "country": "Croatia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 210.46
+    },
+    {
+      "iso3": "HRV",
+      "country": "Croatia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 244.68
+    },
+    {
+      "iso3": "HRV",
+      "country": "Croatia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 194.95
+    },
+    {
+      "iso3": "HRV",
+      "country": "Croatia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 170.7
+    },
+    {
+      "iso3": "HRV",
+      "country": "Croatia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 158.5
+    },
+    {
+      "iso3": "HTI",
+      "country": "Haiti",
+      "year": 2019,
+      "kg_co2e_per_mwh": 556.6
+    },
+    {
+      "iso3": "HTI",
+      "country": "Haiti",
+      "year": 2020,
+      "kg_co2e_per_mwh": 568.63
+    },
+    {
+      "iso3": "HTI",
+      "country": "Haiti",
+      "year": 2021,
+      "kg_co2e_per_mwh": 572.82
+    },
+    {
+      "iso3": "HTI",
+      "country": "Haiti",
+      "year": 2022,
+      "kg_co2e_per_mwh": 534.65
+    },
+    {
+      "iso3": "HTI",
+      "country": "Haiti",
+      "year": 2023,
+      "kg_co2e_per_mwh": 505.88
+    },
+    {
+      "iso3": "HTI",
+      "country": "Haiti",
+      "year": 2024,
+      "kg_co2e_per_mwh": 534.88
+    },
+    {
+      "iso3": "HUN",
+      "country": "Hungary",
+      "year": 2020,
+      "kg_co2e_per_mwh": 257.45
+    },
+    {
+      "iso3": "HUN",
+      "country": "Hungary",
+      "year": 2021,
+      "kg_co2e_per_mwh": 238.5
+    },
+    {
+      "iso3": "HUN",
+      "country": "Hungary",
+      "year": 2022,
+      "kg_co2e_per_mwh": 228.9
+    },
+    {
+      "iso3": "HUN",
+      "country": "Hungary",
+      "year": 2023,
+      "kg_co2e_per_mwh": 196.12
+    },
+    {
+      "iso3": "HUN",
+      "country": "Hungary",
+      "year": 2024,
+      "kg_co2e_per_mwh": 184.47
+    },
+    {
+      "iso3": "HUN",
+      "country": "Hungary",
+      "year": 2025,
+      "kg_co2e_per_mwh": 163.02
+    },
+    {
+      "iso3": "IDN",
+      "country": "Indonesia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 693.81
+    },
+    {
+      "iso3": "IDN",
+      "country": "Indonesia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 685.15
+    },
+    {
+      "iso3": "IDN",
+      "country": "Indonesia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 684.41
+    },
+    {
+      "iso3": "IDN",
+      "country": "Indonesia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 675.81
+    },
+    {
+      "iso3": "IDN",
+      "country": "Indonesia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 680.8
+    },
+    {
+      "iso3": "IDN",
+      "country": "Indonesia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 680.25
+    },
+    {
+      "iso3": "IND",
+      "country": "India",
+      "year": 2020,
+      "kg_co2e_per_mwh": 709.06
+    },
+    {
+      "iso3": "IND",
+      "country": "India",
+      "year": 2021,
+      "kg_co2e_per_mwh": 715.34
+    },
+    {
+      "iso3": "IND",
+      "country": "India",
+      "year": 2022,
+      "kg_co2e_per_mwh": 705.75
+    },
+    {
+      "iso3": "IND",
+      "country": "India",
+      "year": 2023,
+      "kg_co2e_per_mwh": 713.36
+    },
+    {
+      "iso3": "IND",
+      "country": "India",
+      "year": 2024,
+      "kg_co2e_per_mwh": 705.4
+    },
+    {
+      "iso3": "IND",
+      "country": "India",
+      "year": 2025,
+      "kg_co2e_per_mwh": 670.13
+    },
+    {
+      "iso3": "IRL",
+      "country": "Ireland",
+      "year": 2020,
+      "kg_co2e_per_mwh": 291.05
+    },
+    {
+      "iso3": "IRL",
+      "country": "Ireland",
+      "year": 2021,
+      "kg_co2e_per_mwh": 351.92
+    },
+    {
+      "iso3": "IRL",
+      "country": "Ireland",
+      "year": 2022,
+      "kg_co2e_per_mwh": 330.87
+    },
+    {
+      "iso3": "IRL",
+      "country": "Ireland",
+      "year": 2023,
+      "kg_co2e_per_mwh": 282.41
+    },
+    {
+      "iso3": "IRL",
+      "country": "Ireland",
+      "year": 2024,
+      "kg_co2e_per_mwh": 270.91
+    },
+    {
+      "iso3": "IRL",
+      "country": "Ireland",
+      "year": 2025,
+      "kg_co2e_per_mwh": 256.54
+    },
+    {
+      "iso3": "IRN",
+      "country": "Iran",
+      "year": 2020,
+      "kg_co2e_per_mwh": 632.81
+    },
+    {
+      "iso3": "IRN",
+      "country": "Iran",
+      "year": 2021,
+      "kg_co2e_per_mwh": 659.83
+    },
+    {
+      "iso3": "IRN",
+      "country": "Iran",
+      "year": 2022,
+      "kg_co2e_per_mwh": 655.37
+    },
+    {
+      "iso3": "IRN",
+      "country": "Iran",
+      "year": 2023,
+      "kg_co2e_per_mwh": 641.38
+    },
+    {
+      "iso3": "IRN",
+      "country": "Iran",
+      "year": 2024,
+      "kg_co2e_per_mwh": 648.68
+    },
+    {
+      "iso3": "IRN",
+      "country": "Iran",
+      "year": 2025,
+      "kg_co2e_per_mwh": 659.53
+    },
+    {
+      "iso3": "IRQ",
+      "country": "Iraq",
+      "year": 2019,
+      "kg_co2e_per_mwh": 668.87
+    },
+    {
+      "iso3": "IRQ",
+      "country": "Iraq",
+      "year": 2020,
+      "kg_co2e_per_mwh": 674.18
+    },
+    {
+      "iso3": "IRQ",
+      "country": "Iraq",
+      "year": 2021,
+      "kg_co2e_per_mwh": 677.74
+    },
+    {
+      "iso3": "IRQ",
+      "country": "Iraq",
+      "year": 2022,
+      "kg_co2e_per_mwh": 688.71
+    },
+    {
+      "iso3": "IRQ",
+      "country": "Iraq",
+      "year": 2023,
+      "kg_co2e_per_mwh": 685.13
+    },
+    {
+      "iso3": "IRQ",
+      "country": "Iraq",
+      "year": 2024,
+      "kg_co2e_per_mwh": 683.1
+    },
+    {
+      "iso3": "ISL",
+      "country": "Iceland",
+      "year": 2019,
+      "kg_co2e_per_mwh": 28.41
+    },
+    {
+      "iso3": "ISL",
+      "country": "Iceland",
+      "year": 2020,
+      "kg_co2e_per_mwh": 28.06
+    },
+    {
+      "iso3": "ISL",
+      "country": "Iceland",
+      "year": 2021,
+      "kg_co2e_per_mwh": 27.85
+    },
+    {
+      "iso3": "ISL",
+      "country": "Iceland",
+      "year": 2022,
+      "kg_co2e_per_mwh": 27.68
+    },
+    {
+      "iso3": "ISL",
+      "country": "Iceland",
+      "year": 2023,
+      "kg_co2e_per_mwh": 27.76
+    },
+    {
+      "iso3": "ISL",
+      "country": "Iceland",
+      "year": 2024,
+      "kg_co2e_per_mwh": 27.82
+    },
+    {
+      "iso3": "ISR",
+      "country": "Israel",
+      "year": 2020,
+      "kg_co2e_per_mwh": 615.21
+    },
+    {
+      "iso3": "ISR",
+      "country": "Israel",
+      "year": 2021,
+      "kg_co2e_per_mwh": 596.33
+    },
+    {
+      "iso3": "ISR",
+      "country": "Israel",
+      "year": 2022,
+      "kg_co2e_per_mwh": 583.32
+    },
+    {
+      "iso3": "ISR",
+      "country": "Israel",
+      "year": 2023,
+      "kg_co2e_per_mwh": 558.83
+    },
+    {
+      "iso3": "ISR",
+      "country": "Israel",
+      "year": 2024,
+      "kg_co2e_per_mwh": 540.55
+    },
+    {
+      "iso3": "ISR",
+      "country": "Israel",
+      "year": 2025,
+      "kg_co2e_per_mwh": 492.69
+    },
+    {
+      "iso3": "ITA",
+      "country": "Italy",
+      "year": 2020,
+      "kg_co2e_per_mwh": 334.2
+    },
+    {
+      "iso3": "ITA",
+      "country": "Italy",
+      "year": 2021,
+      "kg_co2e_per_mwh": 339.1
+    },
+    {
+      "iso3": "ITA",
+      "country": "Italy",
+      "year": 2022,
+      "kg_co2e_per_mwh": 377.84
+    },
+    {
+      "iso3": "ITA",
+      "country": "Italy",
+      "year": 2023,
+      "kg_co2e_per_mwh": 323.23
+    },
+    {
+      "iso3": "ITA",
+      "country": "Italy",
+      "year": 2024,
+      "kg_co2e_per_mwh": 281.4
+    },
+    {
+      "iso3": "ITA",
+      "country": "Italy",
+      "year": 2025,
+      "kg_co2e_per_mwh": 284.78
+    },
+    {
+      "iso3": "JAM",
+      "country": "Jamaica",
+      "year": 2019,
+      "kg_co2e_per_mwh": 571.12
+    },
+    {
+      "iso3": "JAM",
+      "country": "Jamaica",
+      "year": 2020,
+      "kg_co2e_per_mwh": 553.74
+    },
+    {
+      "iso3": "JAM",
+      "country": "Jamaica",
+      "year": 2021,
+      "kg_co2e_per_mwh": 556.32
+    },
+    {
+      "iso3": "JAM",
+      "country": "Jamaica",
+      "year": 2022,
+      "kg_co2e_per_mwh": 561.25
+    },
+    {
+      "iso3": "JAM",
+      "country": "Jamaica",
+      "year": 2023,
+      "kg_co2e_per_mwh": 563.94
+    },
+    {
+      "iso3": "JAM",
+      "country": "Jamaica",
+      "year": 2024,
+      "kg_co2e_per_mwh": 563.01
+    },
+    {
+      "iso3": "JOR",
+      "country": "Jordan",
+      "year": 2019,
+      "kg_co2e_per_mwh": 596.69
+    },
+    {
+      "iso3": "JOR",
+      "country": "Jordan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 566.67
+    },
+    {
+      "iso3": "JOR",
+      "country": "Jordan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 540.26
+    },
+    {
+      "iso3": "JOR",
+      "country": "Jordan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 539.21
+    },
+    {
+      "iso3": "JOR",
+      "country": "Jordan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 542.28
+    },
+    {
+      "iso3": "JOR",
+      "country": "Jordan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 529.79
+    },
+    {
+      "iso3": "JPN",
+      "country": "Japan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 527.75
+    },
+    {
+      "iso3": "JPN",
+      "country": "Japan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 514.49
+    },
+    {
+      "iso3": "JPN",
+      "country": "Japan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 519.6
+    },
+    {
+      "iso3": "JPN",
+      "country": "Japan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 492.45
+    },
+    {
+      "iso3": "JPN",
+      "country": "Japan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 483.43
+    },
+    {
+      "iso3": "JPN",
+      "country": "Japan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 477.26
+    },
+    {
+      "iso3": "KAZ",
+      "country": "Kazakhstan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 835.88
+    },
+    {
+      "iso3": "KAZ",
+      "country": "Kazakhstan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 833.25
+    },
+    {
+      "iso3": "KAZ",
+      "country": "Kazakhstan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 831.01
+    },
+    {
+      "iso3": "KAZ",
+      "country": "Kazakhstan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 826.66
+    },
+    {
+      "iso3": "KAZ",
+      "country": "Kazakhstan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 802.04
+    },
+    {
+      "iso3": "KAZ",
+      "country": "Kazakhstan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 805.32
+    },
+    {
+      "iso3": "KEN",
+      "country": "Kenya",
+      "year": 2020,
+      "kg_co2e_per_mwh": 71.92
+    },
+    {
+      "iso3": "KEN",
+      "country": "Kenya",
+      "year": 2021,
+      "kg_co2e_per_mwh": 96.12
+    },
+    {
+      "iso3": "KEN",
+      "country": "Kenya",
+      "year": 2022,
+      "kg_co2e_per_mwh": 109.57
+    },
+    {
+      "iso3": "KEN",
+      "country": "Kenya",
+      "year": 2023,
+      "kg_co2e_per_mwh": 96.88
+    },
+    {
+      "iso3": "KEN",
+      "country": "Kenya",
+      "year": 2024,
+      "kg_co2e_per_mwh": 85.22
+    },
+    {
+      "iso3": "KEN",
+      "country": "Kenya",
+      "year": 2025,
+      "kg_co2e_per_mwh": 95.44
+    },
+    {
+      "iso3": "KGZ",
+      "country": "Kyrgyzstan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 105.2
+    },
+    {
+      "iso3": "KGZ",
+      "country": "Kyrgyzstan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 151.26
+    },
+    {
+      "iso3": "KGZ",
+      "country": "Kyrgyzstan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 146.89
+    },
+    {
+      "iso3": "KGZ",
+      "country": "Kyrgyzstan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 139.71
+    },
+    {
+      "iso3": "KGZ",
+      "country": "Kyrgyzstan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 119.21
+    },
+    {
+      "iso3": "KGZ",
+      "country": "Kyrgyzstan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 152.73
+    },
+    {
+      "iso3": "KHM",
+      "country": "Cambodia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 385.64
+    },
+    {
+      "iso3": "KHM",
+      "country": "Cambodia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 356.33
+    },
+    {
+      "iso3": "KHM",
+      "country": "Cambodia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 300.0
+    },
+    {
+      "iso3": "KHM",
+      "country": "Cambodia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 491.18
+    },
+    {
+      "iso3": "KHM",
+      "country": "Cambodia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 538.76
+    },
+    {
+      "iso3": "KHM",
+      "country": "Cambodia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 498.87
+    },
+    {
+      "iso3": "KIR",
+      "country": "Kiribati",
+      "year": 2019,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "KIR",
+      "country": "Kiribati",
+      "year": 2020,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "KIR",
+      "country": "Kiribati",
+      "year": 2021,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "KIR",
+      "country": "Kiribati",
+      "year": 2022,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "KIR",
+      "country": "Kiribati",
+      "year": 2023,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "KIR",
+      "country": "Kiribati",
+      "year": 2024,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "KNA",
+      "country": "Saint Kitts and Nevis",
+      "year": 2019,
+      "kg_co2e_per_mwh": 608.7
+    },
+    {
+      "iso3": "KNA",
+      "country": "Saint Kitts and Nevis",
+      "year": 2020,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "KNA",
+      "country": "Saint Kitts and Nevis",
+      "year": 2021,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "KNA",
+      "country": "Saint Kitts and Nevis",
+      "year": 2022,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "KNA",
+      "country": "Saint Kitts and Nevis",
+      "year": 2023,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "KNA",
+      "country": "Saint Kitts and Nevis",
+      "year": 2024,
+      "kg_co2e_per_mwh": 608.7
+    },
+    {
+      "iso3": "KOR",
+      "country": "South Korea",
+      "year": 2020,
+      "kg_co2e_per_mwh": 457.63
+    },
+    {
+      "iso3": "KOR",
+      "country": "South Korea",
+      "year": 2021,
+      "kg_co2e_per_mwh": 459.46
+    },
+    {
+      "iso3": "KOR",
+      "country": "South Korea",
+      "year": 2022,
+      "kg_co2e_per_mwh": 438.06
+    },
+    {
+      "iso3": "KOR",
+      "country": "South Korea",
+      "year": 2023,
+      "kg_co2e_per_mwh": 427.29
+    },
+    {
+      "iso3": "KOR",
+      "country": "South Korea",
+      "year": 2024,
+      "kg_co2e_per_mwh": 415.51
+    },
+    {
+      "iso3": "KOR",
+      "country": "South Korea",
+      "year": 2025,
+      "kg_co2e_per_mwh": 417.06
+    },
+    {
+      "iso3": "KWT",
+      "country": "Kuwait",
+      "year": 2020,
+      "kg_co2e_per_mwh": 650.19
+    },
+    {
+      "iso3": "KWT",
+      "country": "Kuwait",
+      "year": 2021,
+      "kg_co2e_per_mwh": 649.63
+    },
+    {
+      "iso3": "KWT",
+      "country": "Kuwait",
+      "year": 2022,
+      "kg_co2e_per_mwh": 636.89
+    },
+    {
+      "iso3": "KWT",
+      "country": "Kuwait",
+      "year": 2023,
+      "kg_co2e_per_mwh": 636.14
+    },
+    {
+      "iso3": "KWT",
+      "country": "Kuwait",
+      "year": 2024,
+      "kg_co2e_per_mwh": 635.2
+    },
+    {
+      "iso3": "KWT",
+      "country": "Kuwait",
+      "year": 2025,
+      "kg_co2e_per_mwh": 635.31
+    },
+    {
+      "iso3": "LAO",
+      "country": "Laos",
+      "year": 2019,
+      "kg_co2e_per_mwh": 350.51
+    },
+    {
+      "iso3": "LAO",
+      "country": "Laos",
+      "year": 2020,
+      "kg_co2e_per_mwh": 278.03
+    },
+    {
+      "iso3": "LAO",
+      "country": "Laos",
+      "year": 2021,
+      "kg_co2e_per_mwh": 260.36
+    },
+    {
+      "iso3": "LAO",
+      "country": "Laos",
+      "year": 2022,
+      "kg_co2e_per_mwh": 237.27
+    },
+    {
+      "iso3": "LAO",
+      "country": "Laos",
+      "year": 2023,
+      "kg_co2e_per_mwh": 232.12
+    },
+    {
+      "iso3": "LAO",
+      "country": "Laos",
+      "year": 2024,
+      "kg_co2e_per_mwh": 232.08
+    },
+    {
+      "iso3": "LBN",
+      "country": "Lebanon",
+      "year": 2019,
+      "kg_co2e_per_mwh": 625.75
+    },
+    {
+      "iso3": "LBN",
+      "country": "Lebanon",
+      "year": 2020,
+      "kg_co2e_per_mwh": 615.89
+    },
+    {
+      "iso3": "LBN",
+      "country": "Lebanon",
+      "year": 2021,
+      "kg_co2e_per_mwh": 599.61
+    },
+    {
+      "iso3": "LBN",
+      "country": "Lebanon",
+      "year": 2022,
+      "kg_co2e_per_mwh": 379.86
+    },
+    {
+      "iso3": "LBN",
+      "country": "Lebanon",
+      "year": 2023,
+      "kg_co2e_per_mwh": 449.05
+    },
+    {
+      "iso3": "LBN",
+      "country": "Lebanon",
+      "year": 2024,
+      "kg_co2e_per_mwh": 389.51
+    },
+    {
+      "iso3": "LBR",
+      "country": "Liberia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 452.38
+    },
+    {
+      "iso3": "LBR",
+      "country": "Liberia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 466.67
+    },
+    {
+      "iso3": "LBR",
+      "country": "Liberia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 421.05
+    },
+    {
+      "iso3": "LBR",
+      "country": "Liberia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 435.9
+    },
+    {
+      "iso3": "LBR",
+      "country": "Liberia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 295.08
+    },
+    {
+      "iso3": "LBR",
+      "country": "Liberia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 315.79
+    },
+    {
+      "iso3": "LBY",
+      "country": "Libya",
+      "year": 2019,
+      "kg_co2e_per_mwh": 809.99
+    },
+    {
+      "iso3": "LBY",
+      "country": "Libya",
+      "year": 2020,
+      "kg_co2e_per_mwh": 824.07
+    },
+    {
+      "iso3": "LBY",
+      "country": "Libya",
+      "year": 2021,
+      "kg_co2e_per_mwh": 831.56
+    },
+    {
+      "iso3": "LBY",
+      "country": "Libya",
+      "year": 2022,
+      "kg_co2e_per_mwh": 830.53
+    },
+    {
+      "iso3": "LBY",
+      "country": "Libya",
+      "year": 2023,
+      "kg_co2e_per_mwh": 825.19
+    },
+    {
+      "iso3": "LBY",
+      "country": "Libya",
+      "year": 2024,
+      "kg_co2e_per_mwh": 826.83
+    },
+    {
+      "iso3": "LCA",
+      "country": "Saint Lucia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "LCA",
+      "country": "Saint Lucia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 631.58
+    },
+    {
+      "iso3": "LCA",
+      "country": "Saint Lucia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 650.0
+    },
+    {
+      "iso3": "LCA",
+      "country": "Saint Lucia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 650.0
+    },
+    {
+      "iso3": "LCA",
+      "country": "Saint Lucia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 650.0
+    },
+    {
+      "iso3": "LCA",
+      "country": "Saint Lucia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 650.0
+    },
+    {
+      "iso3": "LKA",
+      "country": "Sri Lanka",
+      "year": 2020,
+      "kg_co2e_per_mwh": 512.73
+    },
+    {
+      "iso3": "LKA",
+      "country": "Sri Lanka",
+      "year": 2021,
+      "kg_co2e_per_mwh": 418.05
+    },
+    {
+      "iso3": "LKA",
+      "country": "Sri Lanka",
+      "year": 2022,
+      "kg_co2e_per_mwh": 410.15
+    },
+    {
+      "iso3": "LKA",
+      "country": "Sri Lanka",
+      "year": 2023,
+      "kg_co2e_per_mwh": 417.33
+    },
+    {
+      "iso3": "LKA",
+      "country": "Sri Lanka",
+      "year": 2024,
+      "kg_co2e_per_mwh": 378.44
+    },
+    {
+      "iso3": "LKA",
+      "country": "Sri Lanka",
+      "year": 2025,
+      "kg_co2e_per_mwh": 329.28
+    },
+    {
+      "iso3": "LSO",
+      "country": "Lesotho",
+      "year": 2017,
+      "kg_co2e_per_mwh": 18.52
+    },
+    {
+      "iso3": "LSO",
+      "country": "Lesotho",
+      "year": 2018,
+      "kg_co2e_per_mwh": 19.23
+    },
+    {
+      "iso3": "LSO",
+      "country": "Lesotho",
+      "year": 2019,
+      "kg_co2e_per_mwh": 25.64
+    },
+    {
+      "iso3": "LSO",
+      "country": "Lesotho",
+      "year": 2020,
+      "kg_co2e_per_mwh": 23.26
+    },
+    {
+      "iso3": "LSO",
+      "country": "Lesotho",
+      "year": 2021,
+      "kg_co2e_per_mwh": 18.87
+    },
+    {
+      "iso3": "LSO",
+      "country": "Lesotho",
+      "year": 2022,
+      "kg_co2e_per_mwh": 20.83
+    },
+    {
+      "iso3": "LTU",
+      "country": "Lithuania",
+      "year": 2020,
+      "kg_co2e_per_mwh": 231.92
+    },
+    {
+      "iso3": "LTU",
+      "country": "Lithuania",
+      "year": 2021,
+      "kg_co2e_per_mwh": 220.93
+    },
+    {
+      "iso3": "LTU",
+      "country": "Lithuania",
+      "year": 2022,
+      "kg_co2e_per_mwh": 180.69
+    },
+    {
+      "iso3": "LTU",
+      "country": "Lithuania",
+      "year": 2023,
+      "kg_co2e_per_mwh": 118.87
+    },
+    {
+      "iso3": "LTU",
+      "country": "Lithuania",
+      "year": 2024,
+      "kg_co2e_per_mwh": 116.37
+    },
+    {
+      "iso3": "LTU",
+      "country": "Lithuania",
+      "year": 2025,
+      "kg_co2e_per_mwh": 138.36
+    },
+    {
+      "iso3": "LUX",
+      "country": "Luxembourg",
+      "year": 2020,
+      "kg_co2e_per_mwh": 163.93
+    },
+    {
+      "iso3": "LUX",
+      "country": "Luxembourg",
+      "year": 2021,
+      "kg_co2e_per_mwh": 162.6
+    },
+    {
+      "iso3": "LUX",
+      "country": "Luxembourg",
+      "year": 2022,
+      "kg_co2e_per_mwh": 140.5
+    },
+    {
+      "iso3": "LUX",
+      "country": "Luxembourg",
+      "year": 2023,
+      "kg_co2e_per_mwh": 120.57
+    },
+    {
+      "iso3": "LUX",
+      "country": "Luxembourg",
+      "year": 2024,
+      "kg_co2e_per_mwh": 132.45
+    },
+    {
+      "iso3": "LUX",
+      "country": "Luxembourg",
+      "year": 2025,
+      "kg_co2e_per_mwh": 123.38
+    },
+    {
+      "iso3": "LVA",
+      "country": "Latvia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 176.57
+    },
+    {
+      "iso3": "LVA",
+      "country": "Latvia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 176.07
+    },
+    {
+      "iso3": "LVA",
+      "country": "Latvia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 135.19
+    },
+    {
+      "iso3": "LVA",
+      "country": "Latvia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 119.12
+    },
+    {
+      "iso3": "LVA",
+      "country": "Latvia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 134.28
+    },
+    {
+      "iso3": "LVA",
+      "country": "Latvia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 138.76
+    },
+    {
+      "iso3": "MAC",
+      "country": "Macao",
+      "year": 2019,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "MAC",
+      "country": "Macao",
+      "year": 2020,
+      "kg_co2e_per_mwh": 482.14
+    },
+    {
+      "iso3": "MAC",
+      "country": "Macao",
+      "year": 2021,
+      "kg_co2e_per_mwh": 460.0
+    },
+    {
+      "iso3": "MAC",
+      "country": "Macao",
+      "year": 2022,
+      "kg_co2e_per_mwh": 448.98
+    },
+    {
+      "iso3": "MAC",
+      "country": "Macao",
+      "year": 2023,
+      "kg_co2e_per_mwh": 484.85
+    },
+    {
+      "iso3": "MAC",
+      "country": "Macao",
+      "year": 2024,
+      "kg_co2e_per_mwh": 474.36
+    },
+    {
+      "iso3": "MAR",
+      "country": "Morocco",
+      "year": 2020,
+      "kg_co2e_per_mwh": 645.62
+    },
+    {
+      "iso3": "MAR",
+      "country": "Morocco",
+      "year": 2021,
+      "kg_co2e_per_mwh": 639.95
+    },
+    {
+      "iso3": "MAR",
+      "country": "Morocco",
+      "year": 2022,
+      "kg_co2e_per_mwh": 662.64
+    },
+    {
+      "iso3": "MAR",
+      "country": "Morocco",
+      "year": 2023,
+      "kg_co2e_per_mwh": 616.35
+    },
+    {
+      "iso3": "MAR",
+      "country": "Morocco",
+      "year": 2024,
+      "kg_co2e_per_mwh": 594.81
+    },
+    {
+      "iso3": "MAR",
+      "country": "Morocco",
+      "year": 2025,
+      "kg_co2e_per_mwh": 596.4
+    },
+    {
+      "iso3": "MDA",
+      "country": "Moldova",
+      "year": 2020,
+      "kg_co2e_per_mwh": 673.14
+    },
+    {
+      "iso3": "MDA",
+      "country": "Moldova",
+      "year": 2021,
+      "kg_co2e_per_mwh": 668.17
+    },
+    {
+      "iso3": "MDA",
+      "country": "Moldova",
+      "year": 2022,
+      "kg_co2e_per_mwh": 647.28
+    },
+    {
+      "iso3": "MDA",
+      "country": "Moldova",
+      "year": 2023,
+      "kg_co2e_per_mwh": 642.52
+    },
+    {
+      "iso3": "MDA",
+      "country": "Moldova",
+      "year": 2024,
+      "kg_co2e_per_mwh": 634.27
+    },
+    {
+      "iso3": "MDA",
+      "country": "Moldova",
+      "year": 2025,
+      "kg_co2e_per_mwh": 633.12
+    },
+    {
+      "iso3": "MDG",
+      "country": "Madagascar",
+      "year": 2019,
+      "kg_co2e_per_mwh": 449.39
+    },
+    {
+      "iso3": "MDG",
+      "country": "Madagascar",
+      "year": 2020,
+      "kg_co2e_per_mwh": 416.67
+    },
+    {
+      "iso3": "MDG",
+      "country": "Madagascar",
+      "year": 2021,
+      "kg_co2e_per_mwh": 486.17
+    },
+    {
+      "iso3": "MDG",
+      "country": "Madagascar",
+      "year": 2022,
+      "kg_co2e_per_mwh": 477.27
+    },
+    {
+      "iso3": "MDG",
+      "country": "Madagascar",
+      "year": 2023,
+      "kg_co2e_per_mwh": 423.39
+    },
+    {
+      "iso3": "MDG",
+      "country": "Madagascar",
+      "year": 2024,
+      "kg_co2e_per_mwh": 432.1
+    },
+    {
+      "iso3": "MDV",
+      "country": "Maldives",
+      "year": 2019,
+      "kg_co2e_per_mwh": 629.63
+    },
+    {
+      "iso3": "MDV",
+      "country": "Maldives",
+      "year": 2020,
+      "kg_co2e_per_mwh": 621.95
+    },
+    {
+      "iso3": "MDV",
+      "country": "Maldives",
+      "year": 2021,
+      "kg_co2e_per_mwh": 619.05
+    },
+    {
+      "iso3": "MDV",
+      "country": "Maldives",
+      "year": 2022,
+      "kg_co2e_per_mwh": 611.77
+    },
+    {
+      "iso3": "MDV",
+      "country": "Maldives",
+      "year": 2023,
+      "kg_co2e_per_mwh": 611.77
+    },
+    {
+      "iso3": "MDV",
+      "country": "Maldives",
+      "year": 2024,
+      "kg_co2e_per_mwh": 611.77
+    },
+    {
+      "iso3": "MEX",
+      "country": "Mexico",
+      "year": 2020,
+      "kg_co2e_per_mwh": 484.05
+    },
+    {
+      "iso3": "MEX",
+      "country": "Mexico",
+      "year": 2021,
+      "kg_co2e_per_mwh": 456.25
+    },
+    {
+      "iso3": "MEX",
+      "country": "Mexico",
+      "year": 2022,
+      "kg_co2e_per_mwh": 464.38
+    },
+    {
+      "iso3": "MEX",
+      "country": "Mexico",
+      "year": 2023,
+      "kg_co2e_per_mwh": 489.05
+    },
+    {
+      "iso3": "MEX",
+      "country": "Mexico",
+      "year": 2024,
+      "kg_co2e_per_mwh": 483.14
+    },
+    {
+      "iso3": "MEX",
+      "country": "Mexico",
+      "year": 2025,
+      "kg_co2e_per_mwh": 474.02
+    },
+    {
+      "iso3": "MKD",
+      "country": "North Macedonia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 623.6
+    },
+    {
+      "iso3": "MKD",
+      "country": "North Macedonia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 562.39
+    },
+    {
+      "iso3": "MKD",
+      "country": "North Macedonia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 624.58
+    },
+    {
+      "iso3": "MKD",
+      "country": "North Macedonia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 568.94
+    },
+    {
+      "iso3": "MKD",
+      "country": "North Macedonia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 510.3
+    },
+    {
+      "iso3": "MKD",
+      "country": "North Macedonia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 441.35
+    },
+    {
+      "iso3": "MLI",
+      "country": "Mali",
+      "year": 2019,
+      "kg_co2e_per_mwh": 417.32
+    },
+    {
+      "iso3": "MLI",
+      "country": "Mali",
+      "year": 2020,
+      "kg_co2e_per_mwh": 401.02
+    },
+    {
+      "iso3": "MLI",
+      "country": "Mali",
+      "year": 2021,
+      "kg_co2e_per_mwh": 416.24
+    },
+    {
+      "iso3": "MLI",
+      "country": "Mali",
+      "year": 2022,
+      "kg_co2e_per_mwh": 391.71
+    },
+    {
+      "iso3": "MLI",
+      "country": "Mali",
+      "year": 2023,
+      "kg_co2e_per_mwh": 535.77
+    },
+    {
+      "iso3": "MLI",
+      "country": "Mali",
+      "year": 2024,
+      "kg_co2e_per_mwh": 538.59
+    },
+    {
+      "iso3": "MLT",
+      "country": "Malta",
+      "year": 2020,
+      "kg_co2e_per_mwh": 506.98
+    },
+    {
+      "iso3": "MLT",
+      "country": "Malta",
+      "year": 2021,
+      "kg_co2e_per_mwh": 504.51
+    },
+    {
+      "iso3": "MLT",
+      "country": "Malta",
+      "year": 2022,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "MLT",
+      "country": "Malta",
+      "year": 2023,
+      "kg_co2e_per_mwh": 493.62
+    },
+    {
+      "iso3": "MLT",
+      "country": "Malta",
+      "year": 2024,
+      "kg_co2e_per_mwh": 488.58
+    },
+    {
+      "iso3": "MLT",
+      "country": "Malta",
+      "year": 2025,
+      "kg_co2e_per_mwh": 484.02
+    },
+    {
+      "iso3": "MMR",
+      "country": "Myanmar",
+      "year": 2019,
+      "kg_co2e_per_mwh": 419.26
+    },
+    {
+      "iso3": "MMR",
+      "country": "Myanmar",
+      "year": 2020,
+      "kg_co2e_per_mwh": 487.22
+    },
+    {
+      "iso3": "MMR",
+      "country": "Myanmar",
+      "year": 2021,
+      "kg_co2e_per_mwh": 484.48
+    },
+    {
+      "iso3": "MMR",
+      "country": "Myanmar",
+      "year": 2022,
+      "kg_co2e_per_mwh": 563.87
+    },
+    {
+      "iso3": "MMR",
+      "country": "Myanmar",
+      "year": 2023,
+      "kg_co2e_per_mwh": 515.64
+    },
+    {
+      "iso3": "MMR",
+      "country": "Myanmar",
+      "year": 2024,
+      "kg_co2e_per_mwh": 502.99
+    },
+    {
+      "iso3": "MNE",
+      "country": "Montenegro",
+      "year": 2020,
+      "kg_co2e_per_mwh": 495.58
+    },
+    {
+      "iso3": "MNE",
+      "country": "Montenegro",
+      "year": 2021,
+      "kg_co2e_per_mwh": 400.53
+    },
+    {
+      "iso3": "MNE",
+      "country": "Montenegro",
+      "year": 2022,
+      "kg_co2e_per_mwh": 483.38
+    },
+    {
+      "iso3": "MNE",
+      "country": "Montenegro",
+      "year": 2023,
+      "kg_co2e_per_mwh": 410.5
+    },
+    {
+      "iso3": "MNE",
+      "country": "Montenegro",
+      "year": 2024,
+      "kg_co2e_per_mwh": 422.1
+    },
+    {
+      "iso3": "MNE",
+      "country": "Montenegro",
+      "year": 2025,
+      "kg_co2e_per_mwh": 264.23
+    },
+    {
+      "iso3": "MNG",
+      "country": "Mongolia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 810.24
+    },
+    {
+      "iso3": "MNG",
+      "country": "Mongolia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 802.42
+    },
+    {
+      "iso3": "MNG",
+      "country": "Mongolia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 814.19
+    },
+    {
+      "iso3": "MNG",
+      "country": "Mongolia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 816.65
+    },
+    {
+      "iso3": "MNG",
+      "country": "Mongolia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 810.66
+    },
+    {
+      "iso3": "MNG",
+      "country": "Mongolia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 816.31
+    },
+    {
+      "iso3": "MOZ",
+      "country": "Mozambique",
+      "year": 2019,
+      "kg_co2e_per_mwh": 154.29
+    },
+    {
+      "iso3": "MOZ",
+      "country": "Mozambique",
+      "year": 2020,
+      "kg_co2e_per_mwh": 128.29
+    },
+    {
+      "iso3": "MOZ",
+      "country": "Mozambique",
+      "year": 2021,
+      "kg_co2e_per_mwh": 131.5
+    },
+    {
+      "iso3": "MOZ",
+      "country": "Mozambique",
+      "year": 2022,
+      "kg_co2e_per_mwh": 127.81
+    },
+    {
+      "iso3": "MOZ",
+      "country": "Mozambique",
+      "year": 2023,
+      "kg_co2e_per_mwh": 128.76
+    },
+    {
+      "iso3": "MOZ",
+      "country": "Mozambique",
+      "year": 2024,
+      "kg_co2e_per_mwh": 129.36
+    },
+    {
+      "iso3": "MRT",
+      "country": "Mauritania",
+      "year": 2019,
+      "kg_co2e_per_mwh": 464.97
+    },
+    {
+      "iso3": "MRT",
+      "country": "Mauritania",
+      "year": 2020,
+      "kg_co2e_per_mwh": 472.39
+    },
+    {
+      "iso3": "MRT",
+      "country": "Mauritania",
+      "year": 2021,
+      "kg_co2e_per_mwh": 474.68
+    },
+    {
+      "iso3": "MRT",
+      "country": "Mauritania",
+      "year": 2022,
+      "kg_co2e_per_mwh": 481.71
+    },
+    {
+      "iso3": "MRT",
+      "country": "Mauritania",
+      "year": 2023,
+      "kg_co2e_per_mwh": 521.53
+    },
+    {
+      "iso3": "MRT",
+      "country": "Mauritania",
+      "year": 2024,
+      "kg_co2e_per_mwh": 512.08
+    },
+    {
+      "iso3": "MSR",
+      "country": "Montserrat",
+      "year": 2019,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "MSR",
+      "country": "Montserrat",
+      "year": 2020,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "MSR",
+      "country": "Montserrat",
+      "year": 2021,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "MSR",
+      "country": "Montserrat",
+      "year": 2022,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "MSR",
+      "country": "Montserrat",
+      "year": 2023,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "MSR",
+      "country": "Montserrat",
+      "year": 2024,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "MTQ",
+      "country": "Martinique",
+      "year": 2018,
+      "kg_co2e_per_mwh": 590.91
+    },
+    {
+      "iso3": "MTQ",
+      "country": "Martinique",
+      "year": 2019,
+      "kg_co2e_per_mwh": 522.58
+    },
+    {
+      "iso3": "MTQ",
+      "country": "Martinique",
+      "year": 2020,
+      "kg_co2e_per_mwh": 540.0
+    },
+    {
+      "iso3": "MTQ",
+      "country": "Martinique",
+      "year": 2021,
+      "kg_co2e_per_mwh": 523.18
+    },
+    {
+      "iso3": "MTQ",
+      "country": "Martinique",
+      "year": 2022,
+      "kg_co2e_per_mwh": 516.78
+    },
+    {
+      "iso3": "MTQ",
+      "country": "Martinique",
+      "year": 2023,
+      "kg_co2e_per_mwh": 529.8
+    },
+    {
+      "iso3": "MUS",
+      "country": "Mauritius",
+      "year": 2019,
+      "kg_co2e_per_mwh": 619.2
+    },
+    {
+      "iso3": "MUS",
+      "country": "Mauritius",
+      "year": 2020,
+      "kg_co2e_per_mwh": 613.79
+    },
+    {
+      "iso3": "MUS",
+      "country": "Mauritius",
+      "year": 2021,
+      "kg_co2e_per_mwh": 628.76
+    },
+    {
+      "iso3": "MUS",
+      "country": "Mauritius",
+      "year": 2022,
+      "kg_co2e_per_mwh": 615.39
+    },
+    {
+      "iso3": "MUS",
+      "country": "Mauritius",
+      "year": 2023,
+      "kg_co2e_per_mwh": 633.03
+    },
+    {
+      "iso3": "MUS",
+      "country": "Mauritius",
+      "year": 2024,
+      "kg_co2e_per_mwh": 642.23
+    },
+    {
+      "iso3": "MWI",
+      "country": "Malawi",
+      "year": 2019,
+      "kg_co2e_per_mwh": 55.56
+    },
+    {
+      "iso3": "MWI",
+      "country": "Malawi",
+      "year": 2020,
+      "kg_co2e_per_mwh": 34.29
+    },
+    {
+      "iso3": "MWI",
+      "country": "Malawi",
+      "year": 2021,
+      "kg_co2e_per_mwh": 54.65
+    },
+    {
+      "iso3": "MWI",
+      "country": "Malawi",
+      "year": 2022,
+      "kg_co2e_per_mwh": 54.65
+    },
+    {
+      "iso3": "MWI",
+      "country": "Malawi",
+      "year": 2023,
+      "kg_co2e_per_mwh": 54.65
+    },
+    {
+      "iso3": "MWI",
+      "country": "Malawi",
+      "year": 2024,
+      "kg_co2e_per_mwh": 54.65
+    },
+    {
+      "iso3": "MYS",
+      "country": "Malaysia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 633.7
+    },
+    {
+      "iso3": "MYS",
+      "country": "Malaysia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 611.44
+    },
+    {
+      "iso3": "MYS",
+      "country": "Malaysia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 604.04
+    },
+    {
+      "iso3": "MYS",
+      "country": "Malaysia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 607.88
+    },
+    {
+      "iso3": "MYS",
+      "country": "Malaysia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 600.44
+    },
+    {
+      "iso3": "MYS",
+      "country": "Malaysia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 601.97
+    },
+    {
+      "iso3": "NAM",
+      "country": "Namibia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 57.97
+    },
+    {
+      "iso3": "NAM",
+      "country": "Namibia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 60.0
+    },
+    {
+      "iso3": "NAM",
+      "country": "Namibia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 46.36
+    },
+    {
+      "iso3": "NAM",
+      "country": "Namibia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 45.46
+    },
+    {
+      "iso3": "NAM",
+      "country": "Namibia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 47.62
+    },
+    {
+      "iso3": "NAM",
+      "country": "Namibia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 48.78
+    },
+    {
+      "iso3": "NCL",
+      "country": "New Caledonia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 663.66
+    },
+    {
+      "iso3": "NCL",
+      "country": "New Caledonia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 657.41
+    },
+    {
+      "iso3": "NCL",
+      "country": "New Caledonia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 597.94
+    },
+    {
+      "iso3": "NCL",
+      "country": "New Caledonia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 566.34
+    },
+    {
+      "iso3": "NCL",
+      "country": "New Caledonia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 566.34
+    },
+    {
+      "iso3": "NCL",
+      "country": "New Caledonia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 560.9
+    },
+    {
+      "iso3": "NER",
+      "country": "Niger",
+      "year": 2019,
+      "kg_co2e_per_mwh": 686.57
+    },
+    {
+      "iso3": "NER",
+      "country": "Niger",
+      "year": 2020,
+      "kg_co2e_per_mwh": 701.49
+    },
+    {
+      "iso3": "NER",
+      "country": "Niger",
+      "year": 2021,
+      "kg_co2e_per_mwh": 690.14
+    },
+    {
+      "iso3": "NER",
+      "country": "Niger",
+      "year": 2022,
+      "kg_co2e_per_mwh": 683.54
+    },
+    {
+      "iso3": "NER",
+      "country": "Niger",
+      "year": 2023,
+      "kg_co2e_per_mwh": 680.41
+    },
+    {
+      "iso3": "NER",
+      "country": "Niger",
+      "year": 2024,
+      "kg_co2e_per_mwh": 673.68
+    },
+    {
+      "iso3": "NGA",
+      "country": "Nigeria",
+      "year": 2020,
+      "kg_co2e_per_mwh": 523.42
+    },
+    {
+      "iso3": "NGA",
+      "country": "Nigeria",
+      "year": 2021,
+      "kg_co2e_per_mwh": 522.7
+    },
+    {
+      "iso3": "NGA",
+      "country": "Nigeria",
+      "year": 2022,
+      "kg_co2e_per_mwh": 497.37
+    },
+    {
+      "iso3": "NGA",
+      "country": "Nigeria",
+      "year": 2023,
+      "kg_co2e_per_mwh": 510.26
+    },
+    {
+      "iso3": "NGA",
+      "country": "Nigeria",
+      "year": 2024,
+      "kg_co2e_per_mwh": 495.74
+    },
+    {
+      "iso3": "NGA",
+      "country": "Nigeria",
+      "year": 2025,
+      "kg_co2e_per_mwh": 455.71
+    },
+    {
+      "iso3": "NIC",
+      "country": "Nicaragua",
+      "year": 2019,
+      "kg_co2e_per_mwh": 334.06
+    },
+    {
+      "iso3": "NIC",
+      "country": "Nicaragua",
+      "year": 2020,
+      "kg_co2e_per_mwh": 250.66
+    },
+    {
+      "iso3": "NIC",
+      "country": "Nicaragua",
+      "year": 2021,
+      "kg_co2e_per_mwh": 261.28
+    },
+    {
+      "iso3": "NIC",
+      "country": "Nicaragua",
+      "year": 2022,
+      "kg_co2e_per_mwh": 289.35
+    },
+    {
+      "iso3": "NIC",
+      "country": "Nicaragua",
+      "year": 2023,
+      "kg_co2e_per_mwh": 300.89
+    },
+    {
+      "iso3": "NIC",
+      "country": "Nicaragua",
+      "year": 2024,
+      "kg_co2e_per_mwh": 300.89
+    },
+    {
+      "iso3": "NLD",
+      "country": "Netherlands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 342.9
+    },
+    {
+      "iso3": "NLD",
+      "country": "Netherlands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 351.97
+    },
+    {
+      "iso3": "NLD",
+      "country": "Netherlands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 325.61
+    },
+    {
+      "iso3": "NLD",
+      "country": "Netherlands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 268.17
+    },
+    {
+      "iso3": "NLD",
+      "country": "Netherlands",
+      "year": 2024,
+      "kg_co2e_per_mwh": 250.72
+    },
+    {
+      "iso3": "NLD",
+      "country": "Netherlands",
+      "year": 2025,
+      "kg_co2e_per_mwh": 253.56
+    },
+    {
+      "iso3": "NOR",
+      "country": "Norway",
+      "year": 2020,
+      "kg_co2e_per_mwh": 30.39
+    },
+    {
+      "iso3": "NOR",
+      "country": "Norway",
+      "year": 2021,
+      "kg_co2e_per_mwh": 26.92
+    },
+    {
+      "iso3": "NOR",
+      "country": "Norway",
+      "year": 2022,
+      "kg_co2e_per_mwh": 29.64
+    },
+    {
+      "iso3": "NOR",
+      "country": "Norway",
+      "year": 2023,
+      "kg_co2e_per_mwh": 30.46
+    },
+    {
+      "iso3": "NOR",
+      "country": "Norway",
+      "year": 2024,
+      "kg_co2e_per_mwh": 29.66
+    },
+    {
+      "iso3": "NOR",
+      "country": "Norway",
+      "year": 2025,
+      "kg_co2e_per_mwh": 28.11
+    },
+    {
+      "iso3": "NPL",
+      "country": "Nepal",
+      "year": 2019,
+      "kg_co2e_per_mwh": 22.76
+    },
+    {
+      "iso3": "NPL",
+      "country": "Nepal",
+      "year": 2020,
+      "kg_co2e_per_mwh": 22.65
+    },
+    {
+      "iso3": "NPL",
+      "country": "Nepal",
+      "year": 2021,
+      "kg_co2e_per_mwh": 23.88
+    },
+    {
+      "iso3": "NPL",
+      "country": "Nepal",
+      "year": 2022,
+      "kg_co2e_per_mwh": 23.36
+    },
+    {
+      "iso3": "NPL",
+      "country": "Nepal",
+      "year": 2023,
+      "kg_co2e_per_mwh": 23.36
+    },
+    {
+      "iso3": "NPL",
+      "country": "Nepal",
+      "year": 2024,
+      "kg_co2e_per_mwh": 24.26
+    },
+    {
+      "iso3": "NRU",
+      "country": "Nauru",
+      "year": 2019,
+      "kg_co2e_per_mwh": 750.0
+    },
+    {
+      "iso3": "NRU",
+      "country": "Nauru",
+      "year": 2020,
+      "kg_co2e_per_mwh": 750.0
+    },
+    {
+      "iso3": "NRU",
+      "country": "Nauru",
+      "year": 2021,
+      "kg_co2e_per_mwh": 750.0
+    },
+    {
+      "iso3": "NRU",
+      "country": "Nauru",
+      "year": 2022,
+      "kg_co2e_per_mwh": 750.0
+    },
+    {
+      "iso3": "NRU",
+      "country": "Nauru",
+      "year": 2023,
+      "kg_co2e_per_mwh": 750.0
+    },
+    {
+      "iso3": "NRU",
+      "country": "Nauru",
+      "year": 2024,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "NZL",
+      "country": "New Zealand",
+      "year": 2020,
+      "kg_co2e_per_mwh": 142.1
+    },
+    {
+      "iso3": "NZL",
+      "country": "New Zealand",
+      "year": 2021,
+      "kg_co2e_per_mwh": 144.89
+    },
+    {
+      "iso3": "NZL",
+      "country": "New Zealand",
+      "year": 2022,
+      "kg_co2e_per_mwh": 103.12
+    },
+    {
+      "iso3": "NZL",
+      "country": "New Zealand",
+      "year": 2023,
+      "kg_co2e_per_mwh": 87.2
+    },
+    {
+      "iso3": "NZL",
+      "country": "New Zealand",
+      "year": 2024,
+      "kg_co2e_per_mwh": 112.02
+    },
+    {
+      "iso3": "NZL",
+      "country": "New Zealand",
+      "year": 2025,
+      "kg_co2e_per_mwh": 92.76
+    },
+    {
+      "iso3": "OMN",
+      "country": "Oman",
+      "year": 2020,
+      "kg_co2e_per_mwh": 565.18
+    },
+    {
+      "iso3": "OMN",
+      "country": "Oman",
+      "year": 2021,
+      "kg_co2e_per_mwh": 559.27
+    },
+    {
+      "iso3": "OMN",
+      "country": "Oman",
+      "year": 2022,
+      "kg_co2e_per_mwh": 545.28
+    },
+    {
+      "iso3": "OMN",
+      "country": "Oman",
+      "year": 2023,
+      "kg_co2e_per_mwh": 542.44
+    },
+    {
+      "iso3": "OMN",
+      "country": "Oman",
+      "year": 2024,
+      "kg_co2e_per_mwh": 542.77
+    },
+    {
+      "iso3": "OMN",
+      "country": "Oman",
+      "year": 2025,
+      "kg_co2e_per_mwh": 544.47
+    },
+    {
+      "iso3": "PAK",
+      "country": "Pakistan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 477.49
+    },
+    {
+      "iso3": "PAK",
+      "country": "Pakistan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 456.77
+    },
+    {
+      "iso3": "PAK",
+      "country": "Pakistan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 431.66
+    },
+    {
+      "iso3": "PAK",
+      "country": "Pakistan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 401.29
+    },
+    {
+      "iso3": "PAK",
+      "country": "Pakistan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 373.69
+    },
+    {
+      "iso3": "PAK",
+      "country": "Pakistan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 346.56
+    },
+    {
+      "iso3": "PAN",
+      "country": "Panama",
+      "year": 2019,
+      "kg_co2e_per_mwh": 325.6
+    },
+    {
+      "iso3": "PAN",
+      "country": "Panama",
+      "year": 2020,
+      "kg_co2e_per_mwh": 180.99
+    },
+    {
+      "iso3": "PAN",
+      "country": "Panama",
+      "year": 2021,
+      "kg_co2e_per_mwh": 161.85
+    },
+    {
+      "iso3": "PAN",
+      "country": "Panama",
+      "year": 2022,
+      "kg_co2e_per_mwh": 168.98
+    },
+    {
+      "iso3": "PAN",
+      "country": "Panama",
+      "year": 2023,
+      "kg_co2e_per_mwh": 266.21
+    },
+    {
+      "iso3": "PAN",
+      "country": "Panama",
+      "year": 2024,
+      "kg_co2e_per_mwh": 221.15
+    },
+    {
+      "iso3": "PER",
+      "country": "Peru",
+      "year": 2020,
+      "kg_co2e_per_mwh": 239.67
+    },
+    {
+      "iso3": "PER",
+      "country": "Peru",
+      "year": 2021,
+      "kg_co2e_per_mwh": 250.92
+    },
+    {
+      "iso3": "PER",
+      "country": "Peru",
+      "year": 2022,
+      "kg_co2e_per_mwh": 287.81
+    },
+    {
+      "iso3": "PER",
+      "country": "Peru",
+      "year": 2023,
+      "kg_co2e_per_mwh": 291.77
+    },
+    {
+      "iso3": "PER",
+      "country": "Peru",
+      "year": 2024,
+      "kg_co2e_per_mwh": 258.73
+    },
+    {
+      "iso3": "PER",
+      "country": "Peru",
+      "year": 2025,
+      "kg_co2e_per_mwh": 238.25
+    },
+    {
+      "iso3": "PHL",
+      "country": "Philippines",
+      "year": 2020,
+      "kg_co2e_per_mwh": 598.82
+    },
+    {
+      "iso3": "PHL",
+      "country": "Philippines",
+      "year": 2021,
+      "kg_co2e_per_mwh": 599.57
+    },
+    {
+      "iso3": "PHL",
+      "country": "Philippines",
+      "year": 2022,
+      "kg_co2e_per_mwh": 602.51
+    },
+    {
+      "iso3": "PHL",
+      "country": "Philippines",
+      "year": 2023,
+      "kg_co2e_per_mwh": 616.12
+    },
+    {
+      "iso3": "PHL",
+      "country": "Philippines",
+      "year": 2024,
+      "kg_co2e_per_mwh": 621.73
+    },
+    {
+      "iso3": "PHL",
+      "country": "Philippines",
+      "year": 2025,
+      "kg_co2e_per_mwh": 588.29
+    },
+    {
+      "iso3": "PNG",
+      "country": "Papua New Guinea",
+      "year": 2019,
+      "kg_co2e_per_mwh": 495.33
+    },
+    {
+      "iso3": "PNG",
+      "country": "Papua New Guinea",
+      "year": 2020,
+      "kg_co2e_per_mwh": 490.24
+    },
+    {
+      "iso3": "PNG",
+      "country": "Papua New Guinea",
+      "year": 2021,
+      "kg_co2e_per_mwh": 507.73
+    },
+    {
+      "iso3": "PNG",
+      "country": "Papua New Guinea",
+      "year": 2022,
+      "kg_co2e_per_mwh": 529.41
+    },
+    {
+      "iso3": "PNG",
+      "country": "Papua New Guinea",
+      "year": 2023,
+      "kg_co2e_per_mwh": 513.74
+    },
+    {
+      "iso3": "PNG",
+      "country": "Papua New Guinea",
+      "year": 2024,
+      "kg_co2e_per_mwh": 513.74
+    },
+    {
+      "iso3": "POL",
+      "country": "Poland",
+      "year": 2020,
+      "kg_co2e_per_mwh": 738.28
+    },
+    {
+      "iso3": "POL",
+      "country": "Poland",
+      "year": 2021,
+      "kg_co2e_per_mwh": 756.36
+    },
+    {
+      "iso3": "POL",
+      "country": "Poland",
+      "year": 2022,
+      "kg_co2e_per_mwh": 732.48
+    },
+    {
+      "iso3": "POL",
+      "country": "Poland",
+      "year": 2023,
+      "kg_co2e_per_mwh": 650.68
+    },
+    {
+      "iso3": "POL",
+      "country": "Poland",
+      "year": 2024,
+      "kg_co2e_per_mwh": 608.18
+    },
+    {
+      "iso3": "POL",
+      "country": "Poland",
+      "year": 2025,
+      "kg_co2e_per_mwh": 588.6
+    },
+    {
+      "iso3": "PRI",
+      "country": "Puerto Rico",
+      "year": 2020,
+      "kg_co2e_per_mwh": 668.59
+    },
+    {
+      "iso3": "PRI",
+      "country": "Puerto Rico",
+      "year": 2021,
+      "kg_co2e_per_mwh": 665.29
+    },
+    {
+      "iso3": "PRI",
+      "country": "Puerto Rico",
+      "year": 2022,
+      "kg_co2e_per_mwh": 660.3
+    },
+    {
+      "iso3": "PRI",
+      "country": "Puerto Rico",
+      "year": 2023,
+      "kg_co2e_per_mwh": 660.3
+    },
+    {
+      "iso3": "PRI",
+      "country": "Puerto Rico",
+      "year": 2024,
+      "kg_co2e_per_mwh": 656.0
+    },
+    {
+      "iso3": "PRI",
+      "country": "Puerto Rico",
+      "year": 2025,
+      "kg_co2e_per_mwh": 654.66
+    },
+    {
+      "iso3": "PRK",
+      "country": "North Korea",
+      "year": 2019,
+      "kg_co2e_per_mwh": 486.6
+    },
+    {
+      "iso3": "PRK",
+      "country": "North Korea",
+      "year": 2020,
+      "kg_co2e_per_mwh": 424.48
+    },
+    {
+      "iso3": "PRK",
+      "country": "North Korea",
+      "year": 2021,
+      "kg_co2e_per_mwh": 342.57
+    },
+    {
+      "iso3": "PRK",
+      "country": "North Korea",
+      "year": 2022,
+      "kg_co2e_per_mwh": 344.26
+    },
+    {
+      "iso3": "PRK",
+      "country": "North Korea",
+      "year": 2023,
+      "kg_co2e_per_mwh": 346.18
+    },
+    {
+      "iso3": "PRK",
+      "country": "North Korea",
+      "year": 2024,
+      "kg_co2e_per_mwh": 340.59
+    },
+    {
+      "iso3": "PRT",
+      "country": "Portugal",
+      "year": 2020,
+      "kg_co2e_per_mwh": 248.3
+    },
+    {
+      "iso3": "PRT",
+      "country": "Portugal",
+      "year": 2021,
+      "kg_co2e_per_mwh": 210.48
+    },
+    {
+      "iso3": "PRT",
+      "country": "Portugal",
+      "year": 2022,
+      "kg_co2e_per_mwh": 225.34
+    },
+    {
+      "iso3": "PRT",
+      "country": "Portugal",
+      "year": 2023,
+      "kg_co2e_per_mwh": 158.43
+    },
+    {
+      "iso3": "PRT",
+      "country": "Portugal",
+      "year": 2024,
+      "kg_co2e_per_mwh": 110.64
+    },
+    {
+      "iso3": "PRT",
+      "country": "Portugal",
+      "year": 2025,
+      "kg_co2e_per_mwh": 127.91
+    },
+    {
+      "iso3": "PRY",
+      "country": "Paraguay",
+      "year": 2020,
+      "kg_co2e_per_mwh": 24.88
+    },
+    {
+      "iso3": "PRY",
+      "country": "Paraguay",
+      "year": 2021,
+      "kg_co2e_per_mwh": 24.98
+    },
+    {
+      "iso3": "PRY",
+      "country": "Paraguay",
+      "year": 2022,
+      "kg_co2e_per_mwh": 24.71
+    },
+    {
+      "iso3": "PRY",
+      "country": "Paraguay",
+      "year": 2023,
+      "kg_co2e_per_mwh": 24.51
+    },
+    {
+      "iso3": "PRY",
+      "country": "Paraguay",
+      "year": 2024,
+      "kg_co2e_per_mwh": 24.76
+    },
+    {
+      "iso3": "PRY",
+      "country": "Paraguay",
+      "year": 2025,
+      "kg_co2e_per_mwh": 24.7
+    },
+    {
+      "iso3": "PSE",
+      "country": "Palestine",
+      "year": 2019,
+      "kg_co2e_per_mwh": 567.9
+    },
+    {
+      "iso3": "PSE",
+      "country": "Palestine",
+      "year": 2020,
+      "kg_co2e_per_mwh": 523.81
+    },
+    {
+      "iso3": "PSE",
+      "country": "Palestine",
+      "year": 2021,
+      "kg_co2e_per_mwh": 505.5
+    },
+    {
+      "iso3": "PSE",
+      "country": "Palestine",
+      "year": 2022,
+      "kg_co2e_per_mwh": 460.78
+    },
+    {
+      "iso3": "PSE",
+      "country": "Palestine",
+      "year": 2023,
+      "kg_co2e_per_mwh": 423.53
+    },
+    {
+      "iso3": "PSE",
+      "country": "Palestine",
+      "year": 2024,
+      "kg_co2e_per_mwh": 414.14
+    },
+    {
+      "iso3": "PYF",
+      "country": "French Polynesia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 463.77
+    },
+    {
+      "iso3": "PYF",
+      "country": "French Polynesia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 454.55
+    },
+    {
+      "iso3": "PYF",
+      "country": "French Polynesia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 469.7
+    },
+    {
+      "iso3": "PYF",
+      "country": "French Polynesia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 436.62
+    },
+    {
+      "iso3": "PYF",
+      "country": "French Polynesia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 436.62
+    },
+    {
+      "iso3": "PYF",
+      "country": "French Polynesia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 430.56
+    },
+    {
+      "iso3": "QAT",
+      "country": "Qatar",
+      "year": 2020,
+      "kg_co2e_per_mwh": 602.63
+    },
+    {
+      "iso3": "QAT",
+      "country": "Qatar",
+      "year": 2021,
+      "kg_co2e_per_mwh": 602.43
+    },
+    {
+      "iso3": "QAT",
+      "country": "Qatar",
+      "year": 2022,
+      "kg_co2e_per_mwh": 596.9
+    },
+    {
+      "iso3": "QAT",
+      "country": "Qatar",
+      "year": 2023,
+      "kg_co2e_per_mwh": 584.25
+    },
+    {
+      "iso3": "QAT",
+      "country": "Qatar",
+      "year": 2024,
+      "kg_co2e_per_mwh": 581.69
+    },
+    {
+      "iso3": "QAT",
+      "country": "Qatar",
+      "year": 2025,
+      "kg_co2e_per_mwh": 581.52
+    },
+    {
+      "iso3": "REU",
+      "country": "Reunion",
+      "year": 2018,
+      "kg_co2e_per_mwh": 535.59
+    },
+    {
+      "iso3": "REU",
+      "country": "Reunion",
+      "year": 2019,
+      "kg_co2e_per_mwh": 567.21
+    },
+    {
+      "iso3": "REU",
+      "country": "Reunion",
+      "year": 2020,
+      "kg_co2e_per_mwh": 643.8
+    },
+    {
+      "iso3": "REU",
+      "country": "Reunion",
+      "year": 2021,
+      "kg_co2e_per_mwh": 572.82
+    },
+    {
+      "iso3": "REU",
+      "country": "Reunion",
+      "year": 2022,
+      "kg_co2e_per_mwh": 483.66
+    },
+    {
+      "iso3": "REU",
+      "country": "Reunion",
+      "year": 2023,
+      "kg_co2e_per_mwh": 394.14
+    },
+    {
+      "iso3": "ROU",
+      "country": "Romania",
+      "year": 2020,
+      "kg_co2e_per_mwh": 277.85
+    },
+    {
+      "iso3": "ROU",
+      "country": "Romania",
+      "year": 2021,
+      "kg_co2e_per_mwh": 289.96
+    },
+    {
+      "iso3": "ROU",
+      "country": "Romania",
+      "year": 2022,
+      "kg_co2e_per_mwh": 297.77
+    },
+    {
+      "iso3": "ROU",
+      "country": "Romania",
+      "year": 2023,
+      "kg_co2e_per_mwh": 243.2
+    },
+    {
+      "iso3": "ROU",
+      "country": "Romania",
+      "year": 2024,
+      "kg_co2e_per_mwh": 251.33
+    },
+    {
+      "iso3": "ROU",
+      "country": "Romania",
+      "year": 2025,
+      "kg_co2e_per_mwh": 250.75
+    },
+    {
+      "iso3": "RUS",
+      "country": "Russia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 417.65
+    },
+    {
+      "iso3": "RUS",
+      "country": "Russia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 426.81
+    },
+    {
+      "iso3": "RUS",
+      "country": "Russia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 436.33
+    },
+    {
+      "iso3": "RUS",
+      "country": "Russia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 442.74
+    },
+    {
+      "iso3": "RUS",
+      "country": "Russia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 445.98
+    },
+    {
+      "iso3": "RUS",
+      "country": "Russia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 449.73
+    },
+    {
+      "iso3": "RWA",
+      "country": "Rwanda",
+      "year": 2019,
+      "kg_co2e_per_mwh": 329.41
+    },
+    {
+      "iso3": "RWA",
+      "country": "Rwanda",
+      "year": 2020,
+      "kg_co2e_per_mwh": 247.19
+    },
+    {
+      "iso3": "RWA",
+      "country": "Rwanda",
+      "year": 2021,
+      "kg_co2e_per_mwh": 280.0
+    },
+    {
+      "iso3": "RWA",
+      "country": "Rwanda",
+      "year": 2022,
+      "kg_co2e_per_mwh": 288.46
+    },
+    {
+      "iso3": "RWA",
+      "country": "Rwanda",
+      "year": 2023,
+      "kg_co2e_per_mwh": 354.55
+    },
+    {
+      "iso3": "RWA",
+      "country": "Rwanda",
+      "year": 2024,
+      "kg_co2e_per_mwh": 353.98
+    },
+    {
+      "iso3": "SAU",
+      "country": "Saudi Arabia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 701.7
+    },
+    {
+      "iso3": "SAU",
+      "country": "Saudi Arabia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 701.86
+    },
+    {
+      "iso3": "SAU",
+      "country": "Saudi Arabia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 702.43
+    },
+    {
+      "iso3": "SAU",
+      "country": "Saudi Arabia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 700.05
+    },
+    {
+      "iso3": "SAU",
+      "country": "Saudi Arabia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 697.31
+    },
+    {
+      "iso3": "SAU",
+      "country": "Saudi Arabia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 691.95
+    },
+    {
+      "iso3": "SDN",
+      "country": "Sudan",
+      "year": 2019,
+      "kg_co2e_per_mwh": 254.62
+    },
+    {
+      "iso3": "SDN",
+      "country": "Sudan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 247.67
+    },
+    {
+      "iso3": "SDN",
+      "country": "Sudan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 261.58
+    },
+    {
+      "iso3": "SDN",
+      "country": "Sudan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 204.41
+    },
+    {
+      "iso3": "SDN",
+      "country": "Sudan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 146.11
+    },
+    {
+      "iso3": "SDN",
+      "country": "Sudan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 153.69
+    },
+    {
+      "iso3": "SEN",
+      "country": "Senegal",
+      "year": 2019,
+      "kg_co2e_per_mwh": 609.97
+    },
+    {
+      "iso3": "SEN",
+      "country": "Senegal",
+      "year": 2020,
+      "kg_co2e_per_mwh": 562.71
+    },
+    {
+      "iso3": "SEN",
+      "country": "Senegal",
+      "year": 2021,
+      "kg_co2e_per_mwh": 546.55
+    },
+    {
+      "iso3": "SEN",
+      "country": "Senegal",
+      "year": 2022,
+      "kg_co2e_per_mwh": 550.28
+    },
+    {
+      "iso3": "SEN",
+      "country": "Senegal",
+      "year": 2023,
+      "kg_co2e_per_mwh": 557.32
+    },
+    {
+      "iso3": "SEN",
+      "country": "Senegal",
+      "year": 2024,
+      "kg_co2e_per_mwh": 539.97
+    },
+    {
+      "iso3": "SGP",
+      "country": "Singapore",
+      "year": 2020,
+      "kg_co2e_per_mwh": 504.62
+    },
+    {
+      "iso3": "SGP",
+      "country": "Singapore",
+      "year": 2021,
+      "kg_co2e_per_mwh": 506.18
+    },
+    {
+      "iso3": "SGP",
+      "country": "Singapore",
+      "year": 2022,
+      "kg_co2e_per_mwh": 504.22
+    },
+    {
+      "iso3": "SGP",
+      "country": "Singapore",
+      "year": 2023,
+      "kg_co2e_per_mwh": 500.87
+    },
+    {
+      "iso3": "SGP",
+      "country": "Singapore",
+      "year": 2024,
+      "kg_co2e_per_mwh": 498.74
+    },
+    {
+      "iso3": "SGP",
+      "country": "Singapore",
+      "year": 2025,
+      "kg_co2e_per_mwh": 497.09
+    },
+    {
+      "iso3": "SHN",
+      "country": "Saint Helena",
+      "year": 2018,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "SHN",
+      "country": "Saint Helena",
+      "year": 2019,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "SHN",
+      "country": "Saint Helena",
+      "year": 2020,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "SHN",
+      "country": "Saint Helena",
+      "year": 2021,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "SHN",
+      "country": "Saint Helena",
+      "year": 2022,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "SHN",
+      "country": "Saint Helena",
+      "year": 2023,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "SLB",
+      "country": "Solomon Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 700.0
+    },
+    {
+      "iso3": "SLB",
+      "country": "Solomon Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 700.0
+    },
+    {
+      "iso3": "SLB",
+      "country": "Solomon Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 700.0
+    },
+    {
+      "iso3": "SLB",
+      "country": "Solomon Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "SLB",
+      "country": "Solomon Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "SLB",
+      "country": "Solomon Islands",
+      "year": 2024,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "SLE",
+      "country": "Sierra Leone",
+      "year": 2019,
+      "kg_co2e_per_mwh": 50.0
+    },
+    {
+      "iso3": "SLE",
+      "country": "Sierra Leone",
+      "year": 2020,
+      "kg_co2e_per_mwh": 50.0
+    },
+    {
+      "iso3": "SLE",
+      "country": "Sierra Leone",
+      "year": 2021,
+      "kg_co2e_per_mwh": 50.0
+    },
+    {
+      "iso3": "SLE",
+      "country": "Sierra Leone",
+      "year": 2022,
+      "kg_co2e_per_mwh": 50.0
+    },
+    {
+      "iso3": "SLE",
+      "country": "Sierra Leone",
+      "year": 2023,
+      "kg_co2e_per_mwh": 47.62
+    },
+    {
+      "iso3": "SLE",
+      "country": "Sierra Leone",
+      "year": 2024,
+      "kg_co2e_per_mwh": 47.62
+    },
+    {
+      "iso3": "SLV",
+      "country": "El Salvador",
+      "year": 2020,
+      "kg_co2e_per_mwh": 152.41
+    },
+    {
+      "iso3": "SLV",
+      "country": "El Salvador",
+      "year": 2021,
+      "kg_co2e_per_mwh": 143.87
+    },
+    {
+      "iso3": "SLV",
+      "country": "El Salvador",
+      "year": 2022,
+      "kg_co2e_per_mwh": 113.12
+    },
+    {
+      "iso3": "SLV",
+      "country": "El Salvador",
+      "year": 2023,
+      "kg_co2e_per_mwh": 135.45
+    },
+    {
+      "iso3": "SLV",
+      "country": "El Salvador",
+      "year": 2024,
+      "kg_co2e_per_mwh": 113.32
+    },
+    {
+      "iso3": "SLV",
+      "country": "El Salvador",
+      "year": 2025,
+      "kg_co2e_per_mwh": 139.32
+    },
+    {
+      "iso3": "SOM",
+      "country": "Somalia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 621.62
+    },
+    {
+      "iso3": "SOM",
+      "country": "Somalia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 594.6
+    },
+    {
+      "iso3": "SOM",
+      "country": "Somalia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 578.95
+    },
+    {
+      "iso3": "SOM",
+      "country": "Somalia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 523.81
+    },
+    {
+      "iso3": "SOM",
+      "country": "Somalia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 523.81
+    },
+    {
+      "iso3": "SOM",
+      "country": "Somalia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 511.63
+    },
+    {
+      "iso3": "SPM",
+      "country": "Saint Pierre and Miquelon",
+      "year": 2018,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "SPM",
+      "country": "Saint Pierre and Miquelon",
+      "year": 2019,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "SPM",
+      "country": "Saint Pierre and Miquelon",
+      "year": 2020,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "SPM",
+      "country": "Saint Pierre and Miquelon",
+      "year": 2021,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "SPM",
+      "country": "Saint Pierre and Miquelon",
+      "year": 2022,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "SPM",
+      "country": "Saint Pierre and Miquelon",
+      "year": 2023,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "SRB",
+      "country": "Serbia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 736.15
+    },
+    {
+      "iso3": "SRB",
+      "country": "Serbia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 666.31
+    },
+    {
+      "iso3": "SRB",
+      "country": "Serbia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 710.68
+    },
+    {
+      "iso3": "SRB",
+      "country": "Serbia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 638.95
+    },
+    {
+      "iso3": "SRB",
+      "country": "Serbia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 666.4
+    },
+    {
+      "iso3": "SRB",
+      "country": "Serbia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 695.8
+    },
+    {
+      "iso3": "SSD",
+      "country": "South Sudan",
+      "year": 2019,
+      "kg_co2e_per_mwh": 654.55
+    },
+    {
+      "iso3": "SSD",
+      "country": "South Sudan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "SSD",
+      "country": "South Sudan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 649.12
+    },
+    {
+      "iso3": "SSD",
+      "country": "South Sudan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 647.06
+    },
+    {
+      "iso3": "SSD",
+      "country": "South Sudan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "SSD",
+      "country": "South Sudan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 642.86
+    },
+    {
+      "iso3": "STP",
+      "country": "Sao Tome and Principe",
+      "year": 2018,
+      "kg_co2e_per_mwh": 700.0
+    },
+    {
+      "iso3": "STP",
+      "country": "Sao Tome and Principe",
+      "year": 2019,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "STP",
+      "country": "Sao Tome and Principe",
+      "year": 2020,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "STP",
+      "country": "Sao Tome and Principe",
+      "year": 2021,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "STP",
+      "country": "Sao Tome and Principe",
+      "year": 2022,
+      "kg_co2e_per_mwh": 555.56
+    },
+    {
+      "iso3": "STP",
+      "country": "Sao Tome and Principe",
+      "year": 2023,
+      "kg_co2e_per_mwh": 555.56
+    },
+    {
+      "iso3": "SUR",
+      "country": "Suriname",
+      "year": 2019,
+      "kg_co2e_per_mwh": 352.94
+    },
+    {
+      "iso3": "SUR",
+      "country": "Suriname",
+      "year": 2020,
+      "kg_co2e_per_mwh": 346.34
+    },
+    {
+      "iso3": "SUR",
+      "country": "Suriname",
+      "year": 2021,
+      "kg_co2e_per_mwh": 349.28
+    },
+    {
+      "iso3": "SUR",
+      "country": "Suriname",
+      "year": 2022,
+      "kg_co2e_per_mwh": 374.41
+    },
+    {
+      "iso3": "SUR",
+      "country": "Suriname",
+      "year": 2023,
+      "kg_co2e_per_mwh": 317.92
+    },
+    {
+      "iso3": "SUR",
+      "country": "Suriname",
+      "year": 2024,
+      "kg_co2e_per_mwh": 321.84
+    },
+    {
+      "iso3": "SVK",
+      "country": "Slovakia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 158.54
+    },
+    {
+      "iso3": "SVK",
+      "country": "Slovakia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 167.34
+    },
+    {
+      "iso3": "SVK",
+      "country": "Slovakia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 142.05
+    },
+    {
+      "iso3": "SVK",
+      "country": "Slovakia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 115.14
+    },
+    {
+      "iso3": "SVK",
+      "country": "Slovakia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 96.55
+    },
+    {
+      "iso3": "SVK",
+      "country": "Slovakia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 94.85
+    },
+    {
+      "iso3": "SVN",
+      "country": "Slovenia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 277.09
+    },
+    {
+      "iso3": "SVN",
+      "country": "Slovenia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 269.4
+    },
+    {
+      "iso3": "SVN",
+      "country": "Slovenia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 257.49
+    },
+    {
+      "iso3": "SVN",
+      "country": "Slovenia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 225.08
+    },
+    {
+      "iso3": "SVN",
+      "country": "Slovenia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 230.4
+    },
+    {
+      "iso3": "SVN",
+      "country": "Slovenia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 183.29
+    },
+    {
+      "iso3": "SWE",
+      "country": "Sweden",
+      "year": 2020,
+      "kg_co2e_per_mwh": 38.71
+    },
+    {
+      "iso3": "SWE",
+      "country": "Sweden",
+      "year": 2021,
+      "kg_co2e_per_mwh": 41.74
+    },
+    {
+      "iso3": "SWE",
+      "country": "Sweden",
+      "year": 2022,
+      "kg_co2e_per_mwh": 41.03
+    },
+    {
+      "iso3": "SWE",
+      "country": "Sweden",
+      "year": 2023,
+      "kg_co2e_per_mwh": 38.42
+    },
+    {
+      "iso3": "SWE",
+      "country": "Sweden",
+      "year": 2024,
+      "kg_co2e_per_mwh": 34.91
+    },
+    {
+      "iso3": "SWE",
+      "country": "Sweden",
+      "year": 2025,
+      "kg_co2e_per_mwh": 35.26
+    },
+    {
+      "iso3": "SWZ",
+      "country": "Eswatini",
+      "year": 2019,
+      "kg_co2e_per_mwh": 204.08
+    },
+    {
+      "iso3": "SWZ",
+      "country": "Eswatini",
+      "year": 2020,
+      "kg_co2e_per_mwh": 163.27
+    },
+    {
+      "iso3": "SWZ",
+      "country": "Eswatini",
+      "year": 2021,
+      "kg_co2e_per_mwh": 137.26
+    },
+    {
+      "iso3": "SWZ",
+      "country": "Eswatini",
+      "year": 2022,
+      "kg_co2e_per_mwh": 127.27
+    },
+    {
+      "iso3": "SWZ",
+      "country": "Eswatini",
+      "year": 2023,
+      "kg_co2e_per_mwh": 121.21
+    },
+    {
+      "iso3": "SWZ",
+      "country": "Eswatini",
+      "year": 2024,
+      "kg_co2e_per_mwh": 131.15
+    },
+    {
+      "iso3": "SYC",
+      "country": "Seychelles",
+      "year": 2019,
+      "kg_co2e_per_mwh": 614.04
+    },
+    {
+      "iso3": "SYC",
+      "country": "Seychelles",
+      "year": 2020,
+      "kg_co2e_per_mwh": 576.27
+    },
+    {
+      "iso3": "SYC",
+      "country": "Seychelles",
+      "year": 2021,
+      "kg_co2e_per_mwh": 566.67
+    },
+    {
+      "iso3": "SYC",
+      "country": "Seychelles",
+      "year": 2022,
+      "kg_co2e_per_mwh": 564.52
+    },
+    {
+      "iso3": "SYC",
+      "country": "Seychelles",
+      "year": 2023,
+      "kg_co2e_per_mwh": 564.52
+    },
+    {
+      "iso3": "SYC",
+      "country": "Seychelles",
+      "year": 2024,
+      "kg_co2e_per_mwh": 555.56
+    },
+    {
+      "iso3": "SYR",
+      "country": "Syria",
+      "year": 2019,
+      "kg_co2e_per_mwh": 697.13
+    },
+    {
+      "iso3": "SYR",
+      "country": "Syria",
+      "year": 2020,
+      "kg_co2e_per_mwh": 690.92
+    },
+    {
+      "iso3": "SYR",
+      "country": "Syria",
+      "year": 2021,
+      "kg_co2e_per_mwh": 692.31
+    },
+    {
+      "iso3": "SYR",
+      "country": "Syria",
+      "year": 2022,
+      "kg_co2e_per_mwh": 682.27
+    },
+    {
+      "iso3": "SYR",
+      "country": "Syria",
+      "year": 2023,
+      "kg_co2e_per_mwh": 705.44
+    },
+    {
+      "iso3": "SYR",
+      "country": "Syria",
+      "year": 2024,
+      "kg_co2e_per_mwh": 706.19
+    },
+    {
+      "iso3": "TCA",
+      "country": "Turks and Caicos Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 653.85
+    },
+    {
+      "iso3": "TCA",
+      "country": "Turks and Caicos Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 640.0
+    },
+    {
+      "iso3": "TCA",
+      "country": "Turks and Caicos Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 653.85
+    },
+    {
+      "iso3": "TCA",
+      "country": "Turks and Caicos Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 653.85
+    },
+    {
+      "iso3": "TCA",
+      "country": "Turks and Caicos Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 653.85
+    },
+    {
+      "iso3": "TCA",
+      "country": "Turks and Caicos Islands",
+      "year": 2024,
+      "kg_co2e_per_mwh": 629.63
+    },
+    {
+      "iso3": "TCD",
+      "country": "Chad",
+      "year": 2019,
+      "kg_co2e_per_mwh": 628.57
+    },
+    {
+      "iso3": "TCD",
+      "country": "Chad",
+      "year": 2020,
+      "kg_co2e_per_mwh": 628.57
+    },
+    {
+      "iso3": "TCD",
+      "country": "Chad",
+      "year": 2021,
+      "kg_co2e_per_mwh": 627.91
+    },
+    {
+      "iso3": "TCD",
+      "country": "Chad",
+      "year": 2022,
+      "kg_co2e_per_mwh": 615.39
+    },
+    {
+      "iso3": "TCD",
+      "country": "Chad",
+      "year": 2023,
+      "kg_co2e_per_mwh": 611.11
+    },
+    {
+      "iso3": "TCD",
+      "country": "Chad",
+      "year": 2024,
+      "kg_co2e_per_mwh": 621.62
+    },
+    {
+      "iso3": "TGO",
+      "country": "Togo",
+      "year": 2019,
+      "kg_co2e_per_mwh": 459.02
+    },
+    {
+      "iso3": "TGO",
+      "country": "Togo",
+      "year": 2020,
+      "kg_co2e_per_mwh": 508.2
+    },
+    {
+      "iso3": "TGO",
+      "country": "Togo",
+      "year": 2021,
+      "kg_co2e_per_mwh": 464.79
+    },
+    {
+      "iso3": "TGO",
+      "country": "Togo",
+      "year": 2022,
+      "kg_co2e_per_mwh": 477.78
+    },
+    {
+      "iso3": "TGO",
+      "country": "Togo",
+      "year": 2023,
+      "kg_co2e_per_mwh": 436.62
+    },
+    {
+      "iso3": "TGO",
+      "country": "Togo",
+      "year": 2024,
+      "kg_co2e_per_mwh": 422.54
+    },
+    {
+      "iso3": "THA",
+      "country": "Thailand",
+      "year": 2020,
+      "kg_co2e_per_mwh": 570.49
+    },
+    {
+      "iso3": "THA",
+      "country": "Thailand",
+      "year": 2021,
+      "kg_co2e_per_mwh": 566.06
+    },
+    {
+      "iso3": "THA",
+      "country": "Thailand",
+      "year": 2022,
+      "kg_co2e_per_mwh": 560.29
+    },
+    {
+      "iso3": "THA",
+      "country": "Thailand",
+      "year": 2023,
+      "kg_co2e_per_mwh": 549.24
+    },
+    {
+      "iso3": "THA",
+      "country": "Thailand",
+      "year": 2024,
+      "kg_co2e_per_mwh": 554.73
+    },
+    {
+      "iso3": "THA",
+      "country": "Thailand",
+      "year": 2025,
+      "kg_co2e_per_mwh": 545.74
+    },
+    {
+      "iso3": "TJK",
+      "country": "Tajikistan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 109.95
+    },
+    {
+      "iso3": "TJK",
+      "country": "Tajikistan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 110.52
+    },
+    {
+      "iso3": "TJK",
+      "country": "Tajikistan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 86.55
+    },
+    {
+      "iso3": "TJK",
+      "country": "Tajikistan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 74.42
+    },
+    {
+      "iso3": "TJK",
+      "country": "Tajikistan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 71.17
+    },
+    {
+      "iso3": "TJK",
+      "country": "Tajikistan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 72.56
+    },
+    {
+      "iso3": "TKM",
+      "country": "Turkmenistan",
+      "year": 2019,
+      "kg_co2e_per_mwh": 1306.67
+    },
+    {
+      "iso3": "TKM",
+      "country": "Turkmenistan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 1306.68
+    },
+    {
+      "iso3": "TKM",
+      "country": "Turkmenistan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 1305.99
+    },
+    {
+      "iso3": "TKM",
+      "country": "Turkmenistan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 1306.14
+    },
+    {
+      "iso3": "TKM",
+      "country": "Turkmenistan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 1306.14
+    },
+    {
+      "iso3": "TKM",
+      "country": "Turkmenistan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 1306.27
+    },
+    {
+      "iso3": "TLS",
+      "country": "East Timor",
+      "year": 2019,
+      "kg_co2e_per_mwh": 653.85
+    },
+    {
+      "iso3": "TLS",
+      "country": "East Timor",
+      "year": 2020,
+      "kg_co2e_per_mwh": 660.0
+    },
+    {
+      "iso3": "TLS",
+      "country": "East Timor",
+      "year": 2021,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "TLS",
+      "country": "East Timor",
+      "year": 2022,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "TLS",
+      "country": "East Timor",
+      "year": 2023,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "TLS",
+      "country": "East Timor",
+      "year": 2024,
+      "kg_co2e_per_mwh": 666.67
+    },
+    {
+      "iso3": "TON",
+      "country": "Tonga",
+      "year": 2019,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "TON",
+      "country": "Tonga",
+      "year": 2020,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "TON",
+      "country": "Tonga",
+      "year": 2021,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "TON",
+      "country": "Tonga",
+      "year": 2022,
+      "kg_co2e_per_mwh": 625.0
+    },
+    {
+      "iso3": "TON",
+      "country": "Tonga",
+      "year": 2023,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "TON",
+      "country": "Tonga",
+      "year": 2024,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "TTO",
+      "country": "Trinidad and Tobago",
+      "year": 2019,
+      "kg_co2e_per_mwh": 681.52
+    },
+    {
+      "iso3": "TTO",
+      "country": "Trinidad and Tobago",
+      "year": 2020,
+      "kg_co2e_per_mwh": 681.47
+    },
+    {
+      "iso3": "TTO",
+      "country": "Trinidad and Tobago",
+      "year": 2021,
+      "kg_co2e_per_mwh": 681.77
+    },
+    {
+      "iso3": "TTO",
+      "country": "Trinidad and Tobago",
+      "year": 2022,
+      "kg_co2e_per_mwh": 682.11
+    },
+    {
+      "iso3": "TTO",
+      "country": "Trinidad and Tobago",
+      "year": 2023,
+      "kg_co2e_per_mwh": 681.72
+    },
+    {
+      "iso3": "TTO",
+      "country": "Trinidad and Tobago",
+      "year": 2024,
+      "kg_co2e_per_mwh": 681.68
+    },
+    {
+      "iso3": "TUN",
+      "country": "Tunisia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 564.55
+    },
+    {
+      "iso3": "TUN",
+      "country": "Tunisia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 564.38
+    },
+    {
+      "iso3": "TUN",
+      "country": "Tunisia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 565.62
+    },
+    {
+      "iso3": "TUN",
+      "country": "Tunisia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 560.15
+    },
+    {
+      "iso3": "TUN",
+      "country": "Tunisia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 558.26
+    },
+    {
+      "iso3": "TUN",
+      "country": "Tunisia",
+      "year": 2025,
+      "kg_co2e_per_mwh": 560.29
+    },
+    {
+      "iso3": "TUR",
+      "country": "Turkey",
+      "year": 2020,
+      "kg_co2e_per_mwh": 482.45
+    },
+    {
+      "iso3": "TUR",
+      "country": "Turkey",
+      "year": 2021,
+      "kg_co2e_per_mwh": 500.61
+    },
+    {
+      "iso3": "TUR",
+      "country": "Turkey",
+      "year": 2022,
+      "kg_co2e_per_mwh": 487.93
+    },
+    {
+      "iso3": "TUR",
+      "country": "Turkey",
+      "year": 2023,
+      "kg_co2e_per_mwh": 493.73
+    },
+    {
+      "iso3": "TUR",
+      "country": "Turkey",
+      "year": 2024,
+      "kg_co2e_per_mwh": 469.74
+    },
+    {
+      "iso3": "TUR",
+      "country": "Turkey",
+      "year": 2025,
+      "kg_co2e_per_mwh": 474.74
+    },
+    {
+      "iso3": "TWN",
+      "country": "Taiwan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 648.06
+    },
+    {
+      "iso3": "TWN",
+      "country": "Taiwan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 652.1
+    },
+    {
+      "iso3": "TWN",
+      "country": "Taiwan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 639.23
+    },
+    {
+      "iso3": "TWN",
+      "country": "Taiwan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 644.18
+    },
+    {
+      "iso3": "TWN",
+      "country": "Taiwan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 635.19
+    },
+    {
+      "iso3": "TWN",
+      "country": "Taiwan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 633.21
+    },
+    {
+      "iso3": "TZA",
+      "country": "Tanzania",
+      "year": 2019,
+      "kg_co2e_per_mwh": 337.19
+    },
+    {
+      "iso3": "TZA",
+      "country": "Tanzania",
+      "year": 2020,
+      "kg_co2e_per_mwh": 298.85
+    },
+    {
+      "iso3": "TZA",
+      "country": "Tanzania",
+      "year": 2021,
+      "kg_co2e_per_mwh": 320.23
+    },
+    {
+      "iso3": "TZA",
+      "country": "Tanzania",
+      "year": 2022,
+      "kg_co2e_per_mwh": 349.27
+    },
+    {
+      "iso3": "TZA",
+      "country": "Tanzania",
+      "year": 2023,
+      "kg_co2e_per_mwh": 372.75
+    },
+    {
+      "iso3": "TZA",
+      "country": "Tanzania",
+      "year": 2024,
+      "kg_co2e_per_mwh": 345.02
+    },
+    {
+      "iso3": "UGA",
+      "country": "Uganda",
+      "year": 2019,
+      "kg_co2e_per_mwh": 56.77
+    },
+    {
+      "iso3": "UGA",
+      "country": "Uganda",
+      "year": 2020,
+      "kg_co2e_per_mwh": 54.35
+    },
+    {
+      "iso3": "UGA",
+      "country": "Uganda",
+      "year": 2021,
+      "kg_co2e_per_mwh": 55.03
+    },
+    {
+      "iso3": "UGA",
+      "country": "Uganda",
+      "year": 2022,
+      "kg_co2e_per_mwh": 57.39
+    },
+    {
+      "iso3": "UGA",
+      "country": "Uganda",
+      "year": 2023,
+      "kg_co2e_per_mwh": 58.93
+    },
+    {
+      "iso3": "UGA",
+      "country": "Uganda",
+      "year": 2024,
+      "kg_co2e_per_mwh": 58.52
+    },
+    {
+      "iso3": "UKR",
+      "country": "Ukraine",
+      "year": 2017,
+      "kg_co2e_per_mwh": 347.22
+    },
+    {
+      "iso3": "UKR",
+      "country": "Ukraine",
+      "year": 2018,
+      "kg_co2e_per_mwh": 349.31
+    },
+    {
+      "iso3": "UKR",
+      "country": "Ukraine",
+      "year": 2019,
+      "kg_co2e_per_mwh": 341.51
+    },
+    {
+      "iso3": "UKR",
+      "country": "Ukraine",
+      "year": 2020,
+      "kg_co2e_per_mwh": 325.39
+    },
+    {
+      "iso3": "UKR",
+      "country": "Ukraine",
+      "year": 2021,
+      "kg_co2e_per_mwh": 279.47
+    },
+    {
+      "iso3": "UKR",
+      "country": "Ukraine",
+      "year": 2022,
+      "kg_co2e_per_mwh": 250.47
+    },
+    {
+      "iso3": "URY",
+      "country": "Uruguay",
+      "year": 2020,
+      "kg_co2e_per_mwh": 94.33
+    },
+    {
+      "iso3": "URY",
+      "country": "Uruguay",
+      "year": 2021,
+      "kg_co2e_per_mwh": 150.72
+    },
+    {
+      "iso3": "URY",
+      "country": "Uruguay",
+      "year": 2022,
+      "kg_co2e_per_mwh": 110.36
+    },
+    {
+      "iso3": "URY",
+      "country": "Uruguay",
+      "year": 2023,
+      "kg_co2e_per_mwh": 113.11
+    },
+    {
+      "iso3": "URY",
+      "country": "Uruguay",
+      "year": 2024,
+      "kg_co2e_per_mwh": 69.56
+    },
+    {
+      "iso3": "URY",
+      "country": "Uruguay",
+      "year": 2025,
+      "kg_co2e_per_mwh": 80.4
+    },
+    {
+      "iso3": "USA",
+      "country": "United States",
+      "year": 2020,
+      "kg_co2e_per_mwh": 411.73
+    },
+    {
+      "iso3": "USA",
+      "country": "United States",
+      "year": 2021,
+      "kg_co2e_per_mwh": 423.78
+    },
+    {
+      "iso3": "USA",
+      "country": "United States",
+      "year": 2022,
+      "kg_co2e_per_mwh": 410.39
+    },
+    {
+      "iso3": "USA",
+      "country": "United States",
+      "year": 2023,
+      "kg_co2e_per_mwh": 392.89
+    },
+    {
+      "iso3": "USA",
+      "country": "United States",
+      "year": 2024,
+      "kg_co2e_per_mwh": 383.78
+    },
+    {
+      "iso3": "USA",
+      "country": "United States",
+      "year": 2025,
+      "kg_co2e_per_mwh": 384.4
+    },
+    {
+      "iso3": "UZB",
+      "country": "Uzbekistan",
+      "year": 2020,
+      "kg_co2e_per_mwh": 1149.11
+    },
+    {
+      "iso3": "UZB",
+      "country": "Uzbekistan",
+      "year": 2021,
+      "kg_co2e_per_mwh": 1150.48
+    },
+    {
+      "iso3": "UZB",
+      "country": "Uzbekistan",
+      "year": 2022,
+      "kg_co2e_per_mwh": 1121.35
+    },
+    {
+      "iso3": "UZB",
+      "country": "Uzbekistan",
+      "year": 2023,
+      "kg_co2e_per_mwh": 1113.28
+    },
+    {
+      "iso3": "UZB",
+      "country": "Uzbekistan",
+      "year": 2024,
+      "kg_co2e_per_mwh": 1040.12
+    },
+    {
+      "iso3": "UZB",
+      "country": "Uzbekistan",
+      "year": 2025,
+      "kg_co2e_per_mwh": 1000.0
+    },
+    {
+      "iso3": "VCT",
+      "country": "Saint Vincent and the Grenadines",
+      "year": 2019,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "VCT",
+      "country": "Saint Vincent and the Grenadines",
+      "year": 2020,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "VCT",
+      "country": "Saint Vincent and the Grenadines",
+      "year": 2021,
+      "kg_co2e_per_mwh": 571.43
+    },
+    {
+      "iso3": "VCT",
+      "country": "Saint Vincent and the Grenadines",
+      "year": 2022,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "VCT",
+      "country": "Saint Vincent and the Grenadines",
+      "year": 2023,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "VCT",
+      "country": "Saint Vincent and the Grenadines",
+      "year": 2024,
+      "kg_co2e_per_mwh": 600.0
+    },
+    {
+      "iso3": "VEN",
+      "country": "Venezuela",
+      "year": 2019,
+      "kg_co2e_per_mwh": 320.85
+    },
+    {
+      "iso3": "VEN",
+      "country": "Venezuela",
+      "year": 2020,
+      "kg_co2e_per_mwh": 184.57
+    },
+    {
+      "iso3": "VEN",
+      "country": "Venezuela",
+      "year": 2021,
+      "kg_co2e_per_mwh": 174.24
+    },
+    {
+      "iso3": "VEN",
+      "country": "Venezuela",
+      "year": 2022,
+      "kg_co2e_per_mwh": 180.43
+    },
+    {
+      "iso3": "VEN",
+      "country": "Venezuela",
+      "year": 2023,
+      "kg_co2e_per_mwh": 91.86
+    },
+    {
+      "iso3": "VEN",
+      "country": "Venezuela",
+      "year": 2024,
+      "kg_co2e_per_mwh": 85.86
+    },
+    {
+      "iso3": "VGB",
+      "country": "British Virgin Islands",
+      "year": 2018,
+      "kg_co2e_per_mwh": 687.5
+    },
+    {
+      "iso3": "VGB",
+      "country": "British Virgin Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 687.5
+    },
+    {
+      "iso3": "VGB",
+      "country": "British Virgin Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 687.5
+    },
+    {
+      "iso3": "VGB",
+      "country": "British Virgin Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 647.06
+    },
+    {
+      "iso3": "VGB",
+      "country": "British Virgin Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 647.06
+    },
+    {
+      "iso3": "VGB",
+      "country": "British Virgin Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 647.06
+    },
+    {
+      "iso3": "VIR",
+      "country": "United States Virgin Islands",
+      "year": 2018,
+      "kg_co2e_per_mwh": 645.16
+    },
+    {
+      "iso3": "VIR",
+      "country": "United States Virgin Islands",
+      "year": 2019,
+      "kg_co2e_per_mwh": 651.52
+    },
+    {
+      "iso3": "VIR",
+      "country": "United States Virgin Islands",
+      "year": 2020,
+      "kg_co2e_per_mwh": 640.63
+    },
+    {
+      "iso3": "VIR",
+      "country": "United States Virgin Islands",
+      "year": 2021,
+      "kg_co2e_per_mwh": 636.36
+    },
+    {
+      "iso3": "VIR",
+      "country": "United States Virgin Islands",
+      "year": 2022,
+      "kg_co2e_per_mwh": 632.35
+    },
+    {
+      "iso3": "VIR",
+      "country": "United States Virgin Islands",
+      "year": 2023,
+      "kg_co2e_per_mwh": 632.35
+    },
+    {
+      "iso3": "VNM",
+      "country": "Vietnam",
+      "year": 2020,
+      "kg_co2e_per_mwh": 528.44
+    },
+    {
+      "iso3": "VNM",
+      "country": "Vietnam",
+      "year": 2021,
+      "kg_co2e_per_mwh": 475.06
+    },
+    {
+      "iso3": "VNM",
+      "country": "Vietnam",
+      "year": 2022,
+      "kg_co2e_per_mwh": 415.41
+    },
+    {
+      "iso3": "VNM",
+      "country": "Vietnam",
+      "year": 2023,
+      "kg_co2e_per_mwh": 472.4
+    },
+    {
+      "iso3": "VNM",
+      "country": "Vietnam",
+      "year": 2024,
+      "kg_co2e_per_mwh": 484.32
+    },
+    {
+      "iso3": "VNM",
+      "country": "Vietnam",
+      "year": 2025,
+      "kg_co2e_per_mwh": 460.73
+    },
+    {
+      "iso3": "VUT",
+      "country": "Vanuatu",
+      "year": 2018,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "VUT",
+      "country": "Vanuatu",
+      "year": 2019,
+      "kg_co2e_per_mwh": 444.44
+    },
+    {
+      "iso3": "VUT",
+      "country": "Vanuatu",
+      "year": 2020,
+      "kg_co2e_per_mwh": 444.44
+    },
+    {
+      "iso3": "VUT",
+      "country": "Vanuatu",
+      "year": 2021,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "VUT",
+      "country": "Vanuatu",
+      "year": 2022,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "VUT",
+      "country": "Vanuatu",
+      "year": 2023,
+      "kg_co2e_per_mwh": 500.0
+    },
+    {
+      "iso3": "WORLD",
+      "country": "World",
+      "year": 2020,
+      "kg_co2e_per_mwh": 492.11
+    },
+    {
+      "iso3": "WORLD",
+      "country": "World",
+      "year": 2021,
+      "kg_co2e_per_mwh": 494.81
+    },
+    {
+      "iso3": "WORLD",
+      "country": "World",
+      "year": 2022,
+      "kg_co2e_per_mwh": 489.52
+    },
+    {
+      "iso3": "WORLD",
+      "country": "World",
+      "year": 2023,
+      "kg_co2e_per_mwh": 483.18
+    },
+    {
+      "iso3": "WORLD",
+      "country": "World",
+      "year": 2024,
+      "kg_co2e_per_mwh": 471.08
+    },
+    {
+      "iso3": "WORLD",
+      "country": "World",
+      "year": 2025,
+      "kg_co2e_per_mwh": 458.29
+    },
+    {
+      "iso3": "WSM",
+      "country": "Samoa",
+      "year": 2019,
+      "kg_co2e_per_mwh": 411.77
+    },
+    {
+      "iso3": "WSM",
+      "country": "Samoa",
+      "year": 2020,
+      "kg_co2e_per_mwh": 388.89
+    },
+    {
+      "iso3": "WSM",
+      "country": "Samoa",
+      "year": 2021,
+      "kg_co2e_per_mwh": 352.94
+    },
+    {
+      "iso3": "WSM",
+      "country": "Samoa",
+      "year": 2022,
+      "kg_co2e_per_mwh": 375.0
+    },
+    {
+      "iso3": "WSM",
+      "country": "Samoa",
+      "year": 2023,
+      "kg_co2e_per_mwh": 400.0
+    },
+    {
+      "iso3": "WSM",
+      "country": "Samoa",
+      "year": 2024,
+      "kg_co2e_per_mwh": 375.0
+    },
+    {
+      "iso3": "YEM",
+      "country": "Yemen",
+      "year": 2019,
+      "kg_co2e_per_mwh": 585.37
+    },
+    {
+      "iso3": "YEM",
+      "country": "Yemen",
+      "year": 2020,
+      "kg_co2e_per_mwh": 578.23
+    },
+    {
+      "iso3": "YEM",
+      "country": "Yemen",
+      "year": 2021,
+      "kg_co2e_per_mwh": 589.04
+    },
+    {
+      "iso3": "YEM",
+      "country": "Yemen",
+      "year": 2022,
+      "kg_co2e_per_mwh": 584.16
+    },
+    {
+      "iso3": "YEM",
+      "country": "Yemen",
+      "year": 2023,
+      "kg_co2e_per_mwh": 597.66
+    },
+    {
+      "iso3": "YEM",
+      "country": "Yemen",
+      "year": 2024,
+      "kg_co2e_per_mwh": 592.38
+    },
+    {
+      "iso3": "ZAF",
+      "country": "South Africa",
+      "year": 2020,
+      "kg_co2e_per_mwh": 763.15
+    },
+    {
+      "iso3": "ZAF",
+      "country": "South Africa",
+      "year": 2021,
+      "kg_co2e_per_mwh": 741.51
+    },
+    {
+      "iso3": "ZAF",
+      "country": "South Africa",
+      "year": 2022,
+      "kg_co2e_per_mwh": 729.02
+    },
+    {
+      "iso3": "ZAF",
+      "country": "South Africa",
+      "year": 2023,
+      "kg_co2e_per_mwh": 714.4
+    },
+    {
+      "iso3": "ZAF",
+      "country": "South Africa",
+      "year": 2024,
+      "kg_co2e_per_mwh": 717.36
+    },
+    {
+      "iso3": "ZAF",
+      "country": "South Africa",
+      "year": 2025,
+      "kg_co2e_per_mwh": 699.29
+    },
+    {
+      "iso3": "ZMB",
+      "country": "Zambia",
+      "year": 2019,
+      "kg_co2e_per_mwh": 138.61
+    },
+    {
+      "iso3": "ZMB",
+      "country": "Zambia",
+      "year": 2020,
+      "kg_co2e_per_mwh": 135.26
+    },
+    {
+      "iso3": "ZMB",
+      "country": "Zambia",
+      "year": 2021,
+      "kg_co2e_per_mwh": 86.91
+    },
+    {
+      "iso3": "ZMB",
+      "country": "Zambia",
+      "year": 2022,
+      "kg_co2e_per_mwh": 111.97
+    },
+    {
+      "iso3": "ZMB",
+      "country": "Zambia",
+      "year": 2023,
+      "kg_co2e_per_mwh": 111.0
+    },
+    {
+      "iso3": "ZMB",
+      "country": "Zambia",
+      "year": 2024,
+      "kg_co2e_per_mwh": 119.68
+    },
+    {
+      "iso3": "ZWE",
+      "country": "Zimbabwe",
+      "year": 2019,
+      "kg_co2e_per_mwh": 429.25
+    },
+    {
+      "iso3": "ZWE",
+      "country": "Zimbabwe",
+      "year": 2020,
+      "kg_co2e_per_mwh": 371.09
+    },
+    {
+      "iso3": "ZWE",
+      "country": "Zimbabwe",
+      "year": 2021,
+      "kg_co2e_per_mwh": 269.55
+    },
+    {
+      "iso3": "ZWE",
+      "country": "Zimbabwe",
+      "year": 2022,
+      "kg_co2e_per_mwh": 297.54
+    },
+    {
+      "iso3": "ZWE",
+      "country": "Zimbabwe",
+      "year": 2023,
+      "kg_co2e_per_mwh": 392.39
+    },
+    {
+      "iso3": "ZWE",
+      "country": "Zimbabwe",
+      "year": 2024,
+      "kg_co2e_per_mwh": 384.02
+    }
+  ]
+}

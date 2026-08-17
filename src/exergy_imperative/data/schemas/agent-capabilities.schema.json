@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/agent-capabilities-v1.json",
+  "title": "Exergy Imperative agent capabilities",
+  "type": "object",
+  "required": ["schema_version", "contract", "package", "package_version", "workflows", "schemas"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract": {"const": "exergy-agent-capabilities"},
+    "package": {"const": "exergy-imperative"},
+    "package_version": {"type": "string"},
+    "recipe_modes": {"type": "array", "items": {"type": "string"}},
+    "interfaces": {"type": "object"},
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "input_schema", "output_formats", "supports"]
+      }
+    },
+    "schemas": {"type": "array", "items": {"type": "object"}},
+    "catalog": {"type": "object"},
+    "safety": {"type": "object"}
+  },
+  "additionalProperties": true
+}

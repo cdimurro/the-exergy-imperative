@@ -1,0 +1,119 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "exergy-imperative"
+version = "0.2.0"
+description = "Progressive exergy, emissions, health-screening, and economic analysis with transparent defaults."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "tzdata>=2025.2; platform_system == 'Windows'",
+]
+license = "Apache-2.0"
+license-files = ["LICENSE", "DOCUMENTATION_LICENSE.md", "NOTICE"]
+authors = [
+  { name = "Christopher DiMurro", email = "chrisdimurro@gmail.com" }
+]
+keywords = [
+  "energy",
+  "exergy",
+  "thermodynamics",
+  "second-law efficiency",
+  "industrial energy",
+  "district heating",
+  "greenhouse gas emissions",
+  "industrial decarbonization",
+  "energy economics",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Manufacturing",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/cdimurro/the-exergy-imperative"
+Repository = "https://github.com/cdimurro/the-exergy-imperative"
+Issues = "https://github.com/cdimurro/the-exergy-imperative/issues"
+
+[project.optional-dependencies]
+data = [
+  "pandas>=2.1",
+  "openpyxl>=3.1",
+  "pyarrow>=14.0",
+  "xlrd>=2.0",
+  "pyxlsb>=1.0.10",
+]
+properties = ["CoolProp>=7.0"]
+reports = ["reportlab>=4.0"]
+mcp = ["mcp>=2.0,<3"]
+dev = [
+  "build>=1.2",
+  "CoolProp>=7.0",
+  "openpyxl>=3.1",
+  "pandas>=2.1",
+  "pyarrow>=14.0",
+  "pyxlsb>=1.0.10",
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "jsonschema>=4.23",
+  "reportlab>=4.0",
+  "ruff>=0.12",
+  "twine>=5.0",
+  "xlrd>=2.0",
+]
+all = [
+  "pandas>=2.1",
+  "openpyxl>=3.1",
+  "pyarrow>=14.0",
+  "xlrd>=2.0",
+  "pyxlsb>=1.0.10",
+  "CoolProp>=7.0",
+  "reportlab>=4.0",
+  "mcp>=2.0,<3",
+]
+
+[project.scripts]
+exergy = "exergy_imperative.cli:main"
+exergy-mcp = "exergy_imperative.mcp_server:main"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+exergy_imperative = ["data/*.json", "data/adapters/*.json", "data/schemas/*.json", "py.typed"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["exergy_imperative"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 80
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/technology-economic-result-v1.json",
+  "title": "Exergy Imperative technology economic result",
+  "type": "object",
+  "required": ["schema_version", "scenario", "annual_outputs_mwh", "annual_costs", "cash_flows", "npv", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "scenario": {"type": "object"},
+    "annual_outputs_mwh": {"type": "array", "items": {"type": "number", "minimum": 0}},
+    "annual_costs": {"type": "array", "items": {"type": "number"}},
+    "cash_flows": {"type": "array", "minItems": 2, "items": {"type": "number"}},
+    "npv": {"type": "number"},
+    "levelized_cost_per_mwh": {"type": ["number", "null"]},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

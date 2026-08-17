@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/assessment-result-v1.json",
+  "title": "Exergy Imperative assessment result",
+  "type": "object",
+  "required": ["schema_version", "subject", "tier", "method_id", "registry_version", "parameters", "results"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "subject": {"type": "string"},
+    "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+    "method_id": {"type": "string"},
+    "registry_version": {"type": "string"},
+    "carrier_id": {"type": ["string", "null"]},
+    "normalized": {"type": "boolean"},
+    "parameters": {"type": "object", "additionalProperties": {"$ref": "#/$defs/parameter"}},
+    "results": {"type": "object", "additionalProperties": {"$ref": "#/$defs/estimate"}},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "missing": {"type": "array", "items": {"type": "string"}},
+    "refinements": {"type": "array", "items": {"type": "object"}},
+    "source_catalog": {"type": "object", "additionalProperties": {"type": "object"}}
+  },
+  "$defs": {
+    "parameter": {
+      "type": "object",
+      "required": ["value", "status"],
+      "properties": {
+        "value": {},
+        "unit": {"type": "string"},
+        "status": {"type": "string"},
+        "source_id": {"type": "string"},
+        "source_version": {"type": "string"},
+        "method_id": {"type": "string"},
+        "low": {"type": "number"},
+        "high": {"type": "number"},
+        "confidence": {"type": "string"},
+        "note": {"type": "string"}
+      }
+    },
+    "estimate": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {"type": "number"},
+        "unit": {"type": "string"},
+        "low": {"type": "number"},
+        "high": {"type": "number"},
+        "confidence": {"type": "string"}
+      }
+    }
+  }
+}

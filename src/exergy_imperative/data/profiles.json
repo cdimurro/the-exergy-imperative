@@ -1,0 +1,486 @@
+{
+  "schema_version": "1.0",
+  "data_version": "2026.2",
+  "license": "CC-BY-4.0",
+  "sources": {
+    "exergy-imperative-guide-2026": {
+      "title": "The Exergy Imperative",
+      "url": "https://github.com/cdimurro/the-exergy-imperative",
+      "note": "Equations, benchmarks, and screening conventions documented by Exergy Lab."
+    },
+    "quantity-quality-framework-2026": {
+      "title": "Quantity and Quality standard reporting framework",
+      "url": "https://github.com/cdimurro/quantity-and-quality",
+      "note": "Carrier factors and the 20 C reporting convention."
+    },
+    "petela-1964": {
+      "title": "Exergy of heat radiation",
+      "note": "Petela blackbody-radiation exergy factor."
+    }
+  },
+  "profiles": {
+    "reference": [
+      {
+        "id": "standard-25c",
+        "label": "Standard 25 C reference environment",
+        "aliases": ["standard", "25c"],
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "ambient_temperature_c": {"value": 25.0, "unit": "C", "confidence": "convention"},
+          "ambient_pressure_kpa": {"value": 101.325, "unit": "kPa", "confidence": "convention"}
+        }
+      },
+      {
+        "id": "reporting-20c",
+        "label": "Quantity-and-quality 20 C reporting reference",
+        "aliases": ["20c", "reporting"],
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "ambient_temperature_c": {"value": 20.0, "unit": "C", "low": 15.0, "high": 25.0, "confidence": "screening"},
+          "ambient_pressure_kpa": {"value": 101.325, "unit": "kPa", "confidence": "convention"}
+        }
+      }
+    ],
+    "carrier": [
+      {
+        "id": "electricity",
+        "label": "Delivered electricity",
+        "aliases": ["electric", "grid electricity", "power", "mwh_e"],
+        "family": "work",
+        "basis": "electrical work at delivery boundary",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "low": 1.0, "high": 1.0, "confidence": "exact"}
+        }
+      },
+      {
+        "id": "shaft-work",
+        "label": "Mechanical shaft work",
+        "aliases": ["mechanical work", "work", "shaft"],
+        "family": "work",
+        "basis": "mechanical work at shaft boundary",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "low": 1.0, "high": 1.0, "confidence": "exact"}
+        }
+      },
+      {
+        "id": "solar-radiation",
+        "label": "Incident solar radiation",
+        "aliases": ["solar", "sunlight", "solar resource"],
+        "family": "radiative",
+        "basis": "Petela factor at a 20 C reference",
+        "source_id": "petela-1964",
+        "parameters": {
+          "exergy_factor": {"value": 0.932, "unit": "MWh_ex/MWh", "low": 0.931, "high": 0.934, "confidence": "high"}
+        }
+      },
+      {
+        "id": "natural-gas-hhv",
+        "label": "Natural gas on HHV basis",
+        "aliases": ["natural gas", "gas", "methane", "methane hhv", "ch4 hhv"],
+        "family": "chemical",
+        "basis": "HHV",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 0.93, "unit": "MWh_ex/MWh_HHV", "low": 0.90, "high": 0.96, "confidence": "screening", "note": "Composition-specific values should replace this range for engineering work."}
+        }
+      },
+      {
+        "id": "methane-lhv",
+        "label": "Methane on LHV basis",
+        "aliases": ["natural gas lhv", "gas lhv", "ch4 lhv"],
+        "family": "chemical",
+        "basis": "LHV",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 1.04, "unit": "MWh_ex/MWh_LHV", "low": 1.02, "high": 1.07, "confidence": "screening"}
+        }
+      },
+      {
+        "id": "hydrogen-hhv",
+        "label": "Hydrogen on HHV basis",
+        "aliases": ["hydrogen", "h2", "hydrogen hhv", "h2 hhv"],
+        "family": "chemical",
+        "basis": "HHV",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 0.83, "unit": "MWh_ex/MWh_HHV", "low": 0.82, "high": 0.84, "confidence": "reference"}
+        }
+      },
+      {
+        "id": "hydrogen-lhv",
+        "label": "Hydrogen on LHV basis",
+        "aliases": ["hydrogen lhv", "h2 lhv"],
+        "family": "chemical",
+        "basis": "LHV",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 0.98, "unit": "MWh_ex/MWh_LHV", "low": 0.97, "high": 0.99, "confidence": "reference"}
+        }
+      },
+      {
+        "id": "diesel-lhv",
+        "label": "Diesel on LHV basis",
+        "aliases": ["diesel", "fuel oil"],
+        "family": "chemical",
+        "basis": "LHV",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 1.06, "unit": "MWh_ex/MWh_LHV", "low": 1.03, "high": 1.09, "confidence": "illustrative"}
+        }
+      },
+      {
+        "id": "gasoline-lhv",
+        "label": "Gasoline on LHV basis",
+        "aliases": ["gasoline", "petrol"],
+        "family": "chemical",
+        "basis": "LHV",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 1.07, "unit": "MWh_ex/MWh_LHV", "low": 1.04, "high": 1.10, "confidence": "illustrative"}
+        }
+      },
+      {
+        "id": "coal-lhv",
+        "label": "Coal on LHV basis",
+        "aliases": ["coal"],
+        "family": "chemical",
+        "basis": "LHV",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "exergy_factor": {"value": 1.05, "unit": "MWh_ex/MWh_LHV", "low": 1.00, "high": 1.10, "confidence": "illustrative"}
+        }
+      }
+    ],
+    "service": [
+      {
+        "id": "space-heating",
+        "label": "Building space heating",
+        "aliases": ["heating", "building heating", "room heating"],
+        "family": "thermal",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "source_temperature_c": {"value": 55.0, "unit": "C", "low": 35.0, "high": 80.0, "confidence": "screening"},
+          "return_temperature_c": {"value": 40.0, "unit": "C", "low": 25.0, "high": 60.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 20.0, "unit": "C", "low": 15.0, "high": 25.0, "confidence": "reporting convention"}
+        }
+      },
+      {
+        "id": "domestic-hot-water",
+        "label": "Domestic hot water",
+        "aliases": ["dhw", "hot water"],
+        "family": "thermal",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "source_temperature_c": {"value": 60.0, "unit": "C", "low": 50.0, "high": 70.0, "confidence": "screening"},
+          "return_temperature_c": {"value": 20.0, "unit": "C", "low": 10.0, "high": 30.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 20.0, "unit": "C", "low": 15.0, "high": 25.0, "confidence": "reporting convention"}
+        }
+      },
+      {
+        "id": "district-heating",
+        "label": "District heating delivery",
+        "aliases": ["district heat", "district heating supply"],
+        "family": "thermal",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "source_temperature_c": {"value": 80.0, "unit": "C", "low": 60.0, "high": 110.0, "confidence": "screening"},
+          "return_temperature_c": {"value": 50.0, "unit": "C", "low": 30.0, "high": 70.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 20.0, "unit": "C", "low": 0.0, "high": 25.0, "confidence": "screening"}
+        }
+      },
+      {
+        "id": "low-temperature-process-heat",
+        "label": "Low-temperature process heat",
+        "aliases": ["low process heat", "process heat low", "drying"],
+        "family": "thermal",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "source_temperature_c": {"value": 120.0, "unit": "C", "low": 80.0, "high": 150.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 20.0, "unit": "C", "low": 15.0, "high": 25.0, "confidence": "reporting convention"}
+        }
+      },
+      {
+        "id": "medium-temperature-process-heat",
+        "label": "Medium-temperature process heat",
+        "aliases": ["medium process heat", "process steam", "steam"],
+        "family": "thermal",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "source_temperature_c": {"value": 180.0, "unit": "C", "low": 150.0, "high": 250.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 20.0, "unit": "C", "low": 15.0, "high": 25.0, "confidence": "reporting convention"}
+        }
+      },
+      {
+        "id": "high-temperature-process-heat",
+        "label": "High-temperature process heat",
+        "aliases": ["high process heat", "furnace heat", "kiln heat"],
+        "family": "thermal",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "source_temperature_c": {"value": 500.0, "unit": "C", "low": 250.0, "high": 1000.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 20.0, "unit": "C", "low": 15.0, "high": 25.0, "confidence": "reporting convention"}
+        }
+      },
+      {
+        "id": "chilled-water-cooling",
+        "label": "Chilled-water cooling",
+        "aliases": ["cooling", "chilled water", "air conditioning"],
+        "family": "cooling",
+        "source_id": "quantity-quality-framework-2026",
+        "parameters": {
+          "cold_temperature_c": {"value": 7.0, "unit": "C", "low": 5.0, "high": 12.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 30.0, "unit": "C", "low": 20.0, "high": 40.0, "confidence": "screening"}
+        }
+      },
+      {
+        "id": "cold-storage",
+        "label": "Frozen cold storage",
+        "aliases": ["freezer", "frozen storage", "refrigeration"],
+        "family": "cooling",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "cold_temperature_c": {"value": -18.0, "unit": "C", "low": -25.0, "high": -10.0, "confidence": "screening"},
+          "ambient_temperature_c": {"value": 30.0, "unit": "C", "low": 20.0, "high": 40.0, "confidence": "screening"}
+        }
+      }
+    ],
+    "technology": [
+      {
+        "id": "natural-gas-boiler",
+        "label": "Natural-gas boiler",
+        "aliases": ["gas boiler", "boiler", "condensing boiler"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "space-heating",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.925, "unit": "energy output/energy input", "low": 0.90, "high": 0.95, "confidence": "benchmark"}
+        }
+      },
+      {
+        "id": "electric-resistance-heater",
+        "label": "Electric resistance heater",
+        "aliases": ["resistance heater", "electric heater", "resistive heating"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "space-heating",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.98, "unit": "energy output/energy input", "low": 0.95, "high": 1.00, "confidence": "screening"}
+        }
+      },
+      {
+        "id": "air-source-heat-pump",
+        "label": "Air-source heat pump",
+        "aliases": ["heat pump", "ashp"],
+        "model": "heat-pump",
+        "input_carrier": "electricity",
+        "default_service": "space-heating",
+        "performance_parameter": "cop",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "cop": {"value": 3.0, "unit": "heat output/electricity input", "low": 2.0, "high": 4.5, "confidence": "screening"}
+        }
+      },
+      {
+        "id": "electric-chiller",
+        "label": "Electric chiller",
+        "aliases": ["chiller", "vapor compression chiller"],
+        "model": "chiller",
+        "input_carrier": "electricity",
+        "default_service": "chilled-water-cooling",
+        "performance_parameter": "cop",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "cop": {"value": 4.0, "unit": "cooling output/electricity input", "low": 2.5, "high": 6.0, "confidence": "screening"}
+        }
+      },
+      {
+        "id": "pem-electrolyzer",
+        "label": "PEM electrolyzer",
+        "aliases": ["electrolyzer", "electrolyser", "pem electrolysis"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "hydrogen-lhv",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.675, "unit": "LHV output/electricity input", "low": 0.60, "high": 0.75, "confidence": "benchmark"}
+        }
+      },
+      {
+        "id": "pem-fuel-cell",
+        "label": "PEM fuel cell",
+        "aliases": ["fuel cell", "pemfc"],
+        "model": "converter",
+        "input_carrier": "hydrogen-lhv",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.50, "unit": "electricity output/LHV input", "low": 0.45, "high": 0.55, "confidence": "benchmark"}
+        }
+      },
+      {
+        "id": "lithium-ion-battery",
+        "label": "Lithium-ion battery round trip",
+        "aliases": ["battery", "li-ion battery", "lithium battery"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.925, "unit": "electricity output/electricity input", "low": 0.90, "high": 0.95, "confidence": "benchmark"}
+        }
+      },
+      {
+        "id": "industrial-steam-boiler",
+        "label": "Industrial steam boiler",
+        "aliases": ["steam boiler", "industrial boiler"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "medium-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.82, "unit": "steam energy output/fuel input", "low": 0.70, "high": 0.90, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "industrial-furnace",
+        "label": "Industrial fuel-fired furnace",
+        "aliases": ["process furnace", "fuel furnace"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.55, "unit": "useful heat/fuel input", "low": 0.30, "high": 0.75, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "compressed-air-system",
+        "label": "Compressed-air system",
+        "aliases": ["compressed air", "air compressor system"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.15, "unit": "delivered pneumatic exergy/electricity input", "low": 0.08, "high": 0.25, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "industrial-refrigeration-system",
+        "label": "Industrial refrigeration system",
+        "aliases": ["industrial refrigeration", "cold storage refrigeration"],
+        "model": "chiller",
+        "input_carrier": "electricity",
+        "default_service": "cold-storage",
+        "performance_parameter": "cop",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "cop": {"value": 2.5, "unit": "cooling output/electricity input", "low": 1.5, "high": 4.0, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "industrial-dryer",
+        "label": "Industrial thermal dryer",
+        "aliases": ["dryer", "drying system"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "low-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.55, "unit": "useful drying heat/fuel input", "low": 0.30, "high": 0.75, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "reverse-osmosis-system",
+        "label": "Reverse-osmosis desalination system",
+        "aliases": ["reverse osmosis", "ro desalination", "desalination"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.25, "unit": "minimum separation exergy/electricity input", "low": 0.10, "high": 0.50, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "data-center-power-chain",
+        "label": "Data-center power chain",
+        "aliases": ["data center", "data centre", "data center power"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.667, "unit": "IT electricity/facility electricity", "low": 0.40, "high": 0.833, "confidence": "screening prior; inverse of PUE"}
+        }
+      },
+      {
+        "id": "cement-kiln-thermal-system",
+        "label": "Cement-kiln thermal system",
+        "aliases": ["cement kiln", "cement process heat"],
+        "model": "converter",
+        "input_carrier": "coal-lhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.45, "unit": "useful process heat/fuel input", "low": 0.25, "high": 0.65, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "steel-reheat-furnace",
+        "label": "Steel reheat furnace",
+        "aliases": ["steel furnace", "reheat furnace"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.50, "unit": "useful product heat/fuel input", "low": 0.30, "high": 0.70, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "food-process-heater",
+        "label": "Food-process thermal system",
+        "aliases": ["food process heating", "food thermal process"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "low-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.65, "unit": "useful process heat/fuel input", "low": 0.40, "high": 0.85, "confidence": "screening prior"}
+        }
+      },
+      {
+        "id": "district-heating-plant",
+        "label": "District-heating generation plant",
+        "aliases": ["district heating plant", "district heat boiler"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "district-heating",
+        "performance_parameter": "efficiency",
+        "source_id": "exergy-imperative-guide-2026",
+        "parameters": {
+          "efficiency": {"value": 0.85, "unit": "network heat/fuel input", "low": 0.70, "high": 0.95, "confidence": "screening prior"}
+        }
+      }
+    ]
+  }
+}

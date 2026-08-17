@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/engineering-result-v1.json",
+  "title": "Exergy Imperative engineering model result",
+  "type": "object",
+  "required": ["schema_version", "model_id", "name", "energy", "exergy", "metrics", "assumptions", "sources", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "model_id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "energy": {
+      "type": "object",
+      "required": ["input_mwh", "useful_mwh", "efficiency", "recoverable_mwh"],
+      "additionalProperties": {"type": "number"}
+    },
+    "exergy": {
+      "type": "object",
+      "required": ["input_mwh", "useful_mwh", "destroyed_or_lost_mwh", "efficiency"],
+      "additionalProperties": {"type": "number"}
+    },
+    "metrics": {"type": "object"},
+    "assumptions": {"type": "object"},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
