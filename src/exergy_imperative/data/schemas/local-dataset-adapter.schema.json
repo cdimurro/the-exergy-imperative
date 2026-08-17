@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/local-dataset-adapter-v1.json",
+  "title": "Exergy Imperative local dataset adapter",
+  "type": "object",
+  "required": ["schema_version", "id", "source_name", "license_notice", "fields"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "minLength": 1},
+    "source_name": {"type": "string", "minLength": 1},
+    "source_url": {"type": ["string", "null"]},
+    "license_notice": {"type": "string", "minLength": 1},
+    "sheet_name": {"type": ["string", "integer"]},
+    "header_row": {"type": "integer", "minimum": 1},
+    "layout": {"enum": ["records", "wide-years"]},
+    "id_columns": {"type": "array", "items": {"type": "string"}},
+    "year_column_pattern": {"type": "string"},
+    "year_field": {"type": "string"},
+    "value_field": {"type": "string"},
+    "filters": {"type": "object"},
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target"],
+        "properties": {
+          "target": {"type": "string", "minLength": 1},
+          "source": {"type": "string"},
+          "multiplier": {"type": "number"},
+          "unit": {"type": ["string", "null"]},
+          "data_type": {"enum": ["number", "integer", "boolean", "json", "string", null]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "defaults": {"type": "object"},
+    "required": {"type": "array", "items": {"type": "string"}},
+    "preserve_unmapped": {"type": "boolean"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

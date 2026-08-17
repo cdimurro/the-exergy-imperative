@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/environmental-result-v1.json",
+  "title": "Exergy Imperative environmental screening result",
+  "type": "object",
+  "required": ["schema_version", "energy", "normalized", "factor_version", "climate", "pollutants", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "energy": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {"type": "number", "minimum": 0},
+        "unit": {"const": "MWh"}
+      }
+    },
+    "normalized": {"type": "boolean"},
+    "carrier": {"type": ["string", "null"]},
+    "geography": {"type": ["string", "null"]},
+    "factor_version": {"type": "string"},
+    "gases_kg": {"type": "object", "additionalProperties": {"type": "number", "minimum": 0}},
+    "climate": {
+      "type": "object",
+      "required": ["co2e20_kg", "co2e100_kg", "contributions"],
+      "properties": {
+        "co2e20_kg": {"type": "number", "minimum": 0},
+        "co2e100_kg": {"type": "number", "minimum": 0},
+        "warming_horizon_gap_kg_co2e": {"type": "number"},
+        "warming_horizon_ratio": {"type": ["number", "null"]},
+        "aggregate_grid_co2e_kg": {"type": "number", "minimum": 0},
+        "contributions": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "pollutants": {"type": "array", "items": {"type": "object"}},
+    "health_externality_currency": {"type": ["string", "null"]},
+    "assumptions": {"type": "object"},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "source_catalog": {"type": "object", "additionalProperties": {"type": "object"}},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

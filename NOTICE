@@ -1,0 +1,36 @@
+The Exergy Imperative
+Copyright 2026 Exergy Lab
+
+The explanatory guide and bundled reference profiles are available under
+CC BY 4.0 as described in DOCUMENTATION_LICENSE.md.
+
+Some carrier conventions and interoperability patterns are derived from the
+MIT-licensed Quantity and Quality project by Christopher DiMurro:
+https://github.com/cdimurro/quantity-and-quality
+
+XAI4Heat is referenced as an external CC BY 4.0 dataset and is not bundled in
+this distribution:
+https://data.mendeley.com/datasets/2mwc6x6kwb/1
+
+The bundled country electricity-intensity history is derived from the Our
+World in Data Energy dataset's publication of Ember Yearly Electricity Data.
+Retain attribution to both Ember and Our World in Data. Ember data is provided
+under CC BY 4.0:
+https://ember-energy.org/data/yearly-electricity-data/
+https://github.com/owid/energy-data
+
+Greenhouse-gas warming potentials and Tier 1 combustion factors reproduce
+numerical reference values from IPCC assessment and inventory materials.
+Health-screening descriptions are concise adaptations of public US EPA and
+European Environment Agency materials. Source URLs and version identifiers
+are retained in the packaged factor registry.
+
+Industrial steam, compressed-air, process-heating, and waste-heat screening
+methods cite public US Department of Energy sourcebooks. The bundled radiative
+reference case cites Petela (2003), "Exergy of undiluted thermal radiation,"
+doi:10.1016/S0038-092X(03)00226-3.
+
+Example local-file adapters name Energy Institute and IEA workbooks solely to
+describe user-controlled field mappings. They contain no publisher data and do
+not grant any right to download, transform, redistribute, or publish derived
+data. Users must comply with the terms applicable to their own copies.

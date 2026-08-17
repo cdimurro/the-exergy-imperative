@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "id": "iea-ghg-energy-highlights-long-v1",
+  "source_name": "IEA Greenhouse Gas Emissions from Energy - Highlights",
+  "source_url": "https://www.iea.org/data-and-statistics/data-product/greenhouse-gas-emissions-from-energy-highlights",
+  "license_notice": "Use only with a workbook you downloaded under terms that permit your intended analysis. IEA content and data are not distributed with this adapter; consult the workbook notice and IEA terms before creating or sharing derived results.",
+  "sheet_name": "GHG Energy",
+  "header_row": 4,
+  "layout": "wide-years",
+  "id_columns": ["million tonnes of CO2 eq"],
+  "year_field": "year",
+  "value_field": "value",
+  "fields": [
+    {"source": "million tonnes of CO2 eq", "target": "location", "data_type": "string"},
+    {"source": "year", "target": "year", "data_type": "integer"},
+    {"source": "value", "target": "ghg_energy_mt_co2e", "data_type": "number"}
+  ],
+  "defaults": {"unit": "million tonnes CO2e"},
+  "required": ["location", "year", "ghg_energy_mt_co2e"],
+  "preserve_unmapped": false,
+  "notes": "Converts the GHG Energy sheet from wide years to long records. Use missing_policy='drop' to omit publisher missing-value markers."
+}

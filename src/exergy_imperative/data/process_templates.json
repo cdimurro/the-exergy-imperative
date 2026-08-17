@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "data_version": "2026.1",
+  "license": "CC-BY-4.0",
+  "source_id": "exergy-imperative-guide-2026",
+  "templates": [
+    {
+      "id": "steam-system",
+      "label": "Industrial steam system",
+      "aliases": ["steam", "steam boiler"],
+      "sector": "cross-industry",
+      "technology": "industrial-steam-boiler",
+      "description": "Fuel-to-steam generation screen; add condensate return and steam-state data for engineering fidelity.",
+      "screening_savings_fraction": {"value": 0.10, "low": 0.03, "high": 0.20},
+      "major_pollutants": ["CO2", "CH4", "N2O", "NOx", "SO2", "PM2.5", "CO"],
+      "priority_inputs": ["steam pressure and temperature", "feedwater temperature", "stack oxygen and temperature", "blowdown", "condensate return"]
+    },
+    {
+      "id": "industrial-furnace",
+      "label": "Industrial furnace",
+      "aliases": ["furnace", "process furnace"],
+      "sector": "cross-industry",
+      "technology": "industrial-furnace",
+      "description": "High-temperature process-heat screen emphasizing heat-quality matching and stack losses.",
+      "screening_savings_fraction": {"value": 0.15, "low": 0.05, "high": 0.30},
+      "major_pollutants": ["CO2", "CH4", "N2O", "NOx", "CO"],
+      "priority_inputs": ["product temperature", "exhaust temperature", "excess oxygen", "burner controls", "throughput"]
+    },
+    {
+      "id": "compressed-air",
+      "label": "Compressed-air system",
+      "aliases": ["air compressor", "compressed air"],
+      "sector": "cross-industry",
+      "technology": "compressed-air-system",
+      "description": "Electricity-to-pneumatic-exergy screen for leaks, pressure mismatch, controls, and inappropriate end uses.",
+      "screening_savings_fraction": {"value": 0.20, "low": 0.05, "high": 0.35},
+      "major_pollutants": ["grid lifecycle GHG and upstream air pollutants"],
+      "priority_inputs": ["compressor power", "flow", "header pressure", "pressure at use", "leak survey", "load profile"]
+    },
+    {
+      "id": "industrial-refrigeration",
+      "label": "Industrial refrigeration and cold storage",
+      "aliases": ["refrigeration", "cold storage"],
+      "sector": "food, beverage, chemical, warehousing",
+      "technology": "industrial-refrigeration-system",
+      "description": "Cooling exergy, electricity, and refrigerant-leakage screen.",
+      "screening_savings_fraction": {"value": 0.15, "low": 0.05, "high": 0.30},
+      "major_pollutants": ["grid lifecycle GHG", "refrigerant greenhouse gases"],
+      "priority_inputs": ["refrigerant and charge", "annual leakage", "evaporating temperature", "condensing temperature", "compressor power", "cooling load"]
+    },
+    {
+      "id": "industrial-drying",
+      "label": "Industrial drying system",
+      "aliases": ["dryer", "drying"],
+      "sector": "food, paper, minerals, chemicals",
+      "technology": "industrial-dryer",
+      "description": "Low-temperature heat-quality and moisture-removal screen.",
+      "screening_savings_fraction": {"value": 0.15, "low": 0.05, "high": 0.30},
+      "major_pollutants": ["CO2", "CH4", "N2O", "NOx", "CO"],
+      "priority_inputs": ["inlet and outlet moisture", "airflow", "inlet and exhaust temperatures", "humidity", "recirculation", "throughput"]
+    },
+    {
+      "id": "desalination",
+      "label": "Reverse-osmosis desalination",
+      "aliases": ["reverse osmosis", "ro"],
+      "sector": "water",
+      "technology": "reverse-osmosis-system",
+      "description": "Electricity-to-minimum-separation-exergy screen; salinity and recovery ratio are the highest-value refinements.",
+      "screening_savings_fraction": {"value": 0.10, "low": 0.03, "high": 0.20},
+      "major_pollutants": ["grid lifecycle GHG and upstream air pollutants"],
+      "priority_inputs": ["feed and product salinity", "recovery ratio", "specific electricity consumption", "pressure", "energy-recovery efficiency"]
+    },
+    {
+      "id": "hydrogen-electrolysis",
+      "label": "Hydrogen electrolysis",
+      "aliases": ["electrolyzer", "electrolysis"],
+      "sector": "hydrogen and chemicals",
+      "technology": "pem-electrolyzer",
+      "description": "Electricity-to-hydrogen chemical-exergy screen with country-specific grid emissions.",
+      "screening_savings_fraction": {"value": 0.08, "low": 0.02, "high": 0.15},
+      "major_pollutants": ["grid lifecycle GHG and upstream air pollutants"],
+      "priority_inputs": ["stack electricity", "balance-of-plant electricity", "hydrogen production", "HHV or LHV basis", "compression energy", "hourly electricity source"]
+    },
+    {
+      "id": "data-center",
+      "label": "Data-center power chain",
+      "aliases": ["data centre", "data center"],
+      "sector": "digital infrastructure",
+      "technology": "data-center-power-chain",
+      "description": "Facility-electricity-to-IT-electricity screen; workload value is outside the thermodynamic boundary.",
+      "screening_savings_fraction": {"value": 0.12, "low": 0.03, "high": 0.25},
+      "major_pollutants": ["grid lifecycle GHG and upstream air pollutants", "backup-generator pollutants", "refrigerant greenhouse gases"],
+      "priority_inputs": ["PUE time series", "IT power", "cooling power", "ambient wet-bulb temperature", "backup fuel", "refrigerant leakage"]
+    },
+    {
+      "id": "cement",
+      "label": "Cement-kiln thermal system",
+      "aliases": ["cement kiln", "cement"],
+      "sector": "cement",
+      "technology": "cement-kiln-thermal-system",
+      "description": "Fuel and high-temperature heat screen; process calcination CO2 must be supplied separately.",
+      "screening_savings_fraction": {"value": 0.10, "low": 0.03, "high": 0.20},
+      "major_pollutants": ["combustion and calcination CO2", "NOx", "SO2", "PM2.5", "CO"],
+      "priority_inputs": ["clinker production", "fuel mix", "calcination emissions", "kiln exhaust", "bypass losses", "alternative-fuel composition"]
+    },
+    {
+      "id": "steel-reheating",
+      "label": "Steel reheat furnace",
+      "aliases": ["reheat furnace", "steel furnace"],
+      "sector": "iron and steel",
+      "technology": "steel-reheat-furnace",
+      "description": "High-temperature product-heating and combustion screen.",
+      "screening_savings_fraction": {"value": 0.12, "low": 0.04, "high": 0.25},
+      "major_pollutants": ["CO2", "NOx", "CO", "PM2.5"],
+      "priority_inputs": ["steel throughput and temperatures", "fuel flow", "flue temperature", "oxygen", "scale loss", "recuperator performance"]
+    },
+    {
+      "id": "food-processing",
+      "label": "Food-process thermal system",
+      "aliases": ["food processing", "food thermal"],
+      "sector": "food and beverage",
+      "technology": "food-process-heater",
+      "description": "Low-temperature process-heat screen suitable for cooking, washing, evaporation, and cleaning utilities.",
+      "screening_savings_fraction": {"value": 0.15, "low": 0.05, "high": 0.30},
+      "major_pollutants": ["CO2", "CH4", "N2O", "NOx", "CO"],
+      "priority_inputs": ["process temperature", "batch or throughput data", "hot-water return", "steam condensate", "cleaning schedule", "waste-heat availability"]
+    },
+    {
+      "id": "district-energy",
+      "label": "District-heating system",
+      "aliases": ["district heating", "district energy"],
+      "sector": "district energy",
+      "technology": "district-heating-plant",
+      "description": "Generation and delivery quality screen with supply/return temperatures and ambient reference.",
+      "screening_savings_fraction": {"value": 0.12, "low": 0.04, "high": 0.25},
+      "major_pollutants": ["CO2", "CH4", "N2O", "NOx", "SO2", "PM2.5", "CO"],
+      "priority_inputs": ["plant fuel and heat output", "network supply and return temperatures", "pumping electricity", "heat losses", "ambient temperature"]
+    }
+  ]
+}

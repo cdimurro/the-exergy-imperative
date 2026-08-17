@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/methane-project-result-v1.json",
+  "title": "Exergy Imperative methane project result",
+  "type": "object",
+  "required": ["schema_version", "annual_methane_available_kg", "baseline", "project", "avoided", "assumptions", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "annual_methane_available_kg": {"type": "number", "minimum": 0},
+    "baseline": {"type": "object"},
+    "project": {"type": "object"},
+    "avoided": {
+      "type": "object",
+      "required": ["co2e20_kg", "co2e100_kg"],
+      "properties": {
+        "co2e20_kg": {"type": "number"},
+        "co2e100_kg": {"type": "number"}
+      },
+      "additionalProperties": true
+    },
+    "economics": {"type": ["object", "null"]},
+    "assumptions": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

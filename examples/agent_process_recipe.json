@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "workflow": "process-assessment",
+  "inputs": {
+    "template": "steam",
+    "energy": 10000,
+    "unit": "MWh",
+    "country": "USA",
+    "year": 2025,
+    "annualization_factor": 1.0,
+    "assessment_options": {
+      "efficiency": 0.88,
+      "source_temperature": "180 C",
+      "return_temperature": "90 C",
+      "ambient_temperature": "20 C"
+    },
+    "economics_options": {
+      "capital_cost": 300000,
+      "energy_price_per_mwh": 42,
+      "carbon_price_per_tonne": 50,
+      "project_life_years": 15,
+      "discount_rate": 0.07,
+      "currency": "USD"
+    }
+  },
+  "outputs": {
+    "html": "output/agent-steam-report.html",
+    "xlsx": "output/agent-steam-report.xlsx",
+    "json": "output/agent-steam-result.json"
+  }
+}

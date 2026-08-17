@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/agent-response-v1.json",
+  "title": "Exergy Imperative agent response",
+  "type": "object",
+  "required": ["schema_version", "contract", "ok"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract": {"const": "exergy-agent-response"},
+    "ok": {"type": "boolean"},
+    "workflow": {"type": "string"},
+    "mode": {"enum": ["execute", "dry-run", "validate-only"]},
+    "command": {"type": "string"},
+    "result": {},
+    "plan": {"type": "object"},
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["format", "path"],
+        "properties": {
+          "format": {"type": "string"},
+          "path": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "error": {
+      "type": "object",
+      "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": {"type": "string"},
+        "message": {"type": "string"},
+        "retryable": {"type": "boolean"},
+        "suggested_fields": {"type": "array", "items": {"type": "string"}},
+        "hint": {"type": "string"},
+        "details": {"type": "object"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"ok": {"const": true}}},
+      "then": {"required": ["workflow", "mode", "artifacts"]}
+    },
+    {
+      "if": {"properties": {"ok": {"const": false}}},
+      "then": {"required": ["error"]}
+    }
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,31 @@
+{
+  "data_version": "example-site-1",
+  "sources": {
+    "example-site-metering": {
+      "title": "Example site commissioning record"
+    }
+  },
+  "profiles": {
+    "technology": [
+      {
+        "id": "site-boiler-a",
+        "label": "Site boiler A",
+        "aliases": ["boiler a"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "space-heating",
+        "performance_parameter": "efficiency",
+        "source_id": "example-site-metering",
+        "parameters": {
+          "efficiency": {
+            "value": 0.91,
+            "unit": "energy output/energy input",
+            "low": 0.90,
+            "high": 0.92,
+            "confidence": "measured campaign"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+name: Bug report
+description: Report an incorrect calculation, interface problem, or regression.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Include code or CLI input with sensitive data removed.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: exergy-imperative 0.2.0, Python 3.13, Windows 11
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Units, boundary, and source assumptions
+      description: Include the declared reference state and relevant factor versions.

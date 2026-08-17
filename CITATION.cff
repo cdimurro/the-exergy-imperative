@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+title: "The Exergy Imperative"
+type: software
+authors:
+  - family-names: "DiMurro"
+    given-names: "Christopher"
+version: 0.2.0
+date-released: 2026-08-15
+url: "https://github.com/cdimurro/the-exergy-imperative"
+license: Apache-2.0

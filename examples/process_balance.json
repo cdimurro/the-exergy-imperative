@@ -1,0 +1,14 @@
+{
+  "name": "Illustrative heating plant",
+  "unit": "MWh_ex",
+  "inputs": [
+    {"name": "natural gas", "exergy": 930.0}
+  ],
+  "products": [
+    {"name": "useful heat", "exergy": 75.0}
+  ],
+  "losses": [
+    {"name": "stack", "exergy": 40.0},
+    {"name": "jacket and surroundings", "exergy": 15.0}
+  ]
+}

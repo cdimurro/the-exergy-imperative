@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "data_version": "2026.2",
+  "license": "Mixed public reference data; see each source",
+  "sources": {
+    "ipcc-ar6-wgi-2021": {
+      "title": "IPCC AR6 Working Group I, Chapter 7 and Supplementary Material",
+      "url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/",
+      "note": "20-year and 100-year global warming potentials including carbon-cycle responses."
+    },
+    "ipcc-2006-stationary-combustion": {
+      "title": "2006 IPCC Guidelines, Volume 2, Chapter 2: Stationary Combustion",
+      "url": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf",
+      "note": "Tier 1 default factors on a net-calorific-value basis."
+    },
+    "epa-ghg-factors-2025": {
+      "title": "US EPA GHG Emission Factors Hub 2025",
+      "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf",
+      "note": "Stationary-combustion factors on an HHV basis."
+    },
+    "epa-ap42-natural-gas": {
+      "title": "US EPA AP-42 Section 1.4 Natural Gas Combustion",
+      "url": "https://www.epa.gov/air-emissions-factors-and-quantification/ap-42-fifth-edition-volume-i-chapter-1-external-0",
+      "note": "Screening factors for commercial boilers; actual controls and operation can materially change emissions."
+    },
+    "epa-criteria-pollutants": {
+      "title": "US EPA Criteria Air Pollutants",
+      "url": "https://www.epa.gov/criteria-air-pollutants",
+      "note": "Qualitative health and environmental screening statements, not exposure-response calculations."
+    },
+    "eea-emep-2023": {
+      "title": "EMEP/EEA Air Pollutant Emission Inventory Guidebook 2023",
+      "url": "https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023",
+      "note": "Inventory methodology and reminder that pollutant factors are technology and control specific."
+    }
+  },
+  "gwp_sets": {
+    "AR6": {
+      "source_id": "ipcc-ar6-wgi-2021",
+      "gases": {
+        "CO2": {"name": "Carbon dioxide", "aliases": ["carbon dioxide"], "gwp20": 1.0, "gwp100": 1.0},
+        "CH4-fossil": {"name": "Fossil methane", "aliases": ["fossil methane", "methane fossil"], "gwp20": 82.5, "gwp100": 29.8},
+        "CH4-biogenic": {"name": "Non-fossil methane", "aliases": ["biogenic methane", "non-fossil methane", "CH4"], "gwp20": 79.7, "gwp100": 27.0},
+        "N2O": {"name": "Nitrous oxide", "aliases": ["nitrous oxide"], "gwp20": 273.0, "gwp100": 273.0},
+        "HFC-32": {"name": "HFC-32 / R-32", "aliases": ["HFC32", "R32", "R-32"], "gwp20": 2693.0, "gwp100": 771.0},
+        "HFC-134a": {"name": "HFC-134a / R-134a", "aliases": ["HFC134a", "R134a", "R-134a"], "gwp20": 4144.0, "gwp100": 1526.0},
+        "CF4": {"name": "Tetrafluoromethane / PFC-14", "aliases": ["PFC-14", "PFC14"], "gwp20": 5301.0, "gwp100": 7380.0},
+        "CFC-11": {"name": "CFC-11", "aliases": ["CFC11", "R11", "R-11"], "gwp20": 8321.0, "gwp100": 6226.0}
+      }
+    }
+  },
+  "fuel_combustion": {
+    "natural-gas-hhv": {
+      "label": "Pipeline natural gas, HHV",
+      "aliases": ["natural gas", "gas", "natural-gas-hhv"],
+      "basis": "HHV",
+      "source_id": "epa-ghg-factors-2025",
+      "gases_kg_per_mwh": {"CO2": 181.048235, "CH4-fossil": 0.003412, "N2O": 0.000341},
+      "pollutants_kg_per_mwh": {
+        "SO2": {"value": 0.000929, "low": 0.000929, "high": 0.000929},
+        "NOx": {"value": 0.090542, "low": 0.026311, "high": 0.154772},
+        "CO": {"value": 0.027859, "low": 0.023216, "high": 0.032502},
+        "PM2.5": {"value": 0.011763, "low": 0.005882, "high": 0.023525},
+        "VOC": {"value": 0.008512, "low": 0.004256, "high": 0.017025}
+      },
+      "pollutant_source_id": "epa-ap42-natural-gas",
+      "note": "Pollutant values are screening estimates for commercial boilers; use measured or permit-specific factors when available."
+    },
+    "methane-lhv": {
+      "label": "Natural gas / methane, LHV",
+      "aliases": ["natural gas lhv", "gas lhv", "methane-lhv"],
+      "basis": "LHV",
+      "source_id": "ipcc-2006-stationary-combustion",
+      "gases_kg_per_mwh": {"CO2": 201.96, "CH4-fossil": 0.0036, "N2O": 0.00036}
+    },
+    "diesel-lhv": {
+      "label": "Gas/diesel oil, LHV",
+      "aliases": ["diesel", "fuel oil", "diesel-lhv"],
+      "basis": "LHV",
+      "source_id": "ipcc-2006-stationary-combustion",
+      "gases_kg_per_mwh": {"CO2": 266.76, "CH4-fossil": 0.0108, "N2O": 0.00216}
+    },
+    "gasoline-lhv": {
+      "label": "Motor gasoline, LHV",
+      "aliases": ["gasoline", "petrol", "gasoline-lhv"],
+      "basis": "LHV",
+      "source_id": "ipcc-2006-stationary-combustion",
+      "gases_kg_per_mwh": {"CO2": 249.48, "CH4-fossil": 0.0108, "N2O": 0.00216}
+    },
+    "coal-lhv": {
+      "label": "Coking coal, LHV screening default",
+      "aliases": ["coal", "coking coal", "coal-lhv"],
+      "basis": "LHV",
+      "source_id": "ipcc-2006-stationary-combustion",
+      "gases_kg_per_mwh": {"CO2": 340.56, "CH4-fossil": 0.0036, "N2O": 0.0054},
+      "note": "Coal composition varies widely; replace this factor for engineering or reporting work."
+    },
+    "lpg-lhv": {
+      "label": "Liquefied petroleum gas, LHV",
+      "aliases": ["lpg", "propane", "lpg-lhv"],
+      "basis": "LHV",
+      "source_id": "ipcc-2006-stationary-combustion",
+      "gases_kg_per_mwh": {"CO2": 227.16, "CH4-fossil": 0.0036, "N2O": 0.00036}
+    },
+    "hydrogen": {
+      "label": "Hydrogen at point of use",
+      "aliases": ["hydrogen", "hydrogen-hhv", "hydrogen-lhv", "h2"],
+      "basis": "point of use only",
+      "source_id": "ipcc-2006-stationary-combustion",
+      "gases_kg_per_mwh": {},
+      "note": "Zero point-of-use CO2 is not zero lifecycle emissions; model production electricity or fuel separately."
+    }
+  },
+  "pollutant_health": {
+    "SO2": {
+      "name": "Sulfur dioxide",
+      "aliases": ["sulphur dioxide", "SOx"],
+      "category": "criteria air pollutant and secondary-particle precursor",
+      "health_effects": ["Can irritate the respiratory system and worsen breathing symptoms, particularly for people with asthma."],
+      "sensitive_groups": ["people with asthma", "children", "older adults"],
+      "secondary_effects": ["forms sulfate particulate matter", "contributes to acid deposition"],
+      "source_id": "epa-criteria-pollutants"
+    },
+    "NOx": {
+      "name": "Nitrogen oxides",
+      "aliases": ["NO2", "nitrogen dioxide", "nitrogen oxides"],
+      "category": "criteria-pollutant family and ozone/particle precursor",
+      "health_effects": ["Elevated nitrogen dioxide exposure can irritate airways, aggravate asthma, and increase susceptibility to respiratory infections."],
+      "sensitive_groups": ["people with asthma", "children", "older adults"],
+      "secondary_effects": ["forms ground-level ozone", "forms nitrate particulate matter", "contributes to acid deposition and nutrient pollution"],
+      "source_id": "epa-criteria-pollutants"
+    },
+    "PM2.5": {
+      "name": "Fine particulate matter",
+      "aliases": ["PM 2.5", "fine particles", "particulates"],
+      "category": "criteria air pollutant",
+      "health_effects": ["Fine particles can penetrate deep into the lungs and some can enter the bloodstream, affecting respiratory and cardiovascular health."],
+      "sensitive_groups": ["people with heart or lung disease", "children", "older adults"],
+      "secondary_effects": ["reduces visibility"],
+      "source_id": "epa-criteria-pollutants"
+    },
+    "PM10": {
+      "name": "Inhalable particulate matter",
+      "aliases": ["PM 10", "coarse particles"],
+      "category": "criteria air pollutant",
+      "health_effects": ["Inhalable particles can enter the respiratory tract and aggravate respiratory conditions."],
+      "sensitive_groups": ["people with respiratory disease", "children", "older adults"],
+      "secondary_effects": ["reduces visibility"],
+      "source_id": "epa-criteria-pollutants"
+    },
+    "CO": {
+      "name": "Carbon monoxide",
+      "aliases": ["carbon monoxide"],
+      "category": "criteria air pollutant and acute combustion hazard",
+      "health_effects": ["Carbon monoxide interferes with oxygen delivery; high exposure can cause headache, dizziness, weakness, nausea, confusion, and potentially death."],
+      "sensitive_groups": ["people with heart disease", "fetuses and infants", "older adults", "people with anemia or respiratory disease"],
+      "secondary_effects": [],
+      "source_id": "epa-criteria-pollutants"
+    },
+    "VOC": {
+      "name": "Volatile organic compounds",
+      "aliases": ["NMVOC", "non-methane volatile organic compounds"],
+      "category": "ozone precursor; toxicity is compound specific",
+      "health_effects": ["Health effects cannot be inferred from total VOC mass because toxicity varies substantially by chemical species."],
+      "sensitive_groups": [],
+      "secondary_effects": ["contributes to ground-level ozone formation"],
+      "source_id": "eea-emep-2023"
+    },
+    "NH3": {
+      "name": "Ammonia",
+      "aliases": ["ammonia"],
+      "category": "air pollutant and secondary-particle precursor",
+      "health_effects": ["Ammonia is irritating at elevated concentrations; an emission total alone does not determine exposure."],
+      "sensitive_groups": [],
+      "secondary_effects": ["forms ammonium particulate matter", "contributes to eutrophication and acidification"],
+      "source_id": "eea-emep-2023"
+    }
+  }
+}

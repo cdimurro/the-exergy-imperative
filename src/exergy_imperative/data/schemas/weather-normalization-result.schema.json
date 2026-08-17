@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/weather-normalization-result-v1.json",
+  "title": "Exergy Imperative weather-normalization result",
+  "type": "object",
+  "required": ["schema_version", "metric", "unit", "observations", "actual_total", "normalized_total", "model", "degree_days", "assumptions", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "metric": {"type": "string", "minLength": 1},
+    "unit": {"type": "string"},
+    "observations": {"type": "integer", "minimum": 2},
+    "actual_total": {"type": "number"},
+    "normalized_total": {"type": "number"},
+    "weather_adjustment": {"type": "number"},
+    "model": {"type": "object"},
+    "degree_days": {"type": "object"},
+    "assumptions": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

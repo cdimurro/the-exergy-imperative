@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/process-assessment-v1.json",
+  "title": "Exergy Imperative integrated process assessment",
+  "type": "object",
+  "required": ["schema_version", "normalized", "template", "assessment", "environmental", "opportunity", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "normalized": {"type": "boolean"},
+    "template": {"type": "object", "required": ["id", "label", "technology"]},
+    "assessment": {"type": "object"},
+    "environmental": {"type": "object"},
+    "opportunity": {"type": "object"},
+    "economics": {"type": ["object", "null"]},
+    "annualization_factor": {"type": ["number", "null"], "exclusiveMinimum": 0},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/ghg-boundary-result-v1.json",
+  "title": "Exergy Imperative greenhouse-gas boundary result",
+  "type": "object",
+  "required": ["schema_version", "boundaries", "totals", "sources", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "boundaries": {"type": "array", "items": {"type": "object"}},
+    "totals": {
+      "type": "object",
+      "required": ["co2e20_kg", "co2e100_kg", "warming_horizon_gap_kg_co2e"],
+      "properties": {
+        "co2e20_kg": {"type": "number"},
+        "co2e100_kg": {"type": "number"},
+        "warming_horizon_gap_kg_co2e": {"type": "number"}
+      },
+      "additionalProperties": true
+    },
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "source_catalog": {"type": "object", "additionalProperties": {"type": "object"}},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
