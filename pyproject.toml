@@ -14,7 +14,7 @@ dependencies = [
 license = "Apache-2.0"
 license-files = ["LICENSE", "DOCUMENTATION_LICENSE.md", "NOTICE"]
 authors = [
-  { name = "Christopher DiMurro", email = "chrisdimurro@gmail.com" }
+  { name = "Exergy Lab" }
 ]
 keywords = [
   "energy",
