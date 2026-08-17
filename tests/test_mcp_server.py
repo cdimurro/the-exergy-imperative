@@ -28,6 +28,7 @@ async def test_mcp_server_discovers_and_calls_structured_tools():
             "normalize_dataset",
             "generate_report",
             "list_profiles",
+            "public_datasets",
         }
 
         result = await client.call_tool(
@@ -90,3 +91,18 @@ async def test_mcp_capability_resource_is_machine_readable():
         payload = json.loads(result.contents[0].text)
         assert payload["contract"] == "exergy-agent-capabilities"
         assert payload["workflows"]
+
+
+@pytest.mark.anyio
+async def test_mcp_dataset_catalog_is_machine_readable():
+    server = create_mcp_server()
+    async with Client(server, raise_exceptions=True) as client:
+        tool_result = await client.call_tool("public_datasets", {})
+        tool_ids = {item["id"] for item in tool_result.structured_content["datasets"]}
+        assert tool_ids >= {"world-bank-wdi", "era5-land", "edgar", "egrid"}
+
+        resource_result = await client.read_resource("exergy://datasets")
+        resource_ids = {
+            item["id"] for item in json.loads(resource_result.contents[0].text)
+        }
+        assert resource_ids == tool_ids

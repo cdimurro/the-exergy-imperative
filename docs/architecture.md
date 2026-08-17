@@ -13,6 +13,7 @@ can replace any default without rewriting the workflow.
 | Data interoperability | `ingestion.py`, `adapters.py`, `preprocess.py`, `weather.py`, `validation.py`, `interop.py`, `schema.py` | Local licensed-data adapters, source-preserving ingestion, XAI4Heat, validation, weather normalization, schemas, conversions |
 | Presentation | `reporting.py`, `excel.py`, `cli.py` | Basic charts, native Excel, HTML/PDF/CSV-JSON exports, command line |
 | Agent integration | `agent.py`, `mcp_server.py` | Versioned recipes, capability discovery, structured errors, side-effect controls, and optional MCP tools/resources/prompts |
+| External data | `datasets.py`, `external_data.py` | Machine-readable source catalog, explicit network connectors, and local publisher-aware normalizers with provenance and unit checks |
 
 Exact formula functions never know whether an input was measured, downloaded,
 or assumed. Factor packs do not contain thermodynamic equations. Reports consume

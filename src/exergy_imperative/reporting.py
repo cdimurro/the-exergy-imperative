@@ -1190,7 +1190,7 @@ def export_pdf(
         topMargin=18 * mm,
         bottomMargin=18 * mm,
         title=view.title,
-        author="The Exergy Imperative",
+        author="Exergy Lab",
     )
     styles = getSampleStyleSheet()
     styles.add(

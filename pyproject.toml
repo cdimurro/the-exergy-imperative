@@ -14,7 +14,7 @@ dependencies = [
 license = "Apache-2.0"
 license-files = ["LICENSE", "DOCUMENTATION_LICENSE.md", "NOTICE"]
 authors = [
-  { name = "Christopher DiMurro", email = "chrisdimurro@gmail.com" }
+  { name = "Exergy Lab" }
 ]
 keywords = [
   "energy",
@@ -58,8 +58,10 @@ data = [
 properties = ["CoolProp>=7.0"]
 reports = ["reportlab>=4.0"]
 mcp = ["mcp>=2.0,<3"]
+climate = ["cdsapi>=0.7.7"]
 dev = [
   "build>=1.2",
+  "cdsapi>=0.7.7",
   "CoolProp>=7.0",
   "openpyxl>=3.1",
   "pandas>=2.1",
@@ -82,6 +84,7 @@ all = [
   "CoolProp>=7.0",
   "reportlab>=4.0",
   "mcp>=2.0,<3",
+  "cdsapi>=0.7.7",
 ]
 
 [project.scripts]

@@ -96,6 +96,13 @@ XAI4Heat files are processed locally. NASA POWER requests are explicit and may
 be cached at a caller-selected path. Large external datasets are not silently
 downloaded during an assessment.
 
+Optional World Bank WDI and ERA5-Land connectors make network access explicit.
+Local EDGAR, EPA eGRID, DOE ITAC/IAC, and FIED normalizers contain publisher
+schema knowledge but no publisher values. Each local result retains a file
+hash, source terms, declared units, assumptions, and scope warnings. See the
+[external-data integration guide](external-data-integrations.md) for install,
+configuration, command-line, Python, and coding-agent workflows.
+
 Licensed datasets, including user-downloaded IEA workbooks, are not bundled,
 mirrored, or automatically fetched. A user may extract values they are entitled
 to use into ordinary mappings, JSON, or CSV and pass those values to the generic

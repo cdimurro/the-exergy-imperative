@@ -17,6 +17,7 @@ from .agent import (
 from .agent import (
     list_capabilities as agent_capabilities,
 )
+from .datasets import list_datasets
 from .processes import list_process_templates
 from .registry import DEFAULT_REGISTRY
 from .schema import load_schema
@@ -159,6 +160,15 @@ def create_mcp_server() -> Any:
         except Exception as exc:
             return error_response(exc, command="list_profiles")
 
+    @server.tool()
+    def public_datasets() -> dict[str, Any]:
+        """List opt-in public-data connectors, local adapters, and source terms."""
+
+        return {
+            "schema_version": "1.0",
+            "datasets": [item.to_dict() for item in list_datasets()],
+        }
+
     @server.resource("exergy://capabilities")
     def capabilities_resource() -> str:
         """Machine-readable Exergy Imperative agent capabilities."""
@@ -177,6 +187,16 @@ def create_mcp_server() -> Any:
 
         return json.dumps(
             [item.to_dict() for item in list_process_templates()],
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+
+    @server.resource("exergy://datasets")
+    def datasets_resource() -> str:
+        """Dataset access modes, coverage, capabilities, and source terms."""
+
+        return json.dumps(
+            [item.to_dict() for item in list_datasets()],
             ensure_ascii=False,
             sort_keys=True,
         )
