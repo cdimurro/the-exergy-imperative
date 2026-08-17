@@ -158,8 +158,9 @@ The server exposes these tools:
 - `normalize_dataset`
 - `generate_report`
 - `list_profiles`
+- `public_datasets`
 
-Resources are available at `exergy://capabilities`,
+Resources are available at `exergy://capabilities`, `exergy://datasets`,
 `exergy://schema/{name}`, and `exergy://process-templates`. The
 `plan_exergy_assessment` prompt helps a user or agent select a workflow without
 misrepresenting screening defaults as measurements.
@@ -181,5 +182,10 @@ Calculation, discovery, and normalization tools operate in memory. Only
 writes files. The tool returns every written artifact path in its response.
 
 Publisher datasets are never sent to a remote service by this integration.
+The `public_datasets` MCP tool and `catalog.datasets` capability collection
+describe each integration's access mode, Python API, CLI command, optional
+extra, source terms, and limitations. They do not fetch anything. World Bank,
+NASA POWER, and ERA5 network access occurs only through an explicitly invoked
+connector; EDGAR, eGRID, ITAC/IAC, and FIED remain local-file workflows.
 Agents remain responsible for the licenses and access boundaries of local files
 they choose to read before passing permitted records to `normalize_dataset`.

@@ -22,6 +22,10 @@ class DatasetCatalogEntry:
     geography: str
     capabilities: tuple[str, ...]
     note: str
+    access_mode: str = "reference"
+    python_api: str | None = None
+    cli_command: str | None = None
+    optional_extra: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -32,6 +36,10 @@ class DatasetCatalogEntry:
             "geography": self.geography,
             "capabilities": list(self.capabilities),
             "note": self.note,
+            "access_mode": self.access_mode,
+            "python_api": self.python_api,
+            "cli_command": self.cli_command,
+            "optional_extra": self.optional_extra,
         }
 
 
@@ -49,11 +57,14 @@ DATASET_CATALOG = (
             "F3 interval analysis",
         ),
         note="Use preprocess.enrich_xai4heat_records after downloading the source dataset.",
+        access_mode="local-file",
+        python_api="exergy_imperative.enrich_xai4heat_records",
+        cli_command="exergy enrich INPUT --output OUTPUT",
     ),
     DatasetCatalogEntry(
         id="fied",
         name="Foundational Industry Energy Dataset",
-        url="https://github.com/NatLabRockies/foundational-industry-energy-data",
+        url="https://doi.org/10.25984/2437657",
         license="See source dataset and upstream agency terms",
         geography="United States",
         capabilities=(
@@ -62,7 +73,100 @@ DATASET_CATALOG = (
             "fuel types",
             "energy estimate ranges",
         ),
-        note="Useful for selecting equipment and industry priors; temperature-grade data remain sparse.",
+        note="Download a release locally, then use load_fied_units; useful for equipment and industry priors, while temperature-grade data remain sparse.",
+        access_mode="local-file",
+        python_api="exergy_imperative.load_fied_units",
+        cli_command="exergy fied INPUT [--output OUTPUT]",
+        optional_extra="data for Excel or Parquet",
+    ),
+    DatasetCatalogEntry(
+        id="doe-iac",
+        name="DOE Industrial Training and Assessment Centers Database",
+        url="https://itac.university/download",
+        license="Public DOE program database; review download terms",
+        geography="United States",
+        capabilities=(
+            "industrial recommendations",
+            "implementation status",
+            "energy and cost savings",
+            "implementation cost and payback",
+        ),
+        note="Download the workbook locally, then use load_iac_recommendations; historical USD values remain nominal and the assessed sample is not globally representative.",
+        access_mode="local-file",
+        python_api="exergy_imperative.load_iac_recommendations",
+        cli_command="exergy iac INPUT [--output OUTPUT]",
+        optional_extra="data for Excel",
+    ),
+    DatasetCatalogEntry(
+        id="world-bank-wdi",
+        name="World Development Indicators",
+        url="https://datacatalog.worldbank.org/search/dataset/0037712",
+        license="CC-BY-4.0",
+        geography="Global country and aggregate series",
+        capabilities=(
+            "consumer price indices",
+            "GDP deflators",
+            "official exchange rates",
+            "economic context",
+        ),
+        note="Explicit API access through fetch_world_bank_indicators; responses can be cached at a caller-selected path.",
+        access_mode="explicit-network",
+        python_api="exergy_imperative.fetch_world_bank_indicators",
+        cli_command="exergy world-bank COUNTRY [--output OUTPUT]",
+    ),
+    DatasetCatalogEntry(
+        id="era5-land",
+        name="ERA5-Land hourly reanalysis",
+        url="https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land",
+        license="CC-BY-4.0 with Copernicus C3S/ECMWF attribution",
+        geography="Global land, approximately 9 km",
+        capabilities=(
+            "hourly temperature",
+            "humidity and precipitation",
+            "solar resource",
+            "weather normalization inputs",
+        ),
+        note="Requires a user CDS account, accepted dataset terms, and the climate extra; request building is offline and retrieval is explicit.",
+        access_mode="authenticated-network",
+        python_api="exergy_imperative.retrieve_era5_land",
+        cli_command="exergy era5-land --latitude LAT --longitude LON --start DATE --end DATE --target-dir DIR",
+        optional_extra="climate",
+    ),
+    DatasetCatalogEntry(
+        id="edgar",
+        name="Emissions Database for Global Atmospheric Research",
+        url="https://edgar.jrc.ec.europa.eu/dataset_ap81",
+        license="EDGAR acknowledgement and dataset-specific upstream terms",
+        geography="Global country, sector, and gridded inventories",
+        capabilities=(
+            "greenhouse gas inventories",
+            "SO2 and NOx inventories",
+            "particulate and other air pollutant inventories",
+            "country-sector time series",
+        ),
+        note="Download and extract the selected release locally, then use load_edgar_inventory; inventory mass is not exposure or health risk.",
+        access_mode="local-file",
+        python_api="exergy_imperative.load_edgar_inventory",
+        cli_command="exergy edgar INPUT [--output OUTPUT]",
+        optional_extra="data for Excel",
+    ),
+    DatasetCatalogEntry(
+        id="egrid",
+        name="EPA Emissions & Generation Resource Integrated Database",
+        url="https://www.epa.gov/egrid/summary-data",
+        license="United States government public data; cite EPA eGRID",
+        geography="United States",
+        capabilities=(
+            "grid greenhouse gas emission rates",
+            "NOx and SO2 emission rates",
+            "total and non-baseload rates",
+            "subregion and state factors",
+        ),
+        note="Download a summary or detailed workbook locally, then use load_egrid_emission_rates; rates are normalized to kg/MWh with their basis retained.",
+        access_mode="local-file",
+        python_api="exergy_imperative.load_egrid_emission_rates",
+        cli_command="exergy egrid INPUT [--output OUTPUT]",
+        optional_extra="data for Excel",
     ),
     DatasetCatalogEntry(
         id="nasa-power",
@@ -76,6 +180,9 @@ DATASET_CATALOG = (
             "hourly and daily time series",
         ),
         note="Network access is explicit and responses can be cached locally.",
+        access_mode="explicit-network",
+        python_api="exergy_imperative.fetch_nasa_power_weather",
+        cli_command="exergy weather --latitude LAT --longitude LON --start YYYYMMDD --end YYYYMMDD",
     ),
     DatasetCatalogEntry(
         id="ember-electricity",
@@ -89,6 +196,8 @@ DATASET_CATALOG = (
             "annual history",
         ),
         note="A recent six-year country intensity history is bundled with attribution; run the update script deliberately to refresh it.",
+        access_mode="bundled-derived-pack",
+        python_api="exergy_imperative.load_bundled_grid_factors",
     ),
     DatasetCatalogEntry(
         id="owid-energy",
@@ -102,6 +211,8 @@ DATASET_CATALOG = (
             "documented source lineage",
         ),
         note="The bundled electricity pack uses OWID's standardized publication of the Ember indicator.",
+        access_mode="bundled-derived-pack",
+        python_api="exergy_imperative.load_bundled_grid_factors",
     ),
     DatasetCatalogEntry(
         id="emep-eea-2023",
