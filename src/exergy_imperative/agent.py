@@ -11,6 +11,7 @@ from typing import Any, Callable, Mapping, Sequence
 
 from .assessment import MissingInputError, assess
 from .balance import analyze_balance
+from .datasets import list_datasets
 from .economics import (
     TechnologyCostScenario,
     evaluate_economics,
@@ -651,6 +652,7 @@ def list_capabilities() -> dict[str, Any]:
             "process_template_count": len(list_process_templates()),
             "profile_categories": list(DEFAULT_REGISTRY.categories()),
             "profile_count": len(DEFAULT_REGISTRY.list()),
+            "datasets": [item.to_dict() for item in list_datasets()],
         },
         "safety": {
             "network_access": "No recipe workflow performs implicit network access.",

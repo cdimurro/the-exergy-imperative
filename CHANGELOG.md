@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Added optional World Bank WDI and authenticated ERA5-Land connectors with
+  explicit network access, local caching or manifests, offline request
+  construction, and publisher attribution.
+- Added publisher-aware local normalizers for EDGAR country-sector emissions,
+  EPA eGRID electricity factors, DOE ITAC/IAC recommendations and economics,
+  and FIED industrial unit estimates. No raw publisher datasets are bundled.
+- Added Excel-compatible CLI outputs, source-file fingerprints, unit
+  normalization, scope and health-screening warnings, column overrides, and
+  agent/MCP discovery for every external-data integration.
+
 ## 0.2.0 - 2026-08-15
 
 - Added versioned agent recipes with execute, dry-run, and validate-only modes;

@@ -30,6 +30,16 @@ from .engineering import (
     match_waste_heat,
 )
 from .excel import create_excel_template, export_xlsx_report, run_excel_template
+from .external_data import (
+    ERA5_LAND_DEFAULT_VARIABLES,
+    WORLD_BANK_DEFAULT_INDICATORS,
+    fetch_world_bank_indicators,
+    load_edgar_inventory,
+    load_egrid_emission_rates,
+    load_fied_units,
+    load_iac_recommendations,
+    retrieve_era5_land,
+)
 from .factors import DEFAULT_IMPACT_FACTORS
 from .ghg import assess_ghg_boundaries, assess_methane_project
 from .impacts import assess_impacts
@@ -87,6 +97,14 @@ def _assignments(values: Sequence[str] | None, *, label: str) -> dict[str, float
             raise ValueError(f"{label} name must not be empty")
         result[name.strip()] = float(value)
     return result
+
+
+def _integration_payload(result: Any, output: Path | None) -> dict[str, Any]:
+    if output is not None:
+        write_records(result.records, output)
+    payload = result.to_dict(include_records=output is None)
+    payload["output"] = str(output) if output is not None else None
+    return payload
 
 
 def _add_assessment_arguments(parser: argparse.ArgumentParser) -> None:
@@ -226,6 +244,85 @@ def build_parser() -> argparse.ArgumentParser:
     weather_parser.add_argument("--start", required=True, help="YYYYMMDD")
     weather_parser.add_argument("--end", required=True, help="YYYYMMDD")
     weather_parser.add_argument("--cache-dir", type=Path)
+
+    world_bank_parser = commands.add_parser(
+        "world-bank", help="Explicitly fetch World Bank economic indicators"
+    )
+    world_bank_parser.add_argument(
+        "country", help="World Bank country or aggregate code"
+    )
+    world_bank_parser.add_argument(
+        "--indicator",
+        action="append",
+        help="WDI indicator ID; repeat as needed (defaults to CPI, deflator, and exchange rate)",
+    )
+    world_bank_parser.add_argument("--start-year", type=int)
+    world_bank_parser.add_argument("--end-year", type=int)
+    world_bank_parser.add_argument("--cache-dir", type=Path)
+    world_bank_parser.add_argument("--output", type=Path)
+
+    era5_parser = commands.add_parser(
+        "era5-land", help="Explicitly retrieve authenticated ERA5-Land files"
+    )
+    era5_parser.add_argument("--latitude", type=float, required=True)
+    era5_parser.add_argument("--longitude", type=float, required=True)
+    era5_parser.add_argument("--start", required=True, help="YYYY-MM-DD")
+    era5_parser.add_argument("--end", required=True, help="YYYY-MM-DD")
+    era5_parser.add_argument("--target-dir", type=Path, required=True)
+    era5_parser.add_argument(
+        "--variable",
+        action="append",
+        help="CDS variable ID; repeat as needed",
+    )
+    era5_parser.add_argument("--format", choices=("netcdf", "grib"), default="netcdf")
+    era5_parser.add_argument("--overwrite", action="store_true")
+
+    edgar_parser = commands.add_parser(
+        "edgar", help="Normalize a local EDGAR country/sector workbook"
+    )
+    edgar_parser.add_argument("input", type=Path)
+    edgar_parser.add_argument("--pollutant")
+    edgar_parser.add_argument("--sheet", default="IPCC 2006")
+    edgar_parser.add_argument("--header-row", type=int)
+    edgar_parser.add_argument("--source-unit", default="auto")
+    edgar_parser.add_argument("--start-year", type=int)
+    edgar_parser.add_argument("--end-year", type=int)
+    edgar_parser.add_argument("--output", type=Path)
+
+    egrid_parser = commands.add_parser(
+        "egrid", help="Normalize a local EPA eGRID workbook or export"
+    )
+    egrid_parser.add_argument("input", type=Path)
+    egrid_parser.add_argument(
+        "--geography", choices=("subregion", "state"), default="subregion"
+    )
+    egrid_parser.add_argument(
+        "--basis", choices=("total", "non-baseload"), default="total"
+    )
+    egrid_parser.add_argument("--sheet")
+    egrid_parser.add_argument("--header-row", type=int)
+    egrid_parser.add_argument("--rate-unit", default="auto")
+    egrid_parser.add_argument("--year", type=int)
+    egrid_parser.add_argument("--output", type=Path)
+
+    iac_parser = commands.add_parser(
+        "iac", help="Normalize a local DOE ITAC/IAC recommendation database"
+    )
+    iac_parser.add_argument("input", type=Path)
+    iac_parser.add_argument("--assessment-file", type=Path)
+    iac_parser.add_argument("--recommendation-sheet", default="RECC")
+    iac_parser.add_argument("--assessment-sheet", default="ASSESS")
+    iac_parser.add_argument("--implemented-only", action="store_true")
+    iac_parser.add_argument("--no-assessment-data", action="store_true")
+    iac_parser.add_argument("--output", type=Path)
+
+    fied_parser = commands.add_parser(
+        "fied", help="Normalize a local FIED unit-level export"
+    )
+    fied_parser.add_argument("input", type=Path)
+    fied_parser.add_argument("--sheet", default=0)
+    fied_parser.add_argument("--header-row", type=int, default=1)
+    fied_parser.add_argument("--output", type=Path)
 
     factor_parser = commands.add_parser(
         "factors", help="Inspect grid, fuel, GWP, and pollutant-health factors"
@@ -540,6 +637,92 @@ def main(argv: Sequence[str] | None = None) -> int:
                     )
                 )
             )
+            return 0
+        if args.command == "world-bank":
+            result = fetch_world_bank_indicators(
+                args.country,
+                indicators=args.indicator or WORLD_BANK_DEFAULT_INDICATORS,
+                start_year=args.start_year,
+                end_year=args.end_year,
+                cache_dir=args.cache_dir,
+            )
+            print(_json(_integration_payload(result, args.output)))
+            return 0
+        if args.command == "era5-land":
+            print(
+                _json(
+                    retrieve_era5_land(
+                        args.latitude,
+                        args.longitude,
+                        args.start,
+                        args.end,
+                        args.target_dir,
+                        variables=args.variable or ERA5_LAND_DEFAULT_VARIABLES,
+                        data_format=args.format,
+                        overwrite=args.overwrite,
+                    )
+                )
+            )
+            return 0
+        if args.command == "edgar":
+            sheet = int(args.sheet) if str(args.sheet).isdigit() else args.sheet
+            result = load_edgar_inventory(
+                args.input,
+                pollutant=args.pollutant,
+                sheet_name=sheet,
+                header_row=args.header_row,
+                source_unit=args.source_unit,
+                start_year=args.start_year,
+                end_year=args.end_year,
+            )
+            print(_json(_integration_payload(result, args.output)))
+            return 0
+        if args.command == "egrid":
+            sheet = (
+                int(args.sheet)
+                if args.sheet is not None and str(args.sheet).isdigit()
+                else args.sheet
+            )
+            result = load_egrid_emission_rates(
+                args.input,
+                geography=args.geography,
+                basis=args.basis,
+                sheet_name=sheet,
+                header_row=args.header_row,
+                rate_unit=args.rate_unit,
+                year=args.year,
+            )
+            print(_json(_integration_payload(result, args.output)))
+            return 0
+        if args.command == "iac":
+            recommendation_sheet = (
+                int(args.recommendation_sheet)
+                if str(args.recommendation_sheet).isdigit()
+                else args.recommendation_sheet
+            )
+            assessment_sheet = (
+                int(args.assessment_sheet)
+                if str(args.assessment_sheet).isdigit()
+                else args.assessment_sheet
+            )
+            result = load_iac_recommendations(
+                args.input,
+                assessment_path=args.assessment_file,
+                recommendation_sheet=recommendation_sheet,
+                assessment_sheet=assessment_sheet,
+                implemented_only=args.implemented_only,
+                include_assessment_data=not args.no_assessment_data,
+            )
+            print(_json(_integration_payload(result, args.output)))
+            return 0
+        if args.command == "fied":
+            sheet = int(args.sheet) if str(args.sheet).isdigit() else args.sheet
+            result = load_fied_units(
+                args.input,
+                sheet_name=sheet,
+                header_row=args.header_row,
+            )
+            print(_json(_integration_payload(result, args.output)))
             return 0
         if args.command == "factors":
             if args.category == "grid":

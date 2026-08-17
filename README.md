@@ -24,6 +24,12 @@ Install optional readers and PDF support only when needed:
 python -m pip install "exergy-imperative[data,reports]"
 ```
 
+Authenticated ERA5-Land retrieval is isolated in its own small extra:
+
+```bash
+python -m pip install "exergy-imperative[climate]"
+```
+
 Install the optional MCP server for direct use by coding agents and other MCP
 hosts:
 
@@ -279,6 +285,20 @@ override. Field-only adapters are installed under the stable names
 workbook licences and permitted derived uses. Python users can inspect them with
 `list_bundled_adapters()` and `load_bundled_adapter()` before use.
 
+### Add optional public context without bundling large datasets
+
+The optional integration layer provides explicit, cacheable World Bank WDI
+economic context and authenticated ERA5-Land retrieval. Publisher-aware local
+normalizers handle EDGAR country-sector emissions, EPA eGRID electricity
+factors, DOE ITAC/IAC recommendations and economics, and FIED unit-level energy
+and GHG estimates.
+
+No raw EDGAR, eGRID, ITAC/IAC, FIED, or ERA5 data is bundled. Local results
+retain a source-file hash, publisher attribution, unit basis, configuration,
+and scope warnings. Python arguments can override publisher-shaped defaults,
+and CLI `--output` paths can produce CSV, JSON, JSONL, TSV, or XLSX records. See
+the [external-data integration guide](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/external-data-integrations.md).
+
 ### Run detailed engineering and waste-heat screens
 
 ```python
@@ -354,6 +374,12 @@ exergy xai-summary  Summarize XAI4Heat-compatible data
 exergy balance      Analyze a JSON process balance
 exergy datasets     List public-data integrations
 exergy weather      Explicitly fetch NASA POWER temperature data
+exergy world-bank   Explicitly fetch WDI economic context
+exergy era5-land    Explicitly retrieve authenticated ERA5-Land files
+exergy edgar        Normalize a local EDGAR workbook or export
+exergy egrid        Normalize a local EPA eGRID workbook or export
+exergy iac          Normalize a local DOE ITAC/IAC database
+exergy fied         Normalize a local FIED unit-level export
 ```
 
 See the [quickstart](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/quickstart.md),
@@ -364,6 +390,8 @@ See the [quickstart](https://github.com/cdimurro/the-exergy-imperative/blob/main
 [engineering-model guide](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/engineering-models.md),
 [validation guide](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/validation.md), and
 [architecture guide](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/architecture.md).
+Optional public-data workflows are documented in the
+[external-data integration guide](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/external-data-integrations.md).
 Coding-agent and MCP integrations are documented in the
 [agent integration guide](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/agent-integration.md).
 
