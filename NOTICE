@@ -34,3 +34,10 @@ Example local-file adapters name Energy Institute and IEA workbooks solely to
 describe user-controlled field mappings. They contain no publisher data and do
 not grant any right to download, transform, redistribute, or publish derived
 data. Users must comply with the terms applicable to their own copies.
+
+Optional connector configurations reference World Bank World Development
+Indicators, Copernicus/ECMWF ERA5-Land, EC-JRC EDGAR, US EPA eGRID, the US DOE
+ITAC/IAC database, and the Foundational Industry Energy Dataset. No values from
+those sources are bundled by these connectors. Users must retain the selected
+release's attribution, review its source and upstream terms, and comply with
+the conditions applicable to their own downloaded files and derived outputs.
