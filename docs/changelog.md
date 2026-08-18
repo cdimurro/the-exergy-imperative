@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 - 2026-08-17
+
+- Retitled the README and widened it to any energy carrier, technology, or
+  process: universal exergy/anergy framing and a "Start from the physics"
+  section of verified one-line examples.
+- Consolidated project meta files: the documentation license terms moved into
+  `NOTICE`, the changelog into `docs/changelog.md`, and the contributing guide
+  into `.github/CONTRIBUTING.md`; `CITATION.cff` was replaced by a citation
+  note in the README.
+- Updated the GitHub repository description to match the README language.
+
 ## 0.3.0 - 2026-08-17
 
 - Rewrote the repository README as the library front door (install, quickstart,

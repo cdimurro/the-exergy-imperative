@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "exergy-imperative"
-version = "0.3.0"
+version = "0.4.0"
 description = "Progressive exergy, emissions, health-screening, and economic analysis with transparent defaults."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -12,7 +12,7 @@ dependencies = [
   "tzdata>=2025.2; platform_system == 'Windows'",
 ]
 license = "Apache-2.0"
-license-files = ["LICENSE", "DOCUMENTATION_LICENSE.md", "NOTICE"]
+license-files = ["LICENSE", "NOTICE"]
 authors = [
   { name = "Exergy Lab" }
 ]
