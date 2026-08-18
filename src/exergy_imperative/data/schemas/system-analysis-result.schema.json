@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/system-analysis-result-v1.json",
+  "title": "Exergy Imperative connected system result",
+  "type": "object",
+  "required": ["schema_version", "name", "tier", "unit", "components", "flows", "accumulations", "energy", "exergy", "warnings", "source_catalog"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "name": {"type": "string", "minLength": 1},
+    "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+    "unit": {"type": "string"},
+    "components": {"type": "array", "items": {"type": "object"}},
+    "flows": {"type": "array", "items": {"type": "object"}},
+    "accumulations": {"type": "array", "items": {"type": "object"}},
+    "energy": {"type": "object"},
+    "exergy": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "source_catalog": {"type": "object"}
+  },
+  "additionalProperties": true
+}

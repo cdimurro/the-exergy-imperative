@@ -111,6 +111,11 @@ class DistributionSpec:
             and self.low > self.high
         ):
             raise ValueError("normal distribution bounds require low <= high")
+        if self.kind == "normal" and self.standard_deviation == 0.0:
+            if self.low is not None and float(self.mean) < self.low:
+                raise ValueError("zero-variance normal mean must be within its bounds")
+            if self.high is not None and float(self.mean) > self.high:
+                raise ValueError("zero-variance normal mean must be within its bounds")
 
     def sample(self, generator: random.Random) -> float:
         if self.kind == "fixed":
@@ -121,12 +126,19 @@ class DistributionSpec:
             return generator.triangular(
                 float(self.low), float(self.high), float(self.mode)
             )
-        value = generator.gauss(float(self.mean), float(self.standard_deviation))
-        if self.low is not None:
-            value = max(value, self.low)
-        if self.high is not None:
-            value = min(value, self.high)
-        return value
+        if self.standard_deviation == 0.0:
+            return float(self.mean)
+        for _ in range(100_000):
+            value = generator.gauss(float(self.mean), float(self.standard_deviation))
+            if self.low is not None and value < self.low:
+                continue
+            if self.high is not None and value > self.high:
+                continue
+            return value
+        raise ValueError(
+            "normal-distribution bounds have negligible probability; review the "
+            "mean, standard deviation, and bounds"
+        )
 
     def central_value(self) -> float:
         if self.kind == "fixed":

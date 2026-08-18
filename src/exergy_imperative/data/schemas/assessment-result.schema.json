@@ -33,7 +33,15 @@
         "low": {"type": "number"},
         "high": {"type": "number"},
         "confidence": {"type": "string"},
-        "note": {"type": "string"}
+        "note": {"type": "string"},
+        "evidence_kind": {"type": "string"},
+        "statistic": {"type": "string"},
+        "range_basis": {"type": "string"},
+        "applicability": {"type": "object"},
+        "estimate_variant": {"type": "string"},
+        "selection_basis": {"type": "string"},
+        "selection_context": {"type": "object"},
+        "available_context": {"type": "array", "items": {"type": "string"}}
       }
     },
     "estimate": {

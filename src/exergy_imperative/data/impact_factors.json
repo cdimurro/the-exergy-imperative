@@ -6,31 +6,43 @@
     "ipcc-ar6-wgi-2021": {
       "title": "IPCC AR6 Working Group I, Chapter 7 and Supplementary Material",
       "url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/",
+      "license": "IPCC copyright and usage terms; citation only, no publisher table redistributed",
+      "applicable_boundary": "AR6 global warming potentials for the named gas and assessment horizon",
       "note": "20-year and 100-year global warming potentials including carbon-cycle responses."
     },
     "ipcc-2006-stationary-combustion": {
       "title": "2006 IPCC Guidelines, Volume 2, Chapter 2: Stationary Combustion",
       "url": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf",
+      "license": "IPCC copyright and usage terms; citation only, no publisher table redistributed",
+      "applicable_boundary": "Tier 1 stationary-combustion inventory factors on a net-calorific-value basis",
       "note": "Tier 1 default factors on a net-calorific-value basis."
     },
     "epa-ghg-factors-2025": {
       "title": "US EPA GHG Emission Factors Hub 2025",
       "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf",
+      "license": "US government work; citation only",
+      "applicable_boundary": "US stationary-combustion inventory factors on the stated HHV basis",
       "note": "Stationary-combustion factors on an HHV basis."
     },
     "epa-ap42-natural-gas": {
       "title": "US EPA AP-42 Section 1.4 Natural Gas Combustion",
       "url": "https://www.epa.gov/air-emissions-factors-and-quantification/ap-42-fifth-edition-volume-i-chapter-1-external-0",
+      "license": "US government work; citation only",
+      "applicable_boundary": "Uncontrolled and controlled natural-gas combustion inventory screens for the stated equipment classes",
       "note": "Screening factors for commercial boilers; actual controls and operation can materially change emissions."
     },
     "epa-criteria-pollutants": {
       "title": "US EPA Criteria Air Pollutants",
       "url": "https://www.epa.gov/criteria-air-pollutants",
+      "license": "US government work; qualitative citation only",
+      "applicable_boundary": "Qualitative pollutant hazard descriptions; excludes exposure and risk quantification",
       "note": "Qualitative health and environmental screening statements, not exposure-response calculations."
     },
     "eea-emep-2023": {
       "title": "EMEP/EEA Air Pollutant Emission Inventory Guidebook 2023",
       "url": "https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023",
+      "license": "EEA reuse policy; citation only",
+      "applicable_boundary": "Air-pollutant inventory methodology and qualitative screening context",
       "note": "Inventory methodology and reminder that pollutant factors are technology and control specific."
     }
   },

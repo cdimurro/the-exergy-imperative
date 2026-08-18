@@ -64,11 +64,17 @@ def analyze_balance(
             warnings.append(
                 "Products and losses exceed input exergy; check units, boundaries, and time bases."
             )
-        destruction_total = inferred_value
-        residual = 0.0
-        destruction_streams = (
-            ExergyStream("inferred exergy destruction", inferred_value, unit=unit),
-        )
+            destruction_total = 0.0
+            residual = inferred_value
+            destruction_streams = ()
+        else:
+            destruction_total = max(inferred_value, 0.0)
+            residual = 0.0
+            destruction_streams = (
+                ExergyStream(
+                    "inferred exergy destruction", destruction_total, unit=unit
+                ),
+            )
     else:
         destruction_streams = _streams(destructions, "destruction")
         destruction_total = sum(
@@ -79,9 +85,6 @@ def analyze_balance(
             warnings.append(
                 f"The declared exergy balance does not close; residual is {residual:.6g} {unit}."
             )
-    if destruction_total < -tolerance:
-        warnings.append("Negative exergy destruction is physically inconsistent.")
-
     efficiency = product_total / input_total
     if efficiency > 1.0 + tolerance:
         warnings.append("Product exergy exceeds input exergy.")

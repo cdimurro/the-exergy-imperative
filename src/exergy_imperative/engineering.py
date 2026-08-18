@@ -306,7 +306,11 @@ def analyze_furnace(
         process_temperature_c, reference_temperature_c
     )
     exhaust_factor = (
-        thermal_exergy_factor_c(exhaust_temperature_c, reference_temperature_c)
+        sensible_heat_exergy_factor_c(
+            exhaust_temperature_c,
+            reference_temperature_c,
+            reference_temperature_c,
+        )
         if exhaust
         else 0.0
     )
@@ -316,6 +320,9 @@ def analyze_furnace(
         "exhaust_temperature_c": exhaust_temperature_c,
         "reference_temperature_c": reference_temperature_c,
         "fuel_exergy_factor": fuel_factor,
+        "exhaust_model": (
+            "constant-heat-capacity stream cooled to the reference temperature"
+        ),
         "useful_heat_source": "provided" if measured_useful_heat else "calculated",
     }
     warnings: list[str] = []
@@ -463,6 +470,9 @@ def analyze_compressed_air(
         },
         sources=(DOE_COMPRESSED_AIR_SOURCE,),
         warnings=(
+            "Useful energy is the minimum reversible pressure-work equivalent, "
+            "not internal energy stored in the air; interpret the exergy fields "
+            "for thermodynamic performance.",
             "The pressure-exergy screen excludes compressor heat recovery, humidity, pressure drops, and transient storage.",
         ),
     )

@@ -11,12 +11,15 @@
       "title": "Ember Yearly Electricity Data",
       "url": "https://ember-energy.org/data/yearly-electricity-data/",
       "methodology": "https://files.ember-energy.org/public-downloads/ember_electricity_data_methodology.pdf",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "applicable_boundary": "Historical country-year lifecycle electricity-generation intensity; not marginal, hourly, or contractual supply"
     },
     "owid-energy": {
       "title": "Our World in Data complete Energy dataset",
       "url": "https://owid-public.owid.io/data/energy/owid-energy-data.csv",
       "repository": "https://github.com/owid/energy-data",
+      "license": "CC-BY-4.0",
+      "applicable_boundary": "Standardized republication and location mapping for the Ember country-year indicator",
       "note": "OWID standardizes location names and republishes the Ember indicator."
     }
   },

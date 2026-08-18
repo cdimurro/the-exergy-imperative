@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/material-balance-result-v1.json",
+  "title": "Exergy Imperative material-balance result",
+  "type": "object",
+  "required": ["schema_version", "name", "tier", "components", "streams", "accumulations", "balance", "warnings", "source_catalog"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "name": {"type": "string", "minLength": 1},
+    "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+    "components": {"type": "array", "items": {"type": "object"}},
+    "streams": {"type": "array", "items": {"type": "object"}},
+    "accumulations": {"type": "array", "items": {"type": "object"}},
+    "balance": {
+      "type": "object",
+      "required": ["mass_unit", "input_mass", "product_mass", "loss_mass", "accumulation_mass", "residual_mass", "constituent_balances", "chemical_exergy_complete", "warnings"],
+      "properties": {
+        "mass_unit": {"const": "kg"},
+        "input_mass": {"type": "number"},
+        "product_mass": {"type": "number"},
+        "loss_mass": {"type": "number"},
+        "accumulation_mass": {"type": "number"},
+        "residual_mass": {"type": "number"},
+        "mass_efficiency": {"type": ["number", "null"]},
+        "constituent_balances": {"type": "object"},
+        "chemical_exergy_complete": {"type": "boolean"},
+        "chemical_exergy": {"type": ["object", "null"]},
+        "warnings": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "source_catalog": {"type": "object"}
+  },
+  "additionalProperties": true
+}

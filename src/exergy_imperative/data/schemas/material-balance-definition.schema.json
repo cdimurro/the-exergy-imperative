@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/material-balance-definition-v1.json",
+  "title": "Exergy Imperative material-balance definition",
+  "$defs": {
+    "component": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["source", "sink", "converter", "heater-cooler", "heat-exchanger", "mixer-splitter", "compressor-pump", "turbine-expander", "reactor-separator", "storage", "transport"]},
+        "label": {"type": "string"},
+        "technology": {"type": "string"},
+        "metadata": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "composition": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+    },
+    "stream": {
+      "type": "object",
+      "required": ["id", "mass"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string"},
+        "mass": {"type": "number", "minimum": 0},
+        "material": {"type": "string", "minLength": 1},
+        "unit": {"enum": ["kg", "g", "t", "tonne", "lb", "short-ton"]},
+        "source": {"type": ["string", "null"]},
+        "target": {"type": ["string", "null"]},
+        "role": {"enum": ["resource", "internal", "product", "loss"]},
+        "composition": {"$ref": "#/$defs/composition"},
+        "specific_chemical_exergy_mj_per_kg": {"type": "number", "minimum": 0},
+        "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "source_id": {"type": "string"},
+        "metadata": {"type": "object"}
+      },
+      "anyOf": [{"required": ["material"]}, {"required": ["composition"]}],
+      "additionalProperties": false
+    },
+    "accumulation": {
+      "type": "object",
+      "required": ["component", "mass_change"],
+      "properties": {
+        "component": {"type": "string", "minLength": 1},
+        "mass_change": {"type": "number"},
+        "material": {"type": "string", "minLength": 1},
+        "unit": {"enum": ["kg", "g", "t", "tonne", "lb", "short-ton"]},
+        "composition": {"$ref": "#/$defs/composition"},
+        "specific_chemical_exergy_mj_per_kg": {"type": "number", "minimum": 0},
+        "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "source_id": {"type": "string"},
+        "metadata": {"type": "object"}
+      },
+      "anyOf": [{"required": ["material"]}, {"required": ["composition"]}],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "required": ["name", "components", "streams"],
+  "properties": {
+    "name": {"type": "string", "minLength": 1},
+    "components": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/component"}},
+    "streams": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/stream"}},
+    "accumulations": {"type": "array", "items": {"$ref": "#/$defs/accumulation"}},
+    "tolerance_kg": {"type": "number", "minimum": 0},
+    "source_catalog": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["title", "license", "applicable_boundary"],
+        "properties": {
+          "title": {"type": "string", "minLength": 1},
+          "license": {"type": "string", "minLength": 1},
+          "applicable_boundary": {"type": "string", "minLength": 1},
+          "url": {"type": "string"},
+          "note": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}

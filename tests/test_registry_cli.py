@@ -17,7 +17,7 @@ def test_release_version_surfaces_are_consistent(capsys):
     expected = pyproject["project"]["version"]
     readme = (project_root / "README.md").read_text(encoding="utf-8")
 
-    assert expected == "0.4.3"
+    assert expected == "0.6.0"
     assert xi.__version__ == expected
     assert LIBRARY_VERSION == expected
     assert f"cacheSeconds=300&release={expected}" in readme
@@ -437,6 +437,11 @@ def test_cli_excel_engineering_waste_heat_adapter_and_validation(tmp_path, capsy
 
     assert main(["validate"]) == 0
     assert json.loads(capsys.readouterr().out)["passed"] is True
+
+    assert main(["validate", "--coverage"]) == 0
+    coverage = json.loads(capsys.readouterr().out)
+    assert coverage["coverage_version"]
+    assert any(item["level"] == "screening-only" for item in coverage["items"])
 
 
 def test_cli_ingest_numeric_sheet_selector_uses_sheet_index(tmp_path, capsys):

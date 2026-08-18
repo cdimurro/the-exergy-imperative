@@ -1,58 +1,164 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "cases": [
     {
       "id": "heat-factor-40c-20c",
-      "title": "Heat-quality factor at 40 C relative to 20 C",
+      "title": "Carnot heat-quality factor at 40 C relative to 20 C",
       "method": "thermal_exergy_factor_c",
       "inputs": {"source_c": 40.0, "reference_c": 20.0},
-      "expected": 0.064,
-      "absolute_tolerance": 0.001,
+      "expected": 0.06386715631486506,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels", "heat-service"],
       "citation": {
-        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
-        "locator": "illustrative temperature example"
+        "title": "Carnot factor defining relation",
+        "locator": "1 - T0/T with temperatures on the absolute scale"
       }
     },
     {
       "id": "heat-factor-80c-20c",
-      "title": "Heat-quality factor at 80 C relative to 20 C",
+      "title": "Carnot heat-quality factor at 80 C relative to 20 C",
       "method": "thermal_exergy_factor_c",
       "inputs": {"source_c": 80.0, "reference_c": 20.0},
-      "expected": 0.170,
-      "absolute_tolerance": 0.001,
+      "expected": 0.16989947614328194,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels", "heat-service"],
       "citation": {
-        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
-        "locator": "illustrative temperature example"
+        "title": "Carnot factor defining relation",
+        "locator": "1 - T0/T with temperatures on the absolute scale"
       }
     },
     {
       "id": "heat-factor-150c-20c",
-      "title": "Heat-quality factor at 150 C relative to 20 C",
+      "title": "Carnot heat-quality factor at 150 C relative to 20 C",
       "method": "thermal_exergy_factor_c",
       "inputs": {"source_c": 150.0, "reference_c": 20.0},
-      "expected": 0.307,
-      "absolute_tolerance": 0.001,
+      "expected": 0.3072196620583717,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels", "heat-service"],
       "citation": {
-        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
-        "locator": "illustrative temperature example"
+        "title": "Carnot factor defining relation",
+        "locator": "1 - T0/T with temperatures on the absolute scale"
       }
     },
     {
-      "id": "heat-pump-cop3-40c-20c",
-      "title": "Heat-pump exergetic efficiency at COP 3",
-      "method": "analyze_heat_pump",
-      "inputs": {
-        "delivered_heat_mwh": 1.0,
-        "source_temperature_c": 20.0,
-        "sink_temperature_c": 40.0,
-        "cop": 3.0
-      },
-      "output_path": "exergy.efficiency",
-      "expected": 0.192,
-      "absolute_tolerance": 0.001,
+      "id": "sensible-exhaust-300c-25c",
+      "title": "Constant-Cp stream exergy from 300 C to a 25 C dead state",
+      "method": "sensible_heat_exergy_factor_c",
+      "inputs": {"supply_c": 300.0, "return_c": 25.0, "reference_c": 25.0},
+      "expected": 0.2914321628522324,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels", "furnace"],
       "citation": {
-        "title": "The Exergy Imperative: A Quantity-and-Quality Standard Reporting Framework",
-        "locator": "heat-pump illustrative example"
+        "title": "US DOE Process Heating System Sourcebook",
+        "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/process_heating_sourcebook2.pdf",
+        "locator": "sensible exhaust heat boundary W Cp (Texhaust - Tambient), integrated with 1 - T0/T"
+      }
+    },
+    {
+      "id": "cooling-factor-minus10c-30c",
+      "title": "Minimum-work factor for cooling at -10 C with 30 C ambient",
+      "method": "cooling_exergy_factor_c",
+      "inputs": {"cold_c": -10.0, "ambient_c": 30.0},
+      "expected": 0.15200456013680408,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels", "refrigeration"],
+      "citation": {
+        "title": "Reversed-Carnot minimum-work relation",
+        "locator": "T0/Tc - 1"
+      }
+    },
+    {
+      "id": "steam-flow-exergy-8mpa-500c",
+      "title": "Physical flow exergy of steam at 8 MPa and 500 C",
+      "method": "physical_flow_exergy",
+      "inputs": {
+        "enthalpy": 3398.3,
+        "reference_enthalpy": 104.89,
+        "entropy": 6.724,
+        "reference_entropy": 0.3674,
+        "reference_k": 298.15
+      },
+      "expected": 1398.1897100000003,
+      "absolute_tolerance": 1e-9,
+      "validation_type": "reference",
+      "capabilities": ["thermodynamic-kernels", "physical-properties"],
+      "citation": {
+        "title": "IAPWS-consistent steam-table reference values",
+        "locator": "h=3398.3 kJ/kg, s=6.7240 kJ/(kg K); 25 C liquid h0=104.89, s0=0.3674"
+      }
+    },
+    {
+      "id": "gouy-stodola-1j-per-k",
+      "title": "Gouy-Stodola destruction for 1 J/K entropy generation",
+      "method": "exergy_destruction",
+      "inputs": {"reference_k": 298.15, "entropy_generation": 1.0},
+      "expected": 298.15,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels"],
+      "citation": {
+        "title": "Gouy-Stodola theorem",
+        "locator": "Exergy destruction = T0 Sgen"
+      }
+    },
+    {
+      "id": "kinetic-exergy-1kg-50ms",
+      "title": "Kinetic exergy of 1 kg at 50 m/s",
+      "method": "kinetic_exergy",
+      "inputs": {"mass": 1.0, "velocity": 50.0},
+      "expected": 1250.0,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels"],
+      "citation": {"title": "Mechanical energy identity", "locator": "m v^2 / 2"}
+    },
+    {
+      "id": "potential-exergy-standard-gravity",
+      "title": "Potential exergy of 1 kg raised 100 m",
+      "method": "potential_exergy",
+      "inputs": {"mass": 1.0, "elevation_difference": 100.0},
+      "expected": 980.665,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "reference",
+      "capabilities": ["thermodynamic-kernels"],
+      "citation": {
+        "title": "NIST CODATA and SI reference constants",
+        "url": "https://physics.nist.gov/cuu/pdf/all.pdf",
+        "locator": "standard acceleration of gravity 9.80665 m/s2"
+      }
+    },
+    {
+      "id": "ideal-gas-pressure-exergy-10bar",
+      "title": "Ideal-gas pressure exergy for one mole at 1000 kPa",
+      "method": "ideal_gas_pressure_exergy",
+      "inputs": {"amount_mol": 1.0, "pressure": 1000.0, "reference_pressure": 101.325, "reference_k": 298.15},
+      "expected": 5675.379024555373,
+      "absolute_tolerance": 1e-9,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels", "compressed-air"],
+      "citation": {
+        "title": "NIST CODATA 2022",
+        "url": "https://physics.nist.gov/cuu/pdf/all.pdf",
+        "locator": "R=8.31446261815324 J/(mol K); reversible isothermal work R T0 ln(p/p0)"
+      }
+    },
+    {
+      "id": "ideal-binary-mixture-separation",
+      "title": "Minimum separation work for an equimolar ideal binary mixture",
+      "method": "ideal_mixture_separation_exergy",
+      "inputs": {"amount_mol": 1.0, "mole_fractions": [0.5, 0.5], "reference_k": 298.15},
+      "expected": 1718.2820757981522,
+      "absolute_tolerance": 1e-9,
+      "validation_type": "analytic",
+      "capabilities": ["thermodynamic-kernels", "separation"],
+      "citation": {
+        "title": "Ideal-mixture Gibbs free energy identity",
+        "locator": "minimum reversible separation work = R T0 ln(2) per mole"
       }
     },
     {
@@ -62,10 +168,282 @@
       "inputs": {"reference_k": 298.15, "radiation_temperature_k": 5778.0},
       "expected": 0.931201163286267,
       "absolute_tolerance": 1e-12,
+      "validation_type": "reference",
+      "capabilities": ["thermodynamic-kernels", "solar-radiation"],
       "citation": {
         "title": "Exergy of undiluted thermal radiation",
         "doi": "10.1016/S0038-092X(03)00226-3"
       }
+    },
+    {
+      "id": "nist-btu-to-mwh",
+      "title": "International Table Btu to MWh conversion",
+      "method": "convert_energy",
+      "inputs": {"value": 1.0, "from_unit": "Btu", "to_unit": "MWh"},
+      "expected": 2.930710701722222e-7,
+      "absolute_tolerance": 1e-20,
+      "validation_type": "reference",
+      "capabilities": ["units"],
+      "citation": {
+        "title": "NIST Guide to the SI, Appendix B",
+        "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors",
+        "locator": "1 Btu (IT) = 1055.05585262 J exactly"
+      }
+    },
+    {
+      "id": "nist-therm-to-mwh",
+      "title": "US therm to MWh conversion",
+      "method": "convert_energy",
+      "inputs": {"value": 1.0, "from_unit": "therm", "to_unit": "MWh"},
+      "expected": 0.029307107017222223,
+      "absolute_tolerance": 1e-15,
+      "validation_type": "reference",
+      "capabilities": ["units"],
+      "citation": {
+        "title": "NIST Guide to the SI, Appendix B",
+        "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors",
+        "locator": "1 therm (US) = 105.505585262 MJ"
+      }
+    },
+    {
+      "id": "heat-pump-cop3-40c-20c",
+      "title": "Heat-pump exergetic efficiency at COP 3",
+      "method": "analyze_heat_pump",
+      "inputs": {"delivered_heat_mwh": 1.0, "source_temperature_c": 20.0, "sink_temperature_c": 40.0, "cop": 3.0},
+      "output_path": "exergy.efficiency",
+      "expected": 0.19160146894459518,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["engineering-models", "heat-pump"],
+      "citation": {
+        "title": "Carnot heating COP and heat exergy identities",
+        "locator": "eta_ex = COP (1 - Tsource/Tsink)"
+      }
+    },
+    {
+      "id": "refrigeration-cop2p5-minus10c-30c",
+      "title": "Refrigeration exergetic efficiency at COP 2.5",
+      "method": "analyze_refrigeration",
+      "inputs": {"cooling_delivered_mwh": 1.0, "cold_temperature_c": -10.0, "ambient_temperature_c": 30.0, "cop": 2.5},
+      "output_path": "exergy.efficiency",
+      "expected": 0.3800114003420102,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["engineering-models", "refrigeration"],
+      "citation": {
+        "title": "Carnot refrigeration COP and cooling exergy identities",
+        "locator": "eta_ex = COP (T0/Tcold - 1)"
+      }
+    },
+    {
+      "id": "furnace-exhaust-sensible-exergy",
+      "title": "Furnace exhaust recoverable exergy for 1 MWh at 300 C",
+      "method": "analyze_furnace",
+      "inputs": {"fuel_energy_mwh": 2.0, "useful_process_heat_mwh": 1.0, "exhaust_energy_mwh": 1.0, "exhaust_temperature_c": 300.0, "reference_temperature_c": 25.0},
+      "output_path": "metrics.recoverable_exhaust_exergy_mwh",
+      "expected": 0.2914321628522324,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["engineering-models", "furnace"],
+      "citation": {
+        "title": "US DOE Process Heating System Sourcebook",
+        "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/process_heating_sourcebook2.pdf",
+        "locator": "exhaust sensible heat is cooled across a temperature range, not supplied isothermally"
+      }
+    },
+    {
+      "id": "compressed-air-isothermal-pressure-exergy",
+      "title": "Ideal pressure exergy of 1000 standard m3 delivered at 8 bar absolute",
+      "method": "analyze_compressed_air",
+      "inputs": {"electricity_mwh": 1.0, "free_air_volume_m3": 1000.0, "delivery_pressure_bar_abs": 8.0},
+      "output_path": "metrics.ideal_delivery_pressure_exergy_mwh",
+      "expected": 0.05815713183359277,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["engineering-models", "compressed-air"],
+      "citation": {
+        "title": "Reversible isothermal ideal-gas compression identity",
+        "locator": "p0 V0 ln(p/p0), with absolute pressures"
+      }
+    },
+    {
+      "id": "capital-recovery-7pct-20yr",
+      "title": "Capital recovery factor at 7 percent for 20 years",
+      "method": "capital_recovery_factor",
+      "inputs": {"discount_rate": 0.07, "periods": 20},
+      "expected": 0.09439292574325567,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "analytic",
+      "capabilities": ["economics"],
+      "citation": {
+        "title": "NIST life-cycle costing methodology",
+        "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/BSS/nbsbuildingscience113.pdf",
+        "locator": "uniform capital recovery factor"
+      }
+    },
+    {
+      "id": "npv-two-period-cashflow",
+      "title": "Net present value of a two-period cash flow",
+      "method": "net_present_value",
+      "inputs": {"discount_rate": 0.1, "cash_flows": [-1000.0, 600.0, 600.0]},
+      "expected": 41.32231404958662,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "analytic",
+      "capabilities": ["economics"],
+      "citation": {
+        "title": "NIST life-cycle costing methodology",
+        "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/BSS/nbsbuildingscience113.pdf",
+        "locator": "present-value discounting at time zero"
+      }
+    },
+    {
+      "id": "ipcc-ar6-fossil-methane-gwp100",
+      "title": "IPCC AR6 fossil methane GWP100",
+      "method": "gwp",
+      "inputs": {"gas": "CH4-fossil", "horizon": 100},
+      "expected": 29.8,
+      "absolute_tolerance": 0.0,
+      "validation_type": "reference",
+      "capabilities": ["climate", "ghg-boundaries"],
+      "citation": {
+        "title": "IPCC AR6 WGI Chapter 7",
+        "url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/",
+        "locator": "Table 7.15, fossil methane GWP100 including climate-carbon feedbacks"
+      }
+    },
+    {
+      "id": "epa-2025-natural-gas-co2-hhv",
+      "title": "EPA 2025 natural-gas stationary-combustion CO2 factor",
+      "method": "fuel_factor",
+      "inputs": {"carrier": "natural-gas-hhv", "species": "CO2"},
+      "expected": 181.048235,
+      "absolute_tolerance": 5e-7,
+      "validation_type": "reference",
+      "capabilities": ["emissions", "impacts"],
+      "citation": {
+        "title": "US EPA GHG Emission Factors Hub 2025",
+        "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf",
+        "locator": "53.06 kg CO2/MMBtu HHV converted using 1 MMBtu = 0.2930710702 MWh"
+      }
+    },
+    {
+      "id": "methane-combustion-stoichiometry",
+      "title": "Complete oxidation of one kilogram methane to carbon dioxide",
+      "method": "methane_combustion_co2",
+      "inputs": {"methane_mass_kg": 1.0},
+      "expected": 2.7433068412030543,
+      "absolute_tolerance": 1e-14,
+      "validation_type": "reference",
+      "capabilities": ["methane-project", "ghg-boundaries"],
+      "citation": {
+        "title": "NIST Chemistry WebBook methane molecular weight and NIST atomic weights",
+        "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=629&Units=CAL",
+        "locator": "CH4 + 2 O2 -> CO2 + 2 H2O; mass ratio 44.0095/16.0425"
+      }
+    },
+    {
+      "id": "degree-day-heating-definition",
+      "title": "Heating degree days for 10 C daily mean and 18 C base",
+      "method": "degree_days",
+      "inputs": {"temperature_c": 10.0, "base_c": 18.0, "mode": "heating"},
+      "expected": 8.0,
+      "absolute_tolerance": 0.0,
+      "validation_type": "reference",
+      "capabilities": ["weather"],
+      "citation": {
+        "title": "US DOE Technical Reference Manuals",
+        "url": "https://www.energy.gov/sites/default/files/2021-07/technical-reference-manuals.pdf",
+        "locator": "HDD = max(base temperature - mean daily temperature, 0)"
+      }
+    },
+    {
+      "id": "exergy-balance-conservation",
+      "title": "Exergy balance infers nonnegative destruction",
+      "method": "balance_destruction",
+      "inputs": {"input_exergy": 100.0, "product_exergy": 40.0},
+      "expected": 60.0,
+      "absolute_tolerance": 0.0,
+      "validation_type": "conservation",
+      "capabilities": ["exergy-balances"],
+      "citation": {"title": "Steady exergy balance", "locator": "Bin = Bproduct + Blost + Bdestroyed"}
+    },
+    {
+      "id": "connected-system-energy-closure",
+      "title": "Connected-system first-law closure",
+      "method": "system_residual",
+      "inputs": {},
+      "expected": 0.0,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "conservation",
+      "capabilities": ["connected-systems"],
+      "citation": {"title": "First-law control-volume balance", "locator": "input = products + losses for the steady validation fixture"}
+    },
+    {
+      "id": "material-system-mass-closure",
+      "title": "Material and constituent mass closure",
+      "method": "material_residual",
+      "inputs": {},
+      "expected": 0.0,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "conservation",
+      "capabilities": ["material-balances"],
+      "citation": {"title": "Conservation of mass", "locator": "100 kg feed = 60 kg product + 40 kg loss"}
+    },
+    {
+      "id": "technology-model-explicit-performance",
+      "title": "Technology model applies only the declared performance",
+      "method": "evaluate_technology_model",
+      "inputs": {"model": "electrolyzer", "input_energy": 100.0, "performance": 0.7, "input_exergy_factor": 1.0, "output_exergy_factor": 1.0},
+      "output_path": "useful_energy",
+      "expected": 70.0,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "structural",
+      "capabilities": ["technology-models"],
+      "citation": {"title": "Declared technology-model contract", "locator": "useful energy = input energy x user-supplied performance; no performance default"}
+    },
+    {
+      "id": "csp-power-block-published-performance",
+      "title": "Published CSP power-block thermal-to-electric screening calculation",
+      "method": "assess_performance_with_pack",
+      "inputs": {"pack": "emerging-energy", "technology": "concentrating-solar-power-block", "input_energy": 100.0},
+      "output_path": "output_energy.value",
+      "expected": 40.0,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "reference",
+      "capabilities": ["technology-and-material-packs"],
+      "citation": {
+        "title": "U.S. DOE Power Block R&D for Concentrating Solar-Thermal Power Systems",
+        "url": "https://www.energy.gov/cmei/systems/power-block-rd-csp-systems",
+        "locator": "midpoint of the approximately 35%-45% existing power-block thermal-to-electric range, applied to 100 MWh thermal input"
+      }
+    },
+    {
+      "id": "eaf-melting-published-intensity",
+      "title": "Published electric-arc-furnace mass-normalized energy calculation",
+      "method": "assess_intensity_with_pack",
+      "inputs": {"pack": "advanced-materials", "technology": "electric-arc-furnace-melting", "output_mass": 100.0},
+      "output_path": "input_energy.value",
+      "expected": 48.45833333,
+      "absolute_tolerance": 1e-8,
+      "validation_type": "reference",
+      "capabilities": ["technology-and-material-packs", "material-balances"],
+      "citation": {
+        "title": "U.S. DOE Waste Heat Recovery: Technology and Opportunities in U.S. Industry",
+        "url": "https://www1.eere.energy.gov/manufacturing/intensiveprocesses/pdfs/waste_heat_recovery.pdf",
+        "locator": "1.5 MMBtu per short ton converted to 0.4845833333 MWh per metric tonne and applied to 100 tonnes"
+      }
+    },
+    {
+      "id": "evpi-paired-samples",
+      "title": "Expected value of perfect information for paired samples",
+      "method": "expected_value_of_perfect_information",
+      "inputs": {"scenario_net_benefit_samples": {"A": [0.0, 10.0], "B": [6.0, 6.0]}},
+      "output_path": "expected_value_of_perfect_information",
+      "expected": 2.0,
+      "absolute_tolerance": 0.0,
+      "validation_type": "analytic",
+      "capabilities": ["uncertainty", "decision-analysis"],
+      "citation": {"title": "EVPI defining identity", "locator": "E[max payoff by state] - max E[payoff] = 8 - 6"}
     }
   ]
 }

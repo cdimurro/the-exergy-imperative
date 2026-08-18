@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Mapping
@@ -26,6 +27,7 @@ class ValueStatus(str, Enum):
     SITE_PROFILE = "site_profile"
     DATASET = "dataset"
     PROFILE = "profile"
+    PUBLISHED_ESTIMATE = "published_estimate"
     LOOKUP = "lookup"
     GLOBAL_DEFAULT = "global_default"
     MISSING = "missing"
@@ -45,12 +47,21 @@ class Parameter:
     high: float | None = None
     confidence: str | None = None
     note: str | None = None
+    evidence_kind: str | None = None
+    statistic: str | None = None
+    range_basis: str | None = None
+    applicability: Mapping[str, Any] | None = None
+    estimate_variant: str | None = None
+    selection_basis: str | None = None
+    selection_context: Mapping[str, Any] | None = None
+    available_context: tuple[str, ...] | None = None
 
     @property
     def is_assumed(self) -> bool:
         return self.status in {
             ValueStatus.SITE_PROFILE,
             ValueStatus.PROFILE,
+            ValueStatus.PUBLISHED_ESTIMATE,
             ValueStatus.LOOKUP,
             ValueStatus.GLOBAL_DEFAULT,
         }
@@ -100,6 +111,30 @@ class Environment:
     pressure_kpa: float = 101.325
     composition_model: str = "standard-atmosphere"
     source_id: str = "reference.standard_25c.v1"
+
+    def __post_init__(self) -> None:
+        try:
+            temperature = float(self.temperature_c)
+            pressure = float(self.pressure_kpa)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ValueError(
+                "environment temperature and pressure must be numeric"
+            ) from exc
+        if not math.isfinite(temperature) or temperature <= -273.15:
+            raise ValueError(
+                "environment temperature must be finite and greater than absolute zero"
+            )
+        if not math.isfinite(pressure) or pressure <= 0.0:
+            raise ValueError(
+                "environment pressure must be finite and greater than zero"
+            )
+        if (
+            not isinstance(self.composition_model, str)
+            or not self.composition_model.strip()
+        ):
+            raise ValueError("environment composition_model must be a non-empty string")
+        if not isinstance(self.source_id, str) or not self.source_id.strip():
+            raise ValueError("environment source_id must be a non-empty string")
 
     @property
     def temperature_k(self) -> float:

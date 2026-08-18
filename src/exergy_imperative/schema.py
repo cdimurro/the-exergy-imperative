@@ -19,6 +19,7 @@ WEATHER_NORMALIZATION_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-impera
 LOCAL_DATASET_ADAPTER_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/local-dataset-adapter-v1.json"
 ENGINEERING_RESULT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/engineering-result-v1.json"
 VALIDATION_RESULT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/validation-result-v1.json"
+VALIDATION_COVERAGE_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/validation-coverage-v1.json"
 AGENT_RECIPE_SCHEMA_ID = (
     "https://github.com/cdimurro/the-exergy-imperative/schemas/agent-recipe-v1.json"
 )
@@ -26,6 +27,17 @@ AGENT_RESPONSE_SCHEMA_ID = (
     "https://github.com/cdimurro/the-exergy-imperative/schemas/agent-response-v1.json"
 )
 AGENT_CAPABILITIES_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/agent-capabilities-v1.json"
+TECHNOLOGY_PACK_SCHEMA_ID = (
+    "https://github.com/cdimurro/the-exergy-imperative/schemas/technology-pack-v1.json"
+)
+SYSTEM_DEFINITION_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/system-definition-v1.json"
+SYSTEM_ANALYSIS_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/system-analysis-result-v1.json"
+SYSTEM_TIMESERIES_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/system-timeseries-result-v1.json"
+MATERIAL_BALANCE_DEFINITION_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/material-balance-definition-v1.json"
+MATERIAL_BALANCE_RESULT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/material-balance-result-v1.json"
+TECHNOLOGY_MODEL_RESULT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/technology-model-result-v1.json"
+TECHNOLOGY_INTENSITY_RESULT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/technology-intensity-result-v1.json"
+TECHNOLOGY_PERFORMANCE_RESULT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/technology-performance-result-v1.json"
 
 _SCHEMA_FILES = {
     "assessment": "assessment-result.schema.json",
@@ -39,9 +51,19 @@ _SCHEMA_FILES = {
     "local-dataset-adapter": "local-dataset-adapter.schema.json",
     "engineering": "engineering-result.schema.json",
     "validation": "validation-result.schema.json",
+    "validation-coverage": "validation-coverage.schema.json",
     "agent-recipe": "agent-recipe.schema.json",
     "agent-response": "agent-response.schema.json",
     "agent-capabilities": "agent-capabilities.schema.json",
+    "technology-pack": "technology-pack.schema.json",
+    "system-definition": "system-definition.schema.json",
+    "system-analysis": "system-analysis-result.schema.json",
+    "system-timeseries": "system-timeseries-result.schema.json",
+    "material-balance-definition": "material-balance-definition.schema.json",
+    "material-balance": "material-balance-result.schema.json",
+    "technology-model": "technology-model-result.schema.json",
+    "technology-intensity": "technology-intensity-result.schema.json",
+    "technology-performance": "technology-performance-result.schema.json",
 }
 
 

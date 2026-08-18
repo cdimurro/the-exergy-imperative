@@ -17,7 +17,9 @@ from .agent import (
 from .agent import (
     list_capabilities as agent_capabilities,
 )
+from .agent import search_capabilities as search_agent_capabilities
 from .datasets import list_datasets
+from .packs import bundled_technology_pack_info, technology_pack_coverage
 from .processes import list_process_templates
 from .registry import DEFAULT_REGISTRY
 from .schema import load_schema
@@ -75,6 +77,17 @@ def create_mcp_server() -> Any:
             }
         except Exception as exc:
             return error_response(exc, command="describe_workflow")
+
+    @server.tool()
+    def search_capabilities(
+        query: str, kind: str = "auto", limit: int = 10
+    ) -> dict[str, Any]:
+        """Find applicable workflows, profiles, components, packs, and schemas."""
+
+        try:
+            return search_agent_capabilities(query, kind=kind, limit=limit)
+        except Exception as exc:
+            return error_response(exc, command="search_capabilities")
 
     @server.tool()
     def run_workflow(recipe: dict[str, Any], mode: str | None = None) -> dict[str, Any]:
@@ -135,6 +148,62 @@ def create_mcp_server() -> Any:
         return safe_run_recipe(_recipe("normalize-records", inputs, "execute"))
 
     @server.tool()
+    def analyze_system(inputs: dict[str, Any], mode: str = "execute") -> dict[str, Any]:
+        """Account for energy and exergy across arbitrary connected components."""
+
+        return safe_run_recipe(_recipe("system-analysis", inputs, mode))
+
+    @server.tool()
+    def analyze_system_timeseries(
+        inputs: dict[str, Any], mode: str = "execute"
+    ) -> dict[str, Any]:
+        """Aggregate chronological system records supplied as interval quantities."""
+
+        return safe_run_recipe(_recipe("system-timeseries", inputs, mode))
+
+    @server.tool()
+    def analyze_material_balance(
+        inputs: dict[str, Any], mode: str = "execute"
+    ) -> dict[str, Any]:
+        """Account for mass, composition, and explicitly supplied chemical exergy."""
+
+        return safe_run_recipe(_recipe("material-balance", inputs, mode))
+
+    @server.tool()
+    def evaluate_technology_model(
+        inputs: dict[str, Any], mode: str = "execute"
+    ) -> dict[str, Any]:
+        """Evaluate a registered explicit-performance technology model."""
+
+        return safe_run_recipe(_recipe("technology-model", inputs, mode))
+
+    @server.tool()
+    def estimate_technology_intensity(
+        inputs: dict[str, Any], mode: str = "execute"
+    ) -> dict[str, Any]:
+        """Estimate process energy from a sourced mass-normalized pack prior."""
+
+        return safe_run_recipe(_recipe("technology-intensity", inputs, mode))
+
+    @server.tool()
+    def estimate_technology_performance(
+        inputs: dict[str, Any], mode: str = "execute"
+    ) -> dict[str, Any]:
+        """Estimate energy output without silently assuming an exergy factor."""
+
+        return safe_run_recipe(_recipe("technology-performance", inputs, mode))
+
+    @server.tool()
+    def validate_technology_pack(
+        pack: dict[str, Any] | str, mode: str = "execute"
+    ) -> dict[str, Any]:
+        """Validate an inline, bundled, or explicitly named local technology pack."""
+
+        return safe_run_recipe(
+            _recipe("technology-pack-validation", {"pack": pack}, mode)
+        )
+
+    @server.tool()
     def generate_report(
         recipe: dict[str, Any], outputs: dict[str, str]
     ) -> dict[str, Any]:
@@ -169,6 +238,24 @@ def create_mcp_server() -> Any:
             "datasets": [item.to_dict() for item in list_datasets()],
         }
 
+    @server.tool()
+    def technology_packs() -> dict[str, Any]:
+        """List bundled data-only domain packs and their default policy."""
+
+        return {
+            "schema_version": "1.0",
+            "packs": list(bundled_technology_pack_info()),
+        }
+
+    @server.tool()
+    def technology_pack_default_coverage(pack: str) -> dict[str, Any]:
+        """Show which pack technologies have sourced defaults and which need inputs."""
+
+        try:
+            return technology_pack_coverage(pack)
+        except Exception as exc:
+            return error_response(exc, command="technology_pack_default_coverage")
+
     @server.resource("exergy://capabilities")
     def capabilities_resource() -> str:
         """Machine-readable exergy-imperative agent capabilities."""
@@ -197,6 +284,16 @@ def create_mcp_server() -> Any:
 
         return json.dumps(
             [item.to_dict() for item in list_datasets()],
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+
+    @server.resource("exergy://technology-packs")
+    def technology_packs_resource() -> str:
+        """Bundled domain-pack identifiers, scope, and default policy."""
+
+        return json.dumps(
+            list(bundled_technology_pack_info()),
             ensure_ascii=False,
             sort_keys=True,
         )

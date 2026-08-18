@@ -9,6 +9,7 @@ can replace any default without rewriting the workflow.
 | Progressive assessment | `registry.py`, `assessment.py`, `models.py` | Resolve sparse inputs, provenance, fidelity, refinement |
 | Environmental | `factors.py`, `impacts.py`, `ghg.py` | Grid/fuel/GWP factors, explicit GHG boundaries, methane projects, pollutant and health screening |
 | Industry workflows | `processes.py`, `engineering.py` | Ready-to-use process boundaries, detailed equipment screens, and waste-heat matching |
+| Universal extensions | `packs.py`, `systems.py`, `materials.py`, `technology_models.py` | Sourced technology/process/material packs, registered performance contracts, generic component graphs, material streams, storage, and chronological accounting |
 | Economics and decisions | `economics.py`, `decision.py`, `uncertainty.py` | Cash flow, user-supplied technology costs, price paths, stranded costs, scenarios, sensitivity, Monte Carlo, EVPI |
 | Data interoperability | `ingestion.py`, `adapters.py`, `preprocess.py`, `weather.py`, `validation.py`, `interop.py`, `schema.py` | Local licensed-data adapters, source-preserving ingestion, XAI4Heat, validation, weather normalization, schemas, conversions |
 | Presentation | `reporting.py`, `excel.py`, `cli.py` | Basic charts, native Excel, HTML/PDF/CSV-JSON exports, command line |
@@ -34,6 +35,20 @@ not permit repurposing existing workflow names, fields, modes, or error codes.
 ## Extension paths
 
 - Add a registry pack for equipment, service, carrier, or reference values.
+- Add a validated technology pack that overlays profiles and process templates
+  together without changing global state. Packs can also declare material
+  boundary templates, sourced conditional performance priors, and
+  mass-normalized intensity priors.
+- Use the technology-performance path when energy conversion can be estimated
+  but an exergy-quality factor cannot. It intentionally returns no exergy
+  ledger; the mass-normalized intensity path likewise stays separate from
+  conversion efficiency.
+- Compose an unfamiliar process from generic system components and explicit
+  energy/exergy flows.
+- Close mass, constituent, and inventory balances with `MaterialStream` before
+  attaching reaction, chemical-exergy, impact, or economic interpretations.
+- Register a declarative single-input technology model; use a dedicated model
+  or connected system when the physics are nonlinear or multi-input.
 - Add an impact-factor pack for a geography, supplier, fuel, or pollutant.
 - Add a process template that composes existing public engines.
 - Add an ingestion mapping or adapter while retaining raw records.

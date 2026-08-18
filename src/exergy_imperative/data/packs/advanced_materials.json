@@ -1,0 +1,601 @@
+{
+  "schema_version": "1.0",
+  "id": "advanced-materials",
+  "version": "2026.1",
+  "license": "CC-BY-4.0",
+  "description": "Energy-train and material-boundary templates for metals, cement, glass, chemicals, batteries, minerals, and circular processing.",
+  "domains": ["advanced materials", "metals", "cement", "chemicals", "critical minerals", "recycling"],
+  "sources": {
+    "doe-industrial-decarbonization-roadmap": {
+      "title": "U.S. DOE Industrial Decarbonization Roadmap",
+      "url": "https://www.energy.gov/sites/default/files/2022-09/Industrial%20Decarbonization%20Roadmap.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Industrial process and decarbonization pathway taxonomy for iron and steel, chemicals, refining, cement, and cross-cutting systems",
+      "note": "Technology names and boundary prompts are derived from public sector taxonomies; no roadmap performance values are copied."
+    },
+    "doe-industrial-liftoff": {
+      "title": "U.S. DOE Pathways to Commercial Liftoff: Industrial Decarbonization",
+      "url": "https://www.energy.gov/sites/default/files/2025-07/LIFTOFF_DOE_Industrial-Decarbonization.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Processing and production emissions for chemicals, refining, iron and steel, food, pulp and paper, cement, aluminum, and glass",
+      "note": "This pack provides no commercial-readiness, cost, or performance assumptions."
+    },
+    "doe-steel-eaf-waste-heat-profile": {
+      "title": "U.S. DOE Waste Heat Recovery: Technology and Opportunities in U.S. Industry",
+      "url": "https://www1.eere.energy.gov/manufacturing/intensiveprocesses/pdfs/waste_heat_recovery.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Electricity supplied to an electric-arc furnace per short ton of liquid steel",
+      "note": "The report gives 1.5 million Btu/short ton average furnace power input and 1.388 million with scrap preheat. Fuel and upstream electricity losses are excluded."
+    },
+    "doe-aluminum-bandwidth-2017": {
+      "title": "DOE Bandwidth Study on Energy Use in U.S. Aluminum Manufacturing",
+      "url": "https://www.energy.gov/sites/default/files/2019/05/f62/Aluminum_bandwidth_study_2017.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "On-site process energy per mass of aluminum for selected U.S. aluminum-manufacturing subareas",
+      "note": "Current-typical and practical-minimum intensities are macro-scale 2010 estimates, not facility measurements. Feedstock energy and off-site generation losses are excluded."
+    },
+    "doe-aluminum-energy-requirements": {
+      "title": "U.S. DOE Energy Requirements for Aluminum Production",
+      "url": "https://www1.eere.energy.gov/manufacturing/resources/aluminum/pdfs/al_theoretical.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Electric induction-furnace input to heat absorbed in secondary aluminum melting",
+      "note": "The report states approximately 90% induction-melting efficiency and identifies capacity and oxide-management limitations."
+    },
+    "doe-netl-compressor-model-2024": {
+      "title": "FECM/NETL Natural Gas with Hydrogen Pipeline Cost Model: Description and User's Manual",
+      "url": "https://www.netl.doe.gov/projects/files/FECMNETLNaturalGaswithHydrogenPipelineCostModel2024DescriptionandUsersManual_052424.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Electric motor input through compressor shaft to isentropic gas-compression work",
+      "note": "The model uses 85% compressor isentropic efficiency and 96% motor efficiency; their product is a generic screening proxy, not a synthesis-loop measurement."
+    }
+  },
+  "profiles": {
+    "carrier": [
+      {
+        "id": "chemical-transformation-work",
+        "label": "Minimum chemical-transformation work",
+        "aliases": ["minimum reaction work", "transformation work"],
+        "family": "work",
+        "basis": "reversible minimum work for caller-declared reactants, products, states, and environment",
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Minimum reversible transformation work, not product heating or actual plant energy",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "confidence": "exact"}
+        }
+      },
+      {
+        "id": "minimum-separation-work",
+        "label": "Minimum separation work",
+        "aliases": ["beneficiation work", "minimum purification work"],
+        "family": "work",
+        "basis": "reversible minimum work for caller-declared feed, product, and tailings compositions",
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Minimum reversible separation work, not actual process energy",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "confidence": "exact"}
+        }
+      }
+    ],
+    "technology": [
+      {
+        "id": "hydrogen-dri-reduction-train",
+        "label": "Hydrogen direct-reduced-iron reduction train",
+        "aliases": ["H2 DRI", "hydrogen direct reduction"],
+        "model": "converter",
+        "input_carrier": "hydrogen-lhv",
+        "output_carrier": "chemical-transformation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "ore and gangue composition", "metallization", "hydrogen consumption", "off-gas", "heat", "product mass"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Hydrogen chemical exergy to declared minimum iron-oxide reduction work; heating, compression, electricity, off-gas, and material streams are separate",
+        "parameters": {}
+      },
+      {
+        "id": "natural-gas-dri-reduction-train",
+        "label": "Natural-gas direct-reduced-iron reduction train",
+        "aliases": ["gas DRI", "natural gas direct reduction"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "output_carrier": "chemical-transformation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "ore composition", "reformed-gas composition", "metallization", "off-gas", "product mass"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Selected natural-gas chemical exergy to minimum reduction work; reforming, heat, electricity, and material streams must be explicit",
+        "parameters": {}
+      },
+      {
+        "id": "blast-furnace-reduction-train",
+        "label": "Blast-furnace reduction train",
+        "aliases": ["blast furnace", "BF ironmaking"],
+        "model": "converter",
+        "input_carrier": "coal-lhv",
+        "output_carrier": "chemical-transformation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "ore", "coke", "injected fuel", "flux", "hot blast", "hot metal", "slag", "top gas"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Selected reductant chemical energy to minimum reduction work; complete assessment requires all material and utility flows",
+        "parameters": {}
+      },
+      {
+        "id": "electric-arc-furnace-melting",
+        "label": "Electric-arc-furnace melting train",
+        "aliases": ["EAF melting", "electric steelmaking"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "scrap and DRI mass", "electricity", "fuel", "oxygen", "carbon", "tap temperature", "slag and dust"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Electrical input to declared molten-metal heat service; reaction inputs, off-gas, slag, dust, and auxiliary energy are separate",
+        "parameters": {}
+      },
+      {
+        "id": "molten-oxide-electrolysis",
+        "label": "Molten-oxide electrolysis",
+        "aliases": ["MOE ironmaking"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "chemical-transformation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "electricity", "metal product", "oxygen product", "cell heat", "temperature"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Electrical input to minimum electrochemical transformation work; heat and all material streams remain explicit",
+        "parameters": {}
+      },
+      {
+        "id": "hall-heroult-electrolysis",
+        "label": "Hall-Heroult aluminum electrolysis",
+        "aliases": ["aluminum smelting cell", "Hall Heroult"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "chemical-transformation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "alumina", "anode consumption", "electricity", "metal output", "cell gases", "bath inventory"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Cell electricity to minimum electrochemical transformation work; anodes, heat, gases, and materials are separate",
+        "parameters": {}
+      },
+      {
+        "id": "alumina-refining-separation",
+        "label": "Alumina-refining separation auxiliaries",
+        "aliases": ["Bayer process auxiliaries"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "bauxite composition", "alumina recovery", "red mud", "caustic inventory", "steam", "calcination heat"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Selected electrical auxiliaries to minimum separation work; digestion heat, steam, calcination, reagents, and materials are separate",
+        "parameters": {}
+      },
+      {
+        "id": "electric-cement-calciner",
+        "label": "Electric cement calciner",
+        "aliases": ["electrified calciner"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "raw-meal composition", "electricity", "calcination extent", "clinker mass", "process CO2", "exhaust state"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Electricity to declared calcination heat; carbonate reaction, process CO2, solids, and exhaust are separate",
+        "parameters": {}
+      },
+      {
+        "id": "oxyfuel-cement-kiln",
+        "label": "Oxyfuel cement kiln heat train",
+        "aliases": ["oxyfuel clinker kiln"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "fuel mix", "oxygen production", "raw meal", "clinker", "process CO2", "recirculated gas"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Selected kiln fuel to useful high-temperature heat; oxygen production, calcination, solids, capture, and exhaust are separate",
+        "parameters": {}
+      },
+      {
+        "id": "electric-glass-melter",
+        "label": "Electric glass melter",
+        "aliases": ["electric glass furnace"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "batch and cullet", "electricity", "molten-glass temperature", "off-gas", "product mass"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Electricity to declared glass-melt heat; batch reactions, cullet, off-gas, and material losses are separate",
+        "parameters": {}
+      },
+      {
+        "id": "electric-lime-calciner",
+        "label": "Electric lime calciner",
+        "aliases": ["electrified lime kiln"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "limestone composition", "electricity", "calcination extent", "lime mass", "process CO2"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Electricity to declared calcination heat; reaction and process CO2 require material accounting",
+        "parameters": {}
+      },
+      {
+        "id": "ammonia-synthesis-loop-compressor",
+        "label": "Ammonia synthesis-loop compressor",
+        "aliases": ["ammonia loop compressor"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "gas composition", "flow", "suction state", "discharge state", "recycle"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Electrical input to synthesis-gas compression work; reaction, separation, heating, and feedstocks are separate",
+        "recommended_overrides": ["compressor map", "motor efficiency", "gas composition", "stage pressures", "recycle flow"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.816,
+            "unit": "MWh_isentropic/MWh_electricity",
+            "low": 0.816,
+            "high": 0.816,
+            "confidence": "derived equipment-family assumption",
+            "source_id": "doe-netl-compressor-model-2024",
+            "source_version": "FECM/NETL pipeline model manual, May 2024",
+            "evidence_kind": "published_estimate",
+            "statistic": "Product of 85% compressor and 96% motor default efficiencies",
+            "range_basis": "Published point assumptions; not an uncertainty interval",
+            "applicability": {
+              "technology": "Electric motor-driven centrifugal gas compressor used as a synthesis-loop proxy",
+              "boundary": "Electricity to isentropic compression work; reaction and separation excluded",
+              "geography": "U.S. NETL modeling context",
+              "vintage": "2024 model"
+            },
+            "note": "Ammonia recycle composition, pressure ratio, staging, and turndown require a compressor map."
+          }
+        }
+      },
+      {
+        "id": "methanol-synthesis-loop-compressor",
+        "label": "Methanol synthesis-loop compressor",
+        "aliases": ["methanol loop compressor"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "syngas composition", "flow", "pressure ratio", "recycle"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Electrical input to synthesis-loop compression work; reaction and separation are separate",
+        "recommended_overrides": ["compressor map", "motor efficiency", "gas composition", "stage pressures", "recycle flow"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.816,
+            "unit": "MWh_isentropic/MWh_electricity",
+            "low": 0.816,
+            "high": 0.816,
+            "confidence": "derived equipment-family assumption",
+            "source_id": "doe-netl-compressor-model-2024",
+            "source_version": "FECM/NETL pipeline model manual, May 2024",
+            "evidence_kind": "published_estimate",
+            "statistic": "Product of 85% compressor and 96% motor default efficiencies",
+            "range_basis": "Published point assumptions; not an uncertainty interval",
+            "applicability": {
+              "technology": "Electric motor-driven centrifugal gas compressor used as a synthesis-loop proxy",
+              "boundary": "Electricity to isentropic compression work; reaction and separation excluded",
+              "geography": "U.S. NETL modeling context",
+              "vintage": "2024 model"
+            },
+            "note": "Methanol recycle composition, pressure ratio, staging, and turndown require a compressor map."
+          }
+        }
+      },
+      {
+        "id": "ethylene-cracker-furnace",
+        "label": "Ethylene steam-cracker furnace",
+        "aliases": ["steam cracker", "ethylene furnace"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "fuel", "feedstock", "steam", "coil duty", "product slate", "decoking", "flue gas"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Selected furnace fuel to coil heat; feedstock reaction, dilution steam, products, and downstream separation are separate",
+        "parameters": {}
+      },
+      {
+        "id": "mineral-grinding-circuit",
+        "label": "Mineral grinding circuit",
+        "aliases": ["comminution circuit", "ore grinding"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed mass", "feed and product size distribution", "hardness", "circulating load", "electricity"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Electrical input to declared comminution work; size distribution and throughput are required for process interpretation",
+        "parameters": {}
+      },
+      {
+        "id": "froth-flotation-auxiliaries",
+        "label": "Froth-flotation auxiliaries",
+        "aliases": ["mineral flotation"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "concentrate grade", "recovery", "tailings", "reagents", "air", "electricity"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Selected electricity to minimum mineral-separation work; reagents, air, water, and all material streams are separate",
+        "parameters": {}
+      },
+      {
+        "id": "hydrometallurgical-separation",
+        "label": "Hydrometallurgical separation auxiliaries",
+        "aliases": ["leaching and solvent extraction", "hydrometallurgy"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "recovery", "product purity", "reagents", "water", "heat", "residues"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Selected electrical auxiliaries to minimum separation work; reagents, reaction heat, water, products, and residues are separate",
+        "parameters": {}
+      },
+      {
+        "id": "battery-cathode-kiln",
+        "label": "Battery cathode-material kiln",
+        "aliases": ["cathode calciner"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "precursor composition", "throughput", "temperature profile", "atmosphere", "product yield", "off-gas"],
+        "source_id": "doe-industrial-liftoff",
+        "boundary": "Electricity to declared material-heating duty; reaction, atmosphere, yield, and off-gas require material flows",
+        "parameters": {}
+      },
+      {
+        "id": "mechanical-recycling-line",
+        "label": "Mechanical recycling line",
+        "aliases": ["sorting and mechanical recycling"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "sorting yield", "product purity", "residue", "washing heat", "electricity"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Selected electricity to minimum separation work; washing, drying, material yields, and rejected fractions are separate",
+        "parameters": {}
+      },
+      {
+        "id": "chemical-recycling-reactor-heat",
+        "label": "Chemical-recycling reactor heat train",
+        "aliases": ["polymer chemical recycling", "depolymerization heat"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "polymer composition", "electricity and fuel", "reactor duty", "product yield", "char", "off-gas"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Selected electricity to reactor heat; reaction products, solvents, fuel, char, and off-gas are separate",
+        "parameters": {}
+      },
+      {
+        "id": "secondary-metal-remelting",
+        "label": "Secondary-metal remelting furnace",
+        "aliases": ["scrap remelting", "metal recycling furnace"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "scrap composition", "electricity and fuel", "metal yield", "dross or slag", "tap temperature"],
+        "source_id": "doe-industrial-decarbonization-roadmap",
+        "boundary": "Selected electricity to molten-metal heat; oxidation, dross, slag, fuel, and product composition are separate",
+        "recommended_overrides": ["furnace type", "measured electricity", "metal enthalpy rise", "yield", "dross and holding losses"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.9,
+            "unit": "MWh_metal_heat/MWh_electricity",
+            "low": 0.9,
+            "high": 0.9,
+            "confidence": "induction-melting technology proxy",
+            "source_id": "doe-aluminum-energy-requirements",
+            "source_version": "DOE aluminum energy-requirements report",
+            "evidence_kind": "published_estimate",
+            "statistic": "Published approximate induction-melting efficiency",
+            "range_basis": "Published point approximation; not an uncertainty interval",
+            "applicability": {
+              "technology": "Coreless induction furnace remelting secondary aluminum",
+              "boundary": "Furnace electricity to heat absorbed by molten aluminum; holding and material losses outside",
+              "geography": "U.S. aluminum-industry characterization",
+              "vintage": "Report technology vintage"
+            },
+            "note": "Only applicable to induction remelting; other metals and furnace types require an override."
+          }
+        }
+      }
+    ],
+    "intensity": [
+      {
+        "id": "electric-arc-furnace-melting",
+        "label": "Electric-arc-furnace electricity per liquid-steel output",
+        "aliases": ["EAF steel intensity"],
+        "technology": "electric-arc-furnace-melting",
+        "energy_carrier": "electricity",
+        "output_material": "liquid steel",
+        "source_id": "doe-steel-eaf-waste-heat-profile",
+        "boundary": "Furnace electrical input per metric tonne of liquid steel; fuels, oxygen production, alloying, casting, upstream electricity losses, and material yield are excluded",
+        "parameters": {
+          "specific_energy": {
+            "value": 0.4845833333,
+            "unit": "MWh/t",
+            "low": 0.4484011111,
+            "high": 0.4845833333,
+            "confidence": "published current-to-scrap-preheat screen",
+            "source_id": "doe-steel-eaf-waste-heat-profile",
+            "source_version": "DOE industrial waste-heat report Table A2.12",
+            "evidence_kind": "published_estimate",
+            "statistic": "Published average power input converted from 1.5 million Btu/short ton",
+            "range_basis": "Published scrap-preheat and no-scrap-preheat inputs converted to MWh per metric tonne",
+            "applicability": {
+              "technology": "Electric arc furnace producing liquid steel",
+              "boundary": "Furnace electricity per liquid-steel mass; upstream electricity and auxiliary material/energy inputs excluded",
+              "geography": "U.S. industry reference",
+              "vintage": "Source industry estimate"
+            },
+            "note": "Mass yield and tap practice must match; this is input intensity, not thermal efficiency."
+          }
+        }
+      },
+      {
+        "id": "hall-heroult-electrolysis",
+        "label": "Hall-Heroult on-site electrolysis energy per aluminum output",
+        "aliases": ["primary aluminum electrolysis intensity"],
+        "technology": "hall-heroult-electrolysis",
+        "energy_carrier": "on-site electrolysis energy",
+        "output_material": "primary aluminum",
+        "source_id": "doe-aluminum-bandwidth-2017",
+        "boundary": "On-site electrolysis energy per metric tonne of aluminum; alumina refining, anodes, casting, feedstock energy, and off-site electricity losses are excluded",
+        "parameters": {
+          "specific_energy": {
+            "value": 15.1112466667,
+            "unit": "MWh/t",
+            "low": 7.9135688889,
+            "high": 15.1112466667,
+            "confidence": "macro-scale bandwidth",
+            "source_id": "doe-aluminum-bandwidth-2017",
+            "source_version": "DOE aluminum bandwidth study, 2017",
+            "evidence_kind": "published_estimate",
+            "statistic": "Current-typical 23,388 Btu/lb converted to MWh per metric tonne",
+            "range_basis": "Practical-minimum 12,248 Btu/lb through current-typical 23,388 Btu/lb",
+            "applicability": {
+              "technology": "U.S. primary-aluminum Hall-Heroult electrolysis subarea",
+              "boundary": "On-site electrolysis energy per aluminum mass; upstream and other process areas excluded",
+              "geography": "United States sector model",
+              "vintage": "2010 production basis published 2017"
+            },
+            "note": "The lower value is a practical-minimum technology case, not statistical uncertainty."
+          }
+        }
+      },
+      {
+        "id": "secondary-metal-remelting",
+        "label": "Secondary-aluminum melting and casting energy per output",
+        "aliases": ["secondary aluminum remelting intensity"],
+        "technology": "secondary-metal-remelting",
+        "energy_carrier": "on-site mixed energy",
+        "output_material": "secondary aluminum",
+        "source_id": "doe-aluminum-bandwidth-2017",
+        "boundary": "On-site secondary melting and casting energy per metric tonne of aluminum; scrap preparation, upstream energy losses, and later shape production are excluded",
+        "parameters": {
+          "specific_energy": {
+            "value": 1.4401816667,
+            "unit": "MWh/t",
+            "low": 0.5491944444,
+            "high": 1.4401816667,
+            "confidence": "macro-scale bandwidth",
+            "source_id": "doe-aluminum-bandwidth-2017",
+            "source_version": "DOE aluminum bandwidth study, 2017",
+            "evidence_kind": "published_estimate",
+            "statistic": "Current-typical 2,229 Btu/lb converted to MWh per metric tonne",
+            "range_basis": "Practical-minimum 850 Btu/lb through current-typical 2,229 Btu/lb",
+            "applicability": {
+              "technology": "U.S. secondary-aluminum melting and casting subarea",
+              "boundary": "On-site mixed energy per secondary-aluminum mass; upstream losses excluded",
+              "geography": "United States sector model",
+              "vintage": "2010 production basis published 2017"
+            },
+            "note": "Carrier mix is not inferred; provide site-specific electricity and fuel shares for emissions or exergy work."
+          }
+        }
+      }
+    ]
+  },
+  "material_templates": [
+    {
+      "id": "ironmaking",
+      "label": "Ironmaking feed-product balance",
+      "aliases": ["DRI material balance", "blast furnace material balance"],
+      "source_id": "doe-industrial-decarbonization-roadmap",
+      "boundary": "Ore, reductant, flux, recycled solids, iron product, slag, dust, and off-gas across the declared ironmaking unit",
+      "required_inputs": ["all feed masses and compositions", "iron product mass and composition", "slag", "dust", "off-gas", "inventory change"]
+    },
+    {
+      "id": "steelmaking",
+      "label": "Steelmaking feed-product balance",
+      "aliases": ["EAF material balance", "BOF material balance"],
+      "source_id": "doe-industrial-decarbonization-roadmap",
+      "boundary": "Hot metal, DRI, scrap, flux, oxygen, carbon, liquid steel, slag, dust, off-gas, and inventory change",
+      "required_inputs": ["feed masses and compositions", "steel output", "slag", "dust", "off-gas", "inventory change"]
+    },
+    {
+      "id": "cement-clinker",
+      "label": "Cement-clinker material and process-CO2 balance",
+      "aliases": ["clinker balance", "cement kiln mass balance"],
+      "source_id": "doe-industrial-decarbonization-roadmap",
+      "boundary": "Raw meal, fuels and ash, clinker, dust, bypass, exhaust species, and inventory change",
+      "required_inputs": ["raw-meal mineral composition", "fuel and ash", "clinker composition", "dust and bypass", "exhaust composition", "calcination extent"]
+    },
+    {
+      "id": "primary-aluminum",
+      "label": "Primary-aluminum material balance",
+      "aliases": ["Hall-Heroult material balance"],
+      "source_id": "doe-industrial-liftoff",
+      "boundary": "Alumina, anodes, bath additions, liquid aluminum, cell gases, dust, spent lining, and inventory change",
+      "required_inputs": ["alumina", "anode consumption", "bath additions", "aluminum output", "gas composition", "solid wastes"]
+    },
+    {
+      "id": "glass-melting",
+      "label": "Glass-melting material balance",
+      "aliases": ["glass furnace mass balance"],
+      "source_id": "doe-industrial-liftoff",
+      "boundary": "Virgin batch, cullet, additives, glass product, volatilization, dust, off-gas, and inventory change",
+      "required_inputs": ["batch composition", "cullet fraction", "product mass and composition", "dust", "off-gas", "inventory change"]
+    },
+    {
+      "id": "ammonia-synthesis",
+      "label": "Ammonia-synthesis material balance",
+      "aliases": ["Haber-Bosch material balance"],
+      "source_id": "doe-industrial-decarbonization-roadmap",
+      "boundary": "Hydrogen, nitrogen, purge and recycle streams, ammonia product, inerts, and inventory change",
+      "required_inputs": ["feed and purge compositions", "feed masses", "ammonia output", "recycle", "inventory change"]
+    },
+    {
+      "id": "methanol-synthesis",
+      "label": "Methanol-synthesis material balance",
+      "aliases": ["methanol plant material balance"],
+      "source_id": "doe-industrial-decarbonization-roadmap",
+      "boundary": "Syngas feed, recycle, purge, crude methanol, water, byproducts, and inventory change",
+      "required_inputs": ["syngas composition and mass", "recycle and purge", "product composition", "byproducts", "inventory change"]
+    },
+    {
+      "id": "mineral-beneficiation",
+      "label": "Mineral-beneficiation material balance",
+      "aliases": ["ore concentration balance"],
+      "source_id": "doe-industrial-liftoff",
+      "boundary": "Ore, water, reagents, concentrate, tailings, recovered water, and inventory change",
+      "required_inputs": ["feed mineralogy", "feed mass", "concentrate grade and recovery", "tailings composition", "water and reagents"]
+    },
+    {
+      "id": "battery-material-processing",
+      "label": "Battery-material processing balance",
+      "aliases": ["cathode material balance", "battery recycling balance"],
+      "source_id": "doe-industrial-liftoff",
+      "boundary": "Precursors or recovered feed, reagents, solvents, active-material product, residues, off-gas, wastewater, and inventory change",
+      "required_inputs": ["feed composition", "all reagents and solvents", "product composition and yield", "solid and liquid residues", "off-gas"]
+    },
+    {
+      "id": "recycling-sortation",
+      "label": "Recycling sortation and yield balance",
+      "aliases": ["circular-material balance"],
+      "source_id": "doe-industrial-decarbonization-roadmap",
+      "boundary": "Mixed feed, recovered product fractions, rejects, contamination, wash streams, and inventory change",
+      "required_inputs": ["feed composition", "product masses and purities", "reject composition", "wash and residue streams", "inventory change"]
+    }
+  ],
+  "process_templates": [],
+  "technology_models": [],
+  "metadata": {
+    "default_policy": "explicit process performance and complete material inventories required",
+    "process_emissions_note": "Calcination, reduction, electrode consumption, and reaction emissions must remain separate from combustion inventories."
+  }
+}

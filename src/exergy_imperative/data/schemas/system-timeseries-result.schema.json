@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/system-timeseries-result-v1.json",
+  "title": "Exergy Imperative chronological system result",
+  "type": "object",
+  "required": ["schema_version", "name", "tier", "unit", "record_count", "total_weight", "value_basis", "aggregate_energy", "aggregate_exergy", "component_totals", "snapshots", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "name": {"type": "string", "minLength": 1},
+    "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+    "unit": {"type": "string"},
+    "record_count": {"type": "integer", "minimum": 1},
+    "total_weight": {"type": "number", "exclusiveMinimum": 0},
+    "value_basis": {"const": "interval energy quantities"},
+    "aggregate_energy": {"type": "object"},
+    "aggregate_exergy": {"type": "object"},
+    "component_totals": {"type": "array", "items": {"type": "object"}},
+    "snapshots": {"type": "array", "items": {"type": "object"}},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

@@ -422,6 +422,33 @@ def _strict_check(parameters: Iterable[tuple[str, Parameter]]) -> None:
         )
 
 
+def _warn_published_estimates(
+    warnings: list[str], parameters: Mapping[str, Parameter]
+) -> None:
+    for name, parameter in parameters.items():
+        if parameter.status != ValueStatus.PUBLISHED_ESTIMATE:
+            continue
+        override_name = name if name in {"efficiency", "cop"} else "performance"
+        warnings.append(
+            f"{name} uses a published F1 screening estimate, not measured site "
+            f"performance. Override it with {override_name}=... or "
+            f"result.refine({override_name}=...)."
+        )
+        if parameter.selection_basis == "family_fallback":
+            supplied = ", ".join(parameter.selection_context or {}) or "none"
+            available = ", ".join(parameter.available_context or ())
+            warnings.append(
+                f"No conditional {name} prior matched the supplied estimate_context "
+                f"({supplied}); the family fallback was used. For a narrower estimate, "
+                f"provide applicable context fields: {available}."
+            )
+        elif parameter.estimate_variant:
+            warnings.append(
+                f"Selected published prior variant {parameter.estimate_variant!r} "
+                "from estimate_context."
+            )
+
+
 def _used_source_catalog(
     registry: Registry, parameters: Mapping[str, Parameter]
 ) -> dict[str, Mapping[str, Any]]:
@@ -450,10 +477,12 @@ def assess(
     temperature_unit: str = "C",
     efficiency: float | None = None,
     cop: float | None = None,
+    performance: float | None = None,
     exergy_factor: float | None = None,
     input_exergy_factor: float | None = None,
     output_exergy_factor: float | None = None,
     location: str | None = None,
+    estimate_context: Mapping[str, Any] | None = None,
     strict: bool = False,
     registry: Registry | None = None,
 ) -> AssessmentResult:
@@ -464,6 +493,19 @@ def assess(
     """
 
     registry = registry or DEFAULT_REGISTRY
+    if estimate_context is not None:
+        if not isinstance(estimate_context, Mapping):
+            raise ValueError("estimate_context must be an object")
+        for context_name, context_value in estimate_context.items():
+            if not str(context_name).strip():
+                raise ValueError("estimate_context field names must not be empty")
+            if isinstance(context_value, (int, float)) and not isinstance(
+                context_value, bool
+            ):
+                if not math.isfinite(float(context_value)):
+                    raise ValueError(
+                        f"estimate_context {context_name!r} must be finite"
+                    )
     if energy is not None and float(energy) < 0.0:
         raise ValueError("energy must be nonnegative")
     for label, value in (
@@ -481,9 +523,9 @@ def assess(
             "to make the boundary explicit"
         )
     if technology is None:
-        if efficiency is not None or cop is not None:
+        if efficiency is not None or cop is not None or performance is not None:
             raise ValueError(
-                "efficiency and COP require a technology boundary; for a stream, "
+                "efficiency, COP, and performance require a technology boundary; for a stream, "
                 "provide an exergy factor instead"
             )
         factor_count = sum(
@@ -495,6 +537,8 @@ def assess(
                 "exergy_factor, input_exergy_factor, and output_exergy_factor are "
                 "mutually exclusive for a stream assessment"
             )
+    if sum(value is not None for value in (efficiency, cop, performance)) > 1:
+        raise ValueError("efficiency, cop, and performance are mutually exclusive")
     explicit_basis: str | None = None
     if basis is not None:
         if not isinstance(basis, str) or basis.strip().upper() not in {"HHV", "LHV"}:
@@ -533,10 +577,12 @@ def assess(
         "temperature_unit": temperature_unit,
         "efficiency": efficiency,
         "cop": cop,
+        "performance": performance,
         "exergy_factor": exergy_factor,
         "input_exergy_factor": input_exergy_factor,
         "output_exergy_factor": output_exergy_factor,
         "location": location,
+        "estimate_context": dict(estimate_context) if estimate_context else None,
         "strict": strict,
         "registry": registry,
     }
@@ -571,7 +617,11 @@ def assess(
         )
         performance_field = technology_profile.metadata.get("performance_parameter")
         explicit_basis_performance = (
-            efficiency if performance_field == "efficiency" else cop
+            performance
+            if performance is not None
+            else efficiency
+            if performance_field == "efficiency"
+            else cop
         )
         if (
             default_carrier is not None
@@ -653,12 +703,25 @@ def assess(
         else None
     )
     performance_parameter: Parameter | None = None
-    explicit_performance = efficiency if performance_name == "efficiency" else cop
+    explicit_performance = (
+        performance
+        if performance is not None
+        else efficiency
+        if performance_name == "efficiency"
+        else cop
+    )
     if performance_name:
         if performance_name == "efficiency" and cop is not None:
             raise ValueError(f"{technology_profile.label} uses efficiency, not COP")
         if performance_name == "cop" and efficiency is not None:
             raise ValueError(f"{technology_profile.label} uses COP, not efficiency")
+        if performance_name not in {"efficiency", "cop"} and (
+            efficiency is not None or cop is not None
+        ):
+            raise ValueError(
+                f"{technology_profile.label} uses {performance_name}; provide it "
+                "through the generic performance input"
+            )
         if explicit_performance is not None:
             performance_parameter = _provided(
                 float(explicit_performance), "dimensionless"
@@ -667,6 +730,7 @@ def assess(
             performance_parameter = technology_profile.parameter(
                 performance_name,
                 source_version=registry.data_version,
+                context=estimate_context,
             )
         if performance_parameter:
             performance_value = float(performance_parameter.value)
@@ -924,6 +988,7 @@ def assess(
         _strict_check(
             (name, value) for name, value in parameters.items() if name in used_names
         )
+    _warn_published_estimates(warnings, parameters)
     technology_model_inputs = {
         "input_exergy_factor",
         "output_exergy_factor",

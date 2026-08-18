@@ -2,6 +2,95 @@
 
 ## Unreleased
 
+- Expanded the bundled scientific suite from 5 to 31 reference, analytic,
+  conservation, and structural cases spanning thermodynamics, unit
+  conversions, engineering screens, emissions, methane chemistry, economics,
+  weather, uncertainty, and connected energy/material balances.
+- Added a machine-readable scientific coverage ledger and JSON Schema. Every
+  exported scientific function must be classified as reference/analytic,
+  cross-implementation, conservation, structural, screening-only,
+  external-data-required, or interface-only. `exergy validate --coverage`
+  exposes the classifications and limitations.
+- Corrected furnace exhaust exergy to integrate a sensible stream cooling to
+  the reference temperature; explicit HHV/LHV cross-basis conversion now
+  fails; impossible reference environments fail early; and inconsistent
+  balances no longer report negative inferred exergy destruction.
+- Changed bounded normal sampling from clipping to rejection-sampled
+  truncation and made methane density reference conditions and LHV basis
+  explicit.
+- Added full primary-source provenance checks, NIST/EPA/IPCC pinning,
+  methane-combustion elemental closure, system unit invariance, and a rule
+  preventing any project capability from being labeled decision-grade without
+  site evidence.
+- Added an explicit `published_estimate` contract and expanded the seven domain
+  packs to 80 technology profiles. Fifty technologies have at least one sourced
+  automatic screening path: 48 efficiency/COP priors and three
+  mass-normalized steel/aluminum intensity priors, with one overlapping
+  technology. Results expose source version, statistic, range basis,
+  applicability, and an override warning; explicit inputs replace the prior,
+  while strict mode rejects it.
+- Added conditional prior selection for equipment class, capacity, phase,
+  temperature, and other declared context. A family fallback remains visible
+  when no variant matches; context never silently changes geography, year,
+  profile, or units.
+- Added separate `technology-performance` and `technology-intensity` results,
+  schemas, CLI commands, agent workflows, and MCP tools. The performance path
+  can estimate energy output without inventing heat/fuel exergy quality, while
+  the intensity path preserves a product-mass functional unit and never labels
+  energy intensity as conversion efficiency.
+- Added per-technology coverage reporting through
+  `technology_pack_coverage()`, `exergy pack-coverage`, and MCP. Every profile
+  now reports either its sourced screening path or an explicit-input reason and
+  checklist.
+
+## 0.6.0 - 2026-08-18
+
+- Added first-class mass and constituent accounting with explicit material
+  streams, signed inventory accumulation, mass-unit conversion, component and
+  whole-system closure, and optional chemical-exergy reconciliation.
+- Kept material, energy, and exergy ledgers separate. Incomplete chemical
+  exergy is omitted, and a complete chemical residual is never labeled
+  destruction without heat, work, and reaction accounting.
+- Replaced the fixed three-name technology-model list with a validated,
+  extensible registry. Added compressor/pump, turbine/expander, electrolyzer,
+  fuel-cell, storage, heat-to-power, and separation contracts plus generic
+  custom performance inputs.
+- Added `oil-gas`, `emerging-energy`, and `advanced-materials` packs spanning
+  upstream/midstream/LNG/refining equipment, hydrogen, geothermal, nuclear,
+  carbon management, long-duration storage, marine energy, metals, cement,
+  chemicals, critical minerals, batteries, and recycling.
+- Added 20 material-boundary templates for petroleum processing, carbon
+  capture, hydrogen storage, iron and steel, clinker, aluminum, glass,
+  chemicals, mineral beneficiation, battery materials, and recycling. They
+  require explicit inventories and contain no performance or composition
+  defaults.
+- Added material and model workflows across Python, CLI, agent recipes, and MCP,
+  plus packaged schemas, examples, capability search, documentation, and
+  regression tests. Agent recipe contract version remains `1.0`.
+
+## 0.5.0 - 2026-08-18
+
+- Added connected-system accounting with eleven generic component kinds,
+  explicit internal/resource/product/loss flows, separate energy and exergy
+  balances, component hotspots, storage accumulation, and whole-system
+  reconciliation.
+- Added chronological system records with representative-period weights,
+  interval-quantity safeguards, per-snapshot results, and net-storage horizon
+  aggregation that avoids double-counting charge/discharge turnover.
+- Added the versioned `technology-pack` contract and public loaders for local
+  carrier, service, technology, and process-template overlays. Pack validation
+  requires source, license, applicable boundary, unit, confidence, and ranges
+  for screening defaults.
+- Added data-only `buildings`, `power`, `mobility`, and `water-materials`
+  starter packs. They provide technology mappings but intentionally require
+  explicit COP or efficiency inputs.
+- Added capability search and richer unknown-profile/template suggestions,
+  plus pack, system, and time-series workflows across Python, CLI, agent
+  recipes, and MCP without changing recipe contract version `1.0`.
+- Added packaged schemas, a safe pack scaffold command, connected-system
+  examples, documentation, and regression coverage for custom packs, system
+  boundaries, provenance, storage, and agent recovery.
+
 - Added a release-specific cache key to the dynamic PyPI README badge so
   GitHub refreshes it promptly after publication.
 

@@ -9,11 +9,28 @@ def test_bundled_reference_validation_passes_and_has_citations():
     assert result.passed
     assert len(result.outcomes) >= 5
     assert all(outcome.citation for outcome in result.outcomes)
+    assert result.total_cases >= 25
+    assert result.passed_cases == result.total_cases
     assert xi.load_schema("validation")["$id"] == xi.VALIDATION_RESULT_SCHEMA_ID
+    assert (
+        xi.load_schema("validation-coverage")["$id"] == xi.VALIDATION_COVERAGE_SCHEMA_ID
+    )
     assert xi.load_schema("engineering")["$id"] == xi.ENGINEERING_RESULT_SCHEMA_ID
     assert (
         xi.load_schema("local-dataset-adapter")["$id"]
         == xi.LOCAL_DATASET_ADAPTER_SCHEMA_ID
+    )
+    assert xi.load_schema("technology-pack")["$id"] == xi.TECHNOLOGY_PACK_SCHEMA_ID
+    assert xi.load_schema("system-definition")["$id"] == xi.SYSTEM_DEFINITION_SCHEMA_ID
+    assert xi.load_schema("system-analysis")["$id"] == xi.SYSTEM_ANALYSIS_SCHEMA_ID
+    assert xi.load_schema("system-timeseries")["$id"] == xi.SYSTEM_TIMESERIES_SCHEMA_ID
+    assert (
+        xi.load_schema("material-balance-definition")["$id"]
+        == xi.MATERIAL_BALANCE_DEFINITION_SCHEMA_ID
+    )
+    assert (
+        xi.load_schema("material-balance")["$id"]
+        == xi.MATERIAL_BALANCE_RESULT_SCHEMA_ID
     )
     validate(result.to_dict(), xi.load_schema("validation"))
     validate(
@@ -82,4 +99,29 @@ def test_unknown_validation_method_is_rejected():
         citation={"title": "test"},
     )
     with pytest.raises(ValueError, match="unsupported validation method"):
+        xi.run_validation_case(case)
+
+
+@pytest.mark.parametrize(
+    ("expected", "absolute_tolerance", "relative_tolerance"),
+    [
+        (float("nan"), 0.0, 0.0),
+        (0.0, -1.0, 0.0),
+        (0.0, 0.0, float("inf")),
+    ],
+)
+def test_validation_case_rejects_nonfinite_or_negative_contract_values(
+    expected, absolute_tolerance, relative_tolerance
+):
+    case = xi.ValidationCase(
+        id="invalid",
+        title="Invalid",
+        method="thermal_exergy_factor_c",
+        inputs={"source_c": 40, "reference_c": 20},
+        expected=expected,
+        absolute_tolerance=absolute_tolerance,
+        relative_tolerance=relative_tolerance,
+        citation={"title": "test"},
+    )
+    with pytest.raises(ValueError, match="finite"):
         xi.run_validation_case(case)

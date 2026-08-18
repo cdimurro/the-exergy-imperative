@@ -1,7 +1,7 @@
 # The Exergy Imperative
 
 [![CI](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml/badge.svg)](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/exergy-imperative?cacheSeconds=300&release=0.4.3)](https://pypi.org/project/exergy-imperative/)
+[![PyPI](https://img.shields.io/pypi/v/exergy-imperative?cacheSeconds=300&release=0.6.0)](https://pypi.org/project/exergy-imperative/)
 [![Python](https://img.shields.io/badge/python-3.11%E2%80%933.14-blue)](https://pypi.org/project/exergy-imperative/)
 [![License](https://img.shields.io/badge/code-Apache--2.0-green)](LICENSE)
 [![Guide](https://img.shields.io/badge/guide-CC%20BY%204.0-lightgrey)](THE_EXERGY_IMPERATIVE.md)
@@ -44,6 +44,9 @@ funnel:
   execute modes, stable error codes, capability discovery, and an optional
   [MCP server](docs/agent-integration.md) so AI assistants can drive full
   assessments safely.
+- **Open-ended by design.** Validated local technology packs and connected
+  component graphs cover unfamiliar equipment, multi-output processes, and
+  chronological storage without pretending the library is a design simulator.
 - **Zero required dependencies.** The core is pure Python (3.11–3.14); pandas,
   CoolProp, PDF, and MCP support are opt-in extras.
 
@@ -131,6 +134,87 @@ exergy validate                # run the bundled reference checks
 
 See the [quickstart](docs/quickstart.md) for the full tour.
 
+## Model a technology that is not in the catalog
+
+Use a bundled domain pack, create your own pack, or describe an arbitrary
+connected system. Where an official source matches the modeled boundary, a
+pack can supply a bounded F1 `published_estimate`; otherwise it still requires
+project performance. Every prior remains visible and replaceable:
+
+```python
+import exergy_imperative as xi
+
+gshp = xi.assess_with_pack(
+    "buildings",
+    technology="ground-source heat pump",
+    energy=100,
+    source_temperature="45 C",
+    ambient_temperature="20 C",
+)
+
+print(gshp.parameters["cop"].to_dict())
+site_result = gshp.refine(cop=4.2)
+
+system = xi.analyze_system(
+    "custom converter",
+    components=[{"id": "converter", "kind": "converter"}],
+    flows=[
+        {"id": "input", "energy": 10, "target": "converter", "carrier": "electricity"},
+        {"id": "product", "energy": 8, "source": "converter", "carrier": "shaft-work"},
+        {"id": "loss", "energy": 2, "exergy": 0, "source": "converter", "role": "loss"},
+    ],
+)
+```
+
+`exergy search "ground source" --json` finds named and generic options.
+`exergy pack-scaffold my_pack.json` creates a sourced, versioned extension
+template. See [connected systems and technology packs](docs/systems-and-packs.md).
+
+The seven domain packs cover 80 technologies from buildings, mobility, power,
+water, oil and gas, and refining through hydrogen, geothermal, advanced
+nuclear, carbon management, long-duration storage, metals, cement, chemicals,
+critical minerals, and recycling. Fifty technologies now have at least one
+official-source screening path: 48 efficiency/COP priors and three
+mass-normalized steel/aluminum intensity priors, with one technology in both
+groups. Every remaining entry reports why explicit data are still required:
+
+```python
+xi.search_capabilities("pipeline compressor")
+xi.search_capabilities("cement clinker", kind="material")
+xi.technology_pack_coverage("oil-gas")
+
+csp = xi.assess_performance_with_pack(
+    "emerging-energy",
+    "concentrating-solar-power-block",
+    input_energy=100,
+)
+
+steel = xi.assess_intensity_with_pack(
+    "advanced-materials",
+    "electric-arc-furnace-melting",
+    output_mass=100,
+)
+
+balance = xi.analyze_material_system(
+    "separator",
+    components=[{"id": "separator", "kind": "reactor-separator"}],
+    streams=[
+        {
+            "id": "feed",
+            "mass": 100,
+            "target": "separator",
+            "composition": {"product": 0.8, "gangue": 0.2},
+        },
+        {"id": "product", "mass": 80, "source": "separator", "material": "product"},
+        {"id": "loss", "mass": 20, "source": "separator", "role": "loss", "material": "gangue"},
+    ],
+)
+```
+
+Mass, constituent, energy, exergy, emissions, hazards, and economics remain
+separate ledgers. Chemical exergy is calculated only from explicitly supplied
+factors and is not silently double-counted as an energy flow.
+
 ## What's inside
 
 - Twelve ready-made process templates spanning the energy landscape: steam,
@@ -139,6 +223,14 @@ See the [quickstart](docs/quickstart.md) for the full tour.
   cement, steel reheat, food processing, district energy.
 - Engineering screens for steam systems, heat pumps, furnaces, refrigeration,
   compressed air, and waste-heat matching.
+- Generic connected-system accounting with eleven component primitives,
+  multi-input/multi-output boundaries, explicit storage change, and weighted
+  chronological records.
+- Versioned custom technology/process packs plus data-only starter packs for
+  buildings, power, mobility, water, oil and gas, emerging energy, advanced
+  materials, and manufacturing.
+- First-class mass/composition balances, material inventory accumulation,
+  material-boundary templates, and an extensible technology-model registry.
 - Explicit GHG boundaries (combustion, process, fugitive, purchased energy),
   methane vent/flare/recovery project analysis, and grid intensities for 213
   countries (Ember / Our World in Data, 2020–2025).
@@ -175,7 +267,10 @@ labels: Ember/OWID electricity intensities, IPCC AR6 warming potentials, IPCC
 restricted publisher data (IEA, Energy Institute) is redistributed — local
 adapters map *your* licensed copies with SHA-256 fingerprinting. Run
 `exergy validate` to execute the bundled reference calculations and see every
-expected value, tolerance, and citation.
+expected value, tolerance, and citation. Run `exergy validate --coverage` to
+inspect the assurance level and unresolved limitations for every scientific
+capability. Screening profiles and discovery-only technology packs are never
+included in a blanket “validated” claim.
 
 ## Documentation
 
@@ -184,6 +279,7 @@ expected value, tolerance, and citation.
 | [Quickstart](docs/quickstart.md) | Install to first report |
 | [Python library](docs/python-library.md) | Full API tour |
 | [Engineering models](docs/engineering-models.md) | Equipment screens and their assumptions |
+| [Connected systems & packs](docs/systems-and-packs.md) | Arbitrary systems, storage, and custom technologies |
 | [Environment, health, economics](docs/environment-health-economics.md) | Impacts and project finance |
 | [Data & fidelity](docs/data-and-fidelity.md) | Fidelity tiers, units, boundaries |
 | [Ingestion](docs/ingestion.md) · [Excel & local data](docs/excel-and-local-data.md) | Getting your data in |

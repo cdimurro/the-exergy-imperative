@@ -6,6 +6,7 @@ import inspect
 import json
 import math
 from dataclasses import MISSING, dataclass, field, fields
+from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
@@ -28,7 +29,17 @@ from .engineering import (
 from .ghg import assess_ghg_boundaries, assess_methane_project
 from .impacts import assess_impacts
 from .ingestion import MappingPlan, infer_mapping, normalize_records
+from .materials import analyze_material_definition
 from .models import ExergyStream
+from .packs import (
+    assess_intensity_with_pack,
+    assess_performance_with_pack,
+    assess_process_with_pack,
+    assess_with_pack,
+    bundled_technology_pack_info,
+    load_technology_pack,
+    validate_technology_pack,
+)
 from .processes import (
     ProcessTemplateNotFoundError,
     assess_process,
@@ -37,11 +48,20 @@ from .processes import (
 )
 from .registry import DEFAULT_REGISTRY, ProfileNotFoundError
 from .schema import list_schemas, load_schema
+from .systems import (
+    SYSTEM_COMPONENT_KINDS,
+    analyze_system_definition,
+    analyze_system_timeseries_definition,
+)
+from .technology_models import (
+    DEFAULT_TECHNOLOGY_MODEL_REGISTRY,
+    evaluate_technology_model,
+)
 from .validation import run_bundled_validation_suite
 from .weather import normalize_weather_performance
 
 AGENT_CONTRACT_VERSION = "1.0"
-LIBRARY_VERSION = "0.4.3"
+LIBRARY_VERSION = "0.6.0"
 RECIPE_MODES = ("execute", "dry-run", "validate-only")
 REPORT_OUTPUTS = ("json", "html", "pdf", "xlsx", "excel_directory")
 
@@ -375,6 +395,67 @@ def _execute_weather_normalization(inputs: Mapping[str, Any]) -> Any:
     return normalize_weather_performance(**dict(inputs))
 
 
+def _execute_custom_assessment(inputs: Mapping[str, Any]) -> Any:
+    return assess_with_pack(inputs["pack"], **dict(inputs["assessment"]))
+
+
+def _execute_custom_process(inputs: Mapping[str, Any]) -> Any:
+    options = dict(inputs)
+    pack = options.pop("pack")
+    template = str(options.pop("template"))
+    energy = options.pop("energy", None)
+    return assess_process_with_pack(pack, template, energy, **options)
+
+
+def _execute_technology_intensity(inputs: Mapping[str, Any]) -> Any:
+    return _call(assess_intensity_with_pack, inputs)
+
+
+def _execute_technology_performance(inputs: Mapping[str, Any]) -> Any:
+    return _call(assess_performance_with_pack, inputs)
+
+
+def _registry_from_optional_pack(inputs: Mapping[str, Any]) -> Any:
+    pack = inputs.get("pack")
+    return load_technology_pack(pack).registry() if pack is not None else None
+
+
+def _execute_system(inputs: Mapping[str, Any]) -> Any:
+    payload = dict(inputs)
+    payload.pop("pack", None)
+    return analyze_system_definition(
+        payload, registry=_registry_from_optional_pack(inputs)
+    )
+
+
+def _execute_system_timeseries(inputs: Mapping[str, Any]) -> Any:
+    payload = dict(inputs)
+    payload.pop("pack", None)
+    return analyze_system_timeseries_definition(
+        payload, registry=_registry_from_optional_pack(inputs)
+    )
+
+
+def _execute_material_balance(inputs: Mapping[str, Any]) -> Any:
+    return analyze_material_definition(inputs)
+
+
+def _execute_technology_model(inputs: Mapping[str, Any]) -> Any:
+    return _call(evaluate_technology_model, inputs)
+
+
+def _execute_pack_validation(inputs: Mapping[str, Any]) -> Any:
+    return validate_technology_pack(inputs["pack"])
+
+
+def _execute_capability_search(inputs: Mapping[str, Any]) -> Any:
+    return search_capabilities(
+        str(inputs["query"]),
+        kind=str(inputs.get("kind", "auto")),
+        limit=int(inputs.get("limit", 10)),
+    )
+
+
 _COMMON_REPORT_FORMATS = REPORT_OUTPUTS
 _EXERGY_STREAM_INPUT_SCHEMA = {
     "type": "object",
@@ -421,6 +502,203 @@ _HEAT_DEMAND_INPUT_SCHEMA = {
     ],
     "additionalProperties": False,
 }
+_PACK_INPUT_SCHEMA = {
+    "type": ["object", "string"],
+    "description": "An inline technology-pack object, bundled pack name, or explicit local JSON path.",
+}
+_SYSTEM_COMPONENT_INPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "id": {"type": "string"},
+        "kind": {"type": "string", "enum": list(SYSTEM_COMPONENT_KINDS)},
+        "label": {"type": "string"},
+        "technology": {"type": "string"},
+        "metadata": {"type": "object", "default": {}},
+    },
+    "required": ["id", "kind"],
+    "additionalProperties": False,
+}
+_SYSTEM_FLOW_INPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "id": {"type": "string"},
+        "energy": {"type": "number"},
+        "unit": {"type": "string", "default": "MWh"},
+        "source": {"type": ["string", "null"]},
+        "target": {"type": ["string", "null"]},
+        "role": {
+            "type": "string",
+            "enum": ["resource", "internal", "product", "loss"],
+        },
+        "carrier": {"type": "string"},
+        "exergy": {"type": "number"},
+        "exergy_factor": {"type": "number"},
+        "tier": {"type": "string", "enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "metadata": {"type": "object", "default": {}},
+    },
+    "required": ["id", "energy"],
+    "additionalProperties": False,
+}
+_SYSTEM_ACCUMULATION_INPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "component": {"type": "string"},
+        "energy_change": {"type": "number"},
+        "unit": {"type": "string", "default": "MWh"},
+        "exergy_change": {"type": "number"},
+        "exergy_factor": {"type": "number"},
+        "carrier": {"type": "string"},
+        "tier": {"type": "string", "enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "metadata": {"type": "object", "default": {}},
+    },
+    "required": ["component", "energy_change"],
+    "additionalProperties": False,
+}
+_MATERIAL_STREAM_INPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "id": {"type": "string"},
+        "mass": {"type": "number"},
+        "material": {"type": "string"},
+        "unit": {
+            "type": "string",
+            "enum": ["kg", "g", "t", "tonne", "lb", "short-ton"],
+            "default": "kg",
+        },
+        "source": {"type": ["string", "null"]},
+        "target": {"type": ["string", "null"]},
+        "role": {
+            "type": "string",
+            "enum": ["resource", "internal", "product", "loss"],
+        },
+        "composition": {
+            "type": "object",
+            "additionalProperties": {"type": "number"},
+        },
+        "specific_chemical_exergy_mj_per_kg": {"type": "number"},
+        "tier": {"type": "string", "enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "source_id": {"type": "string"},
+        "metadata": {"type": "object", "default": {}},
+    },
+    "required": ["id", "mass"],
+    "additionalProperties": False,
+}
+_MATERIAL_ACCUMULATION_INPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "component": {"type": "string"},
+        "mass_change": {"type": "number"},
+        "material": {"type": "string"},
+        "unit": {
+            "type": "string",
+            "enum": ["kg", "g", "t", "tonne", "lb", "short-ton"],
+            "default": "kg",
+        },
+        "composition": {
+            "type": "object",
+            "additionalProperties": {"type": "number"},
+        },
+        "specific_chemical_exergy_mj_per_kg": {"type": "number"},
+        "tier": {"type": "string", "enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "source_id": {"type": "string"},
+        "metadata": {"type": "object", "default": {}},
+    },
+    "required": ["component", "mass_change"],
+    "additionalProperties": False,
+}
+_SYSTEM_PROPERTIES = {
+    "name": {"type": "string"},
+    "components": {"type": "array", "items": _SYSTEM_COMPONENT_INPUT_SCHEMA},
+    "flows": {"type": "array", "items": _SYSTEM_FLOW_INPUT_SCHEMA},
+    "accumulations": {
+        "type": "array",
+        "items": _SYSTEM_ACCUMULATION_INPUT_SCHEMA,
+    },
+    "unit": {"type": "string", "default": "MWh"},
+    "tolerance": {"type": "number", "default": 1e-9},
+    "pack": _PACK_INPUT_SCHEMA,
+}
+_CUSTOM_ASSESSMENT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "pack": _PACK_INPUT_SCHEMA,
+        "assessment": _function_input_schema(assess, exclude=("registry",)),
+    },
+    "required": ["pack", "assessment"],
+    "additionalProperties": False,
+}
+_CUSTOM_PROCESS_BASE_SCHEMA = _function_input_schema(
+    assess_process, exclude=("factor_library", "registry", "catalog")
+)
+_CUSTOM_PROCESS_SCHEMA = {
+    **_CUSTOM_PROCESS_BASE_SCHEMA,
+    "properties": {
+        "pack": _PACK_INPUT_SCHEMA,
+        **_CUSTOM_PROCESS_BASE_SCHEMA["properties"],
+    },
+    "required": ["pack", "template"],
+}
+_TECHNOLOGY_INTENSITY_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "pack": _PACK_INPUT_SCHEMA,
+        "technology": {"type": "string"},
+        "output_mass": {"type": "number", "exclusiveMinimum": 0},
+        "output_unit": {
+            "type": "string",
+            "enum": ["kg", "g", "t", "tonne", "lb", "short-ton"],
+            "default": "t",
+        },
+        "specific_energy_mwh_per_tonne": {
+            "type": ["number", "null"],
+            "exclusiveMinimum": 0,
+            "default": None,
+        },
+        "estimate_context": {
+            "type": ["object", "null"],
+            "default": None,
+        },
+        "strict": {"type": "boolean", "default": False},
+    },
+    "required": ["pack", "technology", "output_mass"],
+    "additionalProperties": False,
+}
+_TECHNOLOGY_PERFORMANCE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "pack": _PACK_INPUT_SCHEMA,
+        "technology": {"type": "string"},
+        "input_energy": {"type": "number", "minimum": 0},
+        "unit": {"type": "string", "default": "MWh"},
+        "performance": {
+            "type": ["number", "null"],
+            "exclusiveMinimum": 0,
+            "default": None,
+        },
+        "estimate_context": {
+            "type": ["object", "null"],
+            "default": None,
+        },
+        "strict": {"type": "boolean", "default": False},
+    },
+    "required": ["pack", "technology", "input_energy"],
+    "additionalProperties": False,
+}
+_SYSTEM_TIMESERIES_RECORD_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "timestamp": {"type": "string"},
+        "weight": {"type": "number", "default": 1.0},
+        "duration_hours": {"type": ["number", "null"], "default": None},
+        "flows": {"type": "array", "items": _SYSTEM_FLOW_INPUT_SCHEMA},
+        "accumulations": {
+            "type": "array",
+            "items": _SYSTEM_ACCUMULATION_INPUT_SCHEMA,
+        },
+    },
+    "required": ["timestamp", "flows"],
+    "additionalProperties": False,
+}
 
 WORKFLOW_SPECS: tuple[WorkflowSpec, ...] = (
     WorkflowSpec(
@@ -433,13 +711,51 @@ WORKFLOW_SPECS: tuple[WorkflowSpec, ...] = (
         output_formats=_COMMON_REPORT_FORMATS,
     ),
     WorkflowSpec(
+        "custom-assessment",
+        "Run a progressive-fidelity assessment with an explicitly loaded technology pack.",
+        _execute_custom_assessment,
+        _CUSTOM_ASSESSMENT_SCHEMA,
+        "assessment",
+        aliases=("packed-assessment",),
+        output_formats=_COMMON_REPORT_FORMATS,
+    ),
+    WorkflowSpec(
         "process-assessment",
         "Integrated process exergy, impact, opportunity, and economic screen.",
         lambda inputs: _call(assess_process, inputs),
-        _function_input_schema(assess_process, exclude=("factor_library",)),
+        _function_input_schema(
+            assess_process, exclude=("factor_library", "registry", "catalog")
+        ),
         "process",
         aliases=("process", "assess-process"),
         output_formats=_COMMON_REPORT_FORMATS,
+    ),
+    WorkflowSpec(
+        "custom-process-assessment",
+        "Run an integrated process assessment with an explicitly loaded technology pack.",
+        _execute_custom_process,
+        _CUSTOM_PROCESS_SCHEMA,
+        "process",
+        aliases=("packed-process",),
+        output_formats=_COMMON_REPORT_FORMATS,
+    ),
+    WorkflowSpec(
+        "technology-intensity",
+        "Estimate process input energy from a sourced mass-normalized pack prior without implying conversion efficiency.",
+        _execute_technology_intensity,
+        _TECHNOLOGY_INTENSITY_SCHEMA,
+        "technology-intensity",
+        aliases=("process-intensity", "material-energy-intensity"),
+        output_formats=("json",),
+    ),
+    WorkflowSpec(
+        "technology-performance",
+        "Estimate energy output from a sourced efficiency or COP without inventing exergy quality.",
+        _execute_technology_performance,
+        _TECHNOLOGY_PERFORMANCE_SCHEMA,
+        "technology-performance",
+        aliases=("performance-screen", "energy-performance"),
+        output_formats=("json",),
     ),
     WorkflowSpec(
         "impacts",
@@ -544,6 +860,131 @@ WORKFLOW_SPECS: tuple[WorkflowSpec, ...] = (
             "additionalProperties": False,
         },
         aliases=("balance",),
+        output_formats=("json",),
+    ),
+    WorkflowSpec(
+        "technology-model",
+        "Evaluate a registered single-input technology model from explicit performance and exergy factors.",
+        _execute_technology_model,
+        _function_input_schema(evaluate_technology_model, exclude=("registry",)),
+        "technology-model",
+        aliases=("evaluate-technology-model",),
+        output_formats=("json",),
+    ),
+    WorkflowSpec(
+        "material-balance",
+        "Account for mass, composition, and explicit chemical exergy without conflating them with energy destruction.",
+        _execute_material_balance,
+        {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "components": {
+                    "type": "array",
+                    "items": _SYSTEM_COMPONENT_INPUT_SCHEMA,
+                },
+                "streams": {
+                    "type": "array",
+                    "items": _MATERIAL_STREAM_INPUT_SCHEMA,
+                },
+                "accumulations": {
+                    "type": "array",
+                    "items": _MATERIAL_ACCUMULATION_INPUT_SCHEMA,
+                },
+                "tolerance_kg": {"type": "number", "default": 1e-6},
+                "source_catalog": {"type": "object", "default": {}},
+            },
+            "required": ["name", "components", "streams"],
+            "additionalProperties": False,
+        },
+        "material-balance",
+        aliases=("materials", "mass-balance"),
+        output_formats=("json",),
+    ),
+    WorkflowSpec(
+        "system-analysis",
+        "Account for energy and exergy across arbitrary connected component boundaries.",
+        _execute_system,
+        {
+            "type": "object",
+            "properties": dict(_SYSTEM_PROPERTIES),
+            "required": ["name", "components", "flows"],
+            "additionalProperties": False,
+        },
+        "system-analysis",
+        aliases=("system", "flowsheet"),
+        output_formats=("json",),
+    ),
+    WorkflowSpec(
+        "system-timeseries",
+        "Aggregate chronological connected-system records without treating power as energy.",
+        _execute_system_timeseries,
+        {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "components": {
+                    "type": "array",
+                    "items": _SYSTEM_COMPONENT_INPUT_SCHEMA,
+                },
+                "records": {
+                    "type": "array",
+                    "items": _SYSTEM_TIMESERIES_RECORD_SCHEMA,
+                },
+                "unit": {"type": "string", "default": "MWh"},
+                "tolerance": {"type": "number", "default": 1e-9},
+                "include_snapshots": {"type": "boolean", "default": True},
+                "pack": _PACK_INPUT_SCHEMA,
+            },
+            "required": ["name", "components", "records"],
+            "additionalProperties": False,
+        },
+        "system-timeseries",
+        aliases=("chronological-system",),
+        output_formats=("json",),
+    ),
+    WorkflowSpec(
+        "technology-pack-validation",
+        "Validate a local or inline technology/process pack and all provenance fields.",
+        _execute_pack_validation,
+        {
+            "type": "object",
+            "properties": {"pack": _PACK_INPUT_SCHEMA},
+            "required": ["pack"],
+            "additionalProperties": False,
+        },
+        aliases=("validate-pack",),
+        output_formats=("json",),
+    ),
+    WorkflowSpec(
+        "capability-search",
+        "Search named and generic workflows, profiles, components, packs, and schemas.",
+        _execute_capability_search,
+        {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "kind": {
+                    "type": "string",
+                    "enum": [
+                        "auto",
+                        "workflow",
+                        "process",
+                        "profile",
+                        "component",
+                        "model",
+                        "material",
+                        "pack",
+                        "schema",
+                    ],
+                    "default": "auto",
+                },
+                "limit": {"type": "integer", "default": 10},
+            },
+            "required": ["query"],
+            "additionalProperties": False,
+        },
+        aliases=("search", "find-capability"),
         output_formats=("json",),
     ),
     WorkflowSpec(
@@ -652,6 +1093,11 @@ def list_capabilities() -> dict[str, Any]:
             "process_template_count": len(list_process_templates()),
             "profile_categories": list(DEFAULT_REGISTRY.categories()),
             "profile_count": len(DEFAULT_REGISTRY.list()),
+            "system_component_kinds": list(SYSTEM_COMPONENT_KINDS),
+            "technology_models": [
+                item.to_dict() for item in DEFAULT_TECHNOLOGY_MODEL_REGISTRY.list()
+            ],
+            "technology_packs": list(bundled_technology_pack_info()),
             "datasets": [item.to_dict() for item in list_datasets()],
         },
         "safety": {
@@ -663,14 +1109,306 @@ def list_capabilities() -> dict[str, Any]:
     }
 
 
+def _capability_score(query: str, texts: Sequence[str]) -> float:
+    normalized_query = query.casefold().strip().replace("_", "-")
+    normalized_texts = [text.casefold().replace("_", "-") for text in texts if text]
+    if any(normalized_query == text for text in normalized_texts):
+        return 1.0
+    contains = max(
+        (
+            min(0.96, 0.78 + len(normalized_query) / max(len(text), 1) * 0.18)
+            for text in normalized_texts
+            if normalized_query in text
+        ),
+        default=0.0,
+    )
+    query_tokens = set(normalized_query.replace("-", " ").split())
+    token_score = max(
+        (
+            len(query_tokens & set(text.replace("-", " ").split()))
+            / max(len(query_tokens), 1)
+            * 0.82
+            for text in normalized_texts
+        ),
+        default=0.0,
+    )
+    similarity = max(
+        (
+            SequenceMatcher(None, normalized_query, text).ratio() * 0.75
+            for text in normalized_texts
+        ),
+        default=0.0,
+    )
+    return max(contains, token_score, similarity)
+
+
+def search_capabilities(
+    query: str, *, kind: str = "auto", limit: int = 10
+) -> dict[str, Any]:
+    """Search workflows, profiles, templates, components, models, packs, and schemas."""
+
+    normalized_query = str(query).strip()
+    if not normalized_query:
+        raise AgentNativeError(
+            "INVALID_ARGUMENT",
+            "capability search query must not be empty",
+            suggested_fields=("query",),
+        )
+    normalized_kind = str(kind).strip().lower().replace("_", "-")
+    valid_kinds = {
+        "auto",
+        "workflow",
+        "process",
+        "profile",
+        "component",
+        "model",
+        "material",
+        "pack",
+        "schema",
+    }
+    if normalized_kind not in valid_kinds:
+        raise AgentNativeError(
+            "INVALID_ARGUMENT",
+            "kind must be " + ", ".join(sorted(valid_kinds)),
+            suggested_fields=("kind",),
+        )
+    try:
+        limit = int(limit)
+    except (TypeError, ValueError) as exc:
+        raise AgentNativeError(
+            "INVALID_ARGUMENT", "limit must be an integer", suggested_fields=("limit",)
+        ) from exc
+    if not 1 <= limit <= 100:
+        raise AgentNativeError(
+            "INVALID_ARGUMENT",
+            "limit must be between 1 and 100",
+            suggested_fields=("limit",),
+        )
+    candidates: list[dict[str, Any]] = []
+    if normalized_kind in {"auto", "workflow"}:
+        for item in WORKFLOW_SPECS:
+            candidates.append(
+                {
+                    "kind": "workflow",
+                    "id": item.id,
+                    "label": item.id,
+                    "description": item.description,
+                    "aliases": list(item.aliases),
+                    "score": _capability_score(
+                        normalized_query,
+                        (item.id, item.description, *item.aliases),
+                    ),
+                    "next_action": f"describe_workflow({item.id!r})",
+                }
+            )
+    if normalized_kind in {"auto", "process"}:
+        for item in list_process_templates():
+            candidates.append(
+                {
+                    "kind": "process",
+                    "id": item.id,
+                    "label": item.label,
+                    "description": item.description,
+                    "aliases": list(item.aliases),
+                    "score": _capability_score(
+                        normalized_query,
+                        (
+                            item.id,
+                            item.label,
+                            item.description,
+                            item.sector,
+                            *item.aliases,
+                        ),
+                    ),
+                    "next_action": (
+                        "Run process-assessment in validate-only mode with "
+                        f"template={item.id!r}."
+                    ),
+                }
+            )
+    if normalized_kind in {"auto", "profile"}:
+        for item in DEFAULT_REGISTRY.list():
+            candidates.append(
+                {
+                    "kind": "profile",
+                    "category": item.category,
+                    "id": item.id,
+                    "label": item.label,
+                    "aliases": list(item.aliases),
+                    "score": _capability_score(
+                        normalized_query,
+                        (item.id, item.label, item.category, *item.aliases),
+                    ),
+                    "next_action": (
+                        f"Use {item.category}={item.id!r} in an assessment recipe."
+                    ),
+                }
+            )
+    if normalized_kind in {"auto", "component"}:
+        for item in SYSTEM_COMPONENT_KINDS:
+            candidates.append(
+                {
+                    "kind": "component",
+                    "id": item,
+                    "label": item.replace("-", " ").title(),
+                    "description": (
+                        "Generic accounting component for explicit incoming, outgoing, "
+                        "loss, and storage flows."
+                    ),
+                    "score": _capability_score(normalized_query, (item,)),
+                    "next_action": "Use it in a system-analysis component definition.",
+                }
+            )
+    if normalized_kind in {"auto", "model"}:
+        for item in DEFAULT_TECHNOLOGY_MODEL_REGISTRY.list():
+            candidates.append(
+                {
+                    "kind": "model",
+                    "id": item.id,
+                    "label": item.label,
+                    "description": item.description,
+                    "aliases": list(item.aliases),
+                    "score": _capability_score(
+                        normalized_query,
+                        (item.id, item.label, item.description, *item.aliases),
+                    ),
+                    "next_action": (
+                        f"Use model={item.id!r} in a technology pack or call "
+                        "evaluate_technology_model."
+                    ),
+                }
+            )
+    if normalized_kind in {"auto", "pack"}:
+        for item in bundled_technology_pack_info():
+            pack = load_technology_pack(str(item["id"]))
+            profile_terms = tuple(
+                str(value)
+                for records in pack.profiles.values()
+                for profile in records
+                for value in (
+                    profile.get("id", ""),
+                    profile.get("label", ""),
+                    *profile.get("aliases", ()),
+                )
+            )
+            material_terms = tuple(
+                str(value)
+                for template in pack.material_templates
+                for value in (
+                    template.get("id", ""),
+                    template.get("label", ""),
+                    template.get("boundary", ""),
+                    *template.get("aliases", ()),
+                )
+            )
+            candidates.append(
+                {
+                    "kind": "pack",
+                    **dict(item),
+                    "label": item["id"].replace("-", " ").title(),
+                    "score": _capability_score(
+                        normalized_query,
+                        (
+                            str(item["id"]),
+                            str(item["description"]),
+                            *(str(value) for value in item["domains"]),
+                            *profile_terms,
+                            *material_terms,
+                        ),
+                    ),
+                    "next_action": (
+                        f"Load bundled pack {item['id']!r} or use custom-assessment."
+                    ),
+                }
+            )
+    if normalized_kind in {"auto", "material"}:
+        for pack_name in (str(item["id"]) for item in bundled_technology_pack_info()):
+            pack = load_technology_pack(pack_name)
+            for item in pack.material_templates:
+                candidates.append(
+                    {
+                        "kind": "material",
+                        "id": str(item["id"]),
+                        "label": str(item["label"]),
+                        "description": str(item["boundary"]),
+                        "pack": pack.id,
+                        "aliases": list(item.get("aliases", ())),
+                        "score": _capability_score(
+                            normalized_query,
+                            (
+                                str(item["id"]),
+                                str(item["label"]),
+                                str(item["boundary"]),
+                                *(str(value) for value in item.get("aliases", ())),
+                            ),
+                        ),
+                        "next_action": (
+                            "Use the template's required_inputs to construct a "
+                            "material-balance recipe."
+                        ),
+                    }
+                )
+    if normalized_kind in {"auto", "schema"}:
+        for item in list_schemas():
+            candidates.append(
+                {
+                    "kind": "schema",
+                    "id": item["name"],
+                    "label": item["name"],
+                    "description": str(item.get("$id", "")),
+                    "score": _capability_score(
+                        normalized_query,
+                        (str(item["name"]), str(item.get("$id", ""))),
+                    ),
+                    "next_action": f"load_schema({item['name']!r})",
+                }
+            )
+    matches = [item for item in candidates if item["score"] >= 0.3]
+    matches.sort(key=lambda item: (-item["score"], item["kind"], item["id"]))
+    for item in matches:
+        item["score"] = round(float(item["score"]), 3)
+    return {
+        "query": normalized_query,
+        "kind": normalized_kind,
+        "matches": matches[:limit],
+        "fallback": (
+            None
+            if matches
+            else {
+                "workflow": (
+                    "material-balance"
+                    if normalized_kind == "material"
+                    else "system-analysis"
+                ),
+                "reason": (
+                    "Define explicit material streams when no material template "
+                    "matches."
+                    if normalized_kind == "material"
+                    else "Define explicit components and energy/exergy flows when no named technology matches."
+                ),
+            }
+        ),
+    }
+
+
 def describe_target(name: str, *, kind: str = "auto") -> dict[str, Any]:
     """Describe a workflow, process template, or bundled profile."""
 
     normalized_kind = str(kind).strip().lower().replace("_", "-")
-    if normalized_kind not in {"auto", "workflow", "process", "profile"}:
+    if normalized_kind not in {
+        "auto",
+        "workflow",
+        "process",
+        "profile",
+        "component",
+        "model",
+        "material",
+        "pack",
+        "schema",
+    }:
         raise AgentNativeError(
             "INVALID_ARGUMENT",
-            "kind must be auto, workflow, process, or profile",
+            "kind must be auto, workflow, process, profile, component, model, material, pack, or schema",
             suggested_fields=("kind",),
         )
     if normalized_kind in {"auto", "workflow"}:
@@ -704,11 +1442,62 @@ def describe_target(name: str, *, kind: str = "auto") -> dict[str, Any]:
                 matches.append(profile.to_dict())
         if matches:
             return {"kind": "profile", "items": matches}
+    if normalized_kind in {"auto", "component"}:
+        component = str(name).strip().lower().replace("_", "-")
+        if component in SYSTEM_COMPONENT_KINDS:
+            return {
+                "kind": "component",
+                "item": {
+                    "id": component,
+                    "description": (
+                        "Generic accounting boundary used by system-analysis; "
+                        "performance and flows remain explicit."
+                    ),
+                },
+            }
+    if normalized_kind in {"auto", "model"}:
+        try:
+            return {
+                "kind": "model",
+                "item": DEFAULT_TECHNOLOGY_MODEL_REGISTRY.get(name).to_dict(),
+            }
+        except KeyError:
+            if normalized_kind == "model":
+                pass
+    if normalized_kind in {"auto", "material"}:
+        material_key = str(name).strip().lower().replace("_", "-")
+        material_matches = []
+        for pack_info in bundled_technology_pack_info():
+            pack = load_technology_pack(str(pack_info["id"]))
+            for item in pack.material_templates:
+                names = {
+                    str(item["id"]).strip().lower().replace("_", "-"),
+                    str(item["label"]).strip().lower().replace("_", "-"),
+                    *(
+                        str(value).strip().lower().replace("_", "-")
+                        for value in item.get("aliases", ())
+                    ),
+                }
+                if material_key in names:
+                    material_matches.append({"pack": pack.id, **dict(item)})
+        if material_matches:
+            return {"kind": "material", "items": material_matches}
+    if normalized_kind in {"auto", "pack"}:
+        for item in bundled_technology_pack_info():
+            if item["id"] == str(name).strip().lower().replace("_", "-"):
+                return {"kind": "pack", "item": dict(item)}
+    if normalized_kind in {"auto", "schema"}:
+        try:
+            return {"kind": "schema", "item": load_schema(name)}
+        except KeyError:
+            pass
+    search = search_capabilities(name, kind=normalized_kind, limit=5)
     raise AgentNativeError(
         "UNKNOWN_TARGET",
-        f"no workflow, process template, or profile matched {name!r}",
+        f"no capability matched {name!r}",
         suggested_fields=("name", "kind"),
-        hint="Use the capabilities, processes, or profiles commands to discover valid names.",
+        hint="Use capability search to discover a named item or the generic system workflow.",
+        details={"suggestions": search["matches"]},
     )
 
 

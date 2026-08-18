@@ -73,9 +73,15 @@ def test_furnace_and_compressed_air_expose_recovery_opportunities():
         leak_fraction=0.1,
     )
     assert furnace.recoverable_energy_mwh == pytest.approx(150)
-    assert furnace.metrics["recoverable_exhaust_exergy_mwh"] > 0
+    assert furnace.metrics["exhaust_heat_exergy_factor"] == pytest.approx(
+        0.2914321628522324
+    )
+    assert furnace.metrics["recoverable_exhaust_exergy_mwh"] == pytest.approx(
+        43.71482442783486
+    )
     assert air.recoverable_energy_mwh > 0
     assert air.useful_exergy_mwh < air.input_exergy_mwh
+    assert any("minimum reversible pressure-work" in item for item in air.warnings)
 
 
 def test_furnace_reconciles_measured_heat_with_declared_efficiency():
@@ -145,6 +151,13 @@ def test_engineering_models_reject_inconsistent_balances():
             fuel_energy_mwh=100,
             useful_process_heat_mwh=90,
             exhaust_energy_mwh=20,
+        )
+    with pytest.raises(ValueError, match="supply_k must be greater"):
+        xi.analyze_furnace(
+            fuel_energy_mwh=100,
+            exhaust_energy_mwh=10,
+            exhaust_temperature_c=20,
+            reference_temperature_c=25,
         )
 
 
