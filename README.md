@@ -6,20 +6,20 @@
 [![License](https://img.shields.io/badge/code-Apache--2.0-green)](LICENSE)
 [![Guide](https://img.shields.io/badge/guide-CC%20BY%204.0-lightgrey)](THE_EXERGY_IMPERATIVE.md)
 
-**Exergy, emissions, health, and economic analysis using the data that you actually have.** Give it as little as an equipment
-name and a country; every default it fills in stays visible, sourced, and is replaceable with your own measurements.
-
-Energy is never created or destroyed — but its capacity to do useful work is.
-Every joule splits into **exergy**, the part that can still perform work, and
-**anergy**, the part that cannot. Across the entire universe only two things
-are ever happening: useful work is being performed, and exergy is being
-destroyed. That one-way flow drives every engine, grid, reactor, and star,
-yet almost all energy accounting ignores it. This library makes it visible —
-for any energy carrier, technology, or process, at whatever level of detail
-you have. [The Exergy Imperative](THE_EXERGY_IMPERATIVE.md), the guide this
-library grew out of, tells the full story.
+**A Python Library and Guide for analyzing exergy, emissions, health, and economics using the data that you actually have.** Give it as little as an equipment
+name and a country; every default it fills in stays visible, sourced, and is replaceable with your own data or measurements.
 
 ## Why this library
+
+Energy is never created or destroyed — but its capacity to do useful work is.
+Every joule can be split into **exergy**, the part that has capacity to perform useful work, and
+**anergy**, the part that does not. Across the entire universe there are two things that
+are happening: useful work is being performed, and exergy is being
+destroyed. That one-way flow drives every engine, grid, reactor, and star,
+yet almost all of our energy accounting ignores it. This library makes it easily visible
+for any energy carrier, technology, or process, and meets you at whatever level of detail
+you have. [The Exergy Imperative](THE_EXERGY_IMPERATIVE.md), the guide this
+library grew out of, tells the full story.
 
 Most exergy tools ([TESPy](https://github.com/oemof/tespy),
 [ExerPy](https://github.com/oemof/exerpy), Aspen Plus) start from a fully
