@@ -21,6 +21,29 @@ for outcome in suite.outcomes:
     print(outcome.case_id, outcome.actual, outcome.expected, outcome.citation)
 ```
 
+## Literature-anchored regression tests
+
+The repository test suite additionally pins package results to values from
+independent published sources (`tests/test_literature_validation.py`):
+
+- Specific flow exergy of superheated steam at 8 MPa and 500 °C against
+  standard steam-table values (IAPWS formulations, as tabulated in Cengel &
+  Boles and equivalent references), exercised through both the optional
+  CoolProp backend and the dependency-free formula.
+- The Petela (2003) radiative exergy factor at the published 6000 K example
+  (doi:10.1016/S0038-092X(03)00226-3).
+- Real-fluid compressed-air exergy against the closed-form ideal-gas
+  expression, two independent code paths that must agree.
+- The textbook minimum work of separation for an ideal equimolar binary
+  mixture, R·T₀·ln 2.
+- Carnot factors at the benchmark temperatures published in The Exergy
+  Imperative guide, and exact kinetic/potential exergy under standard
+  gravity.
+
+A regression in these tests means the package disagrees with published
+literature, not merely with itself. They run in continuous integration on
+every change.
+
 ## Optional XAI4Heat portfolio reproduction
 
 The package does not distribute the XAI4Heat telemetry used in the paper. After
