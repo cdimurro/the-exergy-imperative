@@ -279,7 +279,7 @@ from .weather import (
     weather_anomalies,
 )
 
-__version__ = "0.4.1"
+__version__ = "0.4.3"
 
 __all__ = [
     "AGENT_CAPABILITIES_SCHEMA_ID",

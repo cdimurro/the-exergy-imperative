@@ -19,6 +19,7 @@ jobs:
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e ".[dev,data,mcp]"
       - run: python -m ruff check src tests examples scripts
+      - run: python -m ruff format --check src tests examples scripts
       - run: python -m pytest --cov=exergy_imperative --cov-report=term-missing
 
   test:
