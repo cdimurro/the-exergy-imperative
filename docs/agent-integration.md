@@ -1,6 +1,6 @@
 # Agent integration
 
-Exergy Imperative exposes the same deterministic scientific calculations
+`exergy-imperative` exposes the same deterministic scientific calculations
 through Python recipes, a JSON CLI, and an optional Model Context Protocol
 server. The agent layer does not duplicate equations or factor data; it calls
 the reviewed public library APIs and returns versioned, machine-readable
