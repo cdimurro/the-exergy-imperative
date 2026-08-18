@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.1 - 2026-08-17
+
+- Republished so the PyPI project page renders the current README: The Exergy
+  Imperative title, the version-agnostic status section, and the revised
+  framing and wording. No functional code changes.
+- Made the library documentation status line version-agnostic as well.
+
 ## 0.4.0 - 2026-08-17
 
 - Retitled the README and widened it to any energy carrier, technology, or
