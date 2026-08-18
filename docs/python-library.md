@@ -5,7 +5,7 @@ progressive-fidelity exergy assessments. It is useful with only an equipment,
 service, or carrier name; every default remains visible and every parameter can
 be replaced with measured or site-specific data later.
 
-> Status: `0.3.0` alpha. Results based on bundled profiles are screening
+> Status: `0.4.0` alpha. Results based on bundled profiles are screening
 > estimates, not substitutes for a site-specific thermodynamic audit.
 
 ### Install
@@ -399,5 +399,5 @@ The library never assigns a universal monetary health cost: supply a locally
 appropriate damage-cost factor when that comparison is justified.
 
 The Python source is Apache-2.0 licensed. This guide and the bundled reference
-profiles remain CC BY 4.0; see the
-[documentation licence](https://github.com/cdimurro/the-exergy-imperative/blob/main/DOCUMENTATION_LICENSE.md).
+profiles remain CC BY 4.0; see the licensing and attribution details in
+[NOTICE](https://github.com/cdimurro/the-exergy-imperative/blob/main/NOTICE).

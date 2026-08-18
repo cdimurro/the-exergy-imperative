@@ -1,4 +1,4 @@
-# exergy-imperative
+# the-exergy-imperative
 
 [![CI](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml/badge.svg)](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/exergy-imperative)](https://pypi.org/project/exergy-imperative/)
@@ -191,22 +191,25 @@ expected value, tolerance, and citation.
 | [Agent integration](docs/agent-integration.md) | JSON recipes, discovery, MCP server |
 | [Validation](docs/validation.md) | Reference checks and their scope |
 | [Architecture](docs/architecture.md) | How the modules fit together |
+| [Changelog](docs/changelog.md) | Release history |
 | [**The Exergy Imperative**](THE_EXERGY_IMPERATIVE.md) | The complete guide to exergy and the energy transition |
 
 ## Status
 
 `0.3.0` alpha. The public Python API, CLI commands, recipe contract `1.0`,
 packaged JSON Schemas, and MCP tools are stable surfaces within a minor
-version (see [AGENTS.md](AGENTS.md)). Contributions are welcome — especially
+version (see [AGENTS.md](AGENTS.md)). Release history lives in the
+[changelog](docs/changelog.md). Contributions are welcome — especially
 reviewed profiles, validation cases against published literature, and dataset
-adapters; see [CONTRIBUTING.md](CONTRIBUTING.md).
+adapters; see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ## License and citation
 
 Code is [Apache-2.0](LICENSE). The guide, explanatory documentation, and
-bundled profile data are [CC BY 4.0](DOCUMENTATION_LICENSE.md); third-party
-data attributions are listed in [NOTICE](NOTICE). Cite via
-[CITATION.cff](CITATION.cff).
+bundled profile data are CC BY 4.0; licensing details and third-party data
+attributions are in [NOTICE](NOTICE). To cite this project, reference *The
+Exergy Imperative* (Exergy Lab, 2026),
+https://github.com/cdimurro/the-exergy-imperative.
 
 ---
 
