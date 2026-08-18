@@ -4,7 +4,7 @@ title: "The Exergy Imperative"
 type: software
 authors:
   - name: "Exergy Lab"
-version: 0.2.0
-date-released: 2026-08-15
+version: 0.3.0
+date-released: 2026-08-17
 url: "https://github.com/cdimurro/the-exergy-imperative"
 license: Apache-2.0

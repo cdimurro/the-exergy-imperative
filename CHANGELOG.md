@@ -1,7 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 - 2026-08-17
 
+- Rewrote the repository README as the library front door (install, quickstart,
+  positioning versus TESPy/ExerPy/process simulators, data provenance, and
+  documentation index). This is also the page PyPI renders.
+- Moved the complete guide to `THE_EXERGY_IMPERATIVE.md` with unchanged
+  CC BY 4.0 licensing and a pointer from the guide to the library.
 - Added optional World Bank WDI and authenticated ERA5-Land connectors with
   explicit network access, local caching or manifests, offline request
   construction, and publisher attribution.

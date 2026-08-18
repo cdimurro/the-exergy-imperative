@@ -5,7 +5,7 @@ progressive-fidelity exergy assessments. It is useful with only an equipment,
 service, or carrier name; every default remains visible and every parameter can
 be replaced with measured or site-specific data later.
 
-> Status: `0.2.0` alpha. Results based on bundled profiles are screening
+> Status: `0.3.0` alpha. Results based on bundled profiles are screening
 > estimates, not substitutes for a site-specific thermodynamic audit.
 
 ### Install
