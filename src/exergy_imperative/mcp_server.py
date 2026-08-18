@@ -1,4 +1,4 @@
-"""Optional Model Context Protocol server for Exergy Imperative workflows."""
+"""Optional Model Context Protocol server for exergy-imperative workflows."""
 
 from __future__ import annotations
 
@@ -47,7 +47,7 @@ def create_mcp_server() -> Any:
 
     MCPServer = _mcp_server_class()
     server = MCPServer(
-        "Exergy Imperative",
+        "exergy-imperative",
         instructions=(
             "Use these deterministic tools for exergy, emissions, pollutant-hazard, "
             "economic, engineering, data-normalization, and report workflows. "
@@ -78,7 +78,7 @@ def create_mcp_server() -> Any:
 
     @server.tool()
     def run_workflow(recipe: dict[str, Any], mode: str | None = None) -> dict[str, Any]:
-        """Run any stable Exergy Imperative recipe in execute, dry-run, or validate-only mode."""
+        """Run any stable exergy-imperative recipe in execute, dry-run, or validate-only mode."""
 
         return safe_run_recipe(recipe, mode=mode)
 
@@ -171,7 +171,7 @@ def create_mcp_server() -> Any:
 
     @server.resource("exergy://capabilities")
     def capabilities_resource() -> str:
-        """Machine-readable Exergy Imperative agent capabilities."""
+        """Machine-readable exergy-imperative agent capabilities."""
 
         return json.dumps(agent_capabilities(), ensure_ascii=False, sort_keys=True)
 
@@ -206,7 +206,7 @@ def create_mcp_server() -> Any:
         """Plan a transparent assessment before calling calculation tools."""
 
         return (
-            "Plan an Exergy Imperative assessment for the following goal. "
+            "Plan an exergy-imperative assessment for the following goal. "
             "Use capabilities and describe_workflow first, prefer a sparse "
             "validate-only recipe, then dry-run it. Never present screening defaults "
             "as measurements, and preserve all assumptions, sources, warnings, and "
@@ -220,7 +220,7 @@ def create_mcp_server() -> Any:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="exergy-mcp",
-        description="Serve Exergy Imperative tools over Model Context Protocol.",
+        description="Serve exergy-imperative tools over Model Context Protocol.",
     )
     parser.add_argument("--version", action="version", version=LIBRARY_VERSION)
     parser.add_argument(

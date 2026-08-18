@@ -277,7 +277,7 @@ def create_excel_template(kind: str, path: str | Path) -> Path:
     instructions = workbook.active
     instructions.title = "README"
     instructions.sheet_view.showGridLines = False
-    instructions["A1"] = "Exergy Imperative analysis workbook"
+    instructions["A1"] = "exergy-imperative analysis workbook"
     instructions["A1"].font = openpyxl.styles.Font(size=16, bold=True, color="0F766E")
     instructions["A3"] = "Analysis kind"
     instructions["B3"] = key

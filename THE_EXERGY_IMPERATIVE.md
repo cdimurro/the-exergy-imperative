@@ -1,10 +1,10 @@
-# The Exergy Imperative
-
-## A Complete Guide to the Most Underused Concept in Energy
-
 > 🐍 **Looking for the software?** This guide ships with
 > [`exergy-imperative`](README.md), a Python library that puts these methods
 > to work: `pip install exergy-imperative`.
+
+# The Exergy Imperative
+
+## A Complete Guide to the Most Underused Concept in Energy
 
 **We act as if all joules are equal — when in fact they are not. This makes our energy system less efficient and it is slowing down the energy transition.**
 

@@ -1,4 +1,4 @@
-# Exergy Imperative Python Library
+# The `exergy-imperative` Python library
 
 `exergy-imperative` turns incomplete energy information into transparent,
 progressive-fidelity exergy assessments. It is useful with only an equipment,
