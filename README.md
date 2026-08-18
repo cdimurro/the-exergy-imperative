@@ -6,15 +6,8 @@
 [![License](https://img.shields.io/badge/code-Apache--2.0-green)](LICENSE)
 [![Guide](https://img.shields.io/badge/guide-CC%20BY%204.0-lightgrey)](THE_EXERGY_IMPERATIVE.md)
 
-**Screening-grade exergy, emissions, health, and economic analysis from the
-industrial energy data you actually have.** Give it as little as an equipment
-name and a country; every default it fills in stays visible, sourced, and
-replaceable with your own measurements.
-
-> 📖 This project began as **[The Exergy Imperative](THE_EXERGY_IMPERATIVE.md)**
-> — a complete, free guide to exergy analysis and its role in the energy
-> transition. Read it to understand *why* energy quality matters; use this
-> library to put it to work.
+**Exergy, emissions, health, and economic analysis using the data that you actually have.** Give it as little as an equipment
+name and a country; every default it fills in stays visible, sourced, and is replaceable with your own measurements.
 
 ## Why this library
 
@@ -77,9 +70,10 @@ Warnings and limitations:
   - The improvement opportunity uses a broad template screening prior; ...
 ```
 
-Add whatever you know — efficiency, temperatures, energy prices, capital cost,
-refrigerant leakage — and the fidelity, ranges, and economics tighten
-accordingly. Then export deliverables:
+Add whatever data you have — efficiency, temperatures, energy prices, capital cost,
+lifespan, location, and then analyze the results. 
+
+Export deliverables at any time:
 
 ```python
 case.export_html("compressed-air.html")
