@@ -41,7 +41,7 @@ from .validation import run_bundled_validation_suite
 from .weather import normalize_weather_performance
 
 AGENT_CONTRACT_VERSION = "1.0"
-LIBRARY_VERSION = "0.4.0"
+LIBRARY_VERSION = "0.4.1"
 RECIPE_MODES = ("execute", "dry-run", "validate-only")
 REPORT_OUTPUTS = ("json", "html", "pdf", "xlsx", "excel_directory")
 
