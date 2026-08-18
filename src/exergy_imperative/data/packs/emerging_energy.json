@@ -1,0 +1,808 @@
+{
+  "schema_version": "1.0",
+  "id": "emerging-energy",
+  "version": "2026.1",
+  "license": "CC-BY-4.0",
+  "description": "Explicit-boundary mappings for hydrogen, advanced generation, carbon management, marine energy, and long-duration storage.",
+  "domains": ["emerging energy", "hydrogen", "advanced power", "carbon management", "long-duration storage"],
+  "sources": {
+    "doe-commercial-liftoff": {
+      "title": "U.S. DOE Pathways to Commercial Liftoff",
+      "url": "https://liftoff.energy.gov/",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Technology-family taxonomy and commercialization context for clean hydrogen, advanced nuclear, carbon management, geothermal, and long-duration storage",
+      "note": "The source supports technology classification only. No cost or performance projections are bundled."
+    },
+    "nrel-annual-technology-baseline": {
+      "title": "NREL Annual Technology Baseline",
+      "url": "https://atb.nrel.gov/",
+      "license": "U.S. Government work; verify dataset terms",
+      "applicable_boundary": "Power-generation and storage technology definitions",
+      "note": "This pack contains names and boundaries, not ATB numerical values."
+    },
+    "doe-liquid-alkaline-electrolysis-targets": {
+      "title": "U.S. DOE: Technical Targets for Liquid Alkaline Electrolysis",
+      "url": "https://www.energy.gov/cmei/fuels/technical-targets-liquid-alkaline-electrolysis",
+      "license": "U.S. Government work; verify page-specific third-party notices",
+      "applicable_boundary": "Low-temperature liquid alkaline electrolyzer system electricity to hydrogen energy on an LHV basis",
+      "note": "The published 2022 status and future targets form a scenario envelope, not an empirical uncertainty distribution."
+    },
+    "nrel-integrated-heat-pump-thermal-storage": {
+      "title": "NREL/TP-5700-79806: Integrated Heat Pump Thermal Storage and Comparison with Other Energy Storage Systems",
+      "url": "https://docs.nrel.gov/docs/fy22osti/79806.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Round-trip electrical efficiency cases for pumped-thermal and electrochemical storage technologies tabulated in the report",
+      "note": "The table combines literature cases with different technologies, durations, and power ratings; each prior below narrows its applicability."
+    },
+    "doe-aem-electrolysis-analysis-2022": {
+      "title": "DOE Hydrogen Production Cost and Performance Analysis",
+      "url": "https://www.hydrogen.energy.gov/docs/hydrogenprogramlibraries/pdfs/review22/p204_james_2022_p-pdf.pdf",
+      "license": "U.S. Government work; annual merit review presentation",
+      "applicable_boundary": "AEM electrolyzer system electricity to hydrogen production for modeled pure-water and KOH cases",
+      "note": "Near-term modeled system electricity is 66.1 kWh/kg H2 for pure water and 50.8 for 1 M KOH; future cases are 45.3 and 42.9. These are scenarios, not field measurements."
+    },
+    "doe-fuel-cell-comparison": {
+      "title": "U.S. DOE Comparison of Fuel Cell Technologies",
+      "url": "https://www.energy.gov/cmei/fuels/comparison-fuel-cell-technologies",
+      "license": "U.S. Government work; verify page-specific third-party notices",
+      "applicable_boundary": "Fuel LHV input to electrical output for fuel-cell technology families",
+      "note": "DOE lists 60% LHV electrical efficiency for solid-oxide fuel cells; it is a technology-family value, not a specific product guarantee."
+    },
+    "doe-mit-geothermal-conversion-2006": {
+      "title": "DOE-sponsored MIT Future of Geothermal Energy, Chapter 3 conversion assumptions",
+      "url": "https://www1.eere.energy.gov/geothermal/pdfs/EGS_Chapter_3.pdf",
+      "license": "Public DOE-sponsored report; verify report-specific notices",
+      "applicable_boundary": "Produced geothermal heat delivered to a binary or flash power cycle to net electricity",
+      "note": "Table 3.1 gives net thermal efficiencies of 11%, 14%, 16%, 18%, and 22% at 150, 200, 250, 300, and 350 C. Ambient conditions and conversion cycle are embedded assumptions."
+    },
+    "nrc-nuscale-us600": {
+      "title": "U.S. NRC Design Certification - NuScale US600",
+      "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/past-license-activities/nuscale",
+      "license": "U.S. Government work; applicant design information may retain separate rights",
+      "applicable_boundary": "Certified NuScale module rated reactor thermal output to rated electrical output",
+      "note": "Each module is reported as 160 MWt and 50 MWe, giving a rated ratio of 31.25%; this is one design, not the full SMR family."
+    },
+    "inl-microreactor-program-2025": {
+      "title": "Idaho National Laboratory Microreactor Program Review: Demonstration Capabilities Overview",
+      "url": "https://gain.inl.gov/content/uploads/4/2025/03/01-Piyush-Sabharwall-Demonstration-Capabilities-Overview_2025-MRP-Review.pdf",
+      "license": "U.S. Government-sponsored laboratory presentation; verify third-party design notices",
+      "applicable_boundary": "Selected developer-reported microreactor thermal output to electrical output",
+      "note": "Public design pairs include 5/15, 17/50, and 50/112 MWe/MWth; many concepts do not publish both values."
+    },
+    "doe-sco2-power-cycle": {
+      "title": "U.S. DOE Supercritical CO2 Power Cycles program pages",
+      "url": "https://www.energy.gov/pilot-plant-supercritical-co2-power-cycles",
+      "license": "U.S. Government work; verify page-specific third-party notices",
+      "applicable_boundary": "High-temperature heat supplied to an indirectly heated supercritical CO2 power cycle to electricity",
+      "note": "DOE states greater than 50% is possible and describes it as a demonstration pathway, not established commercial fleet performance."
+    },
+    "doe-storage-cost-performance-2022": {
+      "title": "DOE Energy Storage Grand Challenge Cost and Performance Assessment 2022",
+      "url": "https://www.energy.gov/sites/default/files/2022-09/2022%20Grid%20Energy%20Storage%20Technology%20Cost%20and%20Performance%20Assessment.pdf",
+      "license": "U.S. Government work; PNNL technical report",
+      "applicable_boundary": "Electricity at grid connection during charge to electricity returned at grid connection over a complete storage cycle",
+      "note": "The assessment uses 52% RTE for CAES and reports an 80%-90% composite gravitational-storage range with average values dependent on power."
+    },
+    "doe-csp-power-block-rd": {
+      "title": "U.S. DOE Power Block R&D for Concentrating Solar-Thermal Power Systems",
+      "url": "https://www.energy.gov/cmei/systems/power-block-rd-csp-systems",
+      "license": "U.S. Government work; verify page-specific third-party notices",
+      "applicable_boundary": "Thermal energy delivered to a concentrating-solar power block to gross electricity",
+      "note": "DOE reports approximately 35%-45% thermal-to-electric efficiency for existing steam-Rankine power blocks and describes higher values as research targets. Solar collection, receiver, storage, and net auxiliary losses are outside this boundary."
+    }
+  },
+  "profiles": {
+    "carrier": [
+      {
+        "id": "solar-thermal-heat",
+        "label": "Concentrated solar thermal heat",
+        "aliases": ["CSP heat", "receiver thermal output"],
+        "family": "thermal",
+        "basis": "thermal energy delivered from the receiver or storage system to the power block",
+        "source_id": "doe-csp-power-block-rd",
+        "boundary": "Useful thermal energy at the power-block inlet; incident solar energy, collection, receiver, and storage losses excluded",
+        "parameters": {}
+      },
+      {
+        "id": "geothermal-heat",
+        "label": "Geothermal heat",
+        "aliases": ["reservoir heat"],
+        "family": "thermal",
+        "basis": "caller-declared produced-fluid and reinjection states",
+        "source_id": "nrel-annual-technology-baseline",
+        "boundary": "Thermal energy delivered from the geothermal field to the power or heat plant",
+        "parameters": {}
+      },
+      {
+        "id": "reactor-thermal-energy",
+        "label": "Nuclear reactor thermal energy",
+        "aliases": ["reactor heat"],
+        "family": "thermal",
+        "basis": "caller-declared primary heat-transfer boundary and temperature",
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Thermal energy crossing the selected reactor or primary-system boundary",
+        "parameters": {}
+      },
+      {
+        "id": "ocean-mechanical-energy",
+        "label": "Ocean mechanical energy",
+        "aliases": ["wave energy", "tidal kinetic energy"],
+        "family": "work",
+        "basis": "mechanical energy captured at the selected device boundary",
+        "source_id": "nrel-annual-technology-baseline",
+        "boundary": "Captured wave or tidal mechanical energy before electromechanical conversion",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "confidence": "exact"}
+        }
+      },
+      {
+        "id": "minimum-separation-work",
+        "label": "Minimum separation work",
+        "aliases": ["minimum capture work"],
+        "family": "work",
+        "basis": "reversible minimum work at caller-declared feed and product compositions",
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Minimum separation work rather than actual capture energy",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "confidence": "exact"}
+        }
+      }
+    ],
+    "technology": [
+      {
+        "id": "alkaline-electrolyzer",
+        "label": "Alkaline water electrolyzer",
+        "aliases": ["alkaline electrolysis"],
+        "model": "electrolyzer",
+        "input_carrier": "electricity",
+        "output_carrier": "hydrogen-lhv",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["HHV or LHV basis", "stack electricity", "balance-of-plant electricity", "hydrogen output"],
+        "recommended_overrides": ["efficiency", "measured total system electricity", "hydrogen production and LHV"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Declared total electricity input to hydrogen chemical energy on the selected LHV basis; water, oxygen, heat, and compression are separate",
+        "parameters": {
+          "efficiency": {
+            "value": 0.61,
+            "unit": "MWh_H2_LHV/MWh_electricity",
+            "low": 0.61,
+            "high": 0.70,
+            "confidence": "screening status-to-target envelope",
+            "source_id": "doe-liquid-alkaline-electrolysis-targets",
+            "source_version": "2022 status, 2026 and ultimate target table accessed 2026-08-18",
+            "evidence_kind": "published_estimate",
+            "statistic": "DOE 2022 commercial-system status; 55 kWh/kg H2 reported as 61% LHV",
+            "range_basis": "2022 system-status value through the DOE ultimate target of 70% LHV; a scenario envelope, not uncertainty",
+            "applicability": {
+              "technology": "Low-temperature liquid alkaline electrolyzer system",
+              "boundary": "Total system electricity to hydrogen chemical energy on an LHV basis; downstream compression excluded",
+              "geography": "Technology target is not assigned to a site geography",
+              "vintage": "DOE 2022 commercial status with future target context"
+            },
+            "note": "Use 0.61 as the screening status estimate; the high bound is an aspirational ultimate target, not observed variability."
+          }
+        }
+      },
+      {
+        "id": "anion-exchange-membrane-electrolyzer",
+        "label": "Anion-exchange-membrane electrolyzer",
+        "aliases": ["AEM electrolyzer"],
+        "model": "electrolyzer",
+        "input_carrier": "electricity",
+        "output_carrier": "hydrogen-lhv",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "HHV or LHV basis", "stack electricity", "balance-of-plant electricity", "hydrogen output"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Declared total electricity input to hydrogen chemical energy; thermal and compression services are separate",
+        "recommended_overrides": ["measured system electricity", "water chemistry", "current density", "hydrogen LHV output"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.6561,
+            "unit": "MWh_H2_LHV/MWh_electricity",
+            "low": 0.5042,
+            "high": 0.7769,
+            "confidence": "modeled scenario envelope",
+            "source_id": "doe-aem-electrolysis-analysis-2022",
+            "source_version": "DOE Hydrogen Program 2022 AMR analysis",
+            "evidence_kind": "published_estimate",
+            "statistic": "Near-term 1 M KOH case converted using 33.33 kWh/kg H2 LHV",
+            "range_basis": "Near-term pure-water case through future 1 M KOH case; scenario envelope, not uncertainty",
+            "applicability": {
+              "technology": "Modeled AEM water-electrolysis systems",
+              "boundary": "Total modeled system electricity to hydrogen LHV; downstream compression excluded",
+              "geography": "Technology-cost analysis not assigned to a site",
+              "vintage": "Near-term 2025 and future 2035 modeled cases published in 2022"
+            },
+            "note": "Derived from published kWh/kg cases; water chemistry changes the applicable scenario materially."
+          }
+        }
+      },
+      {
+        "id": "solid-oxide-fuel-cell",
+        "label": "Solid-oxide fuel cell",
+        "aliases": ["SOFC"],
+        "model": "fuel-cell",
+        "input_carrier": "hydrogen-lhv",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "fuel composition", "HHV or LHV basis", "net electricity", "exported heat"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Hydrogen chemical energy to net electricity; useful heat is a separate product flow",
+        "recommended_overrides": ["net system efficiency", "fuel composition", "load", "degradation", "exported heat"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.6,
+            "unit": "MWh_electricity/MWh_fuel_LHV",
+            "low": 0.6,
+            "high": 0.6,
+            "confidence": "technology-family reference value",
+            "source_id": "doe-fuel-cell-comparison",
+            "source_version": "DOE comparison table accessed 2026-08-18",
+            "evidence_kind": "published_estimate",
+            "statistic": "DOE listed SOFC electrical efficiency on an LHV basis",
+            "range_basis": "Published point value; not an uncertainty interval",
+            "applicability": {
+              "technology": "Solid-oxide fuel-cell systems",
+              "boundary": "Fuel LHV to electrical output; separately exported heat excluded",
+              "geography": "Generic DOE technology comparison",
+              "vintage": "DOE page accessed 2026-08-18"
+            },
+            "note": "Fuel processing, net auxiliaries, load, and degradation must match the selected system boundary."
+          }
+        }
+      },
+      {
+        "id": "reversible-fuel-cell-discharge",
+        "label": "Reversible fuel-cell discharge",
+        "aliases": ["regenerative fuel cell"],
+        "model": "fuel-cell",
+        "input_carrier": "hydrogen-lhv",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "hydrogen basis", "net electricity", "cycle state"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Stored hydrogen chemical energy to net electricity during discharge; charging is a separate electrolyzer boundary",
+        "recommended_overrides": ["discharge efficiency", "fuel-cell chemistry", "load", "auxiliary electricity", "cycle state"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.6,
+            "unit": "MWh_electricity/MWh_H2_LHV",
+            "low": 0.6,
+            "high": 0.6,
+            "confidence": "SOFC-family discharge proxy",
+            "source_id": "doe-fuel-cell-comparison",
+            "source_version": "DOE comparison table accessed 2026-08-18",
+            "evidence_kind": "published_estimate",
+            "statistic": "DOE listed SOFC electrical efficiency used only for the discharge leg",
+            "range_basis": "Published point proxy; charging and storage losses excluded",
+            "applicability": {
+              "technology": "Reversible solid-oxide system operating in fuel-cell discharge mode",
+              "boundary": "Stored hydrogen LHV to electricity during discharge only",
+              "geography": "Generic DOE technology comparison",
+              "vintage": "DOE page accessed 2026-08-18"
+            },
+            "note": "Not a round-trip efficiency; charging, hydrogen storage, and compression are separate."
+          }
+        }
+      },
+      {
+        "id": "hydrothermal-geothermal-power",
+        "label": "Hydrothermal geothermal power plant",
+        "aliases": ["hydrothermal geothermal"],
+        "model": "heat-to-power",
+        "input_carrier": "geothermal-heat",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "produced-fluid state", "reinjection state", "parasitic electricity", "net generation"],
+        "source_id": "nrel-annual-technology-baseline",
+        "boundary": "Produced geothermal heat to net plant electricity; field pumping and reservoir decline must be declared",
+        "recommended_overrides": ["resource_temperature_c", "cycle model", "ambient temperature", "parasitic electricity", "net generation"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.14,
+            "unit": "MWh_electricity/MWh_geothermal_heat",
+            "low": 0.11,
+            "high": 0.22,
+            "confidence": "temperature-dependent screening envelope",
+            "source_id": "doe-mit-geothermal-conversion-2006",
+            "source_version": "Future of Geothermal Energy Table 3.1, 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Published 200 C net cycle value used as family center",
+            "range_basis": "Published 150-350 C net cycle values",
+            "applicability": {
+              "technology": "Binary below 200 C and flash-cycle geothermal conversion above 200 C",
+              "boundary": "Geofluid heat delivered to the cycle to net electricity; field pumping excluded",
+              "geography": "Conterminous U.S. resource-assessment assumptions",
+              "vintage": "DOE-sponsored 2006 study"
+            },
+            "note": "Temperature is a dominant selector; supply resource_temperature_c when known.",
+            "variants": [
+              {"id": "150c", "when": {"resource_temperature_c": {"lt": 175}}, "value": 0.11, "low": 0.11, "high": 0.11, "statistic": "Table 3.1 value at 150 C", "range_basis": "Published point assumption"},
+              {"id": "200c", "when": {"resource_temperature_c": {"gte": 175, "lt": 225}}, "value": 0.14, "low": 0.14, "high": 0.14, "statistic": "Table 3.1 value at 200 C", "range_basis": "Published point assumption"},
+              {"id": "250c", "when": {"resource_temperature_c": {"gte": 225, "lt": 275}}, "value": 0.16, "low": 0.16, "high": 0.16, "statistic": "Table 3.1 value at 250 C", "range_basis": "Published point assumption"},
+              {"id": "300c", "when": {"resource_temperature_c": {"gte": 275, "lt": 325}}, "value": 0.18, "low": 0.18, "high": 0.18, "statistic": "Table 3.1 value at 300 C", "range_basis": "Published point assumption"},
+              {"id": "350c", "when": {"resource_temperature_c": {"gte": 325}}, "value": 0.22, "low": 0.22, "high": 0.22, "statistic": "Table 3.1 value at 350 C", "range_basis": "Published point assumption"}
+            ]
+          }
+        }
+      },
+      {
+        "id": "enhanced-geothermal-system",
+        "label": "Enhanced geothermal system power plant",
+        "aliases": ["EGS", "deep EGS"],
+        "model": "heat-to-power",
+        "input_carrier": "geothermal-heat",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "reservoir temperature", "produced flow", "reinjection state", "pumping electricity", "net generation"],
+        "source_id": "nrel-annual-technology-baseline",
+        "boundary": "Produced geothermal heat to net electricity; drilling, stimulation, reservoir response, and pumping remain explicit inputs",
+        "recommended_overrides": ["resource_temperature_c", "cycle model", "produced flow", "pumping electricity", "net generation"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.14,
+            "unit": "MWh_electricity/MWh_geothermal_heat",
+            "low": 0.11,
+            "high": 0.22,
+            "confidence": "temperature-dependent resource-study envelope",
+            "source_id": "doe-mit-geothermal-conversion-2006",
+            "source_version": "Future of Geothermal Energy Table 3.1, 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Published 200 C net cycle value used as family center",
+            "range_basis": "Published 150-350 C EGS conversion assumptions",
+            "applicability": {
+              "technology": "Enhanced-geothermal resource coupled to binary or flash conversion",
+              "boundary": "Produced geofluid heat to net cycle electricity; reservoir creation and pumping excluded",
+              "geography": "Conterminous U.S. EGS resource-assessment assumptions",
+              "vintage": "DOE-sponsored 2006 study"
+            },
+            "note": "A conversion prior does not validate reservoir productivity or pumping load.",
+            "variants": [
+              {"id": "150c", "when": {"resource_temperature_c": {"lt": 175}}, "value": 0.11, "low": 0.11, "high": 0.11, "statistic": "Table 3.1 value at 150 C", "range_basis": "Published point assumption"},
+              {"id": "200c", "when": {"resource_temperature_c": {"gte": 175, "lt": 225}}, "value": 0.14, "low": 0.14, "high": 0.14, "statistic": "Table 3.1 value at 200 C", "range_basis": "Published point assumption"},
+              {"id": "250c", "when": {"resource_temperature_c": {"gte": 225, "lt": 275}}, "value": 0.16, "low": 0.16, "high": 0.16, "statistic": "Table 3.1 value at 250 C", "range_basis": "Published point assumption"},
+              {"id": "300c", "when": {"resource_temperature_c": {"gte": 275, "lt": 325}}, "value": 0.18, "low": 0.18, "high": 0.18, "statistic": "Table 3.1 value at 300 C", "range_basis": "Published point assumption"},
+              {"id": "350c", "when": {"resource_temperature_c": {"gte": 325}}, "value": 0.22, "low": 0.22, "high": 0.22, "statistic": "Table 3.1 value at 350 C", "range_basis": "Published point assumption"}
+            ]
+          }
+        }
+      },
+      {
+        "id": "closed-loop-geothermal-power",
+        "label": "Closed-loop geothermal power plant",
+        "aliases": ["advanced geothermal closed loop"],
+        "model": "heat-to-power",
+        "input_carrier": "geothermal-heat",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "working-fluid states", "circulation power", "heat extraction", "net generation"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Extracted subsurface heat to net electricity; well construction and reservoir heat depletion are separate",
+        "recommended_overrides": ["resource_temperature_c", "working-fluid states", "circulation pumping", "ambient temperature", "net generation"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.14,
+            "unit": "MWh_electricity/MWh_geothermal_heat",
+            "low": 0.11,
+            "high": 0.22,
+            "confidence": "cycle-family proxy envelope",
+            "source_id": "doe-mit-geothermal-conversion-2006",
+            "source_version": "Future of Geothermal Energy Table 3.1, 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Published 200 C geothermal-cycle value used as family center",
+            "range_basis": "Published 150-350 C values used as a cycle proxy",
+            "applicability": {
+              "technology": "Closed-loop geothermal heat extraction coupled to a binary-like power cycle",
+              "boundary": "Heat delivered from the subsurface loop to net cycle electricity; circulation pumping excluded",
+              "geography": "U.S. resource-study conversion proxy",
+              "vintage": "DOE-sponsored 2006 study"
+            },
+            "note": "The source is not a closed-loop field validation; circulation and heat-extraction performance remain explicit.",
+            "variants": [
+              {"id": "150c", "when": {"resource_temperature_c": {"lt": 175}}, "value": 0.11, "low": 0.11, "high": 0.11, "statistic": "Table 3.1 value at 150 C", "range_basis": "Published point proxy"},
+              {"id": "200c", "when": {"resource_temperature_c": {"gte": 175, "lt": 225}}, "value": 0.14, "low": 0.14, "high": 0.14, "statistic": "Table 3.1 value at 200 C", "range_basis": "Published point proxy"},
+              {"id": "250c", "when": {"resource_temperature_c": {"gte": 225, "lt": 275}}, "value": 0.16, "low": 0.16, "high": 0.16, "statistic": "Table 3.1 value at 250 C", "range_basis": "Published point proxy"},
+              {"id": "300c", "when": {"resource_temperature_c": {"gte": 275, "lt": 325}}, "value": 0.18, "low": 0.18, "high": 0.18, "statistic": "Table 3.1 value at 300 C", "range_basis": "Published point proxy"},
+              {"id": "350c", "when": {"resource_temperature_c": {"gte": 325}}, "value": 0.22, "low": 0.22, "high": 0.22, "statistic": "Table 3.1 value at 350 C", "range_basis": "Published point proxy"}
+            ]
+          }
+        }
+      },
+      {
+        "id": "small-modular-reactor-power-block",
+        "label": "Small modular reactor power block",
+        "aliases": ["SMR power block"],
+        "model": "heat-to-power",
+        "input_carrier": "reactor-thermal-energy",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "reactor thermal output", "net electricity", "cooling conditions", "auxiliary load"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Reactor thermal energy to net electricity; fuel cycle and construction remain outside unless explicitly added",
+        "recommended_overrides": ["reactor thermal rating", "net electrical rating", "cooling conditions", "auxiliary load"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.3125,
+            "unit": "MWh_electricity/MWh_reactor_heat",
+            "low": 0.3125,
+            "high": 0.3125,
+            "confidence": "single certified-design ratio",
+            "source_id": "nrc-nuscale-us600",
+            "source_version": "NRC page updated 2025-02-11",
+            "evidence_kind": "published_estimate",
+            "statistic": "50 MWe divided by 160 MWt for one certified module",
+            "range_basis": "Published point design rating; not an SMR-family interval",
+            "applicability": {
+              "technology": "NuScale US600 integral pressurized-water reactor module",
+              "boundary": "Rated reactor thermal output to rated electrical output",
+              "geography": "U.S. NRC design-certification context",
+              "vintage": "US600 certification information reviewed 2025"
+            },
+            "note": "A single-design proxy; other SMR coolants, temperatures, and cogeneration modes require an override."
+          }
+        }
+      },
+      {
+        "id": "microreactor-power-block",
+        "label": "Microreactor power block",
+        "aliases": ["nuclear microreactor"],
+        "model": "heat-to-power",
+        "input_carrier": "reactor-thermal-energy",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "thermal output", "net electricity", "heat rejection", "auxiliary load"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Reactor heat to net electricity or separately declared heat products",
+        "recommended_overrides": ["design", "thermal rating", "net electrical rating", "heat export", "auxiliary load"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.3736,
+            "unit": "MWh_electricity/MWh_reactor_heat",
+            "low": 0.3333,
+            "high": 0.4464,
+            "confidence": "selected public-design envelope",
+            "source_id": "inl-microreactor-program-2025",
+            "source_version": "INL Microreactor Program Review, March 2025",
+            "evidence_kind": "published_estimate",
+            "statistic": "Median of 5/15, 17/50, and 50/112 published MWe/MWth ratios",
+            "range_basis": "Minimum and maximum of those three designs publishing both ratings",
+            "applicability": {
+              "technology": "Selected proposed microreactors with publicly listed thermal and electric ratings",
+              "boundary": "Rated reactor thermal output to rated electrical output; heat export excluded",
+              "geography": "U.S. developer concepts summarized by INL",
+              "vintage": "2025 program review"
+            },
+            "note": "Concept-stage design envelope, not demonstrated fleet performance."
+          }
+        }
+      },
+      {
+        "id": "concentrating-solar-power-block",
+        "label": "Concentrating-solar thermal power block",
+        "aliases": ["CSP power tower", "solar thermal power"],
+        "model": "heat-to-power",
+        "input_carrier": "solar-thermal-heat",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["power-block heat input", "gross generation", "net auxiliary load"],
+        "source_id": "doe-csp-power-block-rd",
+        "boundary": "Thermal energy delivered to the power block to gross electricity; solar field, receiver, storage, and net auxiliary losses excluded",
+        "recommended_overrides": ["measured heat input", "gross generation", "working-fluid conditions", "ambient temperature", "net auxiliary load"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.4,
+            "unit": "MWh_electricity/MWh_solar_thermal_heat",
+            "low": 0.35,
+            "high": 0.45,
+            "confidence": "published technology-family range",
+            "source_id": "doe-csp-power-block-rd",
+            "source_version": "DOE program page accessed 2026-08-18",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of DOE's approximate existing power-block efficiency range",
+            "range_basis": "DOE-reported approximately 35%-45% thermal-to-electric efficiency",
+            "applicability": {
+              "technology": "Existing steam-Rankine concentrating-solar thermal power blocks",
+              "boundary": "Power-block thermal input to gross electricity",
+              "geography": "Technology-family screening; no site geography assumed",
+              "vintage": "DOE program-page description accessed 2026"
+            },
+            "note": "This is power-block conversion efficiency, not incident-solar-to-electric efficiency or plant capacity factor. Apply collection, receiver, storage, and auxiliary losses separately."
+          }
+        }
+      },
+      {
+        "id": "supercritical-co2-power-cycle",
+        "label": "Supercritical-CO2 power cycle",
+        "aliases": ["sCO2 cycle"],
+        "model": "heat-to-power",
+        "input_carrier": "geothermal-heat",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "heat-source state", "heat-rejection state", "compressor work", "net electricity"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Caller-selected heat input to net electricity; use an explicit input factor appropriate to the actual heat source",
+        "recommended_overrides": ["cycle simulation", "heat-source temperature", "cooler temperature", "compressor work", "net auxiliary load"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.5,
+            "unit": "MWh_electricity/MWh_heat",
+            "low": 0.5,
+            "high": 0.5,
+            "confidence": "technology-development target",
+            "source_id": "doe-sco2-power-cycle",
+            "source_version": "DOE STEP pilot program page accessed 2026-08-18",
+            "evidence_kind": "published_estimate",
+            "statistic": "DOE stated possible cycle efficiency threshold",
+            "range_basis": "Published point development goal; not an operating range",
+            "applicability": {
+              "technology": "Indirectly heated high-temperature supercritical CO2 Brayton cycle",
+              "boundary": "High-temperature heat input to cycle electrical output",
+              "geography": "U.S. DOE pilot-program context",
+              "vintage": "STEP technology-development program"
+            },
+            "note": "Prospective target, not demonstrated commercial performance; heat-source temperature is essential."
+          }
+        }
+      },
+      {
+        "id": "redox-flow-battery",
+        "label": "Redox-flow battery",
+        "aliases": ["flow battery"],
+        "model": "storage",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["charge energy", "discharge energy", "state-of-charge change", "auxiliary load"],
+        "recommended_overrides": ["efficiency", "measured charge and discharge energy", "state-of-charge change", "auxiliary load"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Electricity charged to electricity discharged over the declared interval or complete cycle",
+        "parameters": {
+          "efficiency": {
+            "value": 0.72,
+            "unit": "MWh_discharge/MWh_charge",
+            "low": 0.67,
+            "high": 0.77,
+            "confidence": "screening technology envelope",
+            "source_id": "nrel-integrated-heat-pump-thermal-storage",
+            "source_version": "NREL/TP-5700-79806, March 2022, comparison table",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the combined 67-77% envelope across the report's zinc-flow and vanadium-flow cases",
+            "range_basis": "Minimum zinc-flow to maximum vanadium-flow table value; technology envelope, not a statistical interval",
+            "applicability": {
+              "technology": "Four-hour, 100 MW zinc-flow and vanadium-flow battery cases represented in the NREL comparison",
+              "boundary": "Electrical charge to electrical discharge round trip at the modeled system boundary",
+              "geography": "Technology comparison is not assigned to a site geography",
+              "vintage": "Cases compiled in NREL/TP-5700-79806, March 2022"
+            },
+            "note": "Specify chemistry, duration, auxiliary loads, temperature, and degradation for project use."
+          }
+        }
+      },
+      {
+        "id": "sodium-ion-battery",
+        "label": "Sodium-ion battery",
+        "aliases": ["sodium ion storage"],
+        "model": "storage",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "charge energy", "discharge energy", "state-of-charge change", "temperature"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Electricity charged to electricity discharged over the declared interval or complete cycle",
+        "parameters": {}
+      },
+      {
+        "id": "iron-air-battery",
+        "label": "Iron-air battery",
+        "aliases": ["iron air storage"],
+        "model": "storage",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "charge energy", "discharge energy", "state-of-charge change", "auxiliary load"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Electricity charged to electricity discharged over the declared interval or complete cycle",
+        "parameters": {}
+      },
+      {
+        "id": "compressed-air-energy-storage",
+        "label": "Compressed-air energy storage",
+        "aliases": ["CAES"],
+        "model": "storage",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "compression electricity", "generation", "stored-air change", "thermal and fuel inputs"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Declared total charging inputs to net electrical discharge; fuel and thermal stores must be explicit system flows",
+        "recommended_overrides": ["cycle architecture", "electric charging", "fuel input", "thermal storage change", "net discharge"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.52,
+            "unit": "MWh_discharge/MWh_charge",
+            "low": 0.52,
+            "high": 0.52,
+            "confidence": "standardized assessment assumption",
+            "source_id": "doe-storage-cost-performance-2022",
+            "source_version": "PNNL-33283, August 2022",
+            "evidence_kind": "published_estimate",
+            "statistic": "Assessment system round-trip efficiency",
+            "range_basis": "Published point assumption; not an uncertainty interval",
+            "applicability": {
+              "technology": "CAES configuration represented by the DOE/PNNL assessment",
+              "boundary": "Grid electricity charged to grid electricity discharged over a cycle",
+              "geography": "U.S. grid-storage assessment",
+              "vintage": "2022 assessment"
+            },
+            "note": "Fuel-assisted CAES must include fuel explicitly; do not report electricity-only RTE above one."
+          }
+        }
+      },
+      {
+        "id": "pumped-thermal-energy-storage",
+        "label": "Pumped-thermal energy storage",
+        "aliases": ["PTES", "Carnot battery"],
+        "model": "storage",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["charge electricity", "discharge electricity", "hot and cold store changes", "ambient state"],
+        "recommended_overrides": ["efficiency", "measured charge and discharge electricity", "store-state changes", "ambient state"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Electrical charge to electrical discharge with explicit thermal-store accumulation",
+        "parameters": {
+          "efficiency": {
+            "value": 0.62,
+            "unit": "MWh_discharge/MWh_charge",
+            "low": 0.52,
+            "high": 0.72,
+            "confidence": "screening literature case range",
+            "source_id": "nrel-integrated-heat-pump-thermal-storage",
+            "source_version": "NREL/TP-5700-79806, March 2022, comparison table",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the published 52-72% PTES efficiency range",
+            "range_basis": "Published range for the report's 10-hour, 1.6 MW PTES case; not a confidence interval",
+            "applicability": {
+              "technology": "Pumped-thermal energy storage represented by the 10-hour, 1.6 MW literature case",
+              "boundary": "Electrical charge to electrical discharge round trip",
+              "geography": "Technology comparison is not assigned to a site geography",
+              "vintage": "Case compiled in NREL/TP-5700-79806, March 2022"
+            },
+            "note": "Replace for a specific cycle, power rating, storage duration, heat leakage, and auxiliary boundary."
+          }
+        }
+      },
+      {
+        "id": "gravity-energy-storage",
+        "label": "Gravity energy storage",
+        "aliases": ["gravity battery"],
+        "model": "storage",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "charge electricity", "discharge electricity", "potential-energy change"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Electrical charge to electrical discharge over the declared interval or cycle",
+        "recommended_overrides": ["technology subtype", "rated power", "charge and discharge metering", "potential-energy change"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.834,
+            "unit": "MWh_discharge/MWh_charge",
+            "low": 0.8,
+            "high": 0.9,
+            "confidence": "composite developer estimate range",
+            "source_id": "doe-storage-cost-performance-2022",
+            "source_version": "PNNL-33283, August 2022",
+            "evidence_kind": "published_estimate",
+            "statistic": "Assessment average at 100 MW",
+            "range_basis": "Composite range across weight- and pressurized-water gravitational systems",
+            "applicability": {
+              "technology": "Composite gravity-storage concepts evaluated by DOE/PNNL",
+              "boundary": "Grid electricity charged to grid electricity discharged over a complete cycle",
+              "geography": "U.S. grid-storage assessment",
+              "vintage": "2021 technology values published in 2022"
+            },
+            "note": "Developer-derived emerging-technology composite; technology subtype and power materially affect applicability."
+          }
+        }
+      },
+      {
+        "id": "hydrogen-cavern-storage",
+        "label": "Hydrogen cavern storage",
+        "aliases": ["salt-cavern hydrogen storage"],
+        "model": "storage",
+        "input_carrier": "hydrogen-lhv",
+        "output_carrier": "hydrogen-lhv",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "hydrogen injected", "hydrogen withdrawn", "inventory change", "compression electricity", "cushion gas"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Hydrogen chemical energy injected to hydrogen withdrawn; compression is a separate input",
+        "parameters": {}
+      },
+      {
+        "id": "wave-energy-converter",
+        "label": "Wave-energy converter",
+        "aliases": ["wave power device"],
+        "model": "converter",
+        "input_carrier": "ocean-mechanical-energy",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "captured wave energy", "availability", "net electricity"],
+        "source_id": "nrel-annual-technology-baseline",
+        "boundary": "Captured wave mechanical energy to net electrical output",
+        "parameters": {}
+      },
+      {
+        "id": "tidal-stream-generator",
+        "label": "Tidal-stream generator",
+        "aliases": ["tidal turbine"],
+        "model": "converter",
+        "input_carrier": "ocean-mechanical-energy",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "captured tidal energy", "availability", "net electricity"],
+        "source_id": "nrel-annual-technology-baseline",
+        "boundary": "Captured tidal mechanical energy to net electrical output",
+        "parameters": {}
+      },
+      {
+        "id": "direct-air-capture-electric-auxiliaries",
+        "label": "Direct-air-capture electrical auxiliaries",
+        "aliases": ["DAC auxiliaries"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "air and product composition", "capture rate", "pressure", "thermal energy", "electricity"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Selected electrical input to minimum CO2 separation work; thermal regeneration and compression are separate",
+        "parameters": {}
+      },
+      {
+        "id": "point-source-carbon-capture-auxiliaries",
+        "label": "Point-source carbon-capture electrical auxiliaries",
+        "aliases": ["post-combustion capture auxiliaries", "CCS auxiliaries"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "flue composition", "capture fraction", "CO2 purity", "steam", "compression electricity"],
+        "source_id": "doe-commercial-liftoff",
+        "boundary": "Selected electrical input to minimum CO2 separation work; steam, compression, transport, storage, and residual emissions are separate",
+        "parameters": {}
+      }
+    ]
+  },
+  "material_templates": [
+    {
+      "id": "water-electrolysis",
+      "label": "Water-electrolysis material balance",
+      "aliases": ["electrolyzer mass balance"],
+      "source_id": "doe-commercial-liftoff",
+      "boundary": "Water and electrolyte makeup to hydrogen, oxygen, liquid discharge, vent, purge, and inventory change",
+      "required_inputs": ["water input", "hydrogen output and purity", "oxygen output", "purges and vents", "electrolyte makeup", "inventory change"]
+    },
+    {
+      "id": "carbon-capture",
+      "label": "Carbon-capture material balance",
+      "aliases": ["CO2 capture balance", "DAC material balance"],
+      "source_id": "doe-commercial-liftoff",
+      "boundary": "Feed gas and sorbent or solvent makeup to treated gas, captured CO2, degradation products, waste, vent, and inventory change",
+      "required_inputs": ["feed flow and composition", "treated-gas flow and composition", "CO2 product purity", "solvent or sorbent makeup", "waste and degradation products", "inventory change"]
+    },
+    {
+      "id": "hydrogen-storage",
+      "label": "Hydrogen-storage inventory balance",
+      "aliases": ["hydrogen cavern mass balance"],
+      "source_id": "doe-commercial-liftoff",
+      "boundary": "Hydrogen receipts, withdrawals, cushion gas, purge, leakage, and inventory change across the selected store",
+      "required_inputs": ["injected mass and composition", "withdrawn mass and composition", "cushion gas", "purges", "measured leakage", "inventory change"]
+    }
+  ],
+  "process_templates": [],
+  "technology_models": [],
+  "metadata": {
+    "default_policy": "selected published F1 priors; explicit project performance required where no compatible prior exists and preferred everywhere",
+    "maturity_note": "A catalog entry does not imply commercial maturity or project suitability."
+  }
+}

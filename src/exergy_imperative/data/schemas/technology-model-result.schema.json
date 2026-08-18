@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/technology-model-result-v1.json",
+  "title": "Exergy Imperative technology-model result",
+  "type": "object",
+  "required": ["schema_version", "model_id", "performance_parameter", "performance", "unit", "exergy_unit", "input_energy", "useful_energy", "input_exergy", "useful_exergy", "destroyed_or_unallocated_exergy", "exergetic_efficiency", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "model_id": {"type": "string", "minLength": 1},
+    "performance_parameter": {"type": "string", "minLength": 1},
+    "performance": {"type": "number", "minimum": 0},
+    "unit": {"type": "string"},
+    "exergy_unit": {"type": "string"},
+    "input_energy": {"type": "number", "minimum": 0},
+    "useful_energy": {"type": "number", "minimum": 0},
+    "input_exergy": {"type": "number", "minimum": 0},
+    "useful_exergy": {"type": "number", "minimum": 0},
+    "destroyed_or_unallocated_exergy": {"type": "number", "minimum": 0},
+    "exergetic_efficiency": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

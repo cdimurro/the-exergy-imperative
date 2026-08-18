@@ -109,3 +109,21 @@ def test_kinetic_and_potential_exergy_equal_mechanical_energy():
     """
     assert xi.kinetic_exergy(1.0, 50.0) == pytest.approx(1250.0, rel=1e-12)
     assert xi.potential_exergy(1.0, 100.0) == pytest.approx(980.665, rel=1e-12)
+    with pytest.raises(ValueError, match="gravity must be greater than zero"):
+        xi.potential_exergy(1.0, 100.0, gravity=0.0)
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"temperature_c": -273.15},
+        {"temperature_c": float("nan")},
+        {"pressure_kpa": 0.0},
+        {"pressure_kpa": float("inf")},
+        {"composition_model": ""},
+        {"source_id": ""},
+    ],
+)
+def test_reference_environment_rejects_nonphysical_states(payload):
+    with pytest.raises(ValueError):
+        xi.Environment(**payload)

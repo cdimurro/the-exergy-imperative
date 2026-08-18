@@ -86,11 +86,20 @@ def build_payload(rows: list[dict[str, str]]) -> dict[str, object]:
                     "ember_electricity_data_methodology.pdf"
                 ),
                 "license": "CC-BY-4.0",
+                "applicable_boundary": (
+                    "Historical country-year lifecycle electricity-generation "
+                    "intensity; not marginal, hourly, or contractual supply"
+                ),
             },
             "owid-energy": {
                 "title": "Our World in Data complete Energy dataset",
                 "url": SOURCE_URL,
                 "repository": "https://github.com/owid/energy-data",
+                "license": "CC-BY-4.0",
+                "applicable_boundary": (
+                    "Standardized republication and location mapping for the "
+                    "Ember country-year indicator"
+                ),
                 "note": "OWID standardizes location names and republishes the Ember indicator.",
             },
         },

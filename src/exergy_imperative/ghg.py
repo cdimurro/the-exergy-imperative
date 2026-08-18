@@ -13,6 +13,8 @@ METHANE_TO_CO2_MASS_RATIO = 44.0095 / 16.0425
 DEFAULT_METHANE_DENSITY_KG_PER_M3 = 0.7168
 DEFAULT_METHANE_LHV_MWH_PER_KG = 0.0139
 EPA_FLARE_DESTRUCTION_EFFICIENCY = 0.98
+DEFAULT_METHANE_DENSITY_REFERENCE = "pure methane at 0 C and 101.325 kPa"
+DEFAULT_METHANE_ENERGY_BASIS = "lower heating value (LHV)"
 EPA_FLARE_SOURCE = "https://www3.epa.gov/ttnchie1/ap42/ch13/final/dc13s05_6-5-17.pdf"
 
 
@@ -645,7 +647,9 @@ def assess_methane_project(
         assumptions={
             "methane_mass_source": mass_source,
             "methane_density_kg_per_m3": density,
+            "methane_density_reference_conditions": (DEFAULT_METHANE_DENSITY_REFERENCE),
             "methane_energy_mwh_per_kg": energy_content,
+            "methane_energy_basis": DEFAULT_METHANE_ENERGY_BASIS,
             "methane_origin": origin,
             "baseline_efficiency": baseline.effective_efficiency,
             "project_efficiency": project.effective_efficiency,

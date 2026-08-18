@@ -16,6 +16,7 @@ from .agent import (
     error_response,
     list_capabilities,
     run_recipe,
+    search_capabilities,
 )
 from .assessment import MissingInputError, assess
 from .balance import analyze_balance
@@ -52,13 +53,34 @@ from .ingestion import (
     write_mapping,
     write_records,
 )
+from .materials import analyze_material_definition
 from .models import ExergyStream
+from .packs import (
+    assess_intensity_with_pack,
+    assess_performance_with_pack,
+    assess_process_with_pack,
+    assess_with_pack,
+    bundled_technology_pack_info,
+    load_technology_pack,
+    technology_pack_coverage,
+    validate_technology_pack,
+    write_technology_pack_template,
+)
 from .preprocess import enrich_csv, load_csv, xai4heat_summary
 from .processes import assess_process, list_process_templates
 from .registry import DEFAULT_REGISTRY
 from .reporting import export_excel_compatible_report, export_html, export_pdf
 from .schema import list_schemas, load_schema
-from .validation import run_bundled_validation_suite, validate_xai4heat_file
+from .systems import analyze_system_definition, analyze_system_timeseries_definition
+from .technology_models import (
+    DEFAULT_TECHNOLOGY_MODEL_REGISTRY,
+    evaluate_technology_model,
+)
+from .validation import (
+    load_validation_coverage,
+    run_bundled_validation_suite,
+    validate_xai4heat_file,
+)
 from .weather import (
     monthly_weather_climatology,
     normalize_weather_performance,
@@ -107,7 +129,20 @@ def _integration_payload(result: Any, output: Path | None) -> dict[str, Any]:
     return payload
 
 
+def _json_object_argument(value: str) -> dict[str, Any]:
+    try:
+        parsed = json.loads(value)
+    except json.JSONDecodeError as exc:
+        raise argparse.ArgumentTypeError("must be a valid JSON object") from exc
+    if not isinstance(parsed, dict):
+        raise argparse.ArgumentTypeError("must be a JSON object")
+    return parsed
+
+
 def _add_assessment_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--pack", help="Bundled technology-pack name or explicit local JSON path"
+    )
     parser.add_argument("--technology", help="Technology profile or alias")
     parser.add_argument("--service", help="Useful service profile or alias")
     parser.add_argument("--carrier", help="Input carrier profile or alias")
@@ -131,10 +166,20 @@ def _add_assessment_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--temperature-unit", default="C", choices=("C", "F", "K"))
     parser.add_argument("--efficiency", type=float)
     parser.add_argument("--cop", type=float)
+    parser.add_argument(
+        "--performance",
+        type=float,
+        help="Generic performance parameter for a custom registered model",
+    )
     parser.add_argument("--exergy-factor", type=float)
     parser.add_argument("--input-exergy-factor", type=float)
     parser.add_argument("--output-exergy-factor", type=float)
     parser.add_argument("--location", help="Location label retained in provenance")
+    parser.add_argument(
+        "--estimate-context",
+        type=_json_object_argument,
+        help='JSON object used to select a conditional published prior, for example {"capacity_kva":500}',
+    )
     parser.add_argument(
         "--strict", action="store_true", help="Reject required assumed inputs"
     )
@@ -161,10 +206,12 @@ def _assessment_kwargs(args: argparse.Namespace) -> dict[str, Any]:
         "temperature_unit": args.temperature_unit,
         "efficiency": args.efficiency,
         "cop": args.cop,
+        "performance": args.performance,
         "exergy_factor": args.exergy_factor,
         "input_exergy_factor": args.input_exergy_factor,
         "output_exergy_factor": args.output_exergy_factor,
         "location": args.location,
+        "estimate_context": args.estimate_context,
         "strict": args.strict,
     }
 
@@ -197,7 +244,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Emit machine-readable JSON and structured JSON errors",
     )
     parser.add_argument(
-        "--version", action="version", version="exergy-imperative 0.4.3"
+        "--version", action="version", version="exergy-imperative 0.6.0"
     )
     commands = parser.add_subparsers(dest="command", required=True)
 
@@ -207,6 +254,9 @@ def build_parser() -> argparse.ArgumentParser:
     profile_parser = commands.add_parser("profiles", help="List bundled defaults")
     profile_parser.add_argument(
         "--category", choices=DEFAULT_REGISTRY.categories(), help="Filter profiles"
+    )
+    profile_parser.add_argument(
+        "--pack", help="Overlay a bundled pack name or explicit local JSON path"
     )
     profile_parser.add_argument(
         "--json",
@@ -357,11 +407,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     impact_parser.add_argument("--currency", default="USD")
 
-    commands.add_parser("processes", help="List industry process templates")
+    processes_parser = commands.add_parser(
+        "processes", help="List industry process templates"
+    )
+    processes_parser.add_argument(
+        "--pack", help="Overlay a bundled pack name or explicit local JSON path"
+    )
     process_parser = commands.add_parser(
         "process", help="Assess an industry process template"
     )
     process_parser.add_argument("template")
+    process_parser.add_argument(
+        "--pack", help="Bundled technology-pack name or explicit local JSON path"
+    )
     process_parser.add_argument("--energy", type=float)
     process_parser.add_argument("--unit", default="MWh")
     process_parser.add_argument("--country")
@@ -402,6 +460,70 @@ def build_parser() -> argparse.ArgumentParser:
     commands.add_parser(
         "capabilities", help="List agent workflows, contracts, and safety behavior"
     )
+    search_parser = commands.add_parser(
+        "search",
+        help="Search workflows, profiles, models, materials, packs, and schemas",
+    )
+    search_parser.add_argument("query")
+    search_parser.add_argument(
+        "--kind",
+        choices=(
+            "auto",
+            "workflow",
+            "process",
+            "profile",
+            "component",
+            "model",
+            "material",
+            "pack",
+            "schema",
+        ),
+        default="auto",
+    )
+    search_parser.add_argument("--limit", type=int, default=10)
+    packs_parser = commands.add_parser(
+        "packs", help="List or describe bundled data-only technology packs"
+    )
+    packs_parser.add_argument("name", nargs="?")
+    pack_coverage_parser = commands.add_parser(
+        "pack-coverage",
+        help="Show automatic estimates and explicit-input gaps for every technology",
+    )
+    pack_coverage_parser.add_argument("source")
+    commands.add_parser("models", help="List registered technology-model contracts")
+    model_evaluate_parser = commands.add_parser(
+        "model-evaluate", help="Evaluate a registered technology model from JSON"
+    )
+    model_evaluate_parser.add_argument("input", type=Path)
+    pack_validate_parser = commands.add_parser(
+        "pack-validate", help="Validate a bundled or local technology pack"
+    )
+    pack_validate_parser.add_argument("source")
+    pack_scaffold_parser = commands.add_parser(
+        "pack-scaffold", help="Write a safe technology-pack JSON scaffold"
+    )
+    pack_scaffold_parser.add_argument("output", type=Path)
+    intensity_parser = commands.add_parser(
+        "intensity", help="Estimate process input energy from a pack intensity prior"
+    )
+    intensity_parser.add_argument("pack")
+    intensity_parser.add_argument("technology")
+    intensity_parser.add_argument("output_mass", type=float)
+    intensity_parser.add_argument("--unit", default="t")
+    intensity_parser.add_argument("--specific-energy", type=float)
+    intensity_parser.add_argument("--estimate-context", type=_json_object_argument)
+    intensity_parser.add_argument("--strict", action="store_true")
+    performance_parser = commands.add_parser(
+        "performance",
+        help="Estimate technology energy output without assuming exergy quality",
+    )
+    performance_parser.add_argument("pack")
+    performance_parser.add_argument("technology")
+    performance_parser.add_argument("input_energy", type=float)
+    performance_parser.add_argument("--unit", default="MWh")
+    performance_parser.add_argument("--performance", type=float)
+    performance_parser.add_argument("--estimate-context", type=_json_object_argument)
+    performance_parser.add_argument("--strict", action="store_true")
     schema_parser = commands.add_parser(
         "schema", help="List schemas or print one packaged JSON Schema"
     )
@@ -412,7 +534,17 @@ def build_parser() -> argparse.ArgumentParser:
     describe_parser.add_argument("name")
     describe_parser.add_argument(
         "--kind",
-        choices=("auto", "workflow", "process", "profile"),
+        choices=(
+            "auto",
+            "workflow",
+            "process",
+            "profile",
+            "component",
+            "model",
+            "material",
+            "pack",
+            "schema",
+        ),
         default="auto",
     )
 
@@ -517,10 +649,36 @@ def build_parser() -> argparse.ArgumentParser:
     )
     waste_heat_parser.add_argument("input", type=Path)
 
+    system_parser = commands.add_parser(
+        "system", help="Analyze a connected component system from JSON"
+    )
+    system_parser.add_argument("input", type=Path)
+    system_parser.add_argument(
+        "--pack", help="Optional bundled pack name or explicit local JSON path"
+    )
+    system_timeseries_parser = commands.add_parser(
+        "system-timeseries",
+        help="Aggregate chronological connected-system interval records from JSON",
+    )
+    system_timeseries_parser.add_argument("input", type=Path)
+    system_timeseries_parser.add_argument(
+        "--pack", help="Optional bundled pack name or explicit local JSON path"
+    )
+    material_parser = commands.add_parser(
+        "material-balance",
+        help="Analyze mass, composition, and explicit chemical exergy from JSON",
+    )
+    material_parser.add_argument("input", type=Path)
+
     validate_parser = commands.add_parser(
         "validate", help="Run bundled reference validation or a local XAI4Heat check"
     )
     validate_parser.add_argument("--xai4heat", type=Path)
+    validate_parser.add_argument(
+        "--coverage",
+        action="store_true",
+        help="Show scientific assurance levels and limitations for every capability",
+    )
     validate_parser.add_argument("--sheet", default=0)
     validate_parser.add_argument("--header-row", type=int, default=1)
     for command_parser in commands.choices.values():
@@ -560,6 +718,51 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "capabilities":
             print(_json(list_capabilities()))
             return 0
+        if args.command == "search":
+            print(
+                _json(search_capabilities(args.query, kind=args.kind, limit=args.limit))
+            )
+            return 0
+        if args.command == "packs":
+            if args.name:
+                print(_json(load_technology_pack(args.name).to_dict()))
+            else:
+                print(_json(list(bundled_technology_pack_info())))
+            return 0
+        if args.command == "pack-validate":
+            print(_json(validate_technology_pack(args.source)))
+            return 0
+        if args.command == "pack-coverage":
+            print(_json(technology_pack_coverage(args.source)))
+            return 0
+        if args.command == "pack-scaffold":
+            output = write_technology_pack_template(args.output)
+            print(_json({"output": str(output)}))
+            return 0
+        if args.command == "intensity":
+            result = assess_intensity_with_pack(
+                args.pack,
+                args.technology,
+                args.output_mass,
+                output_unit=args.unit,
+                specific_energy_mwh_per_tonne=args.specific_energy,
+                estimate_context=args.estimate_context,
+                strict=args.strict,
+            )
+            print(_json(result.to_dict()))
+            return 0
+        if args.command == "performance":
+            result = assess_performance_with_pack(
+                args.pack,
+                args.technology,
+                args.input_energy,
+                unit=args.unit,
+                performance=args.performance,
+                estimate_context=args.estimate_context,
+                strict=args.strict,
+            )
+            print(_json(result.to_dict()))
+            return 0
         if args.command == "schema":
             print(_json(load_schema(args.name) if args.name else list_schemas()))
             return 0
@@ -567,11 +770,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(_json(describe_target(args.name, kind=args.kind)))
             return 0
         if args.command == "assess":
-            result = assess(**_assessment_kwargs(args))
+            result = (
+                assess_with_pack(args.pack, **_assessment_kwargs(args))
+                if args.pack
+                else assess(**_assessment_kwargs(args))
+            )
             print(_json(result.to_dict()) if args.as_json else result.summary())
             return 0
         if args.command == "profiles":
-            profiles = DEFAULT_REGISTRY.list(args.category)
+            registry = (
+                load_technology_pack(args.pack).registry()
+                if args.pack
+                else DEFAULT_REGISTRY
+            )
+            profiles = registry.list(args.category)
             if args.as_json:
                 print(_json([profile.to_dict() for profile in profiles]))
             else:
@@ -770,7 +982,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(_json(result.to_dict()))
             return 0
         if args.command == "processes":
-            print(_json([item.to_dict() for item in list_process_templates()]))
+            catalog = (
+                load_technology_pack(args.pack).process_catalog() if args.pack else None
+            )
+            print(
+                _json(
+                    [item.to_dict() for item in list_process_templates(catalog=catalog)]
+                )
+            )
             return 0
         if args.command == "process":
             economics_options = None
@@ -783,15 +1002,27 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "carbon_price_per_tonne": args.carbon_price,
                     "currency": args.currency,
                 }
-            result = assess_process(
-                args.template,
-                args.energy,
-                unit=args.unit,
-                country=args.country,
-                year=args.year,
-                improvement_fraction=args.improvement_fraction,
-                economics_options=economics_options,
-                annualization_factor=args.annualization_factor,
+            process_options = {
+                "unit": args.unit,
+                "country": args.country,
+                "year": args.year,
+                "improvement_fraction": args.improvement_fraction,
+                "economics_options": economics_options,
+                "annualization_factor": args.annualization_factor,
+            }
+            result = (
+                assess_process_with_pack(
+                    args.pack,
+                    args.template,
+                    args.energy,
+                    **process_options,
+                )
+                if args.pack
+                else assess_process(
+                    args.template,
+                    args.energy,
+                    **process_options,
+                )
             )
             print(_json(result.to_dict()) if args.as_json else result.summary())
             return 0
@@ -946,7 +1177,45 @@ def main(argv: Sequence[str] | None = None) -> int:
             demands = payload.pop("demands")
             print(_json(match_waste_heat(sources, demands, **payload).to_dict()))
             return 0
+        if args.command in {"system", "system-timeseries"}:
+            payload = json.loads(args.input.read_text(encoding="utf-8"))
+            pack_source = args.pack or payload.pop("pack", None)
+            registry = (
+                load_technology_pack(pack_source).registry()
+                if pack_source is not None
+                else None
+            )
+            result = (
+                analyze_system_definition(payload, registry=registry)
+                if args.command == "system"
+                else analyze_system_timeseries_definition(payload, registry=registry)
+            )
+            print(_json(result.to_dict()))
+            return 0
+        if args.command == "models":
+            print(
+                _json(
+                    [
+                        item.to_dict()
+                        for item in DEFAULT_TECHNOLOGY_MODEL_REGISTRY.list()
+                    ]
+                )
+            )
+            return 0
+        if args.command == "model-evaluate":
+            payload = json.loads(args.input.read_text(encoding="utf-8"))
+            print(_json(evaluate_technology_model(**payload).to_dict()))
+            return 0
+        if args.command == "material-balance":
+            payload = json.loads(args.input.read_text(encoding="utf-8"))
+            print(_json(analyze_material_definition(payload).to_dict()))
+            return 0
         if args.command == "validate":
+            if args.coverage and args.xai4heat is not None:
+                raise ValueError("--coverage cannot be combined with --xai4heat")
+            if args.coverage:
+                print(_json(load_validation_coverage().to_dict()))
+                return 0
             if args.xai4heat is None:
                 result = run_bundled_validation_suite()
             else:

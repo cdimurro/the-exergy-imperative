@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/validation-coverage-v1.json",
+  "title": "Exergy Imperative scientific validation coverage",
+  "type": "object",
+  "required": ["schema_version", "coverage_version", "generated_on", "scope", "levels", "items", "notes"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "coverage_version": {"type": "string", "minLength": 1},
+    "generated_on": {"type": "string", "format": "date"},
+    "scope": {"type": "string", "minLength": 1},
+    "levels": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "level", "public_api", "tests", "case_ids", "evidence", "limitations", "decision_grade"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "level": {
+            "enum": [
+              "reference-validated",
+              "analytically-validated",
+              "cross-implementation-validated",
+              "conservation-validated",
+              "structural-only",
+              "screening-only",
+              "external-data-required",
+              "interface-only"
+            ]
+          },
+          "public_api": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "tests": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "case_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["title"],
+              "properties": {
+                "title": {"type": "string", "minLength": 1},
+                "url": {"type": "string"},
+                "locator": {"type": "string"}
+              },
+              "additionalProperties": false
+            }
+          },
+          "limitations": {"type": "array", "items": {"type": "string"}},
+          "decision_grade": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

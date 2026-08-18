@@ -7,12 +7,51 @@ import math
 from dataclasses import dataclass
 from importlib.resources import files
 from pathlib import Path
-from typing import Any, Callable, Iterable, Mapping
+from typing import Any, Callable, Iterable, Mapping, Sequence
 
-from .engineering import analyze_heat_pump
-from .formulas import petela_exergy_factor, thermal_exergy_factor_c
+from .balance import analyze_balance
+from .economics import capital_recovery_factor, net_present_value
+from .engineering import (
+    analyze_compressed_air,
+    analyze_furnace,
+    analyze_heat_pump,
+    analyze_refrigeration,
+)
+from .factors import DEFAULT_IMPACT_FACTORS
+from .formulas import (
+    cooling_exergy_factor_c,
+    exergy_destruction,
+    ideal_gas_pressure_exergy,
+    ideal_mixture_separation_exergy,
+    kinetic_exergy,
+    petela_exergy_factor,
+    physical_flow_exergy,
+    potential_exergy,
+    sensible_heat_exergy_factor_c,
+    thermal_exergy_factor_c,
+)
+from .ghg import assess_methane_project
 from .ingestion import read_records
+from .materials import analyze_material_definition
+from .models import ExergyStream
+from .packs import assess_intensity_with_pack, assess_performance_with_pack
 from .preprocess import xai4heat_summary
+from .systems import analyze_system_definition
+from .technology_models import evaluate_technology_model
+from .uncertainty import expected_value_of_perfect_information
+from .units import convert_energy
+from .weather import add_weather_metrics
+
+VALIDATION_LEVELS = (
+    "reference-validated",
+    "analytically-validated",
+    "cross-implementation-validated",
+    "conservation-validated",
+    "structural-only",
+    "screening-only",
+    "external-data-required",
+    "interface-only",
+)
 
 
 @dataclass(frozen=True)
@@ -26,6 +65,9 @@ class ValidationCase:
     citation: Mapping[str, str]
     output_path: str = ""
     notes: str = ""
+    relative_tolerance: float = 0.0
+    validation_type: str = "reference"
+    capabilities: tuple[str, ...] = ()
 
     @classmethod
     def from_dict(cls, payload: Mapping[str, Any]) -> "ValidationCase":
@@ -39,6 +81,9 @@ class ValidationCase:
             citation=dict(payload["citation"]),
             output_path=str(payload.get("output_path", "")),
             notes=str(payload.get("notes", "")),
+            relative_tolerance=float(payload.get("relative_tolerance", 0.0)),
+            validation_type=str(payload.get("validation_type", "reference")),
+            capabilities=tuple(str(item) for item in payload.get("capabilities", ())),
         )
 
 
@@ -52,6 +97,9 @@ class ValidationOutcome:
     passed: bool
     citation: Mapping[str, str]
     message: str
+    relative_tolerance: float = 0.0
+    validation_type: str = "reference"
+    capabilities: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -60,9 +108,79 @@ class ValidationOutcome:
             "expected": self.expected,
             "actual": self.actual,
             "absolute_tolerance": self.absolute_tolerance,
+            "relative_tolerance": self.relative_tolerance,
             "passed": self.passed,
             "citation": dict(self.citation),
+            "validation_type": self.validation_type,
+            "capabilities": list(self.capabilities),
             "message": self.message,
+        }
+
+
+@dataclass(frozen=True)
+class ValidationCoverageItem:
+    """Scientific assurance level for one coherent capability family."""
+
+    id: str
+    title: str
+    level: str
+    public_api: tuple[str, ...]
+    tests: tuple[str, ...]
+    case_ids: tuple[str, ...]
+    evidence: tuple[Mapping[str, str], ...]
+    limitations: tuple[str, ...]
+    decision_grade: bool = False
+
+    @classmethod
+    def from_dict(cls, payload: Mapping[str, Any]) -> "ValidationCoverageItem":
+        level = str(payload["level"])
+        if level not in VALIDATION_LEVELS:
+            raise ValueError(f"unsupported scientific validation level {level!r}")
+        return cls(
+            id=str(payload["id"]),
+            title=str(payload["title"]),
+            level=level,
+            public_api=tuple(str(item) for item in payload.get("public_api", ())),
+            tests=tuple(str(item) for item in payload.get("tests", ())),
+            case_ids=tuple(str(item) for item in payload.get("case_ids", ())),
+            evidence=tuple(dict(item) for item in payload.get("evidence", ())),
+            limitations=tuple(str(item) for item in payload.get("limitations", ())),
+            decision_grade=bool(payload.get("decision_grade", False)),
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "title": self.title,
+            "level": self.level,
+            "public_api": list(self.public_api),
+            "tests": list(self.tests),
+            "case_ids": list(self.case_ids),
+            "evidence": [dict(item) for item in self.evidence],
+            "limitations": list(self.limitations),
+            "decision_grade": self.decision_grade,
+        }
+
+
+@dataclass(frozen=True)
+class ScientificValidationCoverage:
+    """Machine-readable scientific coverage ledger for the public package."""
+
+    version: str
+    generated_on: str
+    scope: str
+    items: tuple[ValidationCoverageItem, ...]
+    notes: tuple[str, ...] = ()
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema_version": "1.0",
+            "coverage_version": self.version,
+            "generated_on": self.generated_on,
+            "scope": self.scope,
+            "levels": list(VALIDATION_LEVELS),
+            "items": [item.to_dict() for item in self.items],
+            "notes": list(self.notes),
         }
 
 
@@ -77,13 +195,21 @@ class ValidationSuiteResult:
     def passed(self) -> bool:
         return bool(self.outcomes) and all(item.passed for item in self.outcomes)
 
+    @property
+    def passed_cases(self) -> int:
+        return sum(item.passed for item in self.outcomes)
+
+    @property
+    def total_cases(self) -> int:
+        return len(self.outcomes)
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": "1.0",
             "suite_id": self.suite_id,
             "passed": self.passed,
-            "passed_cases": sum(item.passed for item in self.outcomes),
-            "total_cases": len(self.outcomes),
+            "passed_cases": self.passed_cases,
+            "total_cases": self.total_cases,
             "source": self.source,
             "outcomes": [item.to_dict() for item in self.outcomes],
             "notes": list(self.notes),
@@ -93,7 +219,27 @@ class ValidationSuiteResult:
 def load_validation_cases() -> tuple[ValidationCase, ...]:
     resource = files("exergy_imperative").joinpath("data", "validation_cases.json")
     payload = json.loads(resource.read_text(encoding="utf-8"))
-    return tuple(ValidationCase.from_dict(item) for item in payload["cases"])
+    cases = tuple(ValidationCase.from_dict(item) for item in payload["cases"])
+    ids = [item.id for item in cases]
+    if len(ids) != len(set(ids)):
+        raise ValueError("bundled scientific validation cases contain duplicate ids")
+    return cases
+
+
+def load_validation_coverage() -> ScientificValidationCoverage:
+    resource = files("exergy_imperative").joinpath("data", "validation_coverage.json")
+    payload = json.loads(resource.read_text(encoding="utf-8"))
+    items = tuple(ValidationCoverageItem.from_dict(item) for item in payload["items"])
+    ids = [item.id for item in items]
+    if len(ids) != len(set(ids)):
+        raise ValueError("scientific validation coverage contains duplicate item ids")
+    return ScientificValidationCoverage(
+        version=str(payload["coverage_version"]),
+        generated_on=str(payload["generated_on"]),
+        scope=str(payload["scope"]),
+        items=items,
+        notes=tuple(str(item) for item in payload.get("notes", ())),
+    )
 
 
 def _resolve_output(value: Any, path: str) -> float:
@@ -101,27 +247,170 @@ def _resolve_output(value: Any, path: str) -> float:
     for part in filter(None, path.split(".")):
         if isinstance(current, Mapping):
             current = current[part]
+        elif isinstance(current, Sequence) and not isinstance(current, (str, bytes)):
+            current = current[int(part)]
         else:
             current = getattr(current, part)
     return float(current)
 
 
+def _gwp(gas: str, horizon: int) -> float:
+    return DEFAULT_IMPACT_FACTORS.warming_potential(gas).for_horizon(horizon)
+
+
+def _fuel_factor(carrier: str, species: str) -> float:
+    return DEFAULT_IMPACT_FACTORS.fuel_emissions(carrier).gases_kg_per_mwh[species]
+
+
+def _methane_combustion_co2(methane_mass_kg: float) -> float:
+    result = assess_methane_project(
+        annual_methane_mass_kg=methane_mass_kg,
+        baseline_mode="vented",
+        project_mode="oxidized",
+    )
+    return result.project.combustion_co2_kg
+
+
+def _degree_days(temperature_c: float, base_c: float, mode: str) -> float:
+    row = add_weather_metrics(
+        [{"date": "2026-01-01", "temperature_c": temperature_c}],
+        heating_base_c=base_c,
+        cooling_base_c=base_c,
+    )[0]
+    return float(row[f"{mode}_degree_days_c_day"])
+
+
+def _balance_destruction(input_exergy: float, product_exergy: float) -> float:
+    return analyze_balance(
+        "validation balance",
+        inputs=[ExergyStream("input", input_exergy)],
+        products=[ExergyStream("product", product_exergy)],
+    ).destruction_exergy
+
+
+def _system_residual() -> float:
+    result = analyze_system_definition(
+        {
+            "name": "validation system",
+            "components": [{"id": "converter", "kind": "converter"}],
+            "flows": [
+                {
+                    "id": "input",
+                    "energy": 100.0,
+                    "target": "converter",
+                    "exergy_factor": 1.0,
+                },
+                {
+                    "id": "product",
+                    "energy": 60.0,
+                    "source": "converter",
+                    "exergy_factor": 1.0,
+                },
+                {
+                    "id": "loss",
+                    "energy": 40.0,
+                    "source": "converter",
+                    "role": "loss",
+                    "exergy_factor": 0.25,
+                },
+            ],
+        }
+    )
+    return result.energy.residual
+
+
+def _material_residual() -> float:
+    result = analyze_material_definition(
+        {
+            "name": "validation separator",
+            "components": [{"id": "separator", "kind": "reactor-separator"}],
+            "streams": [
+                {
+                    "id": "feed",
+                    "mass": 100.0,
+                    "target": "separator",
+                    "composition": {"a": 0.6, "b": 0.4},
+                },
+                {
+                    "id": "product",
+                    "mass": 60.0,
+                    "source": "separator",
+                    "material": "a",
+                },
+                {
+                    "id": "loss",
+                    "mass": 40.0,
+                    "source": "separator",
+                    "role": "loss",
+                    "material": "b",
+                },
+            ],
+        }
+    )
+    return result.balance.residual_mass_kg
+
+
 def _methods() -> Mapping[str, Callable[..., Any]]:
     return {
         "thermal_exergy_factor_c": thermal_exergy_factor_c,
+        "cooling_exergy_factor_c": cooling_exergy_factor_c,
+        "sensible_heat_exergy_factor_c": sensible_heat_exergy_factor_c,
+        "physical_flow_exergy": physical_flow_exergy,
+        "exergy_destruction": exergy_destruction,
+        "kinetic_exergy": kinetic_exergy,
+        "potential_exergy": potential_exergy,
+        "ideal_gas_pressure_exergy": ideal_gas_pressure_exergy,
+        "ideal_mixture_separation_exergy": ideal_mixture_separation_exergy,
         "petela_exergy_factor": petela_exergy_factor,
+        "convert_energy": convert_energy,
+        "capital_recovery_factor": capital_recovery_factor,
+        "net_present_value": net_present_value,
         "analyze_heat_pump": analyze_heat_pump,
+        "analyze_refrigeration": analyze_refrigeration,
+        "analyze_furnace": analyze_furnace,
+        "analyze_compressed_air": analyze_compressed_air,
+        "gwp": _gwp,
+        "fuel_factor": _fuel_factor,
+        "methane_combustion_co2": _methane_combustion_co2,
+        "degree_days": _degree_days,
+        "balance_destruction": _balance_destruction,
+        "system_residual": _system_residual,
+        "material_residual": _material_residual,
+        "expected_value_of_perfect_information": (
+            expected_value_of_perfect_information
+        ),
+        "evaluate_technology_model": evaluate_technology_model,
+        "assess_performance_with_pack": assess_performance_with_pack,
+        "assess_intensity_with_pack": assess_intensity_with_pack,
     }
 
 
 def run_validation_case(case: ValidationCase) -> ValidationOutcome:
+    if (
+        not math.isfinite(case.expected)
+        or not math.isfinite(case.absolute_tolerance)
+        or not math.isfinite(case.relative_tolerance)
+        or case.absolute_tolerance < 0.0
+        or case.relative_tolerance < 0.0
+    ):
+        raise ValueError(
+            "validation expected value and tolerances must be finite; tolerances "
+            "must be nonnegative"
+        )
     try:
         method = _methods()[case.method]
     except KeyError as exc:
         raise ValueError(f"unsupported validation method {case.method!r}") from exc
     actual = _resolve_output(method(**case.inputs), case.output_path)
+    if not math.isfinite(actual):
+        raise ValueError(
+            f"validation method {case.method!r} returned a nonfinite value"
+        )
     passed = math.isclose(
-        actual, case.expected, rel_tol=0.0, abs_tol=case.absolute_tolerance
+        actual,
+        case.expected,
+        rel_tol=case.relative_tolerance,
+        abs_tol=case.absolute_tolerance,
     )
     delta = abs(actual - case.expected)
     return ValidationOutcome(
@@ -130,8 +419,11 @@ def run_validation_case(case: ValidationCase) -> ValidationOutcome:
         expected=case.expected,
         actual=actual,
         absolute_tolerance=case.absolute_tolerance,
+        relative_tolerance=case.relative_tolerance,
         passed=passed,
         citation=case.citation,
+        validation_type=case.validation_type,
+        capabilities=case.capabilities,
         message=(
             f"passed; absolute difference {delta:.6g}"
             if passed
@@ -147,7 +439,8 @@ def run_bundled_validation_suite() -> ValidationSuiteResult:
         outcomes=tuple(run_validation_case(case) for case in cases),
         source="packaged reference cases",
         notes=(
-            "Passing reference cases checks implementation consistency, not fitness for a particular design or investment decision.",
+            "Passing cases establishes agreement only for the declared equations, constants, boundaries, and tolerances.",
+            "Screening priors, site measurements, external datasets, exposure, and design fitness require separate evidence; inspect load_validation_coverage().",
         ),
     )
 

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/technology-performance-result-v1.json",
+  "title": "Technology energy-performance screening result",
+  "type": "object",
+  "required": ["schema_version", "model", "technology", "technology_model", "input_carrier", "output_carrier", "input_energy", "performance_parameter", "performance", "output_energy", "boundary", "tier", "warnings", "source_catalog"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "model": {"const": "technology-energy-performance"},
+    "technology": {"type": "string", "minLength": 1},
+    "technology_model": {"type": "string", "minLength": 1},
+    "input_carrier": {"type": "string", "minLength": 1},
+    "output_carrier": {"type": "string", "minLength": 1},
+    "input_energy": {"$ref": "#/$defs/estimate"},
+    "performance_parameter": {"type": "string", "minLength": 1},
+    "performance": {"$ref": "#/$defs/parameter"},
+    "output_energy": {"$ref": "#/$defs/estimate"},
+    "boundary": {"type": "string", "minLength": 1},
+    "tier": {"enum": ["F1", "F2"]},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "source_catalog": {"type": "object"}
+  },
+  "$defs": {
+    "estimate": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {"type": "number", "minimum": 0},
+        "unit": {"type": "string", "minLength": 1},
+        "low": {"type": "number", "minimum": 0},
+        "high": {"type": "number", "minimum": 0},
+        "confidence": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "parameter": {
+      "type": "object",
+      "required": ["value", "unit", "status"],
+      "properties": {
+        "value": {"type": "number", "exclusiveMinimum": 0},
+        "unit": {"type": "string", "minLength": 1},
+        "status": {"enum": ["published_estimate", "profile", "provided"]},
+        "source_id": {"type": "string"},
+        "source_version": {"type": "string"},
+        "low": {"type": "number", "exclusiveMinimum": 0},
+        "high": {"type": "number", "exclusiveMinimum": 0},
+        "confidence": {"type": "string"},
+        "note": {"type": "string"},
+        "evidence_kind": {"type": "string"},
+        "statistic": {"type": "string"},
+        "range_basis": {"type": "string"},
+        "applicability": {"type": "object"},
+        "estimate_variant": {"type": "string"},
+        "selection_basis": {"type": "string"},
+        "selection_context": {"type": "object"},
+        "available_context": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

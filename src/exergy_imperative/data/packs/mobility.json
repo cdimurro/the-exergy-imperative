@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0",
+  "id": "mobility",
+  "version": "2026.1",
+  "license": "CC-BY-4.0",
+  "description": "Vehicle drivetrain mappings with published light-duty screening priors and transport-service boundaries kept separate.",
+  "domains": ["transport", "mobility"],
+  "sources": {
+    "exergy-imperative-component-methods": {
+      "title": "The Exergy Imperative component accounting methods",
+      "url": "https://github.com/cdimurro/the-exergy-imperative",
+      "license": "CC-BY-4.0",
+      "applicable_boundary": "Energy delivered to a drivetrain through shaft work at its output",
+      "note": "Passenger-kilometres and tonne-kilometres are functional services, not thermodynamic exergy. Performance priors, where present, cite their own sources."
+    },
+    "doe-vehicle-efficiency-2024": {
+      "title": "U.S. DOE Fact of the Week 1360: Typical EV efficiency compared with a conventional gasoline vehicle",
+      "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional",
+      "license": "U.S. Government work; source data credited to DOE and EPA FuelEconomy.gov",
+      "applicable_boundary": "Energy stored on a light-duty vehicle to energy used at the wheels on the EPA combined city/highway drive cycle, including net regenerative braking",
+      "note": "Charging losses, upstream energy, vehicle-specific behavior, weather, and transport functional units are outside this prior."
+    },
+    "nrel-fcev-learning-demonstration-2012": {
+      "title": "NREL National Fuel Cell Electric Vehicle Learning Demonstration Final Report",
+      "url": "https://www.nrel.gov/docs/fy12osti/54860.pdf",
+      "license": "U.S. Government work; NREL technical report",
+      "applicable_boundary": "Hydrogen LHV to net fuel-cell-system electrical output over reported vehicle operating points",
+      "note": "Reported net system efficiencies include balance-of-plant loads and span 42%-59% across full- and quarter-power results. A separate DOE/EPA drivetrain range is used only to derive the shaft-output screen."
+    },
+    "doe-diesel-technical-primer-2010": {
+      "title": "U.S. DOE Diesel Power: Clean Vehicles for Tomorrow technical primer",
+      "url": "https://www1.eere.energy.gov/vehiclesandfuels/pdfs/diesel_technical_primer.pdf",
+      "license": "U.S. Government work; verify document-specific third-party notices",
+      "applicable_boundary": "Fuel chemical energy to useful engine shaft work for then-current diesel and gasoline spark-ignition engines",
+      "note": "The primer states 40%-50% for diesel engines and 25%-35% for gasoline spark-ignition engines. These are engine, not tank-to-wheel, ranges."
+    }
+  },
+  "profiles": {
+    "technology": [
+      {
+        "id": "electric-vehicle-drivetrain",
+        "label": "Battery-electric vehicle drivetrain",
+        "aliases": ["BEV drivetrain", "electric drivetrain"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": [],
+        "recommended_overrides": ["efficiency", "measured battery discharge", "wheel energy", "drive cycle"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Energy discharged from the vehicle battery to net mechanical energy used at the wheels over an EPA combined drive cycle, including regenerative braking; charging and upstream electricity are separate",
+        "parameters": {
+          "efficiency": {
+            "value": 0.89,
+            "unit": "MWh_wheel/MWh_battery",
+            "low": 0.87,
+            "high": 0.91,
+            "confidence": "screening drive-cycle range",
+            "source_id": "doe-vehicle-efficiency-2024",
+            "source_version": "Fact of the Week 1360, 2024-09-16",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the DOE/EPA stated typical EV efficiency range",
+            "range_basis": "DOE/EPA stated typical range across the referenced drive-cycle context",
+            "applicability": {
+              "technology": "Typical light-duty battery-electric vehicle",
+              "boundary": "Onboard stored energy to wheel energy including net regenerative braking; charging excluded",
+              "geography": "United States EPA combined city/highway drive-cycle context",
+              "vintage": "Source accessed by DOE on 2024-07-10 and published 2024-09-16"
+            },
+            "note": "Do not interpret this as wall-to-wheel efficiency or a promise for a specific route, climate, or vehicle."
+          }
+        }
+      },
+      {
+        "id": "hydrogen-fuel-cell-drivetrain",
+        "label": "Hydrogen fuel-cell drivetrain",
+        "aliases": ["FCEV drivetrain"],
+        "model": "converter",
+        "input_carrier": "hydrogen-lhv",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Hydrogen LHV input to mechanical shaft work; hydrogen production and compression are separate unless included explicitly",
+        "recommended_overrides": ["fuel-cell system map", "motor and inverter map", "drive cycle", "auxiliary loads"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.4895,
+            "unit": "MWh_shaft/MWh_H2_LHV",
+            "low": 0.3654,
+            "high": 0.5369,
+            "confidence": "derived screening envelope",
+            "source_id": "nrel-fcev-learning-demonstration-2012",
+            "source_version": "NREL/TP-5600-54860 and DOE/EPA 2024 EV drivetrain range",
+            "evidence_kind": "published_estimate",
+            "statistic": "Product of midpoints for reported net fuel-cell-system and typical electric-drivetrain ranges",
+            "range_basis": "Products of the lower and upper source bounds; dependencies are not a statistical confidence interval",
+            "applicability": {
+              "technology": "Light-duty PEM fuel-cell system followed by a typical electric drivetrain",
+              "boundary": "Onboard hydrogen LHV to mechanical drivetrain output; hydrogen production, delivery, and compression excluded",
+              "geography": "United States DOE/NREL vehicle evaluation context",
+              "vintage": "2012 fuel-cell fleet results combined with 2024 drivetrain characterization"
+            },
+            "note": "Composite estimate; replace with a vehicle-specific fuel-cell and motor map."
+          }
+        }
+      },
+      {
+        "id": "gasoline-vehicle-drivetrain",
+        "label": "Gasoline internal-combustion drivetrain",
+        "aliases": ["gasoline ICE drivetrain"],
+        "model": "converter",
+        "input_carrier": "gasoline-lhv",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Gasoline LHV input to mechanical shaft work; upstream fuel production and road load are separate",
+        "recommended_overrides": ["engine efficiency map", "load and speed distribution", "fuel LHV", "hybridization"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.3,
+            "unit": "MWh_shaft/MWh_fuel_LHV",
+            "low": 0.25,
+            "high": 0.35,
+            "confidence": "screening engine range",
+            "source_id": "doe-diesel-technical-primer-2010",
+            "source_version": "DOE technical primer, July 2010",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the source's gasoline spark-ignition engine range",
+            "range_basis": "Published engine conversion range; not a drive-cycle confidence interval",
+            "applicability": {
+              "technology": "Conventional gasoline spark-ignition engine",
+              "boundary": "Fuel LHV to useful engine shaft work; transmission, accessories, idle, and road load excluded",
+              "geography": "Generic U.S. vehicle-technology characterization",
+              "vintage": "2010 source technology"
+            },
+            "note": "Despite the profile label, this prior stops at engine shaft work; use tank-to-wheel data for a full drivetrain boundary."
+          }
+        }
+      },
+      {
+        "id": "diesel-vehicle-drivetrain",
+        "label": "Diesel internal-combustion drivetrain",
+        "aliases": ["diesel ICE drivetrain"],
+        "model": "converter",
+        "input_carrier": "diesel-lhv",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Diesel LHV input to mechanical shaft work; upstream fuel production and road load are separate",
+        "recommended_overrides": ["engine efficiency map", "load and speed distribution", "fuel LHV", "aftertreatment loads"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.45,
+            "unit": "MWh_shaft/MWh_fuel_LHV",
+            "low": 0.4,
+            "high": 0.5,
+            "confidence": "screening engine range",
+            "source_id": "doe-diesel-technical-primer-2010",
+            "source_version": "DOE technical primer, July 2010",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the source's diesel-engine range",
+            "range_basis": "Published engine conversion range; not a drive-cycle confidence interval",
+            "applicability": {
+              "technology": "Conventional compression-ignition diesel engine",
+              "boundary": "Fuel LHV to useful engine shaft work; transmission, accessories, idle, and road load excluded",
+              "geography": "Generic U.S. vehicle-technology characterization",
+              "vintage": "2010 source technology"
+            },
+            "note": "Despite the profile label, this prior stops at engine shaft work; use tank-to-wheel data for a full drivetrain boundary."
+          }
+        }
+      }
+    ]
+  },
+  "process_templates": [],
+  "metadata": {"functional_unit_policy": "declare transport service separately", "default_policy": "selected published F1 priors; explicit vehicle and drive-cycle data preferred"}
+}

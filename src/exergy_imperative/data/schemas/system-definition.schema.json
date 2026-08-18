@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/system-definition-v1.json",
+  "title": "Exergy Imperative connected system definition",
+  "$defs": {
+    "component": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["source", "sink", "converter", "heater-cooler", "heat-exchanger", "mixer-splitter", "compressor-pump", "turbine-expander", "reactor-separator", "storage", "transport"]},
+        "label": {"type": "string"},
+        "technology": {"type": "string"},
+        "metadata": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "flow": {
+      "type": "object",
+      "required": ["id", "energy"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string"},
+        "energy": {"type": "number", "minimum": 0},
+        "unit": {"type": "string", "default": "MWh"},
+        "source": {"type": ["string", "null"]},
+        "target": {"type": ["string", "null"]},
+        "role": {"enum": ["resource", "internal", "product", "loss"]},
+        "carrier": {"type": "string"},
+        "exergy": {"type": "number", "minimum": 0},
+        "exergy_factor": {"type": "number", "minimum": 0},
+        "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "metadata": {"type": "object"}
+      },
+      "anyOf": [{"required": ["source"]}, {"required": ["target"]}],
+      "additionalProperties": false
+    },
+    "accumulation": {
+      "type": "object",
+      "required": ["component", "energy_change"],
+      "properties": {
+        "component": {"type": "string", "minLength": 1},
+        "energy_change": {"type": "number"},
+        "unit": {"type": "string", "default": "MWh"},
+        "exergy_change": {"type": "number"},
+        "exergy_factor": {"type": "number", "minimum": 0},
+        "carrier": {"type": "string"},
+        "tier": {"enum": ["F0", "F1", "F2", "F3", "F4"]},
+        "metadata": {"type": "object"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "required": ["name", "components", "flows"],
+  "properties": {
+    "name": {"type": "string", "minLength": 1},
+    "components": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/component"}},
+    "flows": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/flow"}},
+    "accumulations": {"type": "array", "items": {"$ref": "#/$defs/accumulation"}},
+    "unit": {"type": "string", "default": "MWh"},
+    "tolerance": {"type": "number", "minimum": 0, "default": 1e-9}
+  },
+  "additionalProperties": false
+}

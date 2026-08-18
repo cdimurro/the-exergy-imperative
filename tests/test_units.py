@@ -54,3 +54,5 @@ def test_typed_energy_basis_is_exposed_and_validated():
     assert xi.energy_basis("MWh") is None
     with pytest.raises(xi.UnitError, match="conflicting"):
         xi.energy_basis("MWh_HHV_LHV")
+    with pytest.raises(xi.UnitError, match="fuel-specific"):
+        xi.convert_energy(1, "MWh_HHV", "MWh_LHV")

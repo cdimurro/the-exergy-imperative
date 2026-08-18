@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "id": "water-materials",
+  "version": "2026.1",
+  "license": "CC-BY-4.0",
+  "description": "Data-only water, wastewater, and electrically heated materials technology mappings.",
+  "domains": ["water", "wastewater", "materials", "manufacturing"],
+  "sources": {
+    "exergy-imperative-component-methods": {
+      "title": "The Exergy Imperative component accounting methods",
+      "url": "https://github.com/cdimurro/the-exergy-imperative",
+      "license": "CC-BY-4.0",
+      "applicable_boundary": "Single-input equipment mapping at explicitly selected delivered-energy and useful-output boundaries",
+      "note": "Mappings contain no site performance, exposure, or design defaults."
+    },
+    "doe-industrial-pump-sourcebook": {
+      "title": "U.S. DOE Improving Pumping System Performance: A Sourcebook for Industry, Second Edition",
+      "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/pump.pdf",
+      "license": "U.S. Government work; verify sourcebook-specific third-party notices",
+      "applicable_boundary": "Pump and motor input electricity to hydraulic work for industrial centrifugal pumping systems",
+      "note": "The sourcebook describes pump efficiencies from about 35% to above 90% and includes worked screens using 90% motor efficiency. The bundled prior multiplies those two quantities and is deliberately broad."
+    },
+    "doe-industrial-fan-sourcebook": {
+      "title": "U.S. DOE Improving Fan System Performance: A Sourcebook for Industry",
+      "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/fan_sourcebook.pdf",
+      "license": "U.S. Government work; verify sourcebook-specific third-party notices",
+      "applicable_boundary": "Fan mechanical input to useful airstream power for forward-curved centrifugal fans",
+      "note": "The sourcebook reports 55%-65% for forward-curved fans. The bundled equipment screen multiplies this by the pump sourcebook's illustrative 90% motor efficiency; oxygen transfer and treatment performance are excluded."
+    },
+    "doe-metalcasting-energy-profile": {
+      "title": "U.S. DOE Energy and Environmental Profile of the U.S. Metalcasting Industry",
+      "url": "https://www.energy.gov/sites/default/files/2013/11/f4/profile_0.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Coreless induction-furnace electricity to energy utilized in ferrous-metal melting",
+      "note": "The report states electrical-power utilization exceeding 80%; another DOE aluminum report describes approximately 90% induction melting. The range is a cross-material equipment screen."
+    }
+  },
+  "profiles": {
+    "technology": [
+      {
+        "id": "electric-water-pump",
+        "label": "Electric water pump",
+        "aliases": ["water pump", "pump"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Electricity at motor input to useful hydraulic or shaft work as explicitly declared",
+        "recommended_overrides": ["pump curve", "motor efficiency", "flow", "head", "operating point"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.5625,
+            "unit": "MWh_hydraulic/MWh_electricity",
+            "low": 0.315,
+            "high": 0.81,
+            "confidence": "broad family screening envelope",
+            "source_id": "doe-industrial-pump-sourcebook",
+            "source_version": "Second Edition, May 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of 35%-90% pump range multiplied by illustrative 90% motor efficiency",
+            "range_basis": "Products of the published pump range endpoints and illustrative motor efficiency",
+            "applicability": {
+              "technology": "Industrial centrifugal pump and electric motor",
+              "boundary": "Motor electrical input to pump hydraulic output near a declared operating point",
+              "geography": "Generic U.S. industrial screening context",
+              "vintage": "DOE sourcebook Second Edition, 2006"
+            },
+            "note": "Very broad fallback: efficiency depends strongly on pump size, type, wear, motor, and distance from best-efficiency point."
+          }
+        }
+      },
+      {
+        "id": "wastewater-aeration-system",
+        "label": "Wastewater aeration system",
+        "aliases": ["aeration blower", "wastewater aeration"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Electricity input to declared pneumatic/mechanical useful work; oxygen-transfer performance requires a separate process model",
+        "recommended_overrides": ["blower performance curve", "motor efficiency", "airflow", "pressure rise", "oxygen transfer efficiency"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.54,
+            "unit": "MWh_airstream/MWh_electricity",
+            "low": 0.495,
+            "high": 0.585,
+            "confidence": "equipment-family screening range",
+            "source_id": "doe-industrial-fan-sourcebook",
+            "source_version": "DOE fan sourcebook and illustrative 90% motor efficiency",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of forward-curved fan range multiplied by illustrative motor efficiency",
+            "range_basis": "Products of the 55%-65% fan range and 90% illustrative motor efficiency",
+            "applicability": {
+              "technology": "Forward-curved centrifugal blower and electric motor",
+              "boundary": "Motor electrical input to airstream mechanical power; diffuser, basin, and oxygen transfer excluded",
+              "geography": "Generic U.S. industrial screening context",
+              "vintage": "DOE sourcebook published 2003"
+            },
+            "note": "This is not oxygen-transfer efficiency or wastewater-treatment effectiveness."
+          }
+        }
+      },
+      {
+        "id": "membrane-separation-system",
+        "label": "Membrane separation system",
+        "aliases": ["membrane system"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "product composition", "recovery"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Electricity input to minimum separation work; composition and recovery must be supplied for a separation-exergy calculation",
+        "parameters": {}
+      },
+      {
+        "id": "electric-arc-furnace",
+        "label": "Electric-arc furnace",
+        "aliases": ["EAF"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "source_temperature", "ambient_temperature"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Delivered electricity to declared high-temperature useful heat; feedstock chemical and phase-change terms require explicit streams",
+        "parameters": {}
+      },
+      {
+        "id": "induction-heater",
+        "label": "Induction heater",
+        "aliases": ["induction furnace"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "source_temperature", "ambient_temperature"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Delivered electricity to declared useful process heat at the heated material boundary",
+        "recommended_overrides": ["coil and power-supply efficiency", "material", "charge condition", "temperature rise", "holding losses"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.85,
+            "unit": "MWh_material_heat/MWh_electricity",
+            "low": 0.8,
+            "high": 0.9,
+            "confidence": "cross-material equipment screen",
+            "source_id": "doe-metalcasting-energy-profile",
+            "source_version": "DOE metalcasting and aluminum industry reports",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of greater-than-80% ferrous and approximately-90% aluminum induction references",
+            "range_basis": "Rounded cross-material equipment endpoints; not an empirical confidence interval",
+            "applicability": {
+              "technology": "Coreless induction heating or melting of conductive metal",
+              "boundary": "Delivered electricity to heat utilized in the metal; holding and material yield losses excluded",
+              "geography": "U.S. industrial technology characterization",
+              "vintage": "DOE industry-profile sources"
+            },
+            "note": "Material, coupling, coil design, power supply, charge condition, and holding time strongly affect performance."
+          }
+        }
+      }
+    ]
+  },
+  "process_templates": [],
+  "metadata": {"default_policy": "explicit performance and process-state inputs required"}
+}

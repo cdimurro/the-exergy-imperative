@@ -3,6 +3,14 @@
   "data_version": "2026.1",
   "license": "CC-BY-4.0",
   "source_id": "exergy-imperative-guide-2026",
+  "sources": {
+    "exergy-imperative-guide-2026": {
+      "title": "The Exergy Imperative process-opportunity catalog",
+      "url": "https://github.com/cdimurro/the-exergy-imperative",
+      "license": "CC-BY-4.0",
+      "applicable_boundary": "Author-defined cross-sector screening opportunity ranges; not measured project savings"
+    }
+  },
   "templates": [
     {
       "id": "steam-system",

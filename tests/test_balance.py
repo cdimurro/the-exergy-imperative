@@ -34,7 +34,8 @@ def test_invalid_balance_is_diagnosed():
         inputs=[xi.ExergyStream("input", 10)],
         products=[xi.ExergyStream("product", 12)],
     )
-    assert result.destruction_exergy == pytest.approx(-2)
+    assert result.destruction_exergy == pytest.approx(0)
+    assert result.residual == pytest.approx(-2)
     assert any("exceed" in warning for warning in result.warnings)
 
 

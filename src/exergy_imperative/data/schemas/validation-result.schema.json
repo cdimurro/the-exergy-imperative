@@ -15,7 +15,21 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["case_id", "title", "expected", "actual", "absolute_tolerance", "passed", "citation", "message"]
+        "required": ["case_id", "title", "expected", "actual", "absolute_tolerance", "relative_tolerance", "passed", "citation", "validation_type", "capabilities", "message"],
+        "properties": {
+          "case_id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "expected": {"type": "number"},
+          "actual": {"type": ["number", "null"]},
+          "absolute_tolerance": {"type": "number", "minimum": 0},
+          "relative_tolerance": {"type": "number", "minimum": 0},
+          "passed": {"type": "boolean"},
+          "citation": {"type": "object"},
+          "validation_type": {"type": "string"},
+          "capabilities": {"type": "array", "items": {"type": "string"}},
+          "message": {"type": "string"}
+        },
+        "additionalProperties": false
       }
     },
     "notes": {"type": "array", "items": {"type": "string"}}

@@ -106,11 +106,23 @@ def energy_basis(unit: str) -> str | None:
 
 
 def convert_energy(value: SupportsFloat, from_unit: str, to_unit: str = "MWh") -> float:
-    """Convert an energy quantity, retaining any typed suffix only as metadata."""
+    """Convert an energy quantity without silently changing HHV/LHV basis.
+
+    Typed suffixes other than HHV/LHV remain metadata.  A conversion between
+    two explicitly different calorific-value bases requires a fuel-specific
+    conversion and is therefore rejected here.
+    """
 
     number = _finite(value, "energy")
     from_key = energy_unit_key(from_unit)
     to_key = energy_unit_key(to_unit)
+    from_basis = energy_basis(from_unit)
+    to_basis = energy_basis(to_unit)
+    if from_basis is not None and to_basis is not None and from_basis != to_basis:
+        raise UnitError(
+            f"cannot convert {from_basis} energy to {to_basis} without a "
+            "fuel-specific HHV/LHV conversion factor"
+        )
     return number * _ENERGY_TO_MWH[from_key] / _ENERGY_TO_MWH[to_key]
 
 

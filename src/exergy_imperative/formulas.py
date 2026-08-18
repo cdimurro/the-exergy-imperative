@@ -156,7 +156,7 @@ def potential_exergy(
 ) -> float:
     return (
         _nonnegative(mass, "mass")
-        * _number(gravity, "gravity")
+        * _positive(gravity, "gravity")
         * _number(elevation_difference, "elevation_difference")
     )
 

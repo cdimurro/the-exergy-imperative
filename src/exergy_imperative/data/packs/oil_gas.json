@@ -1,0 +1,664 @@
+{
+  "schema_version": "1.0",
+  "id": "oil-gas",
+  "version": "2026.1",
+  "license": "CC-BY-4.0",
+  "description": "Upstream, midstream, LNG, and refining equipment boundaries with explicit performance and composition inputs.",
+  "domains": ["oil and gas", "petroleum refining", "LNG", "methane management"],
+  "sources": {
+    "epa-petroleum-natural-gas-systems": {
+      "title": "EPA Greenhouse Gas Reporting Program: Petroleum and Natural Gas Systems",
+      "url": "https://www.epa.gov/ghgreporting/ghgrp-petroleum-and-natural-gas-systems",
+      "license": "U.S. Government work; verify page-specific third-party notices",
+      "applicable_boundary": "Industry-segment and equipment-source taxonomy from production through distribution",
+      "note": "The source supports boundary selection only. This pack supplies no site performance, composition, leak, or emission-factor defaults."
+    },
+    "doe-netl-pipeline-compressor-field-tests": {
+      "title": "U.S. DOE NETL: Technologies to Enhance Operation of the Existing Natural Gas Compression Infrastructure",
+      "url": "https://netl.doe.gov/node/4147",
+      "license": "U.S. Government work; verify project-specific third-party notices",
+      "applicable_boundary": "Observed compressor thermal efficiency for reciprocating natural-gas pipeline compressor units at two U.S. field sites",
+      "note": "The reported range is equipment- and test-specific and does not represent all pipeline compressor technologies or operating points."
+    },
+    "doe-industrial-pump-sourcebook": {
+      "title": "U.S. DOE Improving Pumping System Performance: A Sourcebook for Industry, Second Edition",
+      "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/pump.pdf",
+      "license": "U.S. Government work; verify sourcebook-specific third-party notices",
+      "applicable_boundary": "Industrial centrifugal pump and electric motor input to useful hydraulic work",
+      "note": "Pump efficiency is described as ranging from about 35% to above 90%; the sourcebook also uses 90% motor efficiency in screening examples. The derived pack envelope is deliberately broad."
+    },
+    "doe-netl-natural-gas-hydrogen-pipeline-model-2024": {
+      "title": "FECM/NETL Natural Gas with Hydrogen Pipeline Cost Model: Description and User's Manual",
+      "url": "https://www.netl.doe.gov/projects/files/FECMNETLNaturalGaswithHydrogenPipelineCostModel2024DescriptionandUsersManual_052424.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Natural-gas compressor shaft work to isentropic compression work, with a separately stated motor efficiency",
+      "note": "The model uses default compressor isentropic efficiency of 85% and motor efficiency of 96%. These are modeling assumptions, not measured fleet distributions."
+    },
+    "lbnl-refinery-energy-guide": {
+      "title": "LBNL Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries",
+      "url": "https://www.osti.gov/servlets/purl/862119",
+      "license": "U.S. Government-sponsored public report; verify report notices",
+      "applicable_boundary": "Refinery process-heater fuel input to useful process heat on an HHV basis",
+      "note": "The guide reports refinery furnace efficiencies commonly estimated at 75%-90% and an approximately 92% theoretical maximum."
+    }
+  },
+  "profiles": {
+    "carrier": [
+      {
+        "id": "raw-natural-gas",
+        "label": "Raw natural gas",
+        "aliases": ["field gas", "wellhead gas"],
+        "family": "chemical",
+        "basis": "caller-declared HHV or LHV and composition",
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Unprocessed gas at the selected facility boundary",
+        "parameters": {}
+      },
+      {
+        "id": "crude-oil",
+        "label": "Crude oil",
+        "aliases": ["crude petroleum"],
+        "family": "chemical",
+        "basis": "caller-declared assay and HHV or LHV",
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Crude oil at the selected production, transport, or refinery boundary",
+        "parameters": {}
+      },
+      {
+        "id": "lng",
+        "label": "Liquefied natural gas",
+        "aliases": ["liquefied natural gas"],
+        "family": "chemical",
+        "basis": "caller-declared composition, pressure, temperature, and HHV or LHV",
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "LNG at the selected liquefaction, storage, shipping, or regasification boundary",
+        "parameters": {}
+      },
+      {
+        "id": "minimum-separation-work",
+        "label": "Minimum separation work",
+        "aliases": ["separation work"],
+        "family": "work",
+        "basis": "reversible minimum work for the caller-declared feed and product compositions",
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Minimum reversible separation work only; not actual shaft or electrical consumption",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "confidence": "exact"}
+        }
+      }
+    ],
+    "technology": [
+      {
+        "id": "electric-submersible-pump",
+        "label": "Electric submersible production pump",
+        "aliases": ["ESP", "submersible oil pump"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "liquid rate", "differential head", "motor load"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Motor electrical terminals to hydraulic or shaft work; reservoir inflow and multiphase behavior remain external",
+        "recommended_overrides": ["pump curve", "motor efficiency", "liquid fraction", "flow", "head"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.5625,
+            "unit": "MWh_hydraulic/MWh_electricity",
+            "low": 0.315,
+            "high": 0.81,
+            "confidence": "broad single-phase pump fallback",
+            "source_id": "doe-industrial-pump-sourcebook",
+            "source_version": "Second Edition, May 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of 35%-90% pump range multiplied by illustrative 90% motor efficiency",
+            "range_basis": "Products of published pump endpoints and illustrative motor efficiency",
+            "applicability": {
+              "technology": "Electric centrifugal pump handling predominantly liquid service",
+              "boundary": "Motor electricity to hydraulic output; cable losses and multiphase degradation excluded",
+              "geography": "Generic U.S. industrial screening context",
+              "vintage": "DOE sourcebook 2006"
+            },
+            "note": "Use only as a liquid-service fallback; gas fraction, downhole cable loss, wear, and off-BEP operation can invalidate it."
+          }
+        }
+      },
+      {
+        "id": "rod-lift-drive",
+        "label": "Rod-lift surface drive",
+        "aliases": ["pumpjack", "beam pump"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "polished-rod load", "stroke profile", "production rate"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Surface-drive electricity to declared mechanical lift work",
+        "parameters": {}
+      },
+      {
+        "id": "water-injection-pump",
+        "label": "Water-injection pump",
+        "aliases": ["produced-water injection pump"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "flow", "suction pressure", "discharge pressure"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Electrical input to hydraulic injection work",
+        "recommended_overrides": ["pump curve", "motor efficiency", "flow", "pressure rise", "operating point"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.5625,
+            "unit": "MWh_hydraulic/MWh_electricity",
+            "low": 0.315,
+            "high": 0.81,
+            "confidence": "broad pump-family fallback",
+            "source_id": "doe-industrial-pump-sourcebook",
+            "source_version": "Second Edition, May 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of 35%-90% pump range multiplied by illustrative 90% motor efficiency",
+            "range_basis": "Products of published pump endpoints and illustrative motor efficiency",
+            "applicability": {
+              "technology": "Electric centrifugal water-injection pump",
+              "boundary": "Motor electricity to hydraulic work",
+              "geography": "Generic U.S. industrial screening context",
+              "vintage": "DOE sourcebook 2006"
+            },
+            "note": "Use the actual pump and motor curves for design or field analysis."
+          }
+        }
+      },
+      {
+        "id": "gas-lift-compressor",
+        "label": "Gas-lift compressor",
+        "aliases": ["lift-gas compressor"],
+        "model": "compressor-pump",
+        "input_carrier": "shaft-work",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "gas composition", "flow", "suction state", "discharge pressure"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Compressor shaft input to reversible gas-compression work; driver is separate",
+        "recommended_overrides": ["compressor map", "gas composition", "flow", "suction state", "discharge pressure"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.85,
+            "unit": "MWh_isentropic/MWh_shaft",
+            "low": 0.85,
+            "high": 0.85,
+            "confidence": "published model assumption",
+            "source_id": "doe-netl-natural-gas-hydrogen-pipeline-model-2024",
+            "source_version": "FECM/NETL pipeline model manual, May 2024",
+            "evidence_kind": "published_estimate",
+            "statistic": "NETL model default compressor isentropic efficiency",
+            "range_basis": "Published point assumption; not an uncertainty interval",
+            "applicability": {
+              "technology": "Natural-gas centrifugal compression used as a gas-lift proxy",
+              "boundary": "Compressor shaft work to isentropic gas-compression work; driver excluded",
+              "geography": "U.S. NETL pipeline modeling context",
+              "vintage": "2024 model"
+            },
+            "note": "Gas-lift service may differ materially from a pipeline compressor; replace with a compressor map."
+          }
+        }
+      },
+      {
+        "id": "gathering-boosting-compressor",
+        "label": "Gathering and boosting compressor",
+        "aliases": ["gathering compressor", "booster compressor"],
+        "model": "compressor-pump",
+        "input_carrier": "shaft-work",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "gas composition", "flow", "suction state", "discharge state"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Compressor shaft input to reversible compression work",
+        "recommended_overrides": ["compressor map", "gas composition", "flow", "suction state", "discharge state"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.85,
+            "unit": "MWh_isentropic/MWh_shaft",
+            "low": 0.85,
+            "high": 0.85,
+            "confidence": "published model assumption",
+            "source_id": "doe-netl-natural-gas-hydrogen-pipeline-model-2024",
+            "source_version": "FECM/NETL pipeline model manual, May 2024",
+            "evidence_kind": "published_estimate",
+            "statistic": "NETL model default compressor isentropic efficiency",
+            "range_basis": "Published point assumption; not an uncertainty interval",
+            "applicability": {
+              "technology": "Natural-gas centrifugal compressor",
+              "boundary": "Compressor shaft work to isentropic gas-compression work; driver excluded",
+              "geography": "U.S. NETL pipeline modeling context",
+              "vintage": "2024 model"
+            },
+            "note": "Gathering service composition, turndown, recycle, and liquid loading require a site compressor map."
+          }
+        }
+      },
+      {
+        "id": "pipeline-compressor",
+        "label": "Natural-gas pipeline compressor",
+        "aliases": ["transmission compressor"],
+        "model": "compressor-pump",
+        "input_carrier": "shaft-work",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["gas composition", "mass flow", "inlet state", "outlet pressure"],
+        "recommended_overrides": ["efficiency", "measured shaft power", "gas composition", "inlet and outlet states"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Shaft work to reversible pipeline-gas compression work",
+        "parameters": {
+          "efficiency": {
+            "value": 0.875,
+            "unit": "MWh_reversible_compression/MWh_shaft",
+            "low": 0.84,
+            "high": 0.91,
+            "confidence": "screening field-test range",
+            "source_id": "doe-netl-pipeline-compressor-field-tests",
+            "source_version": "DOE project DE-FC26-02NT41646 field-test findings",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the reported observed compressor thermal-efficiency range",
+            "range_basis": "Observed 84-91% range in the cited reciprocating-compressor field tests; not a fleet distribution",
+            "applicability": {
+              "technology": "Reciprocating pipeline compressors represented by HBA-6 and TCVC10 field-test units",
+              "boundary": "Compressor shaft input to reversible/thermal compression work as reported by the NETL project",
+              "geography": "Two United States natural-gas pipeline compressor stations",
+              "vintage": "DOE field program initiated in 2002"
+            },
+            "note": "Do not transfer this prior to centrifugal compressors, drivers, or complete compressor packages without changing the boundary."
+          }
+        }
+      },
+      {
+        "id": "gas-reinjection-compressor",
+        "label": "Gas-reinjection compressor",
+        "aliases": ["injection-gas compressor"],
+        "model": "compressor-pump",
+        "input_carrier": "shaft-work",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "gas composition", "flow", "inlet state", "injection pressure"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Shaft work to reversible reinjection compression work",
+        "recommended_overrides": ["compressor map", "gas composition", "stage pressures", "intercooling", "flow"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.85,
+            "unit": "MWh_isentropic/MWh_shaft",
+            "low": 0.85,
+            "high": 0.85,
+            "confidence": "published model assumption",
+            "source_id": "doe-netl-natural-gas-hydrogen-pipeline-model-2024",
+            "source_version": "FECM/NETL pipeline model manual, May 2024",
+            "evidence_kind": "published_estimate",
+            "statistic": "NETL model default compressor isentropic efficiency",
+            "range_basis": "Published point assumption; not an uncertainty interval",
+            "applicability": {
+              "technology": "Natural-gas centrifugal compressor used as a reinjection proxy",
+              "boundary": "Compressor shaft work to isentropic compression work; driver and intercooling excluded",
+              "geography": "U.S. NETL pipeline modeling context",
+              "vintage": "2024 model"
+            },
+            "note": "High pressure ratio and staging make a site model especially important."
+          }
+        }
+      },
+      {
+        "id": "amine-gas-sweetening",
+        "label": "Amine gas-sweetening auxiliaries",
+        "aliases": ["amine unit", "acid gas removal"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "sweet-gas specification", "acid-gas recovery", "reboiler heat"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Selected electrical auxiliaries to minimum separation work; reboiler heat must be modeled as a separate input",
+        "parameters": {}
+      },
+      {
+        "id": "glycol-dehydration",
+        "label": "Glycol gas-dehydration auxiliaries",
+        "aliases": ["TEG dehydration", "gas dehydrator"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "water content", "product specification", "circulation rate", "regenerator heat"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Selected electrical auxiliaries to minimum water-removal work; regeneration heat is separate",
+        "parameters": {}
+      },
+      {
+        "id": "cryogenic-ngl-recovery",
+        "label": "Cryogenic NGL-recovery auxiliaries",
+        "aliases": ["NGL recovery", "turboexpander plant"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "recoveries", "pressure levels", "refrigeration duty"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Selected electrical input to minimum separation work; refrigeration and expander work require explicit connected flows",
+        "parameters": {}
+      },
+      {
+        "id": "lng-liquefaction-train",
+        "label": "LNG liquefaction train",
+        "aliases": ["LNG plant", "natural-gas liquefaction"],
+        "model": "separation",
+        "input_carrier": "electricity",
+        "output_carrier": "minimum-separation-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "feed composition", "feed state", "LNG state", "boil-off", "driver energy"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Declared liquefaction-train electrical input to minimum liquefaction work; fuel drivers and feed pretreatment are separate",
+        "parameters": {}
+      },
+      {
+        "id": "lng-regasification-pump",
+        "label": "LNG regasification pump",
+        "aliases": ["LNG sendout pump"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "flow", "inlet state", "sendout pressure"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Electrical input to LNG pumping work; vaporization heat is separate",
+        "recommended_overrides": ["cryogenic pump curve", "motor efficiency", "flow", "pressure rise"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.5625,
+            "unit": "MWh_hydraulic/MWh_electricity",
+            "low": 0.315,
+            "high": 0.81,
+            "confidence": "broad pump-family fallback",
+            "source_id": "doe-industrial-pump-sourcebook",
+            "source_version": "Second Edition, May 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of 35%-90% pump range multiplied by illustrative 90% motor efficiency",
+            "range_basis": "Products of published pump endpoints and illustrative motor efficiency",
+            "applicability": {
+              "technology": "Electric centrifugal liquid pump used only as a first-pass proxy for LNG service",
+              "boundary": "Motor electricity to hydraulic work; cryogenic property effects and vaporization excluded",
+              "geography": "Generic U.S. industrial screening context",
+              "vintage": "DOE sourcebook 2006"
+            },
+            "note": "A cryogenic manufacturer curve should replace this generic pump-family prior."
+          }
+        }
+      },
+      {
+        "id": "vapor-recovery-unit",
+        "label": "Vapor-recovery compressor",
+        "aliases": ["VRU", "tank vapor recovery"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "vapor composition", "captured flow", "suction pressure", "discharge pressure"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Electrical input to recovered-vapor compression work; avoided emissions require measured capture and disposition data",
+        "recommended_overrides": ["compressor map", "motor efficiency", "vapor composition", "flow", "pressure ratio"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.816,
+            "unit": "MWh_isentropic/MWh_electricity",
+            "low": 0.816,
+            "high": 0.816,
+            "confidence": "derived published model assumption",
+            "source_id": "doe-netl-natural-gas-hydrogen-pipeline-model-2024",
+            "source_version": "FECM/NETL pipeline model manual, May 2024",
+            "evidence_kind": "published_estimate",
+            "statistic": "Product of NETL default 85% compressor and 96% motor efficiencies",
+            "range_basis": "Derived point assumption; not an uncertainty interval",
+            "applicability": {
+              "technology": "Electric motor-driven natural-gas compressor used as a vapor-recovery proxy",
+              "boundary": "Motor electrical input to isentropic compression work",
+              "geography": "U.S. NETL pipeline modeling context",
+              "vintage": "2024 model"
+            },
+            "note": "No methane capture rate or avoided-emissions claim is inferred."
+          }
+        }
+      },
+      {
+        "id": "flare-gas-recovery-compressor",
+        "label": "Flare-gas recovery compressor",
+        "aliases": ["FGR compressor"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "gas composition", "captured flow", "pressure ratio", "recovery disposition"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Electrical input to recovered-gas compression; flare destruction, slip, and avoided emissions remain separate inventories",
+        "recommended_overrides": ["compressor map", "motor efficiency", "gas composition", "capture flow", "pressure ratio"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.816,
+            "unit": "MWh_isentropic/MWh_electricity",
+            "low": 0.816,
+            "high": 0.816,
+            "confidence": "derived published model assumption",
+            "source_id": "doe-netl-natural-gas-hydrogen-pipeline-model-2024",
+            "source_version": "FECM/NETL pipeline model manual, May 2024",
+            "evidence_kind": "published_estimate",
+            "statistic": "Product of NETL default 85% compressor and 96% motor efficiencies",
+            "range_basis": "Derived point assumption; not an uncertainty interval",
+            "applicability": {
+              "technology": "Electric motor-driven natural-gas compressor used as a flare-gas-recovery proxy",
+              "boundary": "Motor electrical input to isentropic compression work",
+              "geography": "U.S. NETL pipeline modeling context",
+              "vintage": "2024 model"
+            },
+            "note": "Flare capture, destruction, methane slip, and recovered-gas disposition remain separate measured inventories."
+          }
+        }
+      },
+      {
+        "id": "refinery-charge-pump",
+        "label": "Refinery charge pump",
+        "aliases": ["crude charge pump"],
+        "model": "compressor-pump",
+        "input_carrier": "electricity",
+        "output_carrier": "shaft-work",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "flow", "density", "suction pressure", "discharge pressure"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Electrical terminals to liquid pumping work",
+        "recommended_overrides": ["pump curve", "motor efficiency", "crude properties", "flow", "head"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.5625,
+            "unit": "MWh_hydraulic/MWh_electricity",
+            "low": 0.315,
+            "high": 0.81,
+            "confidence": "broad pump-family fallback",
+            "source_id": "doe-industrial-pump-sourcebook",
+            "source_version": "Second Edition, May 2006",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of 35%-90% pump range multiplied by illustrative 90% motor efficiency",
+            "range_basis": "Products of published pump endpoints and illustrative motor efficiency",
+            "applicability": {
+              "technology": "Electric centrifugal refinery charge pump",
+              "boundary": "Motor electricity to hydraulic work",
+              "geography": "Generic U.S. industrial screening context",
+              "vintage": "DOE sourcebook 2006"
+            },
+            "note": "Use actual crude properties, pump curve, motor curve, and operating point when available."
+          }
+        }
+      },
+      {
+        "id": "crude-distillation-furnace",
+        "label": "Crude-distillation furnace",
+        "aliases": ["CDU furnace", "atmospheric distillation heater"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "fuel basis", "feed duty", "stack temperature", "excess oxygen"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Selected furnace fuel input to crude-feed heat; distillation separation and utilities are separate",
+        "recommended_overrides": ["stack oxygen and temperature", "fuel basis", "feed duty", "radiation and convection losses"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.825,
+            "unit": "MWh_process_heat/MWh_fuel_HHV",
+            "low": 0.75,
+            "high": 0.9,
+            "confidence": "refinery furnace screening range",
+            "source_id": "lbnl-refinery-energy-guide",
+            "source_version": "LBNL-56183, refinery energy guide",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the reported refinery-furnace efficiency range",
+            "range_basis": "Published 75%-90% range; theoretical maximum excluded",
+            "applicability": {
+              "technology": "Fired refinery process heater",
+              "boundary": "Fuel HHV to useful crude-feed heat; downstream separation and utilities excluded",
+              "geography": "U.S. petroleum-refinery guidance",
+              "vintage": "Report based on then-current refinery practice"
+            },
+            "note": "Verify HHV basis and calculate from measured fuel and absorbed duty when possible."
+          }
+        }
+      },
+      {
+        "id": "hydrotreater-charge-heater",
+        "label": "Hydrotreater charge heater",
+        "aliases": ["hydrotreating furnace"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "fuel basis", "process duty", "stack temperature", "excess oxygen"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Selected heater fuel input to process heat; reaction hydrogen and compression are separate",
+        "recommended_overrides": ["stack oxygen and temperature", "fuel basis", "charge duty", "radiation and convection losses"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.825,
+            "unit": "MWh_process_heat/MWh_fuel_HHV",
+            "low": 0.75,
+            "high": 0.9,
+            "confidence": "refinery furnace screening range",
+            "source_id": "lbnl-refinery-energy-guide",
+            "source_version": "LBNL-56183, refinery energy guide",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the reported refinery-furnace efficiency range",
+            "range_basis": "Published 75%-90% range; theoretical maximum excluded",
+            "applicability": {
+              "technology": "Fired refinery process heater",
+              "boundary": "Fuel HHV to useful charge heat; hydrogen reaction and compression excluded",
+              "geography": "U.S. petroleum-refinery guidance",
+              "vintage": "Report based on then-current refinery practice"
+            },
+            "note": "Verify HHV basis and calculate from measured fuel and absorbed duty when possible."
+          }
+        }
+      },
+      {
+        "id": "steam-methane-reformer-furnace",
+        "label": "Steam-methane reformer furnace",
+        "aliases": ["SMR furnace", "hydrogen plant furnace"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "default_service": "high-temperature-process-heat",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency", "fuel and feed separation", "process duty", "steam-carbon ratio", "stack state"],
+        "source_id": "epa-petroleum-natural-gas-systems",
+        "boundary": "Furnace fuel input to reformer process heat; methane feed, reaction products, and capture are separate material and system flows",
+        "recommended_overrides": ["stack oxygen and temperature", "fuel basis", "reformer absorbed duty", "heat recovery"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.825,
+            "unit": "MWh_process_heat/MWh_fuel_HHV",
+            "low": 0.75,
+            "high": 0.9,
+            "confidence": "fired-heater family screening range",
+            "source_id": "lbnl-refinery-energy-guide",
+            "source_version": "LBNL-56183, refinery energy guide",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the reported refinery-furnace efficiency range",
+            "range_basis": "Published 75%-90% refinery furnace range used as a fired-heater proxy",
+            "applicability": {
+              "technology": "Steam-methane-reformer fired heater used within a petroleum-refinery context",
+              "boundary": "Furnace fuel HHV to absorbed reformer process heat; methane feed chemistry and heat recovery outside",
+              "geography": "U.S. petroleum-refinery guidance",
+              "vintage": "Report based on then-current refinery practice"
+            },
+            "note": "This is furnace efficiency only, not hydrogen-production efficiency or carbon-capture performance."
+          }
+        }
+      }
+    ]
+  },
+  "material_templates": [
+    {
+      "id": "production-separator",
+      "label": "Oil-gas-water production separator balance",
+      "aliases": ["three-phase separator", "wellstream separator"],
+      "source_id": "epa-petroleum-natural-gas-systems",
+      "boundary": "Wellstream feed to oil, gas, produced-water, solids, vent, flare, drain, and inventory streams",
+      "required_inputs": ["feed mass and composition", "oil output", "gas output and composition", "produced water", "solids", "vents and drains", "inventory change"]
+    },
+    {
+      "id": "gas-processing",
+      "label": "Natural-gas processing material balance",
+      "aliases": ["gas plant balance"],
+      "source_id": "epa-petroleum-natural-gas-systems",
+      "boundary": "Field gas, fuel and additives to pipeline gas, NGL products, acid gas, water, vent, flare, and inventory streams",
+      "required_inputs": ["feed composition and mass", "sales-gas composition", "NGL products", "acid gas", "water", "fuel gas", "vent and flare", "inventory change"]
+    },
+    {
+      "id": "lng-liquefaction",
+      "label": "LNG liquefaction material balance",
+      "aliases": ["LNG train balance"],
+      "source_id": "epa-petroleum-natural-gas-systems",
+      "boundary": "Feed gas and refrigerant makeup to LNG, boil-off, fuel gas, removed contaminants, vents, flares, and inventory change",
+      "required_inputs": ["feed and LNG composition", "feed and product mass", "pretreatment removals", "fuel gas", "boil-off", "vents and flares", "refrigerant makeup"]
+    },
+    {
+      "id": "crude-distillation",
+      "label": "Crude-distillation material balance",
+      "aliases": ["CDU mass balance", "atmospheric distillation balance"],
+      "source_id": "epa-petroleum-natural-gas-systems",
+      "boundary": "Crude and additives to gas, naphtha, distillate, gas oil, residue, sour water, off-gas, slop, and inventory change",
+      "required_inputs": ["crude assay and mass", "all product cuts", "fuel and off-gas", "sour water", "slop and losses", "inventory change"]
+    },
+    {
+      "id": "refinery-hydrogen-system",
+      "label": "Refinery hydrogen-system material balance",
+      "aliases": ["refinery H2 network"],
+      "source_id": "epa-petroleum-natural-gas-systems",
+      "boundary": "Hydrogen production, purchases, recycle, consumers, purge, fuel, vent, flare, and inventory streams",
+      "required_inputs": ["stream masses and hydrogen purities", "production", "purchases", "consumer returns", "purges", "fuel and flare", "inventory change"]
+    },
+    {
+      "id": "flare-vent-recovery",
+      "label": "Flare, vent, and recovery material reconciliation",
+      "aliases": ["flare header balance", "methane disposition balance"],
+      "source_id": "epa-petroleum-natural-gas-systems",
+      "boundary": "Measured flare-header and vent feeds to recovered gas, combusted products, methane slip, uncombusted vent, and inventory change",
+      "required_inputs": ["measured flow by disposition", "gas composition", "recovered gas", "flare combustion and slip", "vents", "measurement uncertainty"]
+    },
+    {
+      "id": "produced-water-system",
+      "label": "Produced-water system material balance",
+      "aliases": ["oilfield water balance"],
+      "source_id": "epa-petroleum-natural-gas-systems",
+      "boundary": "Produced water and treatment additions to reinjection, discharge, recovered hydrocarbons, solids, vapor, and inventory change",
+      "required_inputs": ["water and hydrocarbon mass", "dissolved and suspended composition", "chemical additions", "reinjection", "discharge", "solids", "vapor"]
+    }
+  ],
+  "process_templates": [],
+  "technology_models": [],
+  "metadata": {
+    "default_policy": "selected published F1 priors; explicit performance, composition, pressure, and measured inventory preferred",
+    "methane_note": "Use assess_methane_project for vent, flare, oxidation, and recovery comparisons."
+  }
+}

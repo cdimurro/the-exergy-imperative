@@ -1,0 +1,265 @@
+{
+  "schema_version": "1.0",
+  "coverage_version": "2026.08.18",
+  "generated_on": "2026-08-18",
+  "scope": "Public scientific calculations, bundled numerical defaults, conservation contracts, and scientific data interfaces in exergy-imperative 0.6.0",
+  "items": [
+    {
+      "id": "thermodynamic-kernels",
+      "title": "Dependency-free thermodynamic kernels",
+      "level": "reference-validated",
+      "public_api": ["accessible_exergy", "cooling_exergy_factor", "cooling_exergy_factor_c", "exergy_destruction", "exergetic_efficiency", "ideal_gas_pressure_exergy", "ideal_mixture_separation_exergy", "kinetic_exergy", "petela_exergy_factor", "physical_flow_exergy", "potential_exergy", "sensible_heat_exergy_factor", "sensible_heat_exergy_factor_c", "thermal_exergy_factor", "thermal_exergy_factor_c", "weighted_exergy_factor"],
+      "tests": ["tests/test_formulas.py", "tests/test_literature_validation.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["heat-factor-40c-20c", "heat-factor-80c-20c", "heat-factor-150c-20c", "sensible-exhaust-300c-25c", "cooling-factor-minus10c-30c", "steam-flow-exergy-8mpa-500c", "gouy-stodola-1j-per-k", "kinetic-exergy-1kg-50ms", "potential-exergy-standard-gravity", "ideal-gas-pressure-exergy-10bar", "ideal-binary-mixture-separation", "petela-solar-radiation"],
+      "evidence": [
+        {"title": "NIST CODATA 2022", "url": "https://physics.nist.gov/cuu/pdf/all.pdf", "locator": "physical constants"},
+        {"title": "Petela radiative-exergy relation", "url": "https://doi.org/10.1016/S0038-092X(03)00226-3", "locator": "blackbody radiation exergy"}
+      ],
+      "limitations": ["Chemical exergy requires an explicit composition-specific factor or a separate reference-state model.", "Heat-service factors are boundary equations, not equipment performance predictions."],
+      "decision_grade": false
+    },
+    {
+      "id": "units-and-reference-environment",
+      "title": "Energy units, temperature parsing, basis protection, and dead-state validation",
+      "level": "reference-validated",
+      "public_api": ["canonical_energy_unit", "convert_energy", "energy_basis", "exergy_unit_for", "is_energy_unit", "parse_temperature", "temperature_to_k"],
+      "tests": ["tests/test_units.py", "tests/test_literature_validation.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["nist-btu-to-mwh", "nist-therm-to-mwh"],
+      "evidence": [{"title": "NIST Guide to the SI, Appendix B", "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors", "locator": "exact energy conversion factors"}],
+      "limitations": ["HHV-to-LHV conversion is intentionally rejected unless the caller supplies a fuel-specific relationship.", "A reference environment declares a dead state; it does not infer atmospheric chemical composition."],
+      "decision_grade": false
+    },
+    {
+      "id": "property-backend",
+      "title": "CoolProp physical-flow exergy backend",
+      "level": "cross-implementation-validated",
+      "public_api": ["coolprop_available", "coolprop_physical_exergy"],
+      "tests": ["tests/test_properties.py", "tests/test_literature_validation.py"],
+      "case_ids": ["steam-flow-exergy-8mpa-500c", "ideal-gas-pressure-exergy-10bar"],
+      "evidence": [{"title": "CoolProp documentation", "url": "https://coolprop.org/", "locator": "state-property backend independently compared with steam-table and ideal-gas cases"}],
+      "limitations": ["Accuracy follows the selected CoolProp fluid model and valid state region.", "Mixtures, reactions, and chemical exergy are outside this backend."],
+      "decision_grade": false
+    },
+    {
+      "id": "profile-assessment",
+      "title": "Progressive-fidelity carrier, service, and technology assessment",
+      "level": "screening-only",
+      "public_api": ["assess"],
+      "tests": ["tests/test_assessment.py", "tests/test_registry_cli.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["heat-factor-40c-20c", "petela-solar-radiation"],
+      "evidence": [{"title": "Bundled profile source ledger", "url": "https://github.com/cdimurro/the-exergy-imperative", "locator": "src/exergy_imperative/data/profiles.json"}],
+      "limitations": ["Chemical-fuel factors and technology efficiencies are broad screening values unless explicitly supplied.", "The library does not infer site performance, composition, or operating state."],
+      "decision_grade": false
+    },
+    {
+      "id": "exergy-balances",
+      "title": "Declared-boundary exergy balances",
+      "level": "conservation-validated",
+      "public_api": ["analyze_balance"],
+      "tests": ["tests/test_balance.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["exergy-balance-conservation"],
+      "evidence": [{"title": "Steady control-volume exergy balance", "locator": "input = product + loss + destruction + residual"}],
+      "limitations": ["Inferred destruction is valid only when every product and loss crossing the declared boundary is represented.", "A negative closure is retained as a residual and is never reported as negative destruction."],
+      "decision_grade": false
+    },
+    {
+      "id": "connected-systems",
+      "title": "Connected energy/exergy systems and time series",
+      "level": "conservation-validated",
+      "public_api": ["analyze_system", "analyze_system_definition", "analyze_system_timeseries", "analyze_system_timeseries_definition"],
+      "tests": ["tests/test_systems.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["connected-system-energy-closure", "exergy-balance-conservation"],
+      "evidence": [{"title": "First- and second-law network identities", "locator": "internal flows cancel at the aggregate boundary"}],
+      "limitations": ["Positive storage accumulation is represented as a balance-equivalent product and release as a balance-equivalent input; the explicit accumulation field preserves the signed state change.", "The model does not solve thermodynamic states or transient dynamics."],
+      "decision_grade": false
+    },
+    {
+      "id": "material-balances",
+      "title": "Material, constituent, and declared chemical-exergy ledgers",
+      "level": "conservation-validated",
+      "public_api": ["analyze_material_definition", "analyze_material_system", "convert_mass"],
+      "tests": ["tests/test_materials.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["material-system-mass-closure", "eaf-melting-published-intensity"],
+      "evidence": [{"title": "Conservation of mass", "locator": "total and named-constituent closure fixtures"}],
+      "limitations": ["This is a ledger, not a reaction-equilibrium or stoichiometric solver.", "Chemical exergy is calculated only when every stream has an explicit specific factor.", "Storage accumulation uses the same balance-equivalent input/product convention as connected energy systems."],
+      "decision_grade": false
+    },
+    {
+      "id": "technology-models",
+      "title": "Explicit-performance technology relations",
+      "level": "structural-only",
+      "public_api": ["evaluate_technology_model"],
+      "tests": ["tests/test_technology_models.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["technology-model-explicit-performance"],
+      "evidence": [{"title": "Technology model contract", "locator": "input multiplied by user-declared performance and exergy factors"}],
+      "limitations": ["Models do not predict efficiency, COP, state, composition, degradation, or site behavior.", "Residual exergy combines destruction and unallocated losses."],
+      "decision_grade": false
+    },
+    {
+      "id": "engineering-heat-and-cooling",
+      "title": "Heat pump, refrigeration, furnace, and waste-heat screens",
+      "level": "analytically-validated",
+      "public_api": ["analyze_furnace", "analyze_heat_pump", "analyze_refrigeration", "match_waste_heat"],
+      "tests": ["tests/test_engineering.py", "tests/test_literature_validation.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["heat-pump-cop3-40c-20c", "refrigeration-cop2p5-minus10c-30c", "furnace-exhaust-sensible-exergy"],
+      "evidence": [{"title": "US DOE Process Heating System Sourcebook", "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/process_heating_sourcebook2.pdf", "locator": "process heat and exhaust-energy boundaries"}],
+      "limitations": ["Heat-pump source temperature acts as the dead-state reservoir; non-environmental heat sources need an explicit connected-system boundary.", "Furnace useful heat is an isothermal service approximation; detailed audits need material and fluid states.", "Waste-heat matching is a greedy feasibility screen, not pinch analysis or heat-exchanger design."],
+      "decision_grade": false
+    },
+    {
+      "id": "engineering-steam-and-compressed-air",
+      "title": "Steam and compressed-air engineering screens",
+      "level": "screening-only",
+      "public_api": ["analyze_compressed_air", "analyze_steam_system"],
+      "tests": ["tests/test_engineering.py", "tests/test_literature_validation.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["compressed-air-isothermal-pressure-exergy", "steam-flow-exergy-8mpa-500c"],
+      "evidence": [
+        {"title": "US DOE Improving Compressed Air System Performance", "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/compressed_air_sourcebook.pdf", "locator": "compressed-air boundary and required measurements"},
+        {"title": "US DOE Steam System Sourcebook", "url": "https://www.energy.gov/sites/prod/files/2014/05/f15/steamsourcebook.pdf", "locator": "steam-system boundary"}
+      ],
+      "limitations": ["Compressed-air useful-energy and energy-efficiency fields use reversible pressure exergy as the service proxy; use the exergy fields for interpretation.", "Steam exergy is an isothermal heat-service approximation unless the property backend is used.", "Defaults are not measured boiler or compressor performance."],
+      "decision_grade": false
+    },
+    {
+      "id": "impact-factors",
+      "title": "GWP and stationary-combustion emission factors",
+      "level": "reference-validated",
+      "public_api": ["assess_impacts", "load_impact_factor_pack"],
+      "tests": ["tests/test_factors_impacts.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["ipcc-ar6-fossil-methane-gwp100", "epa-2025-natural-gas-co2-hhv"],
+      "evidence": [
+        {"title": "IPCC AR6 WGI Chapter 7", "url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/", "locator": "Table 7.15 GWP values"},
+        {"title": "US EPA GHG Emission Factors Hub 2025", "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf", "locator": "stationary-combustion HHV factors"},
+        {"title": "2006 IPCC Guidelines Volume 2 Chapter 2", "url": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf", "locator": "Tier 1 NCV factors"}
+      ],
+      "limitations": ["Default fuel factors are inventory defaults, not stack measurements.", "Pollutant factors and health text are hazard screens, not dispersion, exposure, dose-response, or health-risk estimates.", "Aggregate grid CO2e cannot be separated into gas-specific 20- and 100-year totals."],
+      "decision_grade": false
+    },
+    {
+      "id": "grid-factors",
+      "title": "Bundled country-year electricity factors",
+      "level": "external-data-required",
+      "public_api": ["assess_impacts"],
+      "tests": ["tests/test_factors_impacts.py", "tests/test_scientific_validation.py"],
+      "case_ids": [],
+      "evidence": [{"title": "Our World in Data electricity data", "url": "https://github.com/owid/energy-data", "locator": "bundled snapshot records source version and retrieval date"}],
+      "limitations": ["The bundled table is a versioned historical snapshot and must not be treated as a current marginal or hourly grid factor.", "Country averages do not establish a site-specific contractual or consequential electricity boundary."],
+      "decision_grade": false
+    },
+    {
+      "id": "ghg-and-methane",
+      "title": "GHG boundary accounting and methane disposition",
+      "level": "reference-validated",
+      "public_api": ["assess_ghg_boundaries", "assess_methane_project"],
+      "tests": ["tests/test_ghg_methane.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["ipcc-ar6-fossil-methane-gwp100", "methane-combustion-stoichiometry"],
+      "evidence": [
+        {"title": "NIST Chemistry WebBook: methane", "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=629&Units=CAL", "locator": "molecular weight and thermochemistry"},
+        {"title": "US EPA AP-42 flare chapter", "url": "https://www3.epa.gov/ttnchie1/ap42/ch13/final/dc13s05_6-5-17.pdf", "locator": "98 percent flare destruction screening convention"}
+      ],
+      "limitations": ["Default methane density is pure methane at 0 C and 101.325 kPa; actual gas composition and standard conditions must replace it.", "Default recovery and oxidation efficiencies are screening bounds, not field measurements.", "Lifecycle upstream and downstream emissions are included only when explicitly modeled."],
+      "decision_grade": false
+    },
+    {
+      "id": "economics",
+      "title": "Discounted cash flow and technology economics",
+      "level": "analytically-validated",
+      "public_api": ["capital_recovery_factor", "compare_technology_cost_scenarios", "discounted_payback_period", "evaluate_economics", "evaluate_technology_cost_scenario", "internal_rate_of_return", "levelized_cost", "net_present_value", "price_trajectory", "simple_payback_period", "stranded_asset_value", "stranded_cost_sensitivity"],
+      "tests": ["tests/test_economics.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["capital-recovery-7pct-20yr", "npv-two-period-cashflow"],
+      "evidence": [{"title": "NIST life-cycle costing methodology", "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/BSS/nbsbuildingscience113.pdf", "locator": "discounted present-value and capital-recovery equations"}],
+      "limitations": ["Correct arithmetic does not validate prices, escalation, tax, financing, project life, residual value, or decision boundary.", "IRR is suppressed for cash flows with possible multiple-root ambiguity."],
+      "decision_grade": false
+    },
+    {
+      "id": "uncertainty-and-decision",
+      "title": "Monte Carlo, sensitivity, EVPI, and scenario arithmetic",
+      "level": "analytically-validated",
+      "public_api": ["avoided_exergy_destruction", "compare_scenarios", "expected_value_of_perfect_information", "monte_carlo", "one_at_a_time_sensitivity", "scenario_metrics"],
+      "tests": ["tests/test_uncertainty.py", "tests/test_processes_decision.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["evpi-paired-samples"],
+      "evidence": [{"title": "Probability and decision-analysis identities", "locator": "distribution moments, rank correlation, and paired-sample EVPI"}],
+      "limitations": ["Output validity depends on the user's distribution choices, correlations, model form, and scenario completeness.", "Bounded normal sampling is rejection-sampled from a truncated normal, not clipped at the bounds."],
+      "decision_grade": false
+    },
+    {
+      "id": "weather",
+      "title": "Degree days, climatology, anomalies, and weather normalization",
+      "level": "analytically-validated",
+      "public_api": ["add_weather_metrics", "monthly_weather_climatology", "nasa_power_weather_records", "normalize_weather_performance", "weather_anomalies"],
+      "tests": ["tests/test_weather.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["degree-day-heating-definition"],
+      "evidence": [{"title": "US DOE Technical Reference Manuals", "url": "https://www.energy.gov/sites/default/files/2021-07/technical-reference-manuals.pdf", "locator": "degree-day definition and weather-normalization context"}],
+      "limitations": ["The regression is a transparent degree-day screen, not an IPMVP-compliant baseline by itself.", "Reference-period selection, occupancy, production, autocorrelation, and model diagnostics remain the analyst's responsibility."],
+      "decision_grade": false
+    },
+    {
+      "id": "process-opportunities",
+      "title": "Process templates and opportunity priors",
+      "level": "screening-only",
+      "public_api": ["assess_process", "get_process_template", "list_process_templates"],
+      "tests": ["tests/test_processes_decision.py", "tests/test_packs.py"],
+      "case_ids": [],
+      "evidence": [{"title": "Bundled process-template ledger", "url": "https://github.com/cdimurro/the-exergy-imperative", "locator": "src/exergy_imperative/data/process_templates.json"}],
+      "limitations": ["Savings fractions are broad author-defined screening priors, not statistically validated project distributions.", "A process opportunity is not a guaranteed saving, audit result, or equipment recommendation."],
+      "decision_grade": false
+    },
+    {
+      "id": "technology-and-material-packs",
+      "title": "Oil and gas, emerging-energy, advanced-materials, and sector packs",
+      "level": "screening-only",
+      "public_api": ["assess_intensity_with_pack", "assess_performance_with_pack", "assess_process_with_pack", "assess_with_pack", "bundled_technology_pack_info", "list_bundled_technology_packs", "load_technology_pack", "search_capabilities", "technology_pack_coverage", "technology_pack_template", "validate_technology_pack", "write_technology_pack_template"],
+      "tests": ["tests/test_packs.py", "tests/test_registry_cli.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["technology-model-explicit-performance", "csp-power-block-published-performance", "eaf-melting-published-intensity"],
+      "evidence": [
+        {"title": "Pack provenance contracts", "locator": "each source requires title, license, and applicable boundary"},
+        {"title": "U.S. DOE FEMP geothermal heat-pump acquisition guidance", "url": "https://www.energy.gov/cmei/femp/purchasing-energy-efficient-geothermal-heat-pumps", "locator": "COP procurement table and ISO 13256-1 example boundary"},
+        {"title": "U.S. DOE vehicle efficiency Fact of the Week 1360", "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional", "locator": "87-91% stored-energy-to-wheels EV range including regenerative braking"},
+        {"title": "U.S. DOE CHP gas-turbine fact sheet", "url": "https://betterbuildingssolutioncenter.energy.gov/sites/default/files/attachments/CHP_Gas_Turbines.pdf", "locator": "Table 2 natural-gas HHV to net-electric efficiency cases"},
+        {"title": "U.S. DOE NETL natural-gas compression field tests", "url": "https://netl.doe.gov/node/4147", "locator": "observed 84-91% compressor thermal efficiency"},
+        {"title": "U.S. DOE liquid alkaline electrolysis targets", "url": "https://www.energy.gov/cmei/fuels/technical-targets-liquid-alkaline-electrolysis", "locator": "2022 system status and ultimate LHV efficiency target"},
+        {"title": "NREL/TP-5700-79806", "url": "https://docs.nrel.gov/docs/fy22osti/79806.pdf", "locator": "round-trip efficiency comparison for flow batteries and pumped-thermal storage"}
+      ],
+      "limitations": ["Published priors are F1 screening estimates with narrow declared applicability; they are not measurements, fleet distributions, site guarantees, or design values.", "Energy-performance results intentionally omit exergy when heat state or fuel quality is not known; mass-normalized intensity is not conversion efficiency.", "Profiles without a boundary-compatible published range remain discovery metadata and required-input contracts.", "Pack validation proves schema, provenance, ranges, arithmetic, and override behavior, not empirical applicability to a user asset."],
+      "decision_grade": false
+    },
+    {
+      "id": "external-data-adapters",
+      "title": "NASA POWER, ERA5-Land, eGRID, EDGAR, FIED, IAC, and World Bank interfaces",
+      "level": "external-data-required",
+      "public_api": ["build_era5_land_requests", "fetch_nasa_power_temperature", "fetch_nasa_power_weather", "fetch_world_bank_indicators", "load_edgar_inventory", "load_egrid_emission_rates", "load_fied_units", "load_iac_recommendations", "retrieve_era5_land"],
+      "tests": ["tests/test_external_data.py", "tests/test_scientific_validation.py"],
+      "case_ids": [],
+      "evidence": [{"title": "Publisher-owned source datasets", "locator": "local adapters preserve publisher version, boundary, units, and provenance"}],
+      "limitations": ["Interface tests use local fixtures and do not certify changing publisher data.", "The caller must inspect publisher metadata, licensing, revisions, geography, units, and time basis."],
+      "decision_grade": false
+    },
+    {
+      "id": "preprocessing-and-interop",
+      "title": "Record preprocessing and quantity-quality interoperability",
+      "level": "structural-only",
+      "public_api": ["canonicalize_record", "enrich_xai4heat_record", "enrich_xai4heat_records", "from_quantity_quality", "to_quantity_quality", "xai4heat_summary", "xai4heat_temperature_sensitivity"],
+      "tests": ["tests/test_preprocess.py", "tests/test_validation.py", "tests/test_scientific_validation.py"],
+      "case_ids": [],
+      "evidence": [{"title": "XAI4Heat paper reproduction contract", "locator": "optional user-supplied records are compared with published portfolio aggregates"}],
+      "limitations": ["Column mapping and arithmetic validation do not establish sensor accuracy, interval completeness, or representativeness.", "The underlying XAI4Heat telemetry is not redistributed by this project."],
+      "decision_grade": false
+    },
+    {
+      "id": "agent-cli-mcp-reporting",
+      "title": "Agent, CLI, MCP, schema, and reporting surfaces",
+      "level": "interface-only",
+      "public_api": ["create_mcp_server", "report_view", "run_recipe", "safe_run_recipe", "validate_recipe"],
+      "tests": ["tests/test_agent.py", "tests/test_mcp_server.py", "tests/test_reporting.py", "tests/test_validation.py"],
+      "case_ids": [],
+      "evidence": [{"title": "Stable contract tests", "locator": "JSON Schemas, exit codes, in-memory MCP client, and deterministic serialization"}],
+      "limitations": ["Interface correctness inherits the scientific assurance level of the invoked calculation.", "Reports do not upgrade screening inputs into measurements or design results."],
+      "decision_grade": false
+    }
+  ],
+  "notes": [
+    "No capability is globally labeled decision-grade: that status requires validated site boundaries, calibrated measurements, uncertainty appropriate to the decision, and qualified engineering review.",
+    "Reference-validated means agreement for the listed equations, constants, source values, boundaries, and tolerances; it is not universal empirical validation.",
+    "Screening-only and external-data-required entries are deliberately visible so passing software tests cannot be mistaken for scientific validation."
+  ]
+}

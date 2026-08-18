@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "exergy-imperative"
-version = "0.4.3"
+version = "0.6.0"
 description = "Progressive exergy, emissions, health-screening, and economic analysis with transparent defaults."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -26,6 +26,11 @@ keywords = [
   "greenhouse gas emissions",
   "industrial decarbonization",
   "energy economics",
+  "mass balance",
+  "oil and gas",
+  "hydrogen",
+  "carbon capture",
+  "advanced materials",
 ]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -98,7 +103,7 @@ exergy-mcp = "exergy_imperative.mcp_server:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-exergy_imperative = ["data/*.json", "data/adapters/*.json", "data/schemas/*.json", "py.typed"]
+exergy_imperative = ["data/*.json", "data/adapters/*.json", "data/packs/*.json", "data/schemas/*.json", "py.typed"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

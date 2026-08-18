@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "workflow": "material-balance",
+  "inputs": {
+    "name": "recycling separator",
+    "components": [
+      {"id": "sorter", "kind": "reactor-separator"}
+    ],
+    "streams": [
+      {
+        "id": "mixed feed",
+        "mass": 1000,
+        "unit": "kg",
+        "target": "sorter",
+        "composition": {"target material": 0.7, "contaminants": 0.3}
+      },
+      {
+        "id": "recovered product",
+        "mass": 700,
+        "unit": "kg",
+        "source": "sorter",
+        "material": "target material"
+      },
+      {
+        "id": "rejects",
+        "mass": 300,
+        "unit": "kg",
+        "source": "sorter",
+        "role": "loss",
+        "material": "contaminants"
+      }
+    ]
+  }
+}

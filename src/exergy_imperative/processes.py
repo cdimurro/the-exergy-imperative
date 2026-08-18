@@ -6,6 +6,7 @@ import json
 import math
 import re
 from dataclasses import dataclass
+from difflib import get_close_matches
 from importlib.resources import files
 from typing import Any, Mapping
 
@@ -14,6 +15,7 @@ from .economics import EconomicResult, evaluate_economics, normalize_currency
 from .factors import ImpactFactorLibrary
 from .impacts import EnvironmentalResult, assess_impacts
 from .models import AssessmentResult, Estimate
+from .registry import DEFAULT_REGISTRY, Registry
 
 
 class ProcessTemplateNotFoundError(KeyError):
@@ -164,57 +166,134 @@ class ProcessAssessment:
         return export_xlsx_report(self, path, **options)
 
 
-def _load_templates() -> tuple[dict[str, ProcessTemplate], dict[str, str]]:
+def _template_from_dict(
+    raw: Mapping[str, Any], *, source_id: str, data_version: str
+) -> ProcessTemplate:
+    required = {
+        "id",
+        "label",
+        "sector",
+        "technology",
+        "description",
+        "screening_savings_fraction",
+        "major_pollutants",
+        "priority_inputs",
+    }
+    missing = sorted(required - set(raw))
+    if missing:
+        raise ValueError("process template is missing: " + ", ".join(missing))
+    factor = raw["screening_savings_fraction"]
+    if not isinstance(factor, Mapping):
+        raise ValueError("screening_savings_fraction must be an object")
+    value = float(factor["value"])
+    low = float(factor.get("low", value))
+    high = float(factor.get("high", value))
+    if not all(math.isfinite(item) for item in (value, low, high)):
+        raise ValueError("process-template savings fractions must be finite")
+    if not 0.0 <= low <= value <= high <= 1.0:
+        raise ValueError(
+            "process-template savings fractions must satisfy "
+            "0 <= low <= value <= high <= 1"
+        )
+    return ProcessTemplate(
+        id=str(raw["id"]),
+        label=str(raw["label"]),
+        aliases=tuple(str(item) for item in raw.get("aliases", [])),
+        sector=str(raw["sector"]),
+        technology=str(raw["technology"]),
+        description=str(raw["description"]),
+        savings_fraction=Estimate(
+            value,
+            "fraction of input energy",
+            low,
+            high,
+            "screening prior",
+        ),
+        major_pollutants=tuple(str(item) for item in raw["major_pollutants"]),
+        priority_inputs=tuple(str(item) for item in raw["priority_inputs"]),
+        source_id=str(raw.get("source_id", source_id)),
+        data_version=str(raw.get("data_version", data_version)),
+    )
+
+
+class ProcessCatalog:
+    """Process-template lookup with deterministic in-memory pack overlays."""
+
+    def __init__(self, templates: tuple[ProcessTemplate, ...]):
+        self._templates: dict[str, ProcessTemplate] = {}
+        self._aliases: dict[str, str] = {}
+        for template in templates:
+            if not template.id.strip():
+                raise ValueError("process-template id must not be empty")
+            if template.id in self._templates:
+                raise ValueError(f"duplicate process-template id {template.id!r}")
+            self._templates[template.id] = template
+            for alias in (template.id, template.label, *template.aliases):
+                normalized = _key(alias)
+                existing = self._aliases.get(normalized)
+                if existing and existing != template.id:
+                    raise ValueError(f"ambiguous process-template alias {alias!r}")
+                self._aliases[normalized] = template.id
+
+    @classmethod
+    def from_payload(cls, payload: Mapping[str, Any]) -> "ProcessCatalog":
+        source_id = str(payload.get("source_id", "unspecified"))
+        data_version = str(payload.get("data_version", "unknown"))
+        raw_templates = payload.get("templates", payload.get("process_templates", ()))
+        if not isinstance(raw_templates, (list, tuple)):
+            raise ValueError("process templates must be an array")
+        return cls(
+            tuple(
+                _template_from_dict(raw, source_id=source_id, data_version=data_version)
+                for raw in raw_templates
+            )
+        )
+
+    def list(self) -> tuple[ProcessTemplate, ...]:
+        return tuple(self._templates.values())
+
+    def get(self, value: str) -> ProcessTemplate:
+        normalized = _key(value)
+        template_id = self._aliases.get(normalized)
+        if template_id is not None:
+            return self._templates[template_id]
+        choices = sorted(self._templates)
+        suggestions = get_close_matches(
+            str(value).strip().lower().replace(" ", "-"), choices, n=3, cutoff=0.45
+        )
+        suffix = f"; closest matches: {', '.join(suggestions)}" if suggestions else ""
+        raise ProcessTemplateNotFoundError(
+            f"unknown process template {value!r}; available templates: "
+            + ", ".join(choices)
+            + suffix
+        )
+
+    def with_payload(self, payload: Mapping[str, Any]) -> "ProcessCatalog":
+        custom = ProcessCatalog.from_payload(payload)
+        merged = {item.id: item for item in self.list()}
+        merged.update({item.id: item for item in custom.list()})
+        return ProcessCatalog(tuple(merged.values()))
+
+
+def _load_templates() -> ProcessCatalog:
     resource = files("exergy_imperative").joinpath("data", "process_templates.json")
     payload = json.loads(resource.read_text(encoding="utf-8"))
-    templates: dict[str, ProcessTemplate] = {}
-    aliases: dict[str, str] = {}
-    for raw in payload["templates"]:
-        factor = raw["screening_savings_fraction"]
-        template = ProcessTemplate(
-            id=str(raw["id"]),
-            label=str(raw["label"]),
-            aliases=tuple(str(item) for item in raw.get("aliases", [])),
-            sector=str(raw["sector"]),
-            technology=str(raw["technology"]),
-            description=str(raw["description"]),
-            savings_fraction=Estimate(
-                float(factor["value"]),
-                "fraction of input energy",
-                float(factor["low"]),
-                float(factor["high"]),
-                "screening prior",
-            ),
-            major_pollutants=tuple(str(item) for item in raw["major_pollutants"]),
-            priority_inputs=tuple(str(item) for item in raw["priority_inputs"]),
-            source_id=str(payload["source_id"]),
-            data_version=str(payload["data_version"]),
-        )
-        templates[template.id] = template
-        for alias in (template.id, template.label, *template.aliases):
-            normalized = _key(alias)
-            existing = aliases.get(normalized)
-            if existing and existing != template.id:
-                raise ValueError(f"ambiguous process-template alias {alias!r}")
-            aliases[normalized] = template.id
-    return templates, aliases
+    return ProcessCatalog.from_payload(payload)
 
 
-_TEMPLATES, _TEMPLATE_ALIASES = _load_templates()
+DEFAULT_PROCESS_CATALOG = _load_templates()
 
 
-def list_process_templates() -> tuple[ProcessTemplate, ...]:
-    return tuple(_TEMPLATES.values())
+def list_process_templates(
+    catalog: ProcessCatalog | None = None,
+) -> tuple[ProcessTemplate, ...]:
+    return (catalog or DEFAULT_PROCESS_CATALOG).list()
 
 
-def get_process_template(value: str) -> ProcessTemplate:
-    try:
-        return _TEMPLATES[_TEMPLATE_ALIASES[_key(value)]]
-    except KeyError as exc:
-        choices = ", ".join(sorted(_TEMPLATES))
-        raise ProcessTemplateNotFoundError(
-            f"unknown process template {value!r}; available templates: {choices}"
-        ) from exc
+def get_process_template(
+    value: str, *, catalog: ProcessCatalog | None = None
+) -> ProcessTemplate:
+    return (catalog or DEFAULT_PROCESS_CATALOG).get(value)
 
 
 def _scale_range(base: float | Estimate, fraction: Estimate, unit: str) -> Estimate:
@@ -251,10 +330,12 @@ def assess_process(
     economics_options: Mapping[str, Any] | None = None,
     factor_library: ImpactFactorLibrary | None = None,
     annualization_factor: float | None = None,
+    registry: Registry | None = None,
+    catalog: ProcessCatalog | None = None,
 ) -> ProcessAssessment:
     """Run a process screen with progressive overrides and integrated impacts."""
 
-    profile = get_process_template(template)
+    profile = get_process_template(template, catalog=catalog)
     assessment_kwargs = dict(assessment_options or {})
     if "technology" in assessment_kwargs:
         raise ValueError(
@@ -284,12 +365,15 @@ def assess_process(
             "assessment_options conflict with top-level process inputs: "
             + ", ".join(assessment_conflicts)
         )
+    assessment_registry = assessment_kwargs.pop("registry", registry)
     assessment_kwargs.setdefault("technology", profile.technology)
     assessment_kwargs.setdefault("energy", energy)
     assessment_kwargs.setdefault("unit", unit)
     if country is not None:
         assessment_kwargs.setdefault("location", country)
-    thermodynamic = assess(**assessment_kwargs)
+    thermodynamic = assess(
+        **assessment_kwargs, registry=assessment_registry or DEFAULT_REGISTRY
+    )
 
     impact_kwargs = dict(impact_options or {})
     boundary_overrides = sorted(

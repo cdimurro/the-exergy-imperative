@@ -1,0 +1,325 @@
+{
+  "schema_version": "1.0",
+  "id": "power",
+  "version": "2026.1",
+  "license": "CC-BY-4.0",
+  "description": "Power-conversion mappings with selected published screening priors and explicit project overrides.",
+  "domains": ["power", "renewables", "electrical systems"],
+  "sources": {
+    "exergy-imperative-component-methods": {
+      "title": "The Exergy Imperative component accounting methods",
+      "url": "https://github.com/cdimurro/the-exergy-imperative",
+      "license": "CC-BY-4.0",
+      "applicable_boundary": "Single-input power conversion at explicitly declared equipment terminals",
+      "note": "Mechanical kinetic and potential work are exergy. Performance priors, where present, cite their own sources."
+    },
+    "doe-chp-gas-turbines": {
+      "title": "U.S. DOE Better Buildings: CHP Technologies—Gas Turbines",
+      "url": "https://betterbuildingssolutioncenter.energy.gov/sites/default/files/attachments/CHP_Gas_Turbines.pdf",
+      "license": "U.S. Government work; verify report-specific third-party notices",
+      "applicable_boundary": "Natural-gas HHV input to net electricity for the 2 MW through 25 MW gas-turbine cases in Table 2",
+      "note": "Table values characterize full-load technology cases and are not a site heat-rate guarantee."
+    },
+    "doe-pv-module-benchmarks-2024": {
+      "title": "DOE Solar Photovoltaic System Cost Benchmarks and PV Cells 101",
+      "url": "https://www.energy.gov/cmei/systems/solar-photovoltaic-system-cost-benchmarks",
+      "license": "U.S. Government work; verify page-specific third-party notices",
+      "applicable_boundary": "Incident array-plane solar radiation to DC electricity at representative commercial crystalline-silicon module terminals",
+      "note": "The 2024 representative residential module is 400 W over 1.9 m2 (21.1%); DOE PV Cells 101 reports about 18%-22% for commercial panels. AC conversion is excluded."
+    },
+    "doe-wind-conversion-eis": {
+      "title": "U.S. DOE Wellton-Mohawk Generating Facility Draft Environmental Impact Statement",
+      "url": "https://www.energy.gov/documents/eis-0358-deis-2005pdf",
+      "license": "U.S. Government work; verify document-specific third-party notices",
+      "applicable_boundary": "Free-stream wind kinetic energy through the rotor swept area to turbine electrical output",
+      "note": "The source states a 35%-40% range for then-state-of-the-art turbines; it is an older generic screening envelope, not a modern turbine power curve or capacity factor."
+    },
+    "nrel-hydropower-generator-range": {
+      "title": "NREL IEA Wind Task 24 Final Report, Volume 1",
+      "url": "https://www.nrel.gov/docs/fy12osti/50181.pdf",
+      "license": "U.S. Government-sponsored public technical report; verify report notices",
+      "applicable_boundary": "Hydraulic energy across common Pelton, Francis, and Kaplan hydropower conversion equipment to generator output",
+      "note": "The report states that the three common turbine-generator types can achieve 80%-90%; head, flow, part load, and equipment condition remain site variables."
+    },
+    "doe-transformer-standard-2024": {
+      "title": "DOE Energy Conservation Standards for Distribution Transformers Final Rule",
+      "url": "https://www.energy.gov/sites/default/files/2024-04/dt_ecs_fr.pdf",
+      "license": "U.S. Government work; Federal Register rule and supporting tables",
+      "applicable_boundary": "Transformer input terminals to output terminals at the loading and test conditions used for DOE distribution-transformer efficiency standards",
+      "note": "Efficiency depends on phase, kVA, voltage class, insulation, and loading; conditional variants summarize Table I.3 rather than replacing a nameplate value."
+    },
+    "nrel-inverter-benchmark-2021": {
+      "title": "NREL U.S. Solar Photovoltaic System and Energy Storage Cost Benchmark: Q1 2020",
+      "url": "https://www.nrel.gov/docs/fy21osti/77324.pdf",
+      "license": "U.S. Government work; NREL report",
+      "applicable_boundary": "DC electricity at inverter input to AC electricity at inverter output under the benchmarked conversion conditions",
+      "note": "Published benchmark sequence spans 94.0%-98.0%; recent modeled inverters reach 98%. Load and voltage dependence are not captured by a scalar prior."
+    }
+  },
+  "profiles": {
+    "carrier": [
+      {
+        "id": "wind-kinetic-energy",
+        "label": "Captured wind kinetic energy",
+        "aliases": ["wind kinetic"],
+        "family": "work",
+        "basis": "kinetic energy crossing the selected rotor/control-volume boundary",
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Captured kinetic-energy stream before electromechanical conversion",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "confidence": "exact"}
+        }
+      },
+      {
+        "id": "hydraulic-potential-energy",
+        "label": "Hydraulic potential energy",
+        "aliases": ["water potential energy", "hydraulic head energy"],
+        "family": "work",
+        "basis": "gravitational potential energy across the selected hydraulic boundary",
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Hydraulic potential-energy stream before turbine conversion",
+        "parameters": {
+          "exergy_factor": {"value": 1.0, "unit": "MWh_ex/MWh", "confidence": "exact"}
+        }
+      }
+    ],
+    "technology": [
+      {
+        "id": "solar-pv-system",
+        "label": "Solar photovoltaic system",
+        "aliases": ["PV", "photovoltaic"],
+        "model": "converter",
+        "input_carrier": "solar-radiation",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Incident solar radiation at the array plane to delivered AC or DC electricity, as explicitly selected",
+        "recommended_overrides": ["module efficiency", "temperature", "soiling", "DC wiring losses", "inverter losses"],
+        "default_output_boundary": "DC module terminals",
+        "parameters": {
+          "efficiency": {
+            "value": 0.211,
+            "unit": "MWh_DC/MWh_solar",
+            "low": 0.18,
+            "high": 0.22,
+            "confidence": "screening module range",
+            "source_id": "doe-pv-module-benchmarks-2024",
+            "source_version": "DOE 2024 representative system and PV Cells 101 range",
+            "evidence_kind": "published_estimate",
+            "statistic": "Representative 400 W divided by 1.9 m2 module rating",
+            "range_basis": "DOE stated approximate commercial-panel efficiency range",
+            "applicability": {
+              "technology": "Commercial crystalline-silicon PV module",
+              "boundary": "Array-plane irradiance to rated DC module output; inverter, wiring, temperature, soiling, shading, and availability excluded",
+              "geography": "United States representative benchmark",
+              "vintage": "2024 benchmark"
+            },
+            "note": "This default is DC module conversion, not AC system yield or capacity factor."
+          }
+        }
+      },
+      {
+        "id": "wind-turbine",
+        "label": "Wind turbine",
+        "aliases": ["wind generator"],
+        "model": "converter",
+        "input_carrier": "wind-kinetic-energy",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Captured wind kinetic energy to electricity at the declared turbine terminal",
+        "recommended_overrides": ["power curve", "wind-speed distribution", "air density", "wake and availability losses"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.375,
+            "unit": "MWh_electricity/MWh_wind",
+            "low": 0.35,
+            "high": 0.4,
+            "confidence": "generic screening range",
+            "source_id": "doe-wind-conversion-eis",
+            "source_version": "DOE/EIS-0358 draft, published range",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the source's stated conversion range",
+            "range_basis": "Published range for state-of-the-art turbines at the source vintage",
+            "applicability": {
+              "technology": "Generic horizontal-axis wind turbine near an efficient operating point",
+              "boundary": "Free-stream wind kinetic energy through rotor swept area to electricity",
+              "geography": "Generic technology statement in a U.S. DOE project review",
+              "vintage": "2005 technology characterization"
+            },
+            "note": "Do not confuse this instantaneous conversion factor with annual capacity factor; use a power curve for project work."
+          }
+        }
+      },
+      {
+        "id": "hydro-turbine-generator",
+        "label": "Hydroelectric turbine-generator",
+        "aliases": ["hydro turbine", "hydroelectric generator"],
+        "model": "converter",
+        "input_carrier": "hydraulic-potential-energy",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Hydraulic potential energy to electricity at the declared generator terminal",
+        "recommended_overrides": ["turbine hill chart", "generator efficiency", "net head", "flow and part-load distribution"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.85,
+            "unit": "MWh_electricity/MWh_hydraulic",
+            "low": 0.8,
+            "high": 0.9,
+            "confidence": "screening technology range",
+            "source_id": "nrel-hydropower-generator-range",
+            "source_version": "NREL/TP-6A20-50181, published common-turbine range",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of the stated 80%-90% range",
+            "range_basis": "Published achievable range for Pelton, Francis, and Kaplan equipment",
+            "applicability": {
+              "technology": "Common hydropower turbine-generator types",
+              "boundary": "Available hydraulic potential energy to electrical output at generator terminals",
+              "geography": "Generic technology characterization",
+              "vintage": "NREL report published 2011"
+            },
+            "note": "Project calculations require the turbine hill chart, generator curve, head losses, and operating distribution."
+          }
+        }
+      },
+      {
+        "id": "gas-turbine-generator",
+        "label": "Gas-turbine generator",
+        "aliases": ["simple-cycle gas turbine"],
+        "model": "converter",
+        "input_carrier": "natural-gas-hhv",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": [],
+        "recommended_overrides": ["efficiency", "measured fuel HHV input", "net generator output", "part-load condition"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Natural-gas HHV input to net delivered electricity; exhaust is outside the product boundary unless modeled separately",
+        "parameters": {
+          "efficiency": {
+            "value": 0.294,
+            "unit": "MWh_electricity/MWh_HHV",
+            "low": 0.223,
+            "high": 0.347,
+            "confidence": "screening technology table",
+            "source_id": "doe-chp-gas-turbines",
+            "source_version": "Table 2, accessed 2026-08-18",
+            "evidence_kind": "published_estimate",
+            "statistic": "Median of the seven published net electric efficiency cases",
+            "range_basis": "Minimum to maximum across the seven published 2-25 MW cases; not a site uncertainty interval",
+            "applicability": {
+              "technology": "Commercial natural-gas gas turbines represented by the seven 2-25 MW full-load cases",
+              "boundary": "Natural-gas HHV fuel input to net electric power",
+              "geography": "United States technology characterization; not site-specific",
+              "vintage": "DOE fact sheet Table 2 accessed 2026-08-18"
+            },
+            "note": "Replace with the unit heat rate at the applicable load, ambient conditions, degradation state, and auxiliary boundary."
+          }
+        }
+      },
+      {
+        "id": "electrical-transformer",
+        "label": "Electrical transformer",
+        "aliases": ["transformer"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Electricity at transformer input terminals to electricity at output terminals",
+        "recommended_overrides": ["nameplate efficiency", "phase", "capacity_kva", "voltage class", "loading"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.988,
+            "unit": "MWh_out/MWh_in",
+            "low": 0.9746,
+            "high": 0.9948,
+            "confidence": "screening standards envelope",
+            "source_id": "doe-transformer-standard-2024",
+            "source_version": "2024 final rule, Table I.3",
+            "evidence_kind": "published_estimate",
+            "statistic": "Rounded family midpoint",
+            "range_basis": "Envelope of selected single- and three-phase medium-voltage dry-type levels in Table I.3",
+            "applicability": {
+              "technology": "DOE-covered medium-voltage dry-type distribution transformers",
+              "boundary": "Transformer input to output at DOE test loading; field loading and harmonics excluded",
+              "geography": "United States regulated equipment",
+              "vintage": "DOE 2024 final rule"
+            },
+            "note": "Use the nameplate/test efficiency and actual load profile whenever available.",
+            "variants": [
+              {
+                "id": "small-single-phase",
+                "when": {"phase": "single", "capacity_kva": {"lte": 50}},
+                "value": 0.984,
+                "low": 0.9807,
+                "high": 0.9874,
+                "statistic": "Rounded center of applicable Table I.3 entries",
+                "range_basis": "Selected 15-50 kVA single-phase entries across listed BIL classes"
+              },
+              {
+                "id": "small-three-phase",
+                "when": {"phase": "three", "capacity_kva": {"lte": 45}},
+                "value": 0.981,
+                "low": 0.9746,
+                "high": 0.9847,
+                "statistic": "Rounded center of applicable Table I.3 entries",
+                "range_basis": "Selected 15-45 kVA three-phase entries across listed BIL classes"
+              },
+              {
+                "id": "large-dry-type",
+                "when": {"capacity_kva": {"gte": 500}},
+                "value": 0.9935,
+                "low": 0.9918,
+                "high": 0.9948,
+                "statistic": "Rounded center of applicable Table I.3 entries",
+                "range_basis": "Selected 500-5000 kVA entries across phase and BIL classes"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "power-electronic-inverter",
+        "label": "Power-electronic inverter",
+        "aliases": ["inverter"],
+        "model": "converter",
+        "input_carrier": "electricity",
+        "output_carrier": "electricity",
+        "performance_parameter": "efficiency",
+        "required_inputs": ["efficiency"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Electrical input at inverter terminals to electrical output at inverter terminals",
+        "recommended_overrides": ["manufacturer efficiency map", "DC voltage", "AC voltage", "load fraction"],
+        "parameters": {
+          "efficiency": {
+            "value": 0.972,
+            "unit": "MWh_AC/MWh_DC",
+            "low": 0.94,
+            "high": 0.98,
+            "confidence": "screening benchmark sequence",
+            "source_id": "nrel-inverter-benchmark-2021",
+            "source_version": "NREL/TP-6A20-77324, 2021",
+            "evidence_kind": "published_estimate",
+            "statistic": "Recent pre-maximum benchmark value in the published sequence",
+            "range_basis": "Minimum and maximum of the report's published inverter-efficiency benchmark sequence",
+            "applicability": {
+              "technology": "Grid-connected PV power-electronic inverter",
+              "boundary": "DC inverter input terminals to AC inverter output terminals",
+              "geography": "United States PV cost benchmark context",
+              "vintage": "NREL report published 2021"
+            },
+            "note": "Efficiency changes with loading, voltage, temperature, topology, and standby consumption."
+          }
+        }
+      }
+    ]
+  },
+  "process_templates": [],
+  "metadata": {"default_policy": "selected published F1 priors; explicit project performance preferred"}
+}

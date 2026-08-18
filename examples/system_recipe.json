@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "workflow": "system-analysis",
+  "mode": "dry-run",
+  "inputs": {
+    "name": "example converter",
+    "components": [
+      {"id": "converter", "kind": "converter"}
+    ],
+    "flows": [
+      {"id": "electricity input", "energy": 10, "target": "converter", "carrier": "electricity"},
+      {"id": "shaft-work product", "energy": 8, "source": "converter", "carrier": "shaft-work"},
+      {"id": "thermal loss", "energy": 2, "exergy": 0, "source": "converter", "role": "loss"}
+    ]
+  }
+}

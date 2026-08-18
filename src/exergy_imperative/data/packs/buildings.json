@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "id": "buildings",
+  "version": "2026.1",
+  "license": "CC-BY-4.0",
+  "description": "Building and HVAC mappings with selected published screening priors and explicit project overrides.",
+  "domains": ["buildings", "HVAC"],
+  "sources": {
+    "exergy-imperative-component-methods": {
+      "title": "The Exergy Imperative component accounting methods",
+      "url": "https://github.com/cdimurro/the-exergy-imperative",
+      "license": "CC-BY-4.0",
+      "applicable_boundary": "Single-input building energy converters at the delivered-energy equipment boundary",
+      "note": "Definitions provide equipment mappings; performance priors, where present, cite their own sources."
+    },
+    "doe-femp-geothermal-heat-pumps": {
+      "title": "U.S. DOE FEMP: Purchasing Energy-Efficient Geothermal Heat Pumps",
+      "url": "https://www.energy.gov/cmei/femp/purchasing-energy-efficient-geothermal-heat-pumps",
+      "license": "U.S. Government work; verify page-specific third-party notices",
+      "applicable_boundary": "Rated heating COP of 36,000 Btu/h single-phase residential geothermal heat-pump equipment under the referenced ISO 13256-1 test method",
+      "note": "The table is procurement guidance, not a seasonal site COP or a distribution of installed-system performance."
+    },
+    "doe-efficient-new-homes-hvac-2025": {
+      "title": "DOE Efficient New Homes Multifamily Version 2, Revision 2 National Program Requirements",
+      "url": "https://www.energy.gov/sites/default/files/2025-10/DOE%20Efficient%20New%20Homes%20Multifamily%20Version%202%20%28Rev.%202%29%20National%20Program%20Requirements_0.pdf",
+      "license": "U.S. Government work; verify document-specific third-party notices",
+      "applicable_boundary": "Rated and integrated HVAC equipment efficiency criteria in the DOE Efficient New Homes national requirements",
+      "note": "Procurement criteria are screening benchmarks, not field or seasonal measurements. IEER values are converted to dimensionless Btu/h per watt using 3.412 Btu/Wh."
+    }
+  },
+  "profiles": {
+    "technology": [
+      {
+        "id": "ground-source-heat-pump",
+        "label": "Ground-source heat pump",
+        "aliases": ["geothermal heat pump", "GSHP"],
+        "model": "heat-pump",
+        "input_carrier": "electricity",
+        "default_service": "space-heating",
+        "performance_parameter": "cop",
+        "required_inputs": ["source_temperature", "ambient_temperature"],
+        "recommended_overrides": ["cop", "measured auxiliary electricity", "operating-condition temperatures"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Heat-pump unit electricity to rated useful heating output; ground-loop pumping and other external auxiliaries are excluded unless the caller overrides COP with a system-boundary value",
+        "parameters": {
+          "cop": {
+            "value": 3.6,
+            "unit": "dimensionless",
+            "low": 3.1,
+            "high": 4.8,
+            "confidence": "screening benchmark",
+            "source_id": "doe-femp-geothermal-heat-pumps",
+            "source_version": "December 2024 guidance",
+            "evidence_kind": "published_estimate",
+            "statistic": "ENERGY STAR procurement criterion; lower and upper bounds are the less-efficient comparator and best-available product in the DOE example",
+            "range_basis": "Procurement benchmark envelope, not an empirical confidence interval",
+            "applicability": {
+              "technology": "Single-phase residential geothermal heat pumps represented by the 36,000 Btu/h DOE example",
+              "boundary": "Rated equipment heating output divided by equipment electrical input under ISO 13256-1; external loop pumping excluded",
+              "geography": "United States federal procurement examples; the same stated COP benchmarks are used across the three listed regions",
+              "vintage": "December 2024 product criteria"
+            },
+            "note": "Replace with a tested or seasonal system COP when available."
+          }
+        }
+      },
+      {
+        "id": "water-source-heat-pump",
+        "label": "Water-source heat pump",
+        "aliases": ["WSHP"],
+        "model": "heat-pump",
+        "input_carrier": "electricity",
+        "default_service": "space-heating",
+        "performance_parameter": "cop",
+        "required_inputs": ["cop", "source_temperature", "ambient_temperature"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Delivered electricity to useful space heat; source-water pumping must be included in the supplied COP",
+        "recommended_overrides": ["cop", "source-water pumping", "seasonal load profile"],
+        "parameters": {
+          "cop": {
+            "value": 4.5,
+            "unit": "dimensionless",
+            "low": 4.5,
+            "high": 4.5,
+            "confidence": "screening procurement criterion",
+            "source_id": "doe-efficient-new-homes-hvac-2025",
+            "source_version": "Multifamily Version 2 Rev. 2, 2025",
+            "evidence_kind": "published_estimate",
+            "statistic": "DOE water-loop heat-pump heating COP criterion",
+            "range_basis": "Published point criterion; not an uncertainty interval",
+            "applicability": {
+              "technology": "Water-loop heat-pump equipment covered by the DOE program table",
+              "boundary": "Rated equipment heating output divided by equipment electricity; external loop pumping excluded",
+              "geography": "United States DOE Efficient New Homes program",
+              "vintage": "2025 program requirements"
+            },
+            "note": "Use a seasonal system COP including source-water pumping when available."
+          }
+        }
+      },
+      {
+        "id": "variable-refrigerant-flow-heating",
+        "label": "Variable-refrigerant-flow heating system",
+        "aliases": ["VRF heating", "VRV heating"],
+        "model": "heat-pump",
+        "input_carrier": "electricity",
+        "default_service": "space-heating",
+        "performance_parameter": "cop",
+        "required_inputs": ["cop", "source_temperature", "ambient_temperature"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Delivered electricity to useful zone heat including declared indoor and outdoor auxiliaries",
+        "recommended_overrides": ["cop", "outdoor temperature profile", "defrost and auxiliary energy"],
+        "parameters": {
+          "cop": {
+            "value": 3.4,
+            "unit": "dimensionless",
+            "low": 3.3,
+            "high": 3.5,
+            "confidence": "screening procurement range",
+            "source_id": "doe-efficient-new-homes-hvac-2025",
+            "source_version": "Multifamily Version 2 Rev. 2, 2025",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of listed VRF heating COP criteria",
+            "range_basis": "Range across the listed DOE VRF equipment categories",
+            "applicability": {
+              "technology": "Variable-refrigerant-flow heat pumps covered by the DOE program table",
+              "boundary": "Rated equipment heating output divided by rated equipment electricity",
+              "geography": "United States DOE Efficient New Homes program",
+              "vintage": "2025 program requirements"
+            },
+            "note": "Not a seasonal or cold-climate site COP."
+          }
+        }
+      },
+      {
+        "id": "variable-refrigerant-flow-cooling",
+        "label": "Variable-refrigerant-flow cooling system",
+        "aliases": ["VRF cooling", "VRV cooling"],
+        "model": "chiller",
+        "input_carrier": "electricity",
+        "default_service": "chilled-water-cooling",
+        "performance_parameter": "cop",
+        "required_inputs": ["cop", "cold_temperature", "ambient_temperature"],
+        "source_id": "exergy-imperative-component-methods",
+        "boundary": "Delivered electricity to useful zone cooling including declared indoor and outdoor auxiliaries",
+        "recommended_overrides": ["cop", "seasonal cooling load", "indoor and outdoor auxiliary energy"],
+        "parameters": {
+          "cop": {
+            "value": 4.8066,
+            "unit": "dimensionless",
+            "low": 4.7479,
+            "high": 4.8652,
+            "confidence": "screening integrated-efficiency range",
+            "source_id": "doe-efficient-new-homes-hvac-2025",
+            "source_version": "Multifamily Version 2 Rev. 2, 2025",
+            "evidence_kind": "published_estimate",
+            "statistic": "Midpoint of 16.2-16.6 IEER converted by 3.412 Btu/Wh",
+            "range_basis": "Range across listed DOE VRF cooling IEER criteria",
+            "applicability": {
+              "technology": "Variable-refrigerant-flow cooling equipment covered by the DOE program table",
+              "boundary": "Integrated rated cooling output divided by equipment electricity under the IEER test procedure",
+              "geography": "United States DOE Efficient New Homes program",
+              "vintage": "2025 program requirements"
+            },
+            "note": "COP-equivalent derived from IEER; do not use as an instantaneous operating-point COP."
+          }
+        }
+      }
+    ]
+  },
+  "process_templates": [],
+  "metadata": {"default_policy": "selected published F1 priors; explicit site performance preferred"}
+}

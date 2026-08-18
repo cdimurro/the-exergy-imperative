@@ -26,6 +26,7 @@ python -m pip install "exergy-imperative[mcp,data,reports,properties]"
 
 ```bash
 exergy capabilities --json
+exergy search "ground source heat pump" --json
 exergy describe process-assessment --kind workflow --json
 exergy describe steam --kind process --json
 exergy schema agent-recipe --json
@@ -39,8 +40,13 @@ available in Python:
 import exergy_imperative as xi
 
 capabilities = xi.list_capabilities()
+matches = xi.search_capabilities("battery storage")
+material_matches = xi.search_capabilities("cement clinker", kind="material")
 process_contract = xi.describe_workflow("process-assessment")
 ```
+
+When no named technology matches, search returns the nearest named options and
+the generic `system-analysis` fallback. It never invents a profile match.
 
 ## Stable recipe contract
 
@@ -158,10 +164,21 @@ The server exposes these tools:
 - `normalize_dataset`
 - `generate_report`
 - `list_profiles`
+- `search_capabilities`
+- `analyze_system`
+- `analyze_system_timeseries`
+- `analyze_material_balance`
+- `evaluate_technology_model`
+- `estimate_technology_performance`
+- `estimate_technology_intensity`
+- `validate_technology_pack`
+- `technology_pack_default_coverage`
+- `technology_packs`
 - `public_datasets`
 
 Resources are available at `exergy://capabilities`, `exergy://datasets`,
-`exergy://schema/{name}`, and `exergy://process-templates`. The
+`exergy://schema/{name}`, `exergy://process-templates`, and
+`exergy://technology-packs`. The
 `plan_exergy_assessment` prompt helps a user or agent select a workflow without
 misrepresenting screening defaults as measurements.
 
@@ -189,3 +206,26 @@ NASA POWER, and ERA5 network access occurs only through an explicitly invoked
 connector; EDGAR, eGRID, ITAC/IAC, and FIED remain local-file workflows.
 Agents remain responsible for the licenses and access boundaries of local files
 they choose to read before passing permitted records to `normalize_dataset`.
+
+## Custom technologies and connected systems
+
+Recipe contract `1.0` also includes additive `custom-assessment`,
+`custom-process-assessment`, `system-analysis`, `system-timeseries`,
+`material-balance`, `technology-model`, `technology-performance`,
+`technology-intensity`, `technology-pack-validation`, and `capability-search`
+workflows. Inline packs
+are completely in memory. A supplied local pack path is read only during
+dry-run or execute; validate-only checks the recipe structure without reading
+the file. None of these workflows performs implicit network access.
+
+System records use interval energy quantities. Agents must not pass power
+values without first converting them using an explicit interval. Storage
+changes are signed and must reference a component whose kind is `storage`. See
+[Connected systems and technology packs](systems-and-packs.md) for the complete
+contract.
+
+Material recipes use interval masses and explicit compositions. Agents should
+start from a pack's material template, supply every listed feed, product, loss,
+and inventory change, and use a source catalog for referenced measurements or
+datasets. Missing chemical-exergy factors suppress that ledger rather than
+triggering an assumed property lookup.

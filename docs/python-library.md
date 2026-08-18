@@ -75,6 +75,37 @@ for workflow discovery, exergy calculation, integrated process assessment,
 impact screening, economics, dataset normalization, and reporting. See the
 [agent integration guide](agent-integration.md).
 
+Capability search also covers generic components and data-only domain packs:
+
+```python
+xi.search_capabilities("ground source heat pump")
+xi.list_bundled_technology_packs()
+xi.technology_pack_coverage("emerging-energy")
+```
+
+The seven packs contain 80 technology profiles and 50 sourced automatic
+screening paths. Use an energy-performance result when efficiency or COP is
+known but heat or fuel exergy quality is not:
+
+```python
+performance = xi.assess_performance_with_pack(
+    "emerging-energy",
+    "concentrating-solar-power-block",
+    input_energy=100,
+)
+
+intensity = xi.assess_intensity_with_pack(
+    "advanced-materials",
+    "hall-heroult-electrolysis",
+    output_mass=10,
+    output_unit="t",
+)
+```
+
+These APIs deliberately omit exergy, emissions, hazards, and economics rather
+than fill missing ledgers with unrelated defaults. All priors are replaceable,
+and `strict=True` requires the caller to supply the performance or intensity.
+
 ### One call from sparse process data
 
 ```python
@@ -343,12 +374,63 @@ balance = analyze_balance(
 )
 ```
 
+### Compose an unfamiliar technology or connected system
+
+```python
+result = xi.analyze_system(
+    "custom converter",
+    components=[{"id": "converter", "kind": "converter"}],
+    flows=[
+        {"id": "input", "energy": 10, "target": "converter", "carrier": "electricity"},
+        {"id": "product", "energy": 8, "source": "converter", "carrier": "shaft-work"},
+        {"id": "loss", "energy": 2, "exergy": 0, "source": "converter", "role": "loss"},
+    ],
+)
+```
+
+For named extensions, `load_technology_pack()` overlays a local or bundled pack
+without mutating the default registry. `analyze_system_timeseries()` adds
+chronological records, representative-period weights, and signed storage
+changes. See [Connected systems and technology packs](systems-and-packs.md).
+
+### Close material and constituent balances
+
+```python
+materials = xi.analyze_material_system(
+    "separator",
+    components=[{"id": "separator", "kind": "reactor-separator"}],
+    streams=[
+        {
+            "id": "feed",
+            "mass": 100,
+            "target": "separator",
+            "composition": {"product": 0.8, "gangue": 0.2},
+        },
+        {"id": "product", "mass": 80, "source": "separator", "material": "product"},
+        {"id": "tailings", "mass": 20, "source": "separator", "role": "loss", "material": "gangue"},
+    ],
+)
+```
+
+Material balances normalize supported mass units to kilograms and report both
+total and constituent closure. Chemical exergy is optional and remains
+unreconciled unless every participating stream has an explicit specific factor.
+
 ### Commands
 
 ```text
 exergy assess       Screen a stream or technology
 exergy capabilities Discover agent workflows, schemas, and safety behavior
+exergy search       Search named options, generic components, packs, and schemas
 exergy describe     Describe a workflow, process template, or profile
+exergy packs        List or inspect bundled data-only technology packs
+exergy pack-coverage Show defaults and explicit-input gaps for every technology
+exergy performance  Estimate energy output from a sourced efficiency or COP
+exergy intensity    Estimate input energy from a sourced mass-normalized prior
+exergy models       List registered technology-model contracts
+exergy model-evaluate Evaluate an explicit-performance model from JSON
+exergy pack-validate Validate a local or bundled technology pack
+exergy pack-scaffold Write a safe local technology-pack scaffold
 exergy schema       List or read packaged JSON Schemas
 exergy run          Validate, dry-run, or execute an agent recipe
 exergy profiles     Inspect bundled defaults and sources
@@ -372,6 +454,9 @@ exergy validate      Run bundled or local XAI4Heat validation cases
 exergy enrich       Enrich a telemetry CSV
 exergy xai-summary  Summarize XAI4Heat-compatible data
 exergy balance      Analyze a JSON process balance
+exergy system       Analyze a connected component system from JSON
+exergy system-timeseries Aggregate chronological system records from JSON
+exergy material-balance Analyze mass, composition, inventory, and chemical exergy
 exergy datasets     List public-data integrations
 exergy weather      Explicitly fetch NASA POWER temperature data
 exergy world-bank   Explicitly fetch WDI economic context

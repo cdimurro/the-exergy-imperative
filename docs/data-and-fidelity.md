@@ -27,9 +27,9 @@ silently treat a default as a measurement.
 The overall tier never hides field-level provenance. A result can mix a measured
 temperature, a country/year electricity factor, and a profile efficiency.
 
-## Bundled knowledge packs
+## Bundled knowledge resources
 
-The wheel includes four small, versioned resources:
+The wheel includes these small, versioned resources:
 
 - equipment, carrier, service, and reference profiles;
 - 12 cross-industry process templates;
@@ -38,6 +38,11 @@ The wheel includes four small, versioned resources:
 - six recent years of electricity carbon-intensity data for 213 countries plus
   a world aggregate, derived from Ember data distributed through Our World in
   Data.
+- seven technology packs for buildings, power, mobility, water/materials, oil
+  and gas, emerging energy, and advanced materials. Across 80 technologies, 50
+  have an official-source performance or mass-normalized intensity prior;
+  profiles without a boundary-compatible source retain explicit input
+  requirements and a machine-readable reason.
 
 Grid lookup accepts common country names and ISO-like codes. A requested missing
 year falls back explicitly to the closest earlier year, or the earliest year if
@@ -56,6 +61,8 @@ library use is offline and deterministic.
 - Fuel factors declare HHV or LHV basis. Do not mix bases without conversion.
 - Typed units such as `MWh_LHV` and `MWh_HHV_CH4` select that basis; an
   inconsistent explicit `basis` is rejected.
+- Unit scaling between two explicitly conflicting HHV/LHV typed units is also
+  rejected because the relationship is fuel- and composition-specific.
 - Default pollutant factors are broad stationary-combustion screening ranges,
   not permit-grade or stack-test emissions.
 - Health text describes pollutant hazards. It does not calculate ambient
@@ -89,6 +96,37 @@ Explicit function arguments remain the final override. This is the preferred
 path for supplier-specific electricity, stack testing, fuel composition,
 refrigerant inventories, local damage costs, and organization-specific finance.
 
+For a single versioned extension containing technology profiles and process
+templates, use `load_technology_pack()` and validate it against the packaged
+`technology-pack` schema. Numeric screening defaults require units, confidence,
+ranges, sources, licenses, and applicable boundaries. See
+[Connected systems and technology packs](systems-and-packs.md).
+
+Bundled estimates span building heat pumps and VRF; renewable, thermal, and
+power-conversion equipment; electric, fuel-cell, gasoline, and diesel vehicle
+drivetrains; pumps, blowers, and induction heating; oil-and-gas pumping,
+compression, recovery, and fired heaters; electrolyzers, fuel cells,
+geothermal and nuclear power blocks, solar-thermal and supercritical-CO2 power
+cycles, and long-duration storage; plus selected steel and aluminum production
+intensities. Each estimate records its statistic, range basis, technology,
+boundary, geography, vintage, source version, and source license. These are F1
+screening inputs, not fleet distributions, measurements, forecasts, or site
+guarantees.
+
+Performance and production intensity are intentionally separate models.
+`assess_performance_with_pack()` reports energy input and output but does not
+invent an exergy factor for an unspecified heat state or fuel composition.
+`assess_intensity_with_pack()` reports energy per declared product mass but
+does not label that ratio as efficiency. `technology_pack_coverage()` reports
+the available path and override fields for every technology.
+
+Profiles without a defensible default retain required-input prompts. No
+composition, leak-rate, reaction-yield, degradation, capacity factor, or cost
+values are inferred from a performance prior. Material templates identify the
+inventory needed to close a boundary; they are not material-property databases.
+`MaterialStream` values default to F2 because they are caller-provided. Use F3
+or F4 only when the declared provenance supports those evidence levels.
+
 ## Public datasets
 
 `xi.list_datasets()` exposes source, geography, license, and capability metadata.
@@ -119,5 +157,5 @@ Retain:
 - method ID, boundary, energy unit, and HHV/LHV basis;
 - field-level provenance and user overrides;
 - uncertainty distributions, seed, and sample count;
-- missing-data, interpolation, clipping, and filtering rules;
+- missing-data, interpolation, truncation, and filtering rules;
 - currency, price year, discount rate, project life, and included externalities.
