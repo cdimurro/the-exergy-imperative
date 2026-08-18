@@ -6,7 +6,7 @@
 > [`exergy-imperative`](README.md), a Python library that puts these methods
 > to work: `pip install exergy-imperative`.
 
-**We act as if all joules are equal — when in fact they are not. This makes our energy system less efficient and is slowing down the energy transition.**
+**We act as if all joules are equal — when in fact they are not. This makes our energy system less efficient and it is slowing down the energy transition.**
 
 ---
 
@@ -16,7 +16,7 @@
 
 # Preface: The global energy system is operating with a blind spot.
 
-Every year, humanity produces roughly 600 EJ of primary energy. We track it meticulously — barrels of oil, cubic meters of gas, megawatt-hours of electricity, tonnes of coal. We write reports and analyze charts, but nearly all of it treats joules as if they are interchangeable when they are not. Solving this fundamental blind spot within our energy systems would make the energy system more efficient, accelerate the energy transition, and save consumers money by allowing them to do more work with less energy. To understand exactly why here is a simple example: 
+Every year, humanity produces roughly 600 EJ of primary energy. We track it meticulously — barrels of oil, cubic meters of gas, megawatt-hours of electricity, tonnes of coal. We write reports and analyze charts, but nearly all of it treats joules as if they are interchangeable when they are not. Solving this fundamental blind spot within our energy systems would make the energy system more efficient, accelerate the energy transition, and save consumers money by allowing them to do more work with less energy. To understand exactly why, here is a simple example: 
 ```
 Exergy measures the useful work potential of an energy source.
 The quality of different energy sources can be measured using the exergy-to-energy ratio, which ranges from 0 to 1.
@@ -24,11 +24,11 @@ The quality of different energy sources can be measured using the exergy-to-ener
 • Electricity has an exergy-to-energy ratio of nearly 1, meaning that almost all of its energy can be converted into useful work.
 • Low-temperature heat, for example at 50°C, has an exergy-to-energy ratio of around 0.07.
 ```
-What this means in practice is that it doesn't matter how much low temperature heat you have, you'll never be able to melt steel with it because that requires temperatures around 1500 °C. The 'quantity' of how much low temperature heat you have is completely irrelevant if your goal is to melt steel. 
+What this means in practice is that it doesn't matter how much low temperature heat you have, you'll never be able to melt steel with it, because melting steel requires temperatures around 1500 °C. You can never melt steel no matter how much 50 °C heat you have.
 
-This is why Electricity has a higher 'quality' thermodynamically than low temperature heat. When you have 1 unit of electricity, 1 unit can be converted into work. When you have 1 unit of low temperature heat, only 0.07 units can be converted into work. This is why measuring Exergy is fundamental if we want to make our energy systems more efficient.
+This is why Electricity has a higher thermodynamic 'quality' than low temperature heat. If you have 1 unit of electricity, 1 unit can be converted into work. If you have 1 unit of low temperature heat, only 0.07 units can be converted into work. Hopefully this explains why measuring Exergy is fundamental if we want to make our energy systems more efficient.
 
-Today Exergy is almost completely absent from energy policy, investment analysis, technology evaluation, and the systems planning that will determine how efficient our energy system is over the next several decades, and also how fast the energy transition proceeds. 
+Today exergy is almost completely absent from energy policies, investment analysis, technology evaluation, and the decisions being made that will determine what our energy system will look like over the next several decades. 
 
 This guide exists to change that. Not by advocating for exergy as a silver bullet, because it is not one — but by explaining precisely what it reveals, where it is powerful, where it is weak, and how it can be applied practically to make better decisions about which energy solutions to build, fund, and deploy.
 
@@ -955,10 +955,10 @@ Values from Szargut (2005), reference environment T₀ = 298.15 K, P₀ = 101.32
 
 *This document is released as an open resource for engineers, researchers, investors, policymakers, educators, and anyone working to accelerate the energy transition through better thermodynamic decision-making.*
 
-*If all joules are not equal — and they are not — then we owe it to ourselves and to the planet to stop accounting as if they are.*
+*If all joules are not equal — and they are not — then we owe it to ourselves and to the planet to stop counting them as if they are.*
 
-> **Published by [Exergy Lab](https://exergy-lab.com)** — a platform for discovering and validating energy innovations, purpose-built for energy and deep-tech industries. Free for anyone to use to advance clean energy solutions.
+> **Published by [Exergy Lab](https://exergy-lab.com)** — A platform for accelerating scientific discovery and technological innovation, purpose-built for energy and deep-tech industries. Free for anyone to use.
 >
-> This document is our first open-source contribution to the energy community. Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to share and adapt with attribution.
+> This repository is our first open-source contribution to the energy community. Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to share and adapt with attribution.
 
 ---
