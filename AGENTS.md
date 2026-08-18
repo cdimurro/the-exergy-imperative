@@ -4,7 +4,7 @@ These instructions apply to the entire repository.
 
 ## Purpose
 
-Exergy Imperative is a progressive-fidelity engineering library. Preserve the
+`exergy-imperative` is a progressive-fidelity engineering library. Preserve the
 distinction between energy quantity, exergy quality, emissions, pollutant
 hazards, and economics. Screening defaults must never be presented as
 measurements or site-specific design results.
