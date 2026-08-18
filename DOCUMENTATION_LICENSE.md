@@ -1,8 +1,8 @@
 # Documentation and bundled reference-data license
 
-The long-form guide, explanatory documentation, and bundled profile data are
-licensed under the Creative Commons Attribution 4.0 International license
-(CC BY 4.0), Copyright (c) 2026 Exergy Lab.
+The long-form guide (`THE_EXERGY_IMPERATIVE.md`), explanatory documentation,
+and bundled profile data are licensed under the Creative Commons Attribution
+4.0 International license (CC BY 4.0), Copyright (c) 2026 Exergy Lab.
 
 You are free to share and adapt this material for any purpose, including
 commercially, provided that you give appropriate credit, link to the license,
