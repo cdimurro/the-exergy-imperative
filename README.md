@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/code-Apache--2.0-green)](LICENSE)
 [![Guide](https://img.shields.io/badge/guide-CC%20BY%204.0-lightgrey)](THE_EXERGY_IMPERATIVE.md)
 
-**A Python Library and Guide for analyzing exergy, emissions, health, and economics using the data that you actually have.** Give it as little as an equipment
+**A Python Library and Guide for analyzing exergy, emissions, health, and economics using the data that you already have.** Give it as little as an equipment
 name and a country; every default it fills in stays visible, sourced, and is replaceable with your own data or measurements.
 
 ## Why this library
