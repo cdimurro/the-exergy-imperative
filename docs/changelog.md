@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added a release-specific cache key to the dynamic PyPI README badge so
+  GitHub refreshes it promptly after publication.
+
 ## 0.4.3 - 2026-08-18
 
 - Added literature-anchored golden-value tests: steam-table flow exergy
