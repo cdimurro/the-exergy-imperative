@@ -10,14 +10,17 @@ from exergy_imperative.cli import main
 
 
 def test_release_version_surfaces_are_consistent(capsys):
+    project_root = Path(__file__).parents[1]
     pyproject = tomllib.loads(
-        (Path(__file__).parents[1] / "pyproject.toml").read_text(encoding="utf-8")
+        (project_root / "pyproject.toml").read_text(encoding="utf-8")
     )
     expected = pyproject["project"]["version"]
+    readme = (project_root / "README.md").read_text(encoding="utf-8")
 
     assert expected == "0.4.3"
     assert xi.__version__ == expected
     assert LIBRARY_VERSION == expected
+    assert f"cacheSeconds=300&release={expected}" in readme
 
     with pytest.raises(SystemExit) as exc_info:
         main(["--version"])

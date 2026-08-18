@@ -1,7 +1,7 @@
 # The Exergy Imperative
 
 [![CI](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml/badge.svg)](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/exergy-imperative)](https://pypi.org/project/exergy-imperative/)
+[![PyPI](https://img.shields.io/pypi/v/exergy-imperative?cacheSeconds=300&release=0.4.3)](https://pypi.org/project/exergy-imperative/)
 [![Python](https://img.shields.io/badge/python-3.11%E2%80%933.14-blue)](https://pypi.org/project/exergy-imperative/)
 [![License](https://img.shields.io/badge/code-Apache--2.0-green)](LICENSE)
 [![Guide](https://img.shields.io/badge/guide-CC%20BY%204.0-lightgrey)](THE_EXERGY_IMPERATIVE.md)
