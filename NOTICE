@@ -1,8 +1,20 @@
 The Exergy Imperative
 Copyright 2026 Exergy Lab
 
-The explanatory guide and bundled reference profiles are available under
-CC BY 4.0 as described in DOCUMENTATION_LICENSE.md.
+The long-form guide (THE_EXERGY_IMPERATIVE.md), explanatory documentation,
+and bundled profile data are licensed under the Creative Commons Attribution
+4.0 International license (CC BY 4.0). You are free to share and adapt this
+material for any purpose, including commercially, provided that you give
+appropriate credit, link to the license, and indicate whether changes were
+made. Full license text:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+The Python source code is licensed separately under Apache-2.0 as stated in
+LICENSE and pyproject.toml.
+
+Third-party numerical reference data and adapted descriptions retain their
+original attribution and reuse terms, as described below and in the
+`sources` sections inside the bundled data packs.
 
 Some carrier conventions and interoperability patterns are derived from the
 MIT-licensed Quantity and Quality project by Exergy Lab:
