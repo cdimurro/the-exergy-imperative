@@ -177,5 +177,5 @@ data attributions are listed in [NOTICE](NOTICE). Cite via
 ---
 
 Published by **[Exergy Lab](https://exergy-lab.com)** — a platform for
-discovering and validating energy innovations, free for anyone advancing
-clean energy solutions.
+accelerating scientific discovery and technological innovation, purpose-built
+for energy and deep-tech industries. Free for anyone to use.
