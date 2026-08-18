@@ -1,9 +1,28 @@
 import json
+import tomllib
+from pathlib import Path
 
 import pytest
 
 import exergy_imperative as xi
+from exergy_imperative.agent import LIBRARY_VERSION
 from exergy_imperative.cli import main
+
+
+def test_release_version_surfaces_are_consistent(capsys):
+    pyproject = tomllib.loads(
+        (Path(__file__).parents[1] / "pyproject.toml").read_text(encoding="utf-8")
+    )
+    expected = pyproject["project"]["version"]
+
+    assert expected == "0.4.3"
+    assert xi.__version__ == expected
+    assert LIBRARY_VERSION == expected
+
+    with pytest.raises(SystemExit) as exc_info:
+        main(["--version"])
+    assert exc_info.value.code == 0
+    assert capsys.readouterr().out.strip() == f"exergy-imperative {expected}"
 
 
 def test_registry_alias_lookup():

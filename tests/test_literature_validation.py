@@ -47,9 +47,7 @@ def test_flow_exergy_of_steam_matches_steam_tables():
 def test_physical_flow_exergy_formula_reproduces_steam_table_case():
     """The dependency-free formula reproduces the same steam-table case."""
     exergy_kj_per_kg = xi.physical_flow_exergy(3398.3, 104.89, 6.7240, 0.3674, 298.15)
-    assert exergy_kj_per_kg == pytest.approx(
-        STEAM_8MPA_500C_EXERGY_KJ_PER_KG, rel=1e-9
-    )
+    assert exergy_kj_per_kg == pytest.approx(STEAM_8MPA_500C_EXERGY_KJ_PER_KG, rel=1e-9)
 
 
 def test_compressed_air_real_fluid_agrees_with_ideal_gas_expression():
@@ -75,9 +73,7 @@ def test_petela_factor_matches_published_value_for_6000_k_sun():
 
     For Ts = 6000 K and T0 = 300 K the widely quoted value is 0.9333.
     """
-    assert xi.petela_exergy_factor(300.0, 6000.0) == pytest.approx(
-        0.93334, abs=1e-4
-    )
+    assert xi.petela_exergy_factor(300.0, 6000.0) == pytest.approx(0.93334, abs=1e-4)
 
 
 @pytest.mark.parametrize(
@@ -90,9 +86,7 @@ def test_petela_factor_matches_published_value_for_6000_k_sun():
         (313.15, 293.15, 0.06387),  # 40 C space heat vs 20 C ambient
     ],
 )
-def test_carnot_factors_match_hand_computed_benchmarks(
-    source_k, reference_k, expected
-):
+def test_carnot_factors_match_hand_computed_benchmarks(source_k, reference_k, expected):
     assert xi.thermal_exergy_factor(source_k, reference_k) == pytest.approx(
         expected, abs=1e-5
     )
@@ -101,9 +95,9 @@ def test_carnot_factors_match_hand_computed_benchmarks(
 def test_equimolar_separation_work_is_rt0_ln2():
     """Textbook minimum work to separate an ideal equimolar binary mixture."""
     expected_j = xi.UNIVERSAL_GAS_CONSTANT * 298.15 * math.log(2.0)
-    assert xi.ideal_mixture_separation_exergy(
-        1.0, [0.5, 0.5], 298.15
-    ) == pytest.approx(expected_j, rel=1e-9)
+    assert xi.ideal_mixture_separation_exergy(1.0, [0.5, 0.5], 298.15) == pytest.approx(
+        expected_j, rel=1e-9
+    )
     # Published value quoted to four significant figures: 1.718 kJ/mol.
     assert expected_j / 1000 == pytest.approx(1.718, abs=5e-4)
 

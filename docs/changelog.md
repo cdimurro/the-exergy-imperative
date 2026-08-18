@@ -2,11 +2,20 @@
 
 ## Unreleased
 
+## 0.4.3 - 2026-08-18
+
 - Added literature-anchored golden-value tests: steam-table flow exergy
   (8 MPa / 500 °C) through both the CoolProp backend and the dependency-free
   formula, the Petela (2003) radiative factor, real-fluid versus ideal-gas
   compressed-air agreement, the textbook R·T₀·ln 2 separation minimum, and
   Carnot benchmarks from the guide. Documented in `docs/validation.md`.
+- Standardized prose references as "The Exergy Imperative" while retaining
+  `exergy-imperative` in package, CLI, MCP, and workbook contexts.
+- Moved the guide's software pointer above its title so the repository and
+  package entry point is visible immediately.
+- Added a release-version consistency regression test and enforced Ruff
+  formatting in CI.
+- Version 0.4.2 was not published.
 
 ## 0.4.1 - 2026-08-17
 
