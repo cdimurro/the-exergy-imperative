@@ -1,4 +1,4 @@
-# the-exergy-imperative
+# The Exergy Imperative
 
 [![CI](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml/badge.svg)](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/exergy-imperative)](https://pypi.org/project/exergy-imperative/)
@@ -196,7 +196,8 @@ expected value, tolerance, and citation.
 
 ## Status
 
-`0.3.0` alpha. The public Python API, CLI commands, recipe contract `1.0`,
+Alpha — the released version is shown in the PyPI badge above. The public
+Python API, CLI commands, recipe contract `1.0`,
 packaged JSON Schemas, and MCP tools are stable surfaces within a minor
 version (see [AGENTS.md](AGENTS.md)). Release history lives in the
 [changelog](docs/changelog.md). Contributions are welcome — especially
