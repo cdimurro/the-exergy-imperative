@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.7.0 - 2026-08-19
+
+- Added a separate, F1 public-health benefit workflow using all published U.S.
+  EPA Third Edition benefits-per-kWh ranges: 14 AVERT regions, eight energy
+  efficiency/renewable/storage intervention types, and explicit unavailable
+  combinations.
+- Added Python, CLI, JSON-recipe, JSON Schema, and MCP surfaces with normalized
+  one-MWh results, unit conversion, replaceable low/high rates, stable
+  provenance, analysis-year warnings, and no implicit geography substitution.
+- Preserved the scientific boundary: the legacy pollutant path remains an
+  inventory with health context, while the new workflow reports modeled,
+  monetized outdoor-air benefits rather than fabricated local incidence,
+  diagnoses, deaths, or individual risk.
+- Pinned the EPA source report hash, AVERT 4.3 and COBRA 5.1 method versions,
+  2023 currency basis, 2% discount rate, table values, use window, exclusions,
+  and attribution terms in data validation and documentation.
+
 ## 0.6.1 - 2026-08-18
 
 - Added the versioned Quantity and Quality cross-product conformance contract,

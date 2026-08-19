@@ -434,6 +434,22 @@
       }
     },
     {
+      "id": "epa-bpk-rocky-mountains-uniform-ee",
+      "title": "EPA regional public-health benefit screening calculation",
+      "method": "estimate_health_benefits",
+      "inputs": {"region": "Rocky Mountains", "project_type": "Uniform EE", "energy": 1.0},
+      "output_path": "monetized_benefit.low",
+      "expected": 18.0,
+      "absolute_tolerance": 1e-12,
+      "validation_type": "reference",
+      "capabilities": ["public-health-benefits"],
+      "citation": {
+        "title": "U.S. EPA Public Health Benefits per Kilowatt-Hour, Third Edition",
+        "url": "https://www.epa.gov/system/files/documents/2024-12/bpk_report_third_edition.pdf",
+        "locator": "Table 2: Rocky Mountains, Uniform EE, low estimate 1.80 cents/kWh; 1 MWh = 1,000 kWh"
+      }
+    },
+    {
       "id": "evpi-paired-samples",
       "title": "Expected value of perfect information for paired samples",
       "method": "expected_value_of_perfect_information",

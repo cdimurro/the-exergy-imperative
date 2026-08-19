@@ -1,4 +1,4 @@
-# Environment, health screening, and economics
+# Environment, public-health impact screening, and economics
 
 ## Climate accounting
 
@@ -58,12 +58,53 @@ Fuel profiles can estimate SO2, NOx, PM2.5, PM10, CO, VOC, and other available
 pollutants as bounded mass inventories. Results attach compact profiles of
 well-established health concerns and exposure routes.
 
-This is a hazard screen only. Emissions at a stack are not the same as ambient
-concentration or inhaled dose. A defensible health-impact assessment normally
-needs stack characteristics, meteorology, atmospheric chemistry, spatially
-resolved population, baseline incidence, concentration-response functions, and
-an explicit valuation method. The library therefore does not provide universal
-health damage factors.
+Those pollutant outputs are inventories with health context. Emissions at a
+stack are not the same as ambient concentration or inhaled dose. They are never
+reported as exposure, attributable cases, diagnoses, or individual risk.
+
+For a more useful screening result when site data are absent,
+`estimate_health_benefits()` packages the U.S. EPA's Third Edition regional
+benefits-per-kWh (BPK) values. EPA derived these values with AVERT 4.3 and
+COBRA 5.1. They monetize modeled PM2.5- and ozone-related outdoor-air public
+health benefits from SO2, NOx, primary PM2.5, and VOC reductions for:
+
+- 14 AVERT grid regions in the contiguous United States; and
+- uniform and peak energy efficiency, utility and distributed PV, utility and
+  distributed PV-plus-storage, and onshore and offshore wind where published.
+
+```python
+health = xi.estimate_health_benefits(
+    region="Rocky Mountains",
+    project_type="Uniform EE",
+    energy=1_000,
+    unit="MWh",
+)
+
+health.benefit_rate.to_dict()
+# {'value': 2.265, 'unit': '2023 USD cents/kWh',
+#  'low': 1.8, 'high': 2.73, 'confidence': 'screening range'}
+
+health.monetized_benefit.to_dict()
+# {'value': 22650.0, 'unit': '2023 USD/year',
+#  'low': 18000.0, 'high': 27300.0, 'confidence': 'screening range'}
+```
+
+The central value is only the arithmetic midpoint for convenient comparison;
+it is not an additional EPA estimate. Retain the low/high range in reporting.
+`energy` is the annual intervention quantity. If it is omitted, the result is
+normalized to one intervention MWh/year.
+Users can replace both BPK bounds with `low_cents_per_kwh` and
+`high_cents_per_kwh`; the output then labels the factor as user provided.
+
+The packaged values use 2023 electricity, emissions, population,
+baseline-incidence, income, and valuation inputs; 2023 USD; and a 2% discount
+rate. EPA suggests using them for analysis years 2018-2028. Benefits associated
+with emissions changes in a source region include modeled benefits outside that
+region, so the values cannot locate neighborhood impacts. Alaska, Hawaii,
+Puerto Rico, other U.S. territories, indoor air, climate benefits, and health
+pathways outside COBRA 5.1 are excluded. For local or decision-grade work, run
+an appropriately configured AVERT/COBRA, BenMAP, dispersion, or comparable
+exposure analysis with current site and population data.
 
 Users may supply `damage_costs_per_kg` when they have factors applicable to the
 pollutant, source, place, population, year, and currency. These values remain
@@ -76,6 +117,8 @@ Primary references:
 - [US EPA particulate matter basics](https://www.epa.gov/pm-pollution/particulate-matter-pm-basics)
 - [US EPA nitrogen dioxide basics](https://www.epa.gov/no2-pollution/basic-information-about-no2)
 - [US EPA combustion-product health effects](https://www.epa.gov/indoor-air-quality-iaq/sources-combustion-products)
+- [US EPA BPK values and appropriate use](https://www.epa.gov/statelocalenergy/estimating-health-benefits-kilowatt-hour-energy-efficiency-and-renewable-energy)
+- [US EPA BPK Third Edition technical report](https://www.epa.gov/system/files/documents/2024-12/bpk_report_third_edition.pdf)
 - [EMEP/EEA air pollutant emission inventory guidebook](https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023)
 
 ## Economic calculations

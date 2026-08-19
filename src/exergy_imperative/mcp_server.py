@@ -19,6 +19,7 @@ from .agent import (
 )
 from .agent import search_capabilities as search_agent_capabilities
 from .datasets import list_datasets
+from .health import list_health_benefit_factors
 from .packs import bundled_technology_pack_info, technology_pack_coverage
 from .processes import list_process_templates
 from .registry import DEFAULT_REGISTRY
@@ -51,8 +52,8 @@ def create_mcp_server() -> Any:
     server = MCPServer(
         "exergy-imperative",
         instructions=(
-            "Use these deterministic tools for exergy, emissions, pollutant-hazard, "
-            "economic, engineering, data-normalization, and report workflows. "
+            "Use these deterministic tools for exergy, emissions, public-health "
+            "screening, economic, engineering, data-normalization, and report workflows. "
             "Start with capabilities or describe_workflow when input requirements "
             "are unclear. Use validate-only before unfamiliar recipes and dry-run "
             "before requesting file outputs."
@@ -111,9 +112,40 @@ def create_mcp_server() -> Any:
 
     @server.tool()
     def screen_impacts(inputs: dict[str, Any], mode: str = "execute") -> dict[str, Any]:
-        """Screen greenhouse gases, warming horizons, pollutants, and health hazards."""
+        """Screen greenhouse gases and pollutant inventories with health context."""
 
         return safe_run_recipe(_recipe("impacts", inputs, mode))
+
+    @server.tool()
+    def estimate_public_health_benefits(
+        inputs: dict[str, Any], mode: str = "execute"
+    ) -> dict[str, Any]:
+        """Apply sourced EPA regional ranges for monetized outdoor-air health benefits."""
+
+        return safe_run_recipe(_recipe("health-benefits", inputs, mode))
+
+    @server.tool()
+    def public_health_benefit_factors(
+        region: str | None = None,
+        project_type: str | None = None,
+        include_unavailable: bool = True,
+    ) -> dict[str, Any]:
+        """List sourced EPA regional benefit ranges and unavailable combinations."""
+
+        try:
+            return {
+                "schema_version": "1.0",
+                "factors": [
+                    item.to_dict()
+                    for item in list_health_benefit_factors(
+                        region=region,
+                        project_type=project_type,
+                        include_unavailable=include_unavailable,
+                    )
+                ],
+            }
+        except Exception as exc:
+            return error_response(exc, command="public_health_benefit_factors")
 
     @server.tool()
     def evaluate_project_economics(

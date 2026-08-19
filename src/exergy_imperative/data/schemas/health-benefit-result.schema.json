@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cdimurro/the-exergy-imperative/schemas/health-benefit-result-v1.json",
+  "title": "Exergy Imperative public-health benefit screening result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "tier",
+    "method_id",
+    "data_version",
+    "source_data_year",
+    "analysis_year",
+    "time_basis",
+    "energy",
+    "normalized",
+    "region",
+    "project_type",
+    "factor_origin",
+    "benefit_rate",
+    "monetized_benefit",
+    "boundaries",
+    "assumptions",
+    "warnings",
+    "refinements",
+    "sources",
+    "source_catalog"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "tier": {"const": "F1"},
+    "method_id": {"const": "epa-bpk-intervention-energy-v1"},
+    "data_version": {"type": "string", "minLength": 1},
+    "source_data_year": {"const": 2023},
+    "analysis_year": {"type": ["integer", "null"]},
+    "time_basis": {"const": "annual"},
+    "energy": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {"type": "number", "minimum": 0},
+        "unit": {"const": "MWh"}
+      },
+      "additionalProperties": false
+    },
+    "normalized": {"type": "boolean"},
+    "region": {"$ref": "#/$defs/identifier"},
+    "project_type": {"$ref": "#/$defs/identifier"},
+    "factor_origin": {"enum": ["EPA-published", "user-provided"]},
+    "benefit_rate": {"$ref": "#/$defs/estimate"},
+    "monetized_benefit": {"$ref": "#/$defs/estimate"},
+    "boundaries": {"type": "object"},
+    "assumptions": {"type": "object"},
+    "warnings": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "refinements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "priority", "reason"],
+        "properties": {
+          "field": {"type": "string", "minLength": 1},
+          "priority": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1},
+          "unlocks": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "source_catalog": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "object"}
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "estimate": {
+      "type": "object",
+      "required": ["value", "unit", "low", "high", "confidence"],
+      "properties": {
+        "value": {"type": "number", "minimum": 0},
+        "unit": {"type": "string", "minLength": 1},
+        "low": {"type": "number", "minimum": 0},
+        "high": {"type": "number", "minimum": 0},
+        "confidence": {"const": "screening range"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

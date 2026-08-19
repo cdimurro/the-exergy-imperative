@@ -8,6 +8,7 @@ from typing import Any
 
 ASSESSMENT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/assessment-result-v1.json"
 ENVIRONMENTAL_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/environmental-result-v1.json"
+HEALTH_BENEFIT_SCHEMA_ID = "https://github.com/cdimurro/the-exergy-imperative/schemas/health-benefit-result-v1.json"
 ECONOMIC_SCHEMA_ID = (
     "https://github.com/cdimurro/the-exergy-imperative/schemas/economic-result-v1.json"
 )
@@ -42,6 +43,7 @@ TECHNOLOGY_PERFORMANCE_RESULT_SCHEMA_ID = "https://github.com/cdimurro/the-exerg
 _SCHEMA_FILES = {
     "assessment": "assessment-result.schema.json",
     "environmental": "environmental-result.schema.json",
+    "health-benefit": "health-benefit-result.schema.json",
     "economic": "economic-result.schema.json",
     "process": "process-assessment.schema.json",
     "ghg-boundary": "ghg-boundary-result.schema.json",
@@ -102,6 +104,13 @@ def load_bundled_profiles() -> dict[str, Any]:
 
 def load_bundled_impact_factors() -> dict[str, Any]:
     resource = files("exergy_imperative").joinpath("data", "impact_factors.json")
+    return json.loads(resource.read_text(encoding="utf-8"))
+
+
+def load_bundled_health_benefit_factors() -> dict[str, Any]:
+    resource = files("exergy_imperative").joinpath(
+        "data", "health_benefit_factors.json"
+    )
     return json.loads(resource.read_text(encoding="utf-8"))
 
 

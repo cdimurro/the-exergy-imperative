@@ -24,6 +24,8 @@ async def test_mcp_server_discovers_and_calls_structured_tools():
             "calculate_exergy",
             "assess_process",
             "screen_impacts",
+            "estimate_public_health_benefits",
+            "public_health_benefit_factors",
             "evaluate_project_economics",
             "normalize_dataset",
             "generate_report",
@@ -58,6 +60,28 @@ async def test_mcp_server_discovers_and_calls_structured_tools():
         assert any(
             item["kind"] == "pack" for item in searched.structured_content["matches"]
         )
+
+        health = await client.call_tool(
+            "estimate_public_health_benefits",
+            {
+                "inputs": {
+                    "region": "Rocky Mountains",
+                    "project_type": "Uniform EE",
+                    "energy": 1,
+                },
+                "mode": "dry-run",
+            },
+        )
+        assert health.structured_content["ok"] is True
+        assert health.structured_content["result"]["monetized_benefit"][
+            "low"
+        ] == pytest.approx(18.0)
+
+        health_factors = await client.call_tool(
+            "public_health_benefit_factors",
+            {"region": "Texas", "include_unavailable": False},
+        )
+        assert len(health_factors.structured_content["factors"]) == 7
 
 
 @pytest.mark.anyio

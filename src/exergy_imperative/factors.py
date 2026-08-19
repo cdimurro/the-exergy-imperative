@@ -1,4 +1,4 @@
-"""Versioned climate, combustion, grid, and health-screening factors."""
+"""Versioned climate, combustion, grid, and pollutant health-context factors."""
 
 from __future__ import annotations
 
@@ -326,7 +326,7 @@ class ImpactFactorLibrary:
             return self._health[normalize_factor_id(pollutant)]
         except KeyError as exc:
             raise FactorNotFoundError(
-                f"no health-screening profile for pollutant {pollutant!r}"
+                f"no health-context profile for pollutant {pollutant!r}"
             ) from exc
 
     def list_pollutant_health(self) -> tuple[PollutantHealthProfile, ...]:

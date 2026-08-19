@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "coverage_version": "2026.08.18",
-  "generated_on": "2026-08-18",
-  "scope": "Public scientific calculations, bundled numerical defaults, conservation contracts, and scientific data interfaces in exergy-imperative 0.6.1",
+  "coverage_version": "2026.08.19",
+  "generated_on": "2026-08-19",
+  "scope": "Public scientific calculations, bundled numerical defaults, conservation contracts, and scientific data interfaces in exergy-imperative 0.7.0",
   "items": [
     {
       "id": "thermodynamic-kernels",
@@ -132,7 +132,21 @@
         {"title": "US EPA GHG Emission Factors Hub 2025", "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf", "locator": "stationary-combustion HHV factors"},
         {"title": "2006 IPCC Guidelines Volume 2 Chapter 2", "url": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf", "locator": "Tier 1 NCV factors"}
       ],
-      "limitations": ["Default fuel factors are inventory defaults, not stack measurements.", "Pollutant factors and health text are hazard screens, not dispersion, exposure, dose-response, or health-risk estimates.", "Aggregate grid CO2e cannot be separated into gas-specific 20- and 100-year totals."],
+      "limitations": ["Default fuel factors are inventory defaults, not stack measurements.", "Pollutant factors produce inventories with qualitative health context, not dispersion, exposure, dose-response, or health-risk estimates.", "Aggregate grid CO2e cannot be separated into gas-specific 20- and 100-year totals."],
+      "decision_grade": false
+    },
+    {
+      "id": "public-health-benefits",
+      "title": "EPA regional outdoor-air public-health benefit screening",
+      "level": "reference-validated",
+      "public_api": ["estimate_health_benefits", "list_health_benefit_factors", "load_health_benefit_factors"],
+      "tests": ["tests/test_health.py", "tests/test_scientific_validation.py"],
+      "case_ids": ["epa-bpk-rocky-mountains-uniform-ee"],
+      "evidence": [
+        {"title": "U.S. EPA Public Health Benefits per Kilowatt-Hour, Third Edition", "url": "https://www.epa.gov/system/files/documents/2024-12/bpk_report_third_edition.pdf", "locator": "Table 2, 2023 BPK values for 14 AVERT regions and eight intervention types"},
+        {"title": "U.S. EPA BPK use and limitations", "url": "https://www.epa.gov/statelocalenergy/estimating-health-benefits-kilowatt-hour-energy-efficiency-and-renewable-energy", "locator": "screening use, methods, boundaries, currency year, discount rate, and suggested analysis-year window"}
+      ],
+      "limitations": ["The values monetize modeled PM2.5- and ozone-related outdoor-air benefits; they do not predict local exposure, diagnoses, individual risk, or facility-specific health incidence.", "The model domain is the contiguous United States, and benefits attributed to a source AVERT region include effects modeled outside that region.", "The values use 2023 power-sector, emissions, population, baseline-incidence, income, and valuation inputs and a 2 percent discount rate; EPA suggests using them only for 2018-2028 analyses.", "The arithmetic midpoint is a library presentation value, not an additional EPA estimate; decisions should retain and report the published low/high range."],
       "decision_grade": false
     },
     {

@@ -160,6 +160,8 @@ The server exposes these tools:
 - `calculate_exergy`
 - `assess_process`
 - `screen_impacts`
+- `estimate_public_health_benefits`
+- `public_health_benefit_factors`
 - `evaluate_project_economics`
 - `normalize_dataset`
 - `generate_report`

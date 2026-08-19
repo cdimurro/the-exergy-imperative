@@ -137,6 +137,15 @@ from .ghg import (
     assess_ghg_boundaries,
     assess_methane_project,
 )
+from .health import (
+    HEALTH_BENEFIT_METHOD_ID,
+    HEALTH_BENEFIT_SCHEMA_VERSION,
+    HealthBenefitFactor,
+    HealthBenefitResult,
+    estimate_health_benefits,
+    list_health_benefit_factors,
+    load_health_benefit_factors,
+)
 from .impacts import (
     ClimateContribution,
     EnvironmentalResult,
@@ -256,6 +265,7 @@ from .schema import (
     ENGINEERING_RESULT_SCHEMA_ID,
     ENVIRONMENTAL_SCHEMA_ID,
     GHG_BOUNDARY_SCHEMA_ID,
+    HEALTH_BENEFIT_SCHEMA_ID,
     LOCAL_DATASET_ADAPTER_SCHEMA_ID,
     MATERIAL_BALANCE_DEFINITION_SCHEMA_ID,
     MATERIAL_BALANCE_RESULT_SCHEMA_ID,
@@ -275,6 +285,7 @@ from .schema import (
     list_schemas,
     load_assessment_schema,
     load_bundled_grid_factors,
+    load_bundled_health_benefit_factors,
     load_bundled_impact_factors,
     load_bundled_process_templates,
     load_bundled_profiles,
@@ -354,7 +365,7 @@ from .weather import (
     weather_anomalies,
 )
 
-__version__ = "0.6.1"
+__version__ = "0.7.0"
 
 __all__ = [
     "AGENT_CAPABILITIES_SCHEMA_ID",
@@ -381,6 +392,9 @@ __all__ = [
     "Environment",
     "EnvironmentalResult",
     "ENVIRONMENTAL_SCHEMA_ID",
+    "HEALTH_BENEFIT_METHOD_ID",
+    "HEALTH_BENEFIT_SCHEMA_ID",
+    "HEALTH_BENEFIT_SCHEMA_VERSION",
     "GHG_BOUNDARY_SCHEMA_ID",
     "EconomicResult",
     "Estimate",
@@ -391,6 +405,8 @@ __all__ = [
     "FidelityTier",
     "FuelEmissionFactor",
     "GridEmissionFactor",
+    "HealthBenefitFactor",
+    "HealthBenefitResult",
     "ImpactFactorLibrary",
     "IngestionIssue",
     "IngestionResult",
@@ -473,6 +489,7 @@ __all__ = [
     "enrich_xai4heat_record",
     "enrich_xai4heat_records",
     "evaluate_economics",
+    "estimate_health_benefits",
     "expected_value_of_perfect_information",
     "exergy_destruction",
     "exergetic_efficiency",
@@ -497,6 +514,7 @@ __all__ = [
     "kinetic_exergy",
     "levelized_cost",
     "list_datasets",
+    "list_health_benefit_factors",
     "list_bundled_adapters",
     "list_excel_templates",
     "list_process_templates",
@@ -510,6 +528,7 @@ __all__ = [
     "load_iac_recommendations",
     "load_assessment_schema",
     "load_bundled_grid_factors",
+    "load_bundled_health_benefit_factors",
     "load_bundled_impact_factors",
     "load_bundled_process_templates",
     "load_bundled_profiles",
@@ -520,6 +539,7 @@ __all__ = [
     "load_local_adapter",
     "load_registry_pack",
     "load_schema",
+    "load_health_benefit_factors",
     "monte_carlo",
     "match_waste_heat",
     "net_present_value",
