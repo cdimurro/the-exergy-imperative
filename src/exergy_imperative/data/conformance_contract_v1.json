@@ -1,0 +1,326 @@
+{
+  "$schema": "./conformance_contract_v1.schema.json",
+  "schema_version": "exergy_conformance_contract_v1",
+  "contract_version": "1.0.0",
+  "canonical_project": "quantity-and-quality",
+  "canonical_project_version": "0.13.0",
+  "published_at": "2026-08-18",
+  "reference_data": {
+    "path": "data/reference_examples.json",
+    "sha256": "1516296fb21ead8800099b3d87d0f12ca290b6c4e9766d490936f81f1459b7da",
+    "hash_basis": "utf8_text_with_lf_line_endings",
+    "record_count": 35
+  },
+  "constants": {
+    "celsius_zero_kelvin": 273.15,
+    "solar_radiation_temperature_k": 5778.0,
+    "standard_reference_temperature_c": 20.0,
+    "standard_reference_pressure_pa": 101325.0
+  },
+  "rules": {
+    "temperature_scale": "kelvin_absolute",
+    "thermal_heat_relation": "source_temperature_must_be_greater_than_or_equal_to_reference_temperature",
+    "cooling_relation": "ambient_temperature_must_be_greater_than_or_equal_to_cold_service_temperature",
+    "sensible_heat_relation": "supply_temperature_must_be_greater_than_return_temperature_and_reference_must_not_produce_negative_exergy",
+    "factor_domain": "finite_nonnegative",
+    "weighted_factor_basis": "energy_or_power_weighted",
+    "notation": "<quantity> <typed_unit>, fx = <factor> [declared context]"
+  },
+  "sources": [
+    {
+      "title": "Exergy of undiluted thermal radiation",
+      "author": "R. Petela",
+      "year": 2003,
+      "doi": "10.1016/S0038-092X(03)00226-3",
+      "applies_to": [
+        "petela_exergy_factor"
+      ]
+    },
+    {
+      "title": "Quantity and Quality: A Standard Reporting Framework",
+      "author": "Christopher DiMurro",
+      "year": 2026,
+      "path": "paper/quantity-and-quality-standard-reporting-framework.pdf",
+      "applies_to": [
+        "thermal_exergy_factor_c",
+        "cooling_exergy_factor_c",
+        "sensible_heat_exergy_factor_c",
+        "accessible_exergy",
+        "weighted_exergy_factor",
+        "format_energy_notation"
+      ]
+    }
+  ],
+  "valid_cases": [
+    {
+      "id": "thermal-80c-to-20c",
+      "operation": "thermal_exergy_factor_c",
+      "inputs": {
+        "source_c": 80.0,
+        "reference_c": 20.0
+      },
+      "expected": 0.16989947614328194,
+      "absolute_tolerance": 1e-12,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "thermal-equilibrium",
+      "operation": "thermal_exergy_factor_c",
+      "inputs": {
+        "source_c": 20.0,
+        "reference_c": 20.0
+      },
+      "expected": 0.0,
+      "absolute_tolerance": 0.0,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "cooling-7c-to-30c",
+      "operation": "cooling_exergy_factor_c",
+      "inputs": {
+        "cold_c": 7.0,
+        "ambient_c": 30.0
+      },
+      "expected": 0.08209887560235596,
+      "absolute_tolerance": 1e-12,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "sensible-heat-80c-to-50c",
+      "operation": "sensible_heat_exergy_factor_c",
+      "inputs": {
+        "supply_c": 80.0,
+        "return_c": 50.0,
+        "reference_c": 20.0
+      },
+      "expected": 0.13250774341974225,
+      "absolute_tolerance": 1e-12,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "sensible-heat-near-equal-temperatures",
+      "operation": "sensible_heat_exergy_factor_c",
+      "inputs": {
+        "supply_c": 80.0,
+        "return_c": 79.999,
+        "reference_c": 20.0
+      },
+      "expected": 0.1698983008677889,
+      "absolute_tolerance": 1e-11,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "petela-standard-20c",
+      "operation": "petela_exergy_factor",
+      "inputs": {
+        "reference_k": 293.15,
+        "radiation_temperature_k": 5778.0
+      },
+      "expected": 0.9323548104795658,
+      "absolute_tolerance": 1e-12,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "petela-explicit-25c",
+      "operation": "petela_exergy_factor",
+      "inputs": {
+        "reference_k": 298.15,
+        "radiation_temperature_k": 5778.0
+      },
+      "expected": 0.931201163286267,
+      "absolute_tolerance": 1e-12,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ],
+      "note": "The reference state is explicit so products may retain different user-facing defaults without silently disagreeing."
+    },
+    {
+      "id": "accessible-exergy",
+      "operation": "accessible_exergy",
+      "inputs": {
+        "energy": 250.0,
+        "exergy_factor": 0.17
+      },
+      "expected": 42.5,
+      "absolute_tolerance": 1e-12,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "weighted-exergy-factor",
+      "operation": "weighted_exergy_factor",
+      "inputs": {
+        "records": [
+          [
+            100.0,
+            1.0
+          ],
+          [
+            200.0,
+            0.17
+          ]
+        ]
+      },
+      "expected": 0.44666666666666666,
+      "absolute_tolerance": 1e-12,
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "canonical-notation",
+      "operation": "format_energy_notation",
+      "inputs": {
+        "quantity": 1.0,
+        "unit": "MWh_th",
+        "exergy_factor": 0.16989947614328194,
+        "precision": 3
+      },
+      "expected": "1 MWh_th, fx = 0.170",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-factor-browser"
+      ]
+    }
+  ],
+  "invalid_cases": [
+    {
+      "id": "thermal-reversed-temperatures",
+      "operation": "thermal_exergy_factor_c",
+      "inputs": {
+        "source_c": 20.0,
+        "reference_c": 80.0
+      },
+      "expected_error": "domain_error",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "thermal-below-absolute-zero",
+      "operation": "thermal_exergy_factor_c",
+      "inputs": {
+        "source_c": -274.0,
+        "reference_c": -275.0
+      },
+      "expected_error": "domain_error",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "cooling-reversed-temperatures",
+      "operation": "cooling_exergy_factor_c",
+      "inputs": {
+        "cold_c": 30.0,
+        "ambient_c": 7.0
+      },
+      "expected_error": "domain_error",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "sensible-heat-reversed-temperatures",
+      "operation": "sensible_heat_exergy_factor_c",
+      "inputs": {
+        "supply_c": 50.0,
+        "return_c": 80.0,
+        "reference_c": 20.0
+      },
+      "expected_error": "domain_error",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "petela-reference-above-radiation",
+      "operation": "petela_exergy_factor",
+      "inputs": {
+        "reference_k": 6000.0,
+        "radiation_temperature_k": 5778.0
+      },
+      "expected_error": "domain_error",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "negative-accessible-exergy-input",
+      "operation": "accessible_exergy",
+      "inputs": {
+        "energy": -1.0,
+        "exergy_factor": 0.5
+      },
+      "expected_error": "domain_error",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    },
+    {
+      "id": "zero-weight-total",
+      "operation": "weighted_exergy_factor",
+      "inputs": {
+        "records": [
+          [
+            0.0,
+            1.0
+          ],
+          [
+            0.0,
+            0.17
+          ]
+        ]
+      },
+      "expected_error": "domain_error",
+      "implementations": [
+        "quantity-and-quality",
+        "exergy-imperative",
+        "exergy-factor-browser"
+      ]
+    }
+  ]
+}

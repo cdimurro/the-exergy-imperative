@@ -334,6 +334,7 @@ from .validation import (
     ValidationCoverageItem,
     ValidationOutcome,
     ValidationSuiteResult,
+    load_cross_product_conformance_contract,
     load_validation_cases,
     load_validation_coverage,
     run_bundled_validation_suite,
@@ -353,7 +354,7 @@ from .weather import (
     weather_anomalies,
 )
 
-__version__ = "0.6.0"
+__version__ = "0.6.1"
 
 __all__ = [
     "AGENT_CAPABILITIES_SCHEMA_ID",
@@ -514,6 +515,7 @@ __all__ = [
     "load_bundled_profiles",
     "load_impact_factor_pack",
     "load_mapping",
+    "load_cross_product_conformance_contract",
     "load_bundled_adapter",
     "load_local_adapter",
     "load_registry_pack",

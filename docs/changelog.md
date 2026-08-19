@@ -1,6 +1,17 @@
 # Changelog
 
-## Unreleased
+## 0.6.1 - 2026-08-18
+
+- Added the versioned Quantity and Quality cross-product conformance contract,
+  public loader, `exergy validate --conformance`, consumer CI drift checks, and
+  valid/invalid regression cases for every shared kernel.
+- Added a reproducible industrial-data pilot that maps a meter export, preserves
+  its audit trail, separates energy/exergy/emissions/economics, ranks three
+  opportunities, and writes a screening business-case report.
+- Added the common three-product ecosystem map and linked the browser and
+  canonical reporting layers directly from the project overview.
+
+## 0.6.0 - 2026-08-18
 
 - Expanded the bundled scientific suite from 5 to 31 reference, analytic,
   conservation, and structural cases spanning thermodynamics, unit
@@ -43,7 +54,7 @@
   now reports either its sourced screening path or an explicit-input reason and
   checklist.
 
-## 0.6.0 - 2026-08-18
+### Additional 0.6.0 changes
 
 - Added first-class mass and constituent accounting with explicit material
   streams, signed inventory accumulation, mass-unit conversion, component and
