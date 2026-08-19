@@ -242,6 +242,18 @@ def load_validation_coverage() -> ScientificValidationCoverage:
     )
 
 
+def load_cross_product_conformance_contract() -> dict[str, Any]:
+    """Load the canonical shared-kernel contract vendored from Quantity and Quality."""
+
+    resource = files("exergy_imperative").joinpath(
+        "data", "conformance_contract_v1.json"
+    )
+    payload = json.loads(resource.read_text(encoding="utf-8"))
+    if payload.get("schema_version") != "exergy_conformance_contract_v1":
+        raise ValueError("unsupported cross-product conformance contract schema")
+    return payload
+
+
 def _resolve_output(value: Any, path: str) -> float:
     current = value.to_dict() if hasattr(value, "to_dict") else value
     for part in filter(None, path.split(".")):

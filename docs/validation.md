@@ -3,6 +3,14 @@
 The project uses a coverage ledger instead of a blanket “validated” claim.
 Every scientific capability is assigned one of these assurance levels:
 
+The package also vendors Quantity and Quality's
+`exergy_conformance_contract_v1` and runs every applicable valid and invalid
+case in CI. The contract makes the shared reference temperature, solar source
+temperature, formulas, numerical tolerances, and domain behavior explicit.
+Both 20 °C and 25 °C Petela cases are tested: different user-facing defaults are
+allowed only when the reference environment is declared, never as a silent
+cross-product disagreement.
+
 - `reference-validated`: pinned to values from an independent primary or
   authoritative source.
 - `analytically-validated`: checked against an independently evaluated defining

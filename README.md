@@ -1,13 +1,24 @@
 # The Exergy Imperative
 
 [![CI](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml/badge.svg)](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/exergy-imperative?cacheSeconds=300&release=0.6.0)](https://pypi.org/project/exergy-imperative/)
+[![PyPI](https://img.shields.io/pypi/v/exergy-imperative?cacheSeconds=300&release=0.6.1)](https://pypi.org/project/exergy-imperative/)
 [![Python](https://img.shields.io/badge/python-3.11%E2%80%933.14-blue)](https://pypi.org/project/exergy-imperative/)
 [![License](https://img.shields.io/badge/code-Apache--2.0-green)](LICENSE)
 [![Guide](https://img.shields.io/badge/guide-CC%20BY%204.0-lightgrey)](THE_EXERGY_IMPERATIVE.md)
 
 **A Python Library and Guide for analyzing exergy, emissions, health, and economics using the data that you already have.** Give it as little as an equipment
 name and a country; every default it fills in stays visible, sourced, and is replaceable with your own data or measurements.
+
+## One product stack
+
+The shared path is: **discover the missing quality field, standardize the
+record, then turn it into an auditable decision.**
+
+| Product | Use it when |
+|---|---|
+| **[Exergy Factor](https://exergyfactor.com)** | You need a free, no-install calculator for one or a few energy records. |
+| **[Quantity and Quality](https://github.com/cdimurro/quantity-and-quality)** | You need the canonical calculation kernel, CLI, schemas, API, or batch reporting standard. |
+| **The Exergy Imperative** | You need to turn utility or telemetry data into prioritized losses, emissions, health screens, economics, and reports. |
 
 ## Why this library
 
@@ -133,6 +144,11 @@ exergy validate                # run the bundled reference checks
 ```
 
 See the [quickstart](docs/quickstart.md) for the full tour.
+
+For the complete product journey, run the
+[industrial data pilot](docs/case-study-industrial-data-pilot.md): an existing
+meter export is mapped and quality-checked, assessed by process, ranked by
+thermodynamic loss and screening NPV, and exported as an auditable report.
 
 ## Model a technology that is not in the catalog
 
@@ -286,6 +302,7 @@ included in a blanket “validated” claim.
 | [External data integrations](docs/external-data-integrations.md) | World Bank, ERA5-Land, EDGAR, eGRID, IAC |
 | [Agent integration](docs/agent-integration.md) | JSON recipes, discovery, MCP server |
 | [Validation](docs/validation.md) | Reference checks and their scope |
+| [Industrial data pilot](docs/case-study-industrial-data-pilot.md) | Meter export to prioritized business-case report |
 | [Architecture](docs/architecture.md) | How the modules fit together |
 | [Changelog](docs/changelog.md) | Release history |
 | [**The Exergy Imperative**](THE_EXERGY_IMPERATIVE.md) | The complete guide to exergy and the energy transition |

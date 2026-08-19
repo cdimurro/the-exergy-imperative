@@ -12,12 +12,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check out canonical Quantity and Quality contract
+        uses: actions/checkout@v4
+        with:
+          repository: cdimurro/quantity-and-quality
+          path: canonical
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e ".[dev,data,mcp]"
+      - name: Reject cross-repository contract drift
+        shell: bash
+        run: |
+          python -m pip install ./canonical
+          python -m quantity_quality export-web-data \
+            --output "$RUNNER_TEMP/reference_examples.json" \
+            --contract-output "$RUNNER_TEMP/conformance_contract_v1.json"
+          cmp src/exergy_imperative/data/conformance_contract_v1.json \
+            "$RUNNER_TEMP/conformance_contract_v1.json"
       - run: python -m ruff check src tests examples scripts
       - run: python -m ruff format --check src tests examples scripts
       - run: python -m pytest --cov=exergy_imperative --cov-report=term-missing

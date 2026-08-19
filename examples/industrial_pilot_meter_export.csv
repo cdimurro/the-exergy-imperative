@@ -1,0 +1,13 @@
+Timestamp,Site,Equipment,Energy (MWh),Carrier,Supply Temp C,Return Temp C,Ambient Temp C,Efficiency (%),Energy Price ($/MWh),Capital Cost
+2025-01-01T00:00:00Z,Illustrative Plant,Steam system,3200,natural gas,180,90,5,82,45,250000
+2025-04-01T00:00:00Z,Illustrative Plant,Steam system,2800,natural gas,180,90,15,82,45,250000
+2025-07-01T00:00:00Z,Illustrative Plant,Steam system,2600,natural gas,180,90,25,82,45,250000
+2025-10-01T00:00:00Z,Illustrative Plant,Steam system,3400,natural gas,180,90,10,82,45,250000
+2025-01-01T00:00:00Z,Illustrative Plant,Compressed air,900,electricity,,,,15,110,180000
+2025-04-01T00:00:00Z,Illustrative Plant,Compressed air,850,electricity,,,,15,110,180000
+2025-07-01T00:00:00Z,Illustrative Plant,Compressed air,820,electricity,,,,15,110,180000
+2025-10-01T00:00:00Z,Illustrative Plant,Compressed air,930,electricity,,,,15,110,180000
+2025-01-01T00:00:00Z,Illustrative Plant,Furnace,2100,natural gas,900,,5,68,45,300000
+2025-04-01T00:00:00Z,Illustrative Plant,Furnace,2000,natural gas,900,,15,68,45,300000
+2025-07-01T00:00:00Z,Illustrative Plant,Furnace,1900,natural gas,900,,25,68,45,300000
+2025-10-01T00:00:00Z,Illustrative Plant,Furnace,2000,natural gas,900,,10,68,45,300000

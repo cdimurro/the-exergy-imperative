@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "coverage_version": "2026.08.18",
   "generated_on": "2026-08-18",
-  "scope": "Public scientific calculations, bundled numerical defaults, conservation contracts, and scientific data interfaces in exergy-imperative 0.6.0",
+  "scope": "Public scientific calculations, bundled numerical defaults, conservation contracts, and scientific data interfaces in exergy-imperative 0.6.1",
   "items": [
     {
       "id": "thermodynamic-kernels",

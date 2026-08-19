@@ -77,6 +77,7 @@ from .technology_models import (
     evaluate_technology_model,
 )
 from .validation import (
+    load_cross_product_conformance_contract,
     load_validation_coverage,
     run_bundled_validation_suite,
     validate_xai4heat_file,
@@ -244,7 +245,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Emit machine-readable JSON and structured JSON errors",
     )
     parser.add_argument(
-        "--version", action="version", version="exergy-imperative 0.6.0"
+        "--version", action="version", version="exergy-imperative 0.6.1"
     )
     commands = parser.add_subparsers(dest="command", required=True)
 
@@ -678,6 +679,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--coverage",
         action="store_true",
         help="Show scientific assurance levels and limitations for every capability",
+    )
+    validate_parser.add_argument(
+        "--conformance",
+        action="store_true",
+        help="Show the vendored cross-product physics and reporting contract",
     )
     validate_parser.add_argument("--sheet", default=0)
     validate_parser.add_argument("--header-row", type=int, default=1)
@@ -1211,10 +1217,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(_json(analyze_material_definition(payload).to_dict()))
             return 0
         if args.command == "validate":
-            if args.coverage and args.xai4heat is not None:
-                raise ValueError("--coverage cannot be combined with --xai4heat")
+            selected_views = sum(
+                (bool(args.coverage), bool(args.conformance), args.xai4heat is not None)
+            )
+            if selected_views > 1:
+                raise ValueError(
+                    "--coverage, --conformance, and --xai4heat cannot be combined"
+                )
             if args.coverage:
                 print(_json(load_validation_coverage().to_dict()))
+                return 0
+            if args.conformance:
+                print(_json(load_cross_product_conformance_contract()))
                 return 0
             if args.xai4heat is None:
                 result = run_bundled_validation_suite()
