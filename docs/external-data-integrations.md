@@ -126,7 +126,7 @@ For a CSV export, declare `source_unit`; for a revised layout, pass a `columns`
 mapping to the Python API. EDGAR requires source acknowledgement and some
 releases incorporate upstream data with additional conditions. Review the
 terms for the exact selected release. Inventory mass supports emissions and
-hazard screening but is not ambient concentration, exposure, attributable
+pollutant inventory context but is not ambient concentration, exposure, attributable
 illness, or clinical risk. See the
 [EDGAR air-pollutant dataset](https://edgar.jrc.ec.europa.eu/dataset_ap81).
 

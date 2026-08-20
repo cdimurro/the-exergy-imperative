@@ -33,9 +33,16 @@ https://github.com/owid/energy-data
 
 Greenhouse-gas warming potentials and Tier 1 combustion factors reproduce
 numerical reference values from IPCC assessment and inventory materials.
-Health-screening descriptions are concise adaptations of public US EPA and
+Pollutant health-context descriptions are concise adaptations of public US EPA and
 European Environment Agency materials. Source URLs and version identifiers
 are retained in the packaged factor registry.
+
+Regional public-health benefits-per-kWh numerical facts are transcribed with
+attribution from the US EPA Third Edition technical report. The packaged data
+retains the publication, table locator, source hash, AVERT/COBRA versions,
+boundary, and EPA copyright-status URL. The numerical screening results are
+not an EPA endorsement of this software. Source-document copyright conditions
+may vary; see https://www.epa.gov/web-policies-and-procedures/epa-disclaimers.
 
 Industrial steam, compressed-air, process-heating, and waste-heat screening
 methods cite public US Department of Energy sourcebooks. The bundled radiative

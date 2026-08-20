@@ -436,7 +436,7 @@ exergy run          Validate, dry-run, or execute an agent recipe
 exergy profiles     Inspect bundled defaults and sources
 exergy processes    List industry process templates
 exergy process      Run an integrated process, impact, and economic screen
-exergy factors      Inspect grid, fuel, GWP, and health-screening factors
+exergy factors      Inspect grid, fuel, GWP, and pollutant health-context factors
 exergy impacts      Screen greenhouse gases and air pollutants
 exergy ghg-boundaries Evaluate a JSON inventory with explicit GHG boundaries
 exergy methane      Evaluate a JSON venting, flaring, or recovery project
@@ -480,7 +480,7 @@ Optional public-data workflows are documented in the
 Coding-agent and MCP integrations are documented in the
 [agent integration guide](https://github.com/cdimurro/the-exergy-imperative/blob/main/docs/agent-integration.md).
 
-Air-pollutant results are inventory and hazard screens. They do not model
+Air-pollutant results are inventories with qualitative health context. They do not model
 dispersion, population exposure, dose-response relationships, or clinical risk.
 The library never assigns a universal monetary health cost: supply a locally
 appropriate damage-cost factor when that comparison is justified.

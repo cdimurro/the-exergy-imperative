@@ -43,6 +43,7 @@ from .external_data import (
 )
 from .factors import DEFAULT_IMPACT_FACTORS
 from .ghg import assess_ghg_boundaries, assess_methane_project
+from .health import estimate_health_benefits, list_health_benefit_factors
 from .impacts import assess_impacts
 from .ingestion import (
     export_excel_compatible_bundle,
@@ -245,7 +246,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Emit machine-readable JSON and structured JSON errors",
     )
     parser.add_argument(
-        "--version", action="version", version="exergy-imperative 0.6.1"
+        "--version", action="version", version="exergy-imperative 0.7.0"
     )
     commands = parser.add_subparsers(dest="command", required=True)
 
@@ -407,6 +408,28 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional user factor as POLLUTANT=CURRENCY_PER_KG",
     )
     impact_parser.add_argument("--currency", default="USD")
+
+    health_factor_parser = commands.add_parser(
+        "health-factors",
+        help="List sourced EPA public-health benefit screening factors",
+    )
+    health_factor_parser.add_argument("--region")
+    health_factor_parser.add_argument("--project-type")
+    health_factor_parser.add_argument("--available-only", action="store_true")
+
+    health_parser = commands.add_parser(
+        "health-benefits",
+        help="Estimate monetized outdoor-air public-health benefits",
+    )
+    health_parser.add_argument("--region", required=True, help="EPA AVERT region")
+    health_parser.add_argument("--project-type", required=True)
+    health_parser.add_argument(
+        "--energy", type=float, help="Annual intervention energy"
+    )
+    health_parser.add_argument("--unit", default="MWh")
+    health_parser.add_argument("--analysis-year", type=int)
+    health_parser.add_argument("--low-cents-per-kwh", type=float)
+    health_parser.add_argument("--high-cents-per-kwh", type=float)
 
     processes_parser = commands.add_parser(
         "processes", help="List industry process templates"
@@ -984,6 +1007,26 @@ def main(argv: Sequence[str] | None = None) -> int:
                 pollutant_masses_kg=_assignments(args.pollutant, label="pollutant"),
                 damage_costs_per_kg=_assignments(args.damage_cost, label="damage cost"),
                 currency=args.currency,
+            )
+            print(_json(result.to_dict()))
+            return 0
+        if args.command == "health-factors":
+            factors = list_health_benefit_factors(
+                region=args.region,
+                project_type=args.project_type,
+                include_unavailable=not args.available_only,
+            )
+            print(_json([item.to_dict() for item in factors]))
+            return 0
+        if args.command == "health-benefits":
+            result = estimate_health_benefits(
+                region=args.region,
+                project_type=args.project_type,
+                energy=args.energy,
+                unit=args.unit,
+                analysis_year=args.analysis_year,
+                low_cents_per_kwh=args.low_cents_per_kwh,
+                high_cents_per_kwh=args.high_cents_per_kwh,
             )
             print(_json(result.to_dict()))
             return 0

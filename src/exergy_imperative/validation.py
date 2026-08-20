@@ -31,6 +31,7 @@ from .formulas import (
     thermal_exergy_factor_c,
 )
 from .ghg import assess_methane_project
+from .health import estimate_health_benefits
 from .ingestion import read_records
 from .materials import analyze_material_definition
 from .models import ExergyStream
@@ -394,6 +395,7 @@ def _methods() -> Mapping[str, Callable[..., Any]]:
         "evaluate_technology_model": evaluate_technology_model,
         "assess_performance_with_pack": assess_performance_with_pack,
         "assess_intensity_with_pack": assess_intensity_with_pack,
+        "estimate_health_benefits": estimate_health_benefits,
     }
 
 

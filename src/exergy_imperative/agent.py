@@ -27,6 +27,7 @@ from .engineering import (
     match_waste_heat,
 )
 from .ghg import assess_ghg_boundaries, assess_methane_project
+from .health import estimate_health_benefits, list_health_benefit_factors
 from .impacts import assess_impacts
 from .ingestion import MappingPlan, infer_mapping, normalize_records
 from .materials import analyze_material_definition
@@ -61,7 +62,7 @@ from .validation import run_bundled_validation_suite
 from .weather import normalize_weather_performance
 
 AGENT_CONTRACT_VERSION = "1.0"
-LIBRARY_VERSION = "0.6.1"
+LIBRARY_VERSION = "0.7.0"
 RECIPE_MODES = ("execute", "dry-run", "validate-only")
 REPORT_OUTPUTS = ("json", "html", "pdf", "xlsx", "excel_directory")
 
@@ -231,6 +232,26 @@ def _function_input_schema(
         "required": list(required) if required is not None else inferred_required,
         "additionalProperties": False,
     }
+
+
+def _health_benefit_input_schema() -> dict[str, Any]:
+    schema = _function_input_schema(estimate_health_benefits)
+    factors = list_health_benefit_factors()
+    regions = {item.region_id: item.region for item in factors}
+    project_types = {item.project_type_id: item.project_type for item in factors}
+    schema["properties"]["region"].update(
+        {
+            "x-canonical-values": list(regions),
+            "x-labels": regions,
+        }
+    )
+    schema["properties"]["project_type"].update(
+        {
+            "x-canonical-values": list(project_types),
+            "x-labels": project_types,
+        }
+    )
+    return schema
 
 
 def _technology_input_schema() -> dict[str, Any]:
@@ -759,7 +780,7 @@ WORKFLOW_SPECS: tuple[WorkflowSpec, ...] = (
     ),
     WorkflowSpec(
         "impacts",
-        "Greenhouse-gas, warming-horizon, pollutant, and health-hazard screen.",
+        "Greenhouse-gas, warming-horizon, and pollutant inventory with health context.",
         lambda inputs: _call(assess_impacts, inputs),
         _function_input_schema(
             assess_impacts, exclude=("assessment", "factor_library")
@@ -767,6 +788,15 @@ WORKFLOW_SPECS: tuple[WorkflowSpec, ...] = (
         "environmental",
         aliases=("environmental", "screen-impacts"),
         output_formats=_COMMON_REPORT_FORMATS,
+    ),
+    WorkflowSpec(
+        "health-benefits",
+        "EPA-sourced regional screening range for monetized outdoor-air public-health benefits of EE, renewable energy, and PV-plus-storage.",
+        lambda inputs: _call(estimate_health_benefits, inputs),
+        _health_benefit_input_schema(),
+        "health-benefit",
+        aliases=("public-health", "health-impact-benefits"),
+        output_formats=("json",),
     ),
     WorkflowSpec(
         "ghg-boundaries",
@@ -1099,12 +1129,27 @@ def list_capabilities() -> dict[str, Any]:
             ],
             "technology_packs": list(bundled_technology_pack_info()),
             "datasets": [item.to_dict() for item in list_datasets()],
+            "public_health_benefits": {
+                "available_factor_count": sum(
+                    item.available for item in list_health_benefit_factors()
+                ),
+                "region_count": len(
+                    {item.region_id for item in list_health_benefit_factors()}
+                ),
+                "project_type_count": len(
+                    {item.project_type_id for item in list_health_benefit_factors()}
+                ),
+            },
         },
         "safety": {
             "network_access": "No recipe workflow performs implicit network access.",
             "file_writes": "Only execute-mode recipes with explicit outputs write files.",
             "licensed_data": "Publisher datasets are not bundled; local adapters contain field mappings only.",
-            "health": "Pollutant results are inventory and hazard screens, not exposure or clinical risk estimates.",
+            "health": (
+                "Pollutant outputs remain inventories with health context. The separate "
+                "health-benefits workflow applies EPA AVERT/COBRA regional monetary "
+                "screening ranges and is not a local exposure, incidence, or clinical-risk model."
+            ),
         },
     }
 

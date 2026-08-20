@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "data_version": "EPA-BPK-2024.12-third-edition",
+  "title": "U.S. EPA public health benefits per kilowatt-hour",
+  "publication_date": "2024-12",
+  "data_year": 2023,
+  "currency": "USD",
+  "currency_year": 2023,
+  "discount_rate": 0.02,
+  "source": {
+    "id": "epa-bpk-third-edition-2024",
+    "organization": "United States Environmental Protection Agency",
+    "title": "Public Health Benefits per Kilowatt-Hour of Energy Efficiency and Renewable Energy in the United States: A Technical Report, Third Edition",
+    "url": "https://www.epa.gov/system/files/documents/2024-12/bpk_report_third_edition.pdf",
+    "landing_page": "https://www.epa.gov/statelocalenergy/estimating-health-benefits-kilowatt-hour-energy-efficiency-and-renewable-energy",
+    "locator": "Table 2, pages 33-35",
+    "source_sha256": "db622f674a49aabbbc75366775f543e13cde18e9c2914ae98f4bcdc313c9707f",
+    "model_versions": {
+      "AVERT": "4.3",
+      "COBRA": "5.1"
+    },
+    "license": "Factual numerical data transcribed with U.S. EPA attribution; EPA's copyright status applies to the source document.",
+    "license_url": "https://www.epa.gov/web-policies-and-procedures/epa-disclaimers"
+  },
+  "method": {
+    "id": "epa-bpk-intervention-energy-v1",
+    "description": "Multiply an EPA regional low/high benefit-per-kWh value by intervention kWh. The reported central value is the arithmetic midpoint of the published range and is not an additional EPA estimate.",
+    "rate_unit": "2023 USD cents per intervention kWh",
+    "result_unit": "2023 USD per modeled year",
+    "reporting_guidance": "EPA recommends reporting multiplied dollar benefits with two significant figures. Machine-readable results retain calculation precision and expose the source range."
+  },
+  "boundary": {
+    "geography": "Contiguous United States; emissions changes are assigned to an AVERT region, while monetized health benefits include modeled effects inside and outside that source region.",
+    "intervention": "Annual energy efficiency savings or renewable/PV-plus-storage electricity generation, measured as intervention kWh. EPA's values account for transmission and distribution losses where applicable.",
+    "pollutants": ["SO2", "NOx", "primary PM2.5", "VOC"],
+    "health_pathways": "Outdoor-air PM2.5 and ozone concentration changes and associated public-health outcomes represented in COBRA 5.1.",
+    "excluded": [
+      "Alaska, Hawaii, Puerto Rico, and other U.S. territories",
+      "indoor-air impacts",
+      "localized exposure or facility-specific incidence",
+      "climate benefits and non-air-quality co-benefits",
+      "health impacts not represented by COBRA 5.1"
+    ],
+    "valid_analysis_years": [2018, 2028],
+    "fidelity_tier": "F1",
+    "decision_grade": false
+  },
+  "regions": {
+    "california": {"label": "California", "aliases": ["ca"]},
+    "carolinas": {"label": "Carolinas", "aliases": ["carolina"]},
+    "central": {"label": "Central", "aliases": []},
+    "florida": {"label": "Florida", "aliases": ["fl"]},
+    "mid-atlantic": {"label": "Mid-Atlantic", "aliases": ["mid atlantic", "midatlantic"]},
+    "midwest": {"label": "Midwest", "aliases": []},
+    "new-england": {"label": "New England", "aliases": []},
+    "new-york": {"label": "New York", "aliases": ["ny"]},
+    "northwest": {"label": "Northwest", "aliases": []},
+    "rocky-mountains": {"label": "Rocky Mountains", "aliases": ["rockies", "rocky mountain"]},
+    "southeast": {"label": "Southeast", "aliases": []},
+    "southwest": {"label": "Southwest", "aliases": []},
+    "tennessee": {"label": "Tennessee", "aliases": ["tn"]},
+    "texas": {"label": "Texas", "aliases": ["tx"]}
+  },
+  "project_types": {
+    "uniform-energy-efficiency": {"label": "Uniform EE", "aliases": ["uniform ee", "uniform efficiency", "energy efficiency"]},
+    "peak-energy-efficiency": {"label": "Peak EE", "aliases": ["peak ee", "ee at peak", "peak efficiency"]},
+    "utility-pv": {"label": "Utility PV", "aliases": ["utility solar", "utility-scale solar"]},
+    "distributed-pv": {"label": "Distributed PV", "aliases": ["distributed solar", "rooftop solar"]},
+    "utility-pv-plus-storage": {"label": "Utility PV-plus-storage", "aliases": ["utility solar plus storage", "utility pv storage"]},
+    "distributed-pv-plus-storage": {"label": "Distributed PV-plus-storage", "aliases": ["distributed solar plus storage", "distributed pv storage"]},
+    "onshore-wind": {"label": "Onshore wind", "aliases": ["land-based wind", "onshore wind"]},
+    "offshore-wind": {"label": "Offshore wind", "aliases": ["offshore wind"]}
+  },
+  "values": {
+    "california": {
+      "uniform-energy-efficiency": [0.75, 1.26],
+      "peak-energy-efficiency": [0.85, 1.42],
+      "utility-pv": [0.69, 1.15],
+      "distributed-pv": [0.75, 1.25],
+      "utility-pv-plus-storage": [0.74, 1.24],
+      "distributed-pv-plus-storage": [0.83, 1.37],
+      "onshore-wind": [0.68, 1.14],
+      "offshore-wind": [0.69, 1.16]
+    },
+    "carolinas": {
+      "uniform-energy-efficiency": [5.13, 8.04],
+      "peak-energy-efficiency": [5.99, 9.40],
+      "utility-pv": [4.55, 7.15],
+      "distributed-pv": [4.84, 7.62],
+      "utility-pv-plus-storage": [4.51, 7.12],
+      "distributed-pv-plus-storage": [4.79, 7.57],
+      "onshore-wind": [4.66, 7.30],
+      "offshore-wind": [4.66, 7.31]
+    },
+    "central": {
+      "uniform-energy-efficiency": [4.63, 7.49],
+      "peak-energy-efficiency": [5.16, 8.03],
+      "utility-pv": [4.60, 7.25],
+      "distributed-pv": [4.96, 7.81],
+      "utility-pv-plus-storage": [4.65, 7.29],
+      "distributed-pv-plus-storage": [5.02, 7.87],
+      "onshore-wind": [4.14, 6.79],
+      "offshore-wind": null
+    },
+    "florida": {
+      "uniform-energy-efficiency": [2.82, 4.38],
+      "peak-energy-efficiency": [3.29, 5.10],
+      "utility-pv": [2.86, 4.44],
+      "distributed-pv": [3.09, 4.80],
+      "utility-pv-plus-storage": [2.90, 4.50],
+      "distributed-pv-plus-storage": [3.13, 4.86],
+      "onshore-wind": [2.47, 3.83],
+      "offshore-wind": null
+    },
+    "mid-atlantic": {
+      "uniform-energy-efficiency": [5.26, 8.97],
+      "peak-energy-efficiency": [5.95, 10.21],
+      "utility-pv": [5.23, 8.94],
+      "distributed-pv": [5.60, 9.57],
+      "utility-pv-plus-storage": [5.28, 9.02],
+      "distributed-pv-plus-storage": [5.67, 9.68],
+      "onshore-wind": [4.73, 8.07],
+      "offshore-wind": [4.76, 8.11]
+    },
+    "midwest": {
+      "uniform-energy-efficiency": [6.27, 10.70],
+      "peak-energy-efficiency": [6.73, 11.39],
+      "utility-pv": [5.99, 10.18],
+      "distributed-pv": [6.46, 10.97],
+      "utility-pv-plus-storage": [5.99, 10.17],
+      "distributed-pv-plus-storage": [6.47, 10.96],
+      "onshore-wind": [5.75, 9.81],
+      "offshore-wind": null
+    },
+    "new-england": {
+      "uniform-energy-efficiency": [1.07, 1.81],
+      "peak-energy-efficiency": [1.46, 2.44],
+      "utility-pv": [1.07, 1.80],
+      "distributed-pv": [1.13, 1.91],
+      "utility-pv-plus-storage": [1.20, 2.01],
+      "distributed-pv-plus-storage": [1.30, 2.18],
+      "onshore-wind": [0.92, 1.56],
+      "offshore-wind": [0.92, 1.56]
+    },
+    "new-york": {
+      "uniform-energy-efficiency": [4.25, 7.91],
+      "peak-energy-efficiency": [5.37, 9.93],
+      "utility-pv": [4.28, 7.96],
+      "distributed-pv": [4.56, 8.48],
+      "utility-pv-plus-storage": [4.48, 8.34],
+      "distributed-pv-plus-storage": [4.81, 8.95],
+      "onshore-wind": [3.65, 6.79],
+      "offshore-wind": [3.56, 6.62]
+    },
+    "northwest": {
+      "uniform-energy-efficiency": [1.64, 2.43],
+      "peak-energy-efficiency": [1.74, 2.56],
+      "utility-pv": [1.40, 2.09],
+      "distributed-pv": [1.52, 2.27],
+      "utility-pv-plus-storage": [1.44, 2.13],
+      "distributed-pv-plus-storage": [1.56, 2.32],
+      "onshore-wind": [1.50, 2.22],
+      "offshore-wind": [1.52, 2.26]
+    },
+    "rocky-mountains": {
+      "uniform-energy-efficiency": [1.80, 2.73],
+      "peak-energy-efficiency": [1.77, 2.66],
+      "utility-pv": [1.62, 2.46],
+      "distributed-pv": [1.78, 2.70],
+      "utility-pv-plus-storage": [1.62, 2.46],
+      "distributed-pv-plus-storage": [1.78, 2.69],
+      "onshore-wind": [1.66, 2.53],
+      "offshore-wind": null
+    },
+    "southeast": {
+      "uniform-energy-efficiency": [3.64, 5.00],
+      "peak-energy-efficiency": [4.59, 6.26],
+      "utility-pv": [3.60, 4.93],
+      "distributed-pv": [3.88, 5.32],
+      "utility-pv-plus-storage": [3.68, 5.05],
+      "distributed-pv-plus-storage": [3.99, 5.46],
+      "onshore-wind": [2.97, 4.10],
+      "offshore-wind": null
+    },
+    "southwest": {
+      "uniform-energy-efficiency": [0.88, 1.21],
+      "peak-energy-efficiency": [0.97, 1.31],
+      "utility-pv": [0.83, 1.14],
+      "distributed-pv": [0.91, 1.26],
+      "utility-pv-plus-storage": [0.87, 1.20],
+      "distributed-pv-plus-storage": [0.98, 1.35],
+      "onshore-wind": [0.77, 1.06],
+      "offshore-wind": null
+    },
+    "tennessee": {
+      "uniform-energy-efficiency": [3.10, 5.42],
+      "peak-energy-efficiency": [3.80, 6.57],
+      "utility-pv": [3.20, 5.58],
+      "distributed-pv": [3.41, 5.94],
+      "utility-pv-plus-storage": [3.20, 5.57],
+      "distributed-pv-plus-storage": [3.43, 5.95],
+      "onshore-wind": [2.54, 4.45],
+      "offshore-wind": null
+    },
+    "texas": {
+      "uniform-energy-efficiency": [3.13, 5.01],
+      "peak-energy-efficiency": [3.56, 5.45],
+      "utility-pv": [3.09, 4.85],
+      "distributed-pv": [3.22, 5.07],
+      "utility-pv-plus-storage": [3.16, 4.88],
+      "distributed-pv-plus-storage": [3.31, 5.10],
+      "onshore-wind": [2.89, 4.67],
+      "offshore-wind": null
+    }
+  }
+}

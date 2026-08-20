@@ -17,7 +17,7 @@ def test_release_version_surfaces_are_consistent(capsys):
     expected = pyproject["project"]["version"]
     readme = (project_root / "README.md").read_text(encoding="utf-8")
 
-    assert expected == "0.6.1"
+    assert expected == "0.7.0"
     assert xi.__version__ == expected
     assert LIBRARY_VERSION == expected
     assert f"cacheSeconds=300&release={expected}" in readme
@@ -100,6 +100,7 @@ def test_packaged_schema_and_profiles():
     assert schema["$id"] == xi.ASSESSMENT_SCHEMA_ID
     assert profiles["data_version"] == "2026.2"
     assert xi.load_schema("environmental")["$id"] == xi.ENVIRONMENTAL_SCHEMA_ID
+    assert xi.load_schema("health-benefit")["$id"] == xi.HEALTH_BENEFIT_SCHEMA_ID
     assert xi.load_schema("economic")["$id"] == xi.ECONOMIC_SCHEMA_ID
     assert xi.load_schema("process")["$id"] == xi.PROCESS_SCHEMA_ID
     assert xi.load_schema("ghg-boundary")["$id"] == xi.GHG_BOUNDARY_SCHEMA_ID
@@ -113,6 +114,7 @@ def test_packaged_schema_and_profiles():
     )
     assert len(xi.load_bundled_grid_factors()["records"]) >= 1200
     assert xi.load_bundled_impact_factors()["gwp_sets"]["AR6"]
+    assert len(xi.load_bundled_health_benefit_factors()["values"]) == 14
     assert len(xi.load_bundled_process_templates()["templates"]) == 12
 
 

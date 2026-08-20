@@ -71,6 +71,7 @@ def test_every_exported_scientific_function_has_a_coverage_classification():
         "exergy_imperative.factors",
         "exergy_imperative.formulas",
         "exergy_imperative.ghg",
+        "exergy_imperative.health",
         "exergy_imperative.impacts",
         "exergy_imperative.materials",
         "exergy_imperative.packs",

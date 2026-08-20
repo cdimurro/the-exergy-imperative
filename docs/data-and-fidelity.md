@@ -65,7 +65,7 @@ library use is offline and deterministic.
   rejected because the relationship is fuel- and composition-specific.
 - Default pollutant factors are broad stationary-combustion screening ranges,
   not permit-grade or stack-test emissions.
-- Health text describes pollutant hazards. It does not calculate ambient
+- Pollutant health text provides qualitative context. It does not calculate ambient
   concentration, dispersion, intake, population exposure, dose-response, cases,
   or individual clinical risk.
 - Economic defaults such as a 7% discount rate and 20-year project life are

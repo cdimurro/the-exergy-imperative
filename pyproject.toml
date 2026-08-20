@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "exergy-imperative"
-version = "0.6.1"
-description = "Progressive exergy, emissions, health-screening, and economic analysis with transparent defaults."
+version = "0.7.0"
+description = "Progressive exergy, emissions, public-health screening, and economic analysis with transparent defaults."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

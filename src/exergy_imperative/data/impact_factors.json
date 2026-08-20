@@ -35,7 +35,7 @@
       "title": "US EPA Criteria Air Pollutants",
       "url": "https://www.epa.gov/criteria-air-pollutants",
       "license": "US government work; qualitative citation only",
-      "applicable_boundary": "Qualitative pollutant hazard descriptions; excludes exposure and risk quantification",
+      "applicable_boundary": "Qualitative pollutant health-context descriptions; excludes exposure and risk quantification",
       "note": "Qualitative health and environmental screening statements, not exposure-response calculations."
     },
     "eea-emep-2023": {

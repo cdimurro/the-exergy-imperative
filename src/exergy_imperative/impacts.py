@@ -211,8 +211,8 @@ def assess_impacts(
 
     The function uses a country grid factor for electricity and a declared-basis
     combustion factor for recognized fuels. Explicit user factors override the
-    matching defaults. Health output is a hazard screen, not an exposure or
-    epidemiological risk assessment.
+    matching defaults. Pollutant health text is qualitative context, not an
+    exposure or epidemiological risk assessment.
     """
 
     library = factor_library or DEFAULT_IMPACT_FACTORS
@@ -516,7 +516,7 @@ def assess_impacts(
         )
     if pollutant_results:
         warnings.append(
-            "Health descriptions identify hazards only. Estimating health outcomes requires dispersion, "
+            "Pollutant health descriptions are qualitative context only. Estimating health outcomes requires dispersion, "
             "ambient concentration, exposure, population, and concentration-response data."
         )
     if damage_lookup:

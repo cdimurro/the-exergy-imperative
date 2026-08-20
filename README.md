@@ -1,7 +1,7 @@
 # The Exergy Imperative
 
 [![CI](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml/badge.svg)](https://github.com/cdimurro/the-exergy-imperative/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/exergy-imperative?cacheSeconds=300&release=0.6.1)](https://pypi.org/project/exergy-imperative/)
+[![PyPI](https://img.shields.io/pypi/v/exergy-imperative?cacheSeconds=300&release=0.7.0)](https://pypi.org/project/exergy-imperative/)
 [![Python](https://img.shields.io/badge/python-3.11%E2%80%933.14-blue)](https://pypi.org/project/exergy-imperative/)
 [![License](https://img.shields.io/badge/code-Apache--2.0-green)](LICENSE)
 [![Guide](https://img.shields.io/badge/guide-CC%20BY%204.0-lightgrey)](THE_EXERGY_IMPERATIVE.md)
@@ -18,7 +18,7 @@ record, then turn it into an auditable decision.**
 |---|---|
 | **[Exergy Factor](https://exergyfactor.com)** | You need a free, no-install calculator for one or a few energy records. |
 | **[Quantity and Quality](https://github.com/cdimurro/quantity-and-quality)** | You need the canonical calculation kernel, CLI, schemas, API, or batch reporting standard. |
-| **The Exergy Imperative** | You need to turn utility or telemetry data into prioritized losses, emissions, health screens, economics, and reports. |
+| **The Exergy Imperative** | You need to turn utility or telemetry data into prioritized losses, emissions, public-health benefit screening, economics, and reports. |
 
 ## Why this library
 
@@ -44,8 +44,9 @@ funnel:
   carries provenance, a range, and warnings — screening defaults are never
   passed off as measurements.
 - **The whole business case, not just thermodynamics.** Exergetic efficiency
-  and destruction, AR6 20/100-year climate impact, air-pollutant health
-  screening, and project economics (NPV, IRR, payback, levelized cost,
+  and destruction, AR6 20/100-year climate impact, pollutant inventories,
+  sourced EPA public-health benefit ranges, and project economics (NPV, IRR,
+  payback, levelized cost,
   marginal abatement cost) in one result.
 - **Data plumbing built in.** Auditable ingestion from CSV, Excel,
   Parquet, JSON, and SQL with unit conversion and mapping inference; native
@@ -125,6 +126,28 @@ Warnings and limitations:
 
 Add whatever data you have — efficiency, temperatures, energy prices, capital cost,
 lifespan, location, and then analyze the results. 
+
+For U.S. efficiency, renewable-energy, and PV-plus-storage projects, the
+library can estimate monetized outdoor-air public-health benefits even when a
+user has no exposure model. This example applies EPA's published Rocky
+Mountains screening range to 1,000 MWh/year of uniform energy savings:
+
+```python
+health = xi.estimate_health_benefits(
+    region="Rocky Mountains",
+    project_type="Uniform EE",
+    energy=1_000,
+)
+
+health.monetized_benefit.low   # 18,000 (2023 USD/year)
+health.monetized_benefit.high  # 27,300 (2023 USD/year)
+```
+
+Every result retains the source table, model versions, 2023 currency basis,
+2% discount rate, geography and pathway boundaries, F1 fidelity, and explicit
+warnings. Both rate bounds can be overridden. It is a regional screening
+estimate, not a prediction of local exposure, cases, deaths, or individual
+risk.
 
 Export deliverables at any time:
 
@@ -227,7 +250,8 @@ balance = xi.analyze_material_system(
 )
 ```
 
-Mass, constituent, energy, exergy, emissions, hazards, and economics remain
+Mass, constituent, energy, exergy, emissions, public-health screening, and
+economics remain
 separate ledgers. Chemical exergy is calculated only from explicitly supplied
 factors and is not silently double-counted as an energy flow.
 
@@ -250,6 +274,8 @@ factors and is not silently double-counted as an energy flow.
 - Explicit GHG boundaries (combustion, process, fugitive, purchased energy),
   methane vent/flare/recovery project analysis, and grid intensities for 213
   countries (Ember / Our World in Data, 2020–2025).
+- EPA AVERT/COBRA regional public-health benefit ranges for 14 contiguous-U.S.
+  grid regions and eight efficiency, solar, storage, and wind interventions.
 - Monte Carlo uncertainty propagation, sensitivity ranking, and value of
   perfect information.
 - Dependency-free SVG/HTML reports, optional PDF, and auditable
@@ -279,7 +305,8 @@ is worth the money, not a substitute for one.
 
 Bundled reference data ships with sources, versions, licenses, and confidence
 labels: Ember/OWID electricity intensities, IPCC AR6 warming potentials, IPCC
-2006 fuel factors, EPA and EMEP/EEA pollutant screening profiles. No
+2006 fuel factors, EPA regional public-health benefit ranges, and EPA/EMEP/EEA
+pollutant context profiles. No
 restricted publisher data (IEA, Energy Institute) is redistributed — local
 adapters map *your* licensed copies with SHA-256 fingerprinting. Run
 `exergy validate` to execute the bundled reference calculations and see every
