@@ -20,7 +20,7 @@ def test_release_version_surfaces_are_consistent(capsys):
     assert expected == "0.7.0"
     assert xi.__version__ == expected
     assert LIBRARY_VERSION == expected
-    assert f"cacheSeconds=300&release={expected}" in readme
+    assert "https://img.shields.io/pypi/v/exergy-imperative.svg" in readme
 
     with pytest.raises(SystemExit) as exc_info:
         main(["--version"])
