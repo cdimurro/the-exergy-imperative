@@ -246,7 +246,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Emit machine-readable JSON and structured JSON errors",
     )
     parser.add_argument(
-        "--version", action="version", version="exergy-imperative 0.7.0"
+        "--version", action="version", version="exergy-imperative 0.7.1"
     )
     commands = parser.add_subparsers(dest="command", required=True)
 

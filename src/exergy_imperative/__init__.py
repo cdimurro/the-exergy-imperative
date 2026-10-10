@@ -365,9 +365,18 @@ from .weather import (
     weather_anomalies,
 )
 
-__version__ = "0.7.0"
+__version__ = "0.7.1"
+
+from .reference_assessment import (
+    FULL_REFERENCE_FIELDS,
+    REFERENCE_ASSESSMENT_SCHEMA_VERSION,
+    assess_exergy_reference,
+)
 
 __all__ = [
+    "FULL_REFERENCE_FIELDS",
+    "REFERENCE_ASSESSMENT_SCHEMA_VERSION",
+    "assess_exergy_reference",
     "AGENT_CAPABILITIES_SCHEMA_ID",
     "AGENT_CONTRACT_VERSION",
     "AGENT_RECIPE_SCHEMA_ID",

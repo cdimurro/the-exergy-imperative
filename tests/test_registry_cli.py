@@ -17,7 +17,7 @@ def test_release_version_surfaces_are_consistent(capsys):
     expected = pyproject["project"]["version"]
     readme = (project_root / "README.md").read_text(encoding="utf-8")
 
-    assert expected == "0.7.0"
+    assert expected == "0.7.1"
     assert xi.__version__ == expected
     assert LIBRARY_VERSION == expected
     assert "https://img.shields.io/pypi/v/exergy-imperative.svg" in readme
