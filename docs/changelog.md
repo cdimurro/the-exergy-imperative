@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.1 - 2026-10-10
+
+- Add the dependency-free `assess_exergy_reference` reporting API and a packaged
+  JSON Schema. Missing reference metadata remains explicit; a complete tuple
+  alone never establishes a closed physical-exergy account.
+- Add clean/dirty regression controls for partial and absent references,
+  invalid declarations, serialization, independent copies and self-promotion.
+- Preserve existing physics calculations, recipe contract, fidelity tiers and
+  conformance data. See [reference assessment](reference-assessment.md).
+
 ## 0.7.0 - 2026-08-19
 
 - Added a separate, F1 public-health benefit workflow using all published U.S.

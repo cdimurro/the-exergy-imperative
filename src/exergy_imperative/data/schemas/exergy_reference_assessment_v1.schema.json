@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Full-reference metadata assessment; no closed-account certificate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reference_gate",
+    "physical_exergy_status",
+    "reason",
+    "reference_carried",
+    "missing_reference_fields",
+    "screening_allowed",
+    "screening_qualifier",
+    "assurance_scope",
+    "physical_account_verified",
+    "claim_permitted"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "exergy-reference-assessment/1"
+    },
+    "reference_gate": {
+      "enum": [
+        "passed",
+        "unresolved"
+      ]
+    },
+    "physical_exergy_status": {
+      "const": "unresolved"
+    },
+    "reason": {
+      "enum": [
+        "declared_reference_environment_missing_or_incomplete",
+        "reference_present_but_closed_carrier_account_not_tested"
+      ]
+    },
+    "reference_carried": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "T0_K": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "P0_Pa": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "composition": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "object",
+              "minProperties": 1
+            }
+          ]
+        }
+      }
+    },
+    "missing_reference_fields": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "T0_K",
+          "P0_Pa",
+          "composition"
+        ]
+      }
+    },
+    "screening_allowed": {
+      "const": true
+    },
+    "screening_qualifier": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assurance_scope": {
+      "const": "REFERENCE_METADATA_ONLY"
+    },
+    "physical_account_verified": {
+      "const": false
+    },
+    "claim_permitted": {
+      "const": false
+    }
+  }
+}
